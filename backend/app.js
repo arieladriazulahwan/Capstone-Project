@@ -1,21 +1,20 @@
 const express = require("express");
+const cors = require("cors");
+const vocabRoutes = require("./routes/vocabRoutes");
+
+
 const app = express();
 
-const authRoutes = require("./routes/authRoutes");
-const cors = require("cors");
-
 app.use(cors());
-
 app.use(express.json());
 
-// route
+const authRoutes = require("./routes/authRoutes");
 app.use("/api/auth", authRoutes);
-
-app.get("/", (req, res) => {
-  res.send("Server berjalan...");
-});
 
 app.listen(3000, () => {
   console.log("Server running on http://localhost:3000");
 });
 
+app.use("/api/game", require("./routes/gamification"));
+
+app.use("/api/vocab", vocabRoutes);

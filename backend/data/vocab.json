@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "indonesia": "Air",
+    "category": "kata benda",
+    "translations": [
+      { "dialect": "ledo", "word": "Ue" },
+      { "dialect": "rai", "word": "We" }
+    ]
+  },
+  {
+    "id": 2,
+    "indonesia": "Makan",
+    "category": "kata kerja",
+    "translations": [
+      { "dialect": "ledo", "word": "Mangan" },
+      { "dialect": "rai", "word": "Kande" }
+    ]
+  },
+  {
+    "id": 3,
+    "indonesia": "Cepat",
+    "category": "kata sifat",
+    "translations": [
+      { "dialect": "ledo", "word": "Gasa" },
+      { "dialect": "rai", "word": "Laju" }
+    ]
+  }
+]

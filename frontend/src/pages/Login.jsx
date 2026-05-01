@@ -1,69 +1,65 @@
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleLogin = async (e) => {
-    e.preventDefault();
-
-    try {
-      const res = await fetch("http://localhost:3000/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
-
-      const data = await res.json();
-
-      if (res.ok) {
-        // simpan token
-        localStorage.setItem("token", data.token);
-
-        alert("Login berhasil ✅");
-
-        // redirect ke dashboard
-        window.location.href = "/dashboard";
-      } else {
-        alert(data.message);
-      }
-    } catch (error) {
-      console.error(error);
-      alert("Terjadi kesalahan koneksi");
-    }
-  };
+  const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <form onSubmit={handleLogin} className="bg-white p-8 rounded-xl shadow-md w-80">
-        <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
+    <div className="min-h-screen bg-gray-200 flex items-center justify-center px-4">
+      <div className="w-full max-w-md md:max-w-lg lg:max-w-xl bg-white rounded-3xl shadow-xl p-6 md:p-10">
 
-        <input
-          type="email"
-          placeholder="Email"
-          className="w-full p-2 border mb-4 rounded"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+        {/* Logo */}
+        <div className="flex justify-center mb-4">
+          <div className="w-20 h-20 bg-green-500 rounded-2xl flex items-center justify-center text-2xl text-white shadow-md">
+            🌿
+          </div>
+        </div>
 
-        <input
-          type="password"
-          placeholder="Password"
-          className="w-full p-2 border mb-4 rounded"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        {/* Title */}
+        <h1 className="text-center text-2xl md:text-3xl font-bold text-green-600">
+          Sora Kaili
+        </h1>
 
-        <button className="w-full bg-blue-500 text-white p-2 rounded">
-          Login
-        </button>
-
-        <p className="text-sm mt-4 text-center">
-          Belum punya akun? <a href="/register" className="text-blue-500">Register</a>
+        <p className="text-center text-gray-500 mt-2 mb-8 text-sm md:text-base">
+          Belajar Bahasa Ledo dengan Seru!
         </p>
-      </form>
+
+        {/* ROLE SELECTION */}
+        <p className="text-center mb-4 font-medium">Masuk sebagai:</p>
+
+        <div className="flex flex-col md:flex-row gap-4">
+
+          {/* SISWA CARD */}
+          <div
+            onClick={() => navigate("/login/siswa")}
+            className="flex-1 p-6 rounded-2xl border bg-white text-center cursor-pointer transition-all duration-300 hover:shadow-lg hover:border-green-500 hover:bg-green-50"
+          >
+            <div className="text-3xl mb-2">👨‍🎓</div>
+            <p className="font-semibold text-gray-700">Siswa</p>
+          </div>
+
+          {/* GURU CARD */}
+          <div
+            onClick={() => navigate("/login/guru")}
+            className="flex-1 p-6 rounded-2xl border bg-white text-center cursor-pointer transition-all duration-300 hover:shadow-lg hover:border-blue-500 hover:bg-blue-50"
+          >
+            <div className="text-3xl mb-2">👨‍🏫</div>
+            <p className="font-semibold text-gray-700">Guru / Host</p>
+          </div>
+
+        </div>
+
+        {/* REGISTER */}
+        <p className="text-center text-sm mt-8 text-gray-500">
+          Belum punya akun?{" "}
+          <span
+            onClick={() => navigate("/register")}
+            className="text-green-600 cursor-pointer font-medium"
+          >
+            Daftar di sini
+          </span>
+        </p>
+
+      </div>
     </div>
   );
 }
