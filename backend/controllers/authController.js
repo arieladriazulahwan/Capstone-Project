@@ -1,9 +1,17 @@
 const db = require("../config/db");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const today = new Date().toISOString().slice(0, 10);
 
-// REGISTER
+// 🔥 helper tanggal (ANTI BUG TIMEZONE)
+const getToday = () => new Date().toLocaleDateString("en-CA");
+
+const formatLocalDate = (date) => {
+  return date.toLocaleDateString("en-CA", {
+    timeZone: "Asia/Makassar", // bisa juga Asia/Jakarta
+  });
+};
+
+// ================= REGISTER =================
 exports.register = async (req, res) => {
   const { name, username, password, role } = req.body;
 
@@ -11,103 +19,127 @@ exports.register = async (req, res) => {
     return res.status(400).json({ message: "Semua field wajib diisi" });
   }
 
-  db.query("SELECT * FROM users WHERE username = ?", [username], async (err, results) => {
-    if (results.length > 0) {
-      return res.status(400).json({ message: "Username sudah digunakan" });
-    }
-
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const defaultProgress = JSON.stringify({
-      bab1: true,
-      bab2: false,
-      bab3: false,
-    });
-
-    db.query(
-      "INSERT INTO users (name, username, password, role, progress) VALUES (?, ?, ?, ?, ?)",
-      [name, username , hashedPassword, role || "siswa", defaultProgress],
-      (err) => {
-        if (err) return res.status(500).json(err);
-        res.json({ message: "Register berhasil" });
+  db.query(
+    "SELECT * FROM users WHERE username = ?",
+    [username],
+    async (err, results) => {
+      if (results.length > 0) {
+        return res.status(400).json({ message: "Username sudah digunakan" });
       }
-    );
-  });
+
+      const hashedPassword = await bcrypt.hash(password, 10);
+
+      const defaultProgress = JSON.stringify({
+        bab1: true,
+        bab2: false,
+        bab3: false,
+      });
+
+      db.query(
+        "INSERT INTO users (name, username, password, role, progress) VALUES (?, ?, ?, ?, ?)",
+        [name, username, hashedPassword, role || "siswa", defaultProgress],
+        (err) => {
+          if (err) return res.status(500).json(err);
+          res.json({ message: "Register berhasil" });
+        }
+      );
+    }
+  );
 };
 
-// LOGIN
+// ================= LOGIN =================
 exports.login = (req, res) => {
   const { username, password, role } = req.body;
 
-  db.query("SELECT * FROM users WHERE username = ?", [username], async (err, results) => {
-    if (results.length === 0) {
-      return res.status(400).json({ message: "User tidak ditemukan" });
-    }
-
-    const user = results[0]; // <--- Variabel user didefinisikan di sini
-
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      return res.status(400).json({ message: "Password salah" });
-    }
-
-    if (role && user.role !== role) {
-      return res.status(403).json({ message: "Role tidak sesuai" });
-    }
-
-    // --- PINDAHKAN LOGIKA STREAK KE SINI ---
-    db.query(
-      "SELECT last_login, streak FROM users WHERE id = ?",
-      [user.id],
-      (err, result) => {
-        if (err) return res.status(500).json(err);
-
-        let streak = result[0].streak || 0;
-        let lastLogin = result[0].last_login;
-
-        const yesterday = new Date();
-        yesterday.setDate(yesterday.getDate() - 1);
-        const yDate = yesterday.toISOString().slice(0, 10);
-
-        if (lastLogin === yDate) {
-          streak += 1;
-        } else if (lastLogin !== today) {
-          streak = 1;
-        }
-
-        // Update streak di database
-        db.query(
-          "UPDATE users SET streak=?, last_login=? WHERE id=?",
-          [streak, today, user.id],
-          (updateErr) => {
-            if (updateErr) console.log("Gagal update streak");
-
-            // --- TOKEN DAN RESPONSE PINDAH KE DALAM CALLBACK AGAR TERUPDATE ---
-            const token = jwt.sign(
-              { id: user.id, role: user.role },
-              "SECRET_KEY",
-              { expiresIn: "1d" }
-            );
-
-            res.json({
-              message: "Login berhasil",
-              token,
-              user: {
-                id: user.id,
-                name: user.name,
-                username: user.username,
-                role: user.role,
-                streak: streak // Tambahkan info streak di response jika perlu
-              },
-            });
-          }
-        );
+  db.query(
+    "SELECT * FROM users WHERE username = ?",
+    [username],
+    async (err, results) => {
+      if (results.length === 0) {
+        return res.status(400).json({ message: "User tidak ditemukan" });
       }
-    );
-    // --- AKHIR LOGIKA STREAK ---
-  });
+
+      const user = results[0];
+
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (!isMatch) {
+        return res.status(400).json({ message: "Password salah" });
+      }
+
+      if (role && user.role !== role) {
+        return res.status(403).json({ message: "Role tidak sesuai" });
+      }
+
+      // 🔥 STREAK FIX
+      db.query(
+        "SELECT last_login, streak FROM users WHERE id = ?",
+        [user.id],
+        (err, result) => {
+          if (err) return res.status(500).json(err);
+
+          let streak = result[0].streak || 0;
+          let lastLoginRaw = result[0].last_login;
+
+          const today = formatLocalDate(new Date());
+
+          const yesterdayDate = new Date();
+          yesterdayDate.setDate(yesterdayDate.getDate() - 1);
+          const yesterday = formatLocalDate(yesterdayDate);
+
+          // 🔥 FIX parsing DB (INI KUNCI UTAMA)
+          let lastLogin = null;
+          if (lastLoginRaw) {
+            lastLogin = formatLocalDate(new Date(lastLoginRaw));
+          }
+
+          console.log("TODAY:", today);
+          console.log("YESTERDAY:", yesterday);
+          console.log("LAST LOGIN:", lastLogin);
+
+          // 🔥 LOGIC FINAL
+          if (!lastLogin) {
+            streak = 1;
+          } else if (lastLogin === yesterday) {
+            streak += 1;
+          } else if (lastLogin === today) {
+            // login di hari yang sama → biarkan
+            streak = streak;
+          } else {
+            streak = 1;
+          }
+
+          db.query(
+            "UPDATE users SET streak=?, last_login=? WHERE id=?",
+            [streak, today, user.id],
+            (updateErr) => {
+              if (updateErr) console.log("Gagal update streak");
+
+              const token = jwt.sign(
+                { id: user.id, role: user.role },
+                "SECRET_KEY",
+                { expiresIn: "1d" }
+              );
+
+              res.json({
+                message: "Login berhasil",
+                token,
+                user: {
+                  id: user.id,
+                  name: user.name,
+                  username: user.username,
+                  role: user.role,
+                  streak: streak,
+                },
+              });
+            }
+          );
+        }
+      );
+    }
+  );
 };
 
-// PROFILE
+// ================= PROFILE =================
 exports.getProfile = (req, res) => {
   const userId = req.user.id;
 
@@ -133,6 +165,7 @@ exports.getProfile = (req, res) => {
   );
 };
 
+// ================= ADD XP =================
 exports.addXP = (req, res) => {
   const userId = req.user.id;
   const { xp } = req.body;
@@ -185,6 +218,7 @@ exports.addXP = (req, res) => {
   );
 };
 
+// ================= COMPLETE BAB 1 =================
 exports.completeBab1 = (req, res) => {
   const userId = req.user.id;
 
@@ -196,7 +230,6 @@ exports.completeBab1 = (req, res) => {
 
       let progress = JSON.parse(results[0].progress || "{}");
 
-      // ✅ unlock bab2
       progress.bab1 = true;
       progress.bab2 = true;
 
@@ -216,8 +249,7 @@ exports.completeBab1 = (req, res) => {
   );
 };
 
-// LOGOUT
+// ================= LOGOUT =================
 exports.logout = (req, res) => {
-  // Karena JWT stateless, logout bisa dilakukan di client dengan menghapus token
   res.json({ message: "Logout berhasil" });
 };

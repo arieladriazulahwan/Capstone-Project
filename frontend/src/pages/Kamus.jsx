@@ -20,7 +20,7 @@ function Kamus() {
       .then((res) => setData(res));
   }, []);
 
-  // ❤️ GET FAVORITES (FIX PENTING)
+  // ❤️ GET FAVORITES
   useEffect(() => {
     const fetchFavorites = async () => {
       try {
@@ -35,24 +35,22 @@ function Kamus() {
 
         const result = await res.json();
 
-        // 🔥 pastikan array
         const favIds = Array.isArray(result)
           ? result.map((item) => item.vocab_id)
           : [];
 
         setFavorites(new Set(favIds));
-
       } catch (err) {
         console.log("Error ambil favorit:", err);
       } finally {
-        setLoadingFav(false); // 🔥 penting
+        setLoadingFav(false);
       }
     };
 
     fetchFavorites();
   }, []);
 
-  // ❤️ TOGGLE FAVORIT (FIX)
+  // ❤️ TOGGLE FAVORIT
   const toggleFavorite = async (id) => {
     const token = localStorage.getItem("token");
     if (!token) return alert("Login dulu!");
@@ -69,47 +67,86 @@ function Kamus() {
         body: JSON.stringify({ vocabId: id }),
       });
 
-      // 🔥 update state aman
       setFavorites((prev) => {
         const newSet = new Set(prev);
-        if (isFav) {
-          newSet.delete(id);
-        } else {
-          newSet.add(id);
-        }
+        if (isFav) newSet.delete(id);
+        else newSet.add(id);
         return newSet;
       });
-
     } catch (err) {
       console.log("Error toggle:", err);
     }
   };
 
-  // 🔍 FILTER
-  const filtered = data.filter((item) => {
-    const matchSearch =
-      mode === "indo"
-        ? item.indonesia.toLowerCase().includes(search.toLowerCase())
-        : item.translations.some((t) =>
-            t.word.toLowerCase().includes(search.toLowerCase())
-          );
+  // 🔍 SEARCH + FILTER (SMART)
+  const filtered = (() => {
+  if (!search.trim()) return data;
 
-    const matchCategory = category ? item.category === category : true;
+  const keywords = search
+    .toLowerCase()
+    .trim()
+    .split(" ")
+    .map((k) => k.trim());
 
-    const matchDialect = dialect
-      ? item.translations.some((t) => t.dialect === dialect)
-      : true;
+  return data
+    .map((item) => {
+      let score = 0;
 
-    return matchSearch && matchCategory && matchDialect;
-  });
+      // 🔥 pecah semua kata indonesia
+      const indoTokens = item.indonesia
+        .toLowerCase()
+        .split(";")
+        .flatMap((phrase) =>
+          phrase.trim().split(" ")
+        );
+
+      // 🔥 pecah semua kata kaili
+      const kailiTokens = item.translations.flatMap((t) =>
+        t.word
+          .toLowerCase()
+          .split(";")
+          .flatMap((w) => w.trim().split(" "))
+      );
+
+      // 🔥 MODE INDONESIA
+      if (mode === "indo") {
+        score = keywords.filter((k) =>
+          indoTokens.includes(k)
+        ).length;
+      }
+
+      // 🔥 MODE KAILI
+      if (mode === "kaili") {
+        score = keywords.filter((k) =>
+          kailiTokens.includes(k)
+        ).length;
+      }
+
+      return { ...item, score };
+    })
+    .filter((item) => item.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .filter((item) => {
+      const matchCategory = category
+        ? item.category.toLowerCase() === category.toLowerCase()
+        : true;
+
+      const matchDialect = dialect
+        ? item.translations.some(
+            (t) =>
+              t.dialect.toLowerCase() === dialect.toLowerCase()
+          )
+        : true;
+
+      return matchCategory && matchDialect;
+    });
+})();
 
   return (
     <div className="flex min-h-screen bg-gray-100">
-
       <Sidebar role="siswa" />
 
       <div className="flex-1 flex flex-col">
-
         <Navbar user={{ name: "User" }} />
 
         <main className="flex-1 px-4 py-6 flex justify-center">
@@ -167,6 +204,7 @@ function Kamus() {
                 <option value="kata benda">Kata Benda</option>
                 <option value="kata kerja">Kata Kerja</option>
                 <option value="kata sifat">Kata Sifat</option>
+                <option value="kata ganti">Kata Ganti</option>
               </select>
 
               <select
@@ -179,7 +217,7 @@ function Kamus() {
               </select>
             </div>
 
-            {/* ⏳ loading */}
+            {/* LOADING */}
             {loadingFav ? (
               <p className="text-center text-gray-500">
                 Memuat favorit...
@@ -192,7 +230,6 @@ function Kamus() {
                     key={item.id}
                     className="bg-white p-4 rounded-xl shadow"
                   >
-
                     <div className="flex justify-between items-center mb-2">
                       <h3 className="font-bold text-lg">
                         {item.indonesia}
@@ -229,9 +266,14 @@ function Kamus() {
                   </div>
                 ))}
 
+                {filtered.length === 0 && (
+                  <p className="text-center text-gray-500">
+                    Tidak ditemukan 😢
+                  </p>
+                )}
+
               </div>
             )}
-
           </div>
         </main>
       </div>

@@ -23,43 +23,83 @@ exports.getVocabById = (req, res) => {
 
 // 🔥 SEARCH
 exports.searchVocab = (req, res) => {
-  const { q, mode, dialect, category } = req.query;
+  const { q, mode = "indo", dialect, category } = req.query;
 
   const data = JSON.parse(fs.readFileSync(filePath));
 
   if (!q) return res.json([]);
 
-  let result = [];
+  const keywords = q
+    .toLowerCase()
+    .trim()
+    .split(" ")
+    .filter((k) => k.length > 0);
 
-  data.forEach((item) => {
-    // 🔥 MODE INDONESIA → KAILI
+  let result = data.filter((item) => {
+
+    // =========================
+    // 🔥 MODE INDONESIA
+    // =========================
     if (mode === "indo") {
-      if (item.indonesia.toLowerCase().includes(q.toLowerCase())) {
-        result.push(item);
-      }
+      const words = item.indonesia
+        .toLowerCase()
+        .split(";")
+        .map((w) => w.trim());
+
+      // 🔥 hitung jumlah kata cocok
+      const matchCount = keywords.filter((k) =>
+        words.includes(k)
+      ).length;
+
+      // 🔥 minimal 1 cocok (kalau cuma 1 kata)
+      // 🔥 atau minimal setengah cocok (kalau kalimat)
+      return keywords.length === 1
+        ? matchCount === 1
+        : matchCount >= Math.ceil(keywords.length / 2);
     }
 
-    // 🔥 MODE KAILI → INDONESIA
+    // =========================
+    // 🔥 MODE KAILI
+    // =========================
     if (mode === "kaili") {
+      return item.translations?.some((t) => {
+        const word = t.word?.toLowerCase().trim();
+
+        const matchCount = keywords.filter((k) =>
+          word === k
+        ).length;
+
+        return keywords.length === 1
+          ? matchCount === 1
+          : matchCount >= Math.ceil(keywords.length / 2);
+      });
+    }
+
+    return false;
+  });
+
+  // 🔥 TAMBAH INFO MATCH (KAILI)
+  if (mode === "kaili") {
+    result = result.map((item) => {
       const match = item.translations.find((t) =>
-        t.word.toLowerCase().includes(q.toLowerCase())
+        keywords.includes(t.word.toLowerCase().trim())
       );
 
-      if (match) {
-        result.push({
-          ...item,
-          matchedWord: match.word,
-          matchedDialect: match.dialect,
-        });
-      }
-    }
-  });
+      return {
+        ...item,
+        matchedWord: match?.word,
+        matchedDialect: match?.dialect,
+      };
+    });
+  }
 
   // 🔥 FILTER DIALEK
   if (dialect) {
     result = result.filter((item) =>
       item.translations?.some(
-        (t) => t.dialect.toLowerCase() === dialect.toLowerCase()
+        (t) =>
+          t.dialect?.toLowerCase().trim() ===
+          dialect.toLowerCase().trim()
       )
     );
   }
@@ -68,7 +108,8 @@ exports.searchVocab = (req, res) => {
   if (category) {
     result = result.filter(
       (item) =>
-        item.category.toLowerCase() === category.toLowerCase()
+        item.category?.toLowerCase().trim() ===
+        category.toLowerCase().trim()
     );
   }
 
