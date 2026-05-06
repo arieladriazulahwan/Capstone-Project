@@ -29,7 +29,7 @@ function LoginGuru() {
       if (res.ok) {
         localStorage.setItem("token", data.token);
         alert("Login guru berhasil");
-        navigate("/dashboard");
+        navigate("/dashboard/guru");
       } else {
         alert(data.message);
       }

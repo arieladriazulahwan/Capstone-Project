@@ -1,0 +1,6 @@
+[
+  { "indo": "Halo", "kaili": "Halo", "tipe": "sapaan" },
+  { "indo": "Selamat pagi", "kaili": "Pagi", "tipe": "sapaan" },
+  { "indo": "Nama saya", "kaili": "Yaku", "tipe": "perkenalan" },
+  { "indo": "Apa kabar?", "kaili": "Napa kareba?", "tipe": "sapaan" }
+]

@@ -23,12 +23,54 @@ exports.getVocabById = (req, res) => {
 
 // 🔥 SEARCH
 exports.searchVocab = (req, res) => {
-  const { q } = req.query;
+  const { q, mode, dialect, category } = req.query;
+
   const data = JSON.parse(fs.readFileSync(filePath));
 
-  const result = data.filter((v) =>
-    v.indonesia.toLowerCase().includes(q.toLowerCase())
-  );
+  if (!q) return res.json([]);
+
+  let result = [];
+
+  data.forEach((item) => {
+    // 🔥 MODE INDONESIA → KAILI
+    if (mode === "indo") {
+      if (item.indonesia.toLowerCase().includes(q.toLowerCase())) {
+        result.push(item);
+      }
+    }
+
+    // 🔥 MODE KAILI → INDONESIA
+    if (mode === "kaili") {
+      const match = item.translations.find((t) =>
+        t.word.toLowerCase().includes(q.toLowerCase())
+      );
+
+      if (match) {
+        result.push({
+          ...item,
+          matchedWord: match.word,
+          matchedDialect: match.dialect,
+        });
+      }
+    }
+  });
+
+  // 🔥 FILTER DIALEK
+  if (dialect) {
+    result = result.filter((item) =>
+      item.translations?.some(
+        (t) => t.dialect.toLowerCase() === dialect.toLowerCase()
+      )
+    );
+  }
+
+  // 🔥 FILTER CATEGORY
+  if (category) {
+    result = result.filter(
+      (item) =>
+        item.category.toLowerCase() === category.toLowerCase()
+    );
+  }
 
   res.json(result);
 };

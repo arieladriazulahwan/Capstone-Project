@@ -1,19 +1,39 @@
-function BottomNav() {
+import { useNavigate, useLocation } from "react-router-dom";
+
+function BottomNav({ role = "siswa" }) {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const menuSiswa = [
+    { label: "Home", path: "/dashboard", icon: "🏠" },
+    { label: "Level", path: "/level", icon: "⭐" },
+    { label: "Kamus", path: "/kamus", icon: "📚" },
+    { label: "Riwayat", path: "/riwayat", icon: "🕘" },
+  ];
+
+  const menuGuru = [
+    { label: "Home", path: "/dashboard/guru", icon: "🏠" },
+    { label: "Buat Room", path: "/guru/buat-room", icon: "🎯" },
+  ];
+
+  const menu = role === "guru" ? menuGuru : menuSiswa;
+
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-white border-t flex justify-around py-3 md:hidden">
-
-      <button className="text-green-600 text-sm">
-        🏠 <br /> Home
-      </button>
-
-      <button className="text-gray-400 text-sm">
-        📖 <br /> Kosakata
-      </button>
-
-      <button className="text-gray-400 text-sm">
-        📊 <br /> Riwayat
-      </button>
-
+    <div className="fixed bottom-0 left-0 right-0 bg-white border-t shadow md:hidden flex justify-around py-2">
+      {menu.map((item, i) => (
+        <button
+          key={i}
+          onClick={() => navigate(item.path)}
+          className={`flex flex-col items-center text-sm ${
+            location.pathname === item.path
+              ? "text-green-600"
+              : "text-gray-400"
+          }`}
+        >
+          <span className="text-lg">{item.icon}</span>
+          {item.label}
+        </button>
+      ))}
     </div>
   );
 }

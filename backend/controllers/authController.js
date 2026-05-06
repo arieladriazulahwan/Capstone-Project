@@ -17,10 +17,15 @@ exports.register = async (req, res) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
+    const defaultProgress = JSON.stringify({
+      bab1: true,
+      bab2: false,
+      bab3: false,
+    });
 
     db.query(
-      "INSERT INTO users (name, username, password, role) VALUES (?, ?, ?, ?)",
-      [name, username , hashedPassword, role || "siswa"],
+      "INSERT INTO users (name, username, password, role, progress) VALUES (?, ?, ?, ?, ?)",
+      [name, username , hashedPassword, role || "siswa", defaultProgress],
       (err) => {
         if (err) return res.status(500).json(err);
         res.json({ message: "Register berhasil" });
@@ -105,10 +110,110 @@ exports.login = (req, res) => {
 // PROFILE
 exports.getProfile = (req, res) => {
   const userId = req.user.id;
-  db.query("SELECT id, name, username, role, streak FROM users WHERE id = ?", [userId], (err, results) => {
-    if (err) return res.status(500).json(err);
-    res.json(results[0]);
-  });
+
+  db.query(
+    "SELECT id, name, username, role, xp, level, title, streak, progress FROM users WHERE id = ?",
+    [userId],
+    (err, results) => {
+      if (err) return res.status(500).json(err);
+
+      let progress = {};
+
+      try {
+        progress = JSON.parse(results[0].progress || "{}");
+      } catch {
+        progress = {};
+      }
+
+      res.json({
+        ...results[0],
+        progress,
+      });
+    }
+  );
+};
+
+exports.addXP = (req, res) => {
+  const userId = req.user.id;
+  const { xp } = req.body;
+
+  if (!xp) {
+    return res.status(400).json({ message: "XP kosong" });
+  }
+
+  db.query(
+    "SELECT xp, level FROM users WHERE id = ?",
+    [userId],
+    (err, results) => {
+      if (err) return res.status(500).json(err);
+
+      let currentXP = results[0].xp || 0;
+      let level = results[0].level || 1;
+
+      let newXP = currentXP + xp;
+      let oldLevel = level;
+
+      // 🔥 LEVEL UP
+      while (newXP >= 100) {
+        newXP -= 100;
+        level += 1;
+      }
+
+      // 🎖️ TITLE
+      let title = "Pemula 🌱";
+
+      if (level >= 10) title = "Master 🏆";
+      else if (level >= 5) title = "Ahli 🧠";
+      else if (level >= 3) title = "Penjelajah 🧭";
+      else if (level >= 2) title = "Pelajar 📘";
+
+      db.query(
+        "UPDATE users SET xp=?, level=?, title=? WHERE id=?",
+        [newXP, level, title, userId],
+        (err) => {
+          if (err) return res.status(500).json(err);
+
+          res.json({
+            message: level > oldLevel ? "LEVEL UP! 🎉" : "XP bertambah",
+            xp: newXP,
+            level,
+            title,
+          });
+        }
+      );
+    }
+  );
+};
+
+exports.completeBab1 = (req, res) => {
+  const userId = req.user.id;
+
+  db.query(
+    "SELECT progress FROM users WHERE id = ?",
+    [userId],
+    (err, results) => {
+      if (err) return res.status(500).json(err);
+
+      let progress = JSON.parse(results[0].progress || "{}");
+
+      // ✅ unlock bab2
+      progress.bab1 = true;
+      progress.bab2 = true;
+
+      db.query(
+        "UPDATE users SET progress = ? WHERE id = ?",
+        [JSON.stringify(progress), userId],
+        (err) => {
+          if (err) return res.status(500).json(err);
+
+          res.json({
+            message: "Progress diperbarui",
+            progress,
+          });
+        }
+      );
+    }
+  );
 };
 
 // LOGOUT

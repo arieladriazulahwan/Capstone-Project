@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
 import BottomNav from "../components/BottomNav";
+import Navbar from "../components/Navbar";
 import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
-  const [user, setUser] = useState(null); // 🔥 ubah jadi null
+  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -25,7 +27,6 @@ function Dashboard() {
         });
 
         const data = await res.json();
-        console.log("PROFILE:", data);
 
         if (res.status === 401) {
           localStorage.removeItem("token");
@@ -33,63 +34,63 @@ function Dashboard() {
           return;
         }
 
-        // 🔥 fleksibel (support data.user atau langsung data)
         setUser(data.user || data);
       } catch (err) {
         console.log(err);
-        alert("Gagal ambil data user");
       } finally {
-        setLoading(false); // 🔥 anti loading selamanya
+        setLoading(false);
       }
     };
+
+    const fetchFavorites = async () => {
+      try {
+        const token = localStorage.getItem("token");
+
+        const res = await fetch("http://localhost:3000/api/favorites/full", {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        });
+
+        const data = await res.json();
+        setFavorites(data);
+      } catch (err) {
+        console.log("Gagal ambil favorit:", err);
+      }
+    };
+
+    fetchFavorites();
 
     fetchUser();
   }, [navigate]);
 
-  // ⏳ Loading
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <p>Loading dashboard...</p>
+        Loading dashboard...
       </div>
     );
   }
 
-  // ❌ kalau user tidak ada
   if (!user) return null;
 
   return (
-    <div className="flex bg-gray-100 min-h-screen">
+    <div className="flex min-h-screen bg-gray-100">
 
-      {/* SIDEBAR DESKTOP */}
-      <Sidebar />
+      {/* SIDEBAR */}
+      <Sidebar role="siswa" />
 
-      {/* MAIN */}
-      <div className="flex-1 flex justify-center px-4 py-6">
-        <div className="w-full max-w-md md:max-w-3xl">
+      {/* RIGHT AREA */}
+      <div className="flex-1 flex flex-col">
 
-          {/* HEADER */}
-          <div className="flex justify-between items-center mb-6">
-            <div className="flex items-center gap-2">
-              <div className="w-10 h-10 bg-green-500 rounded-xl flex items-center justify-center text-white">
-                🌿
-              </div>
-              <h1 className="font-bold text-green-600 text-lg">
-                Sora Kaili
-              </h1>
-            </div>
+        {/* NAVBAR */}
+        <Navbar user={user} />
 
-            <div className="flex items-center gap-3">
-              <span className="hidden md:block text-sm">
-                {user?.name}
-              </span>
-              <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
-                👨‍🎓
-              </div>
-            </div>
-          </div>
+        {/* CONTENT */}
+        <main className="flex-1 px-4 py-6 flex justify-center">
+          <div className="w-full max-w-md md:max-w-3xl">
 
-          {/* GREETING */}
+            {/* GREETING */}
           <div className="bg-gradient-to-r from-green-500 to-green-400 text-white rounded-2xl p-5 mb-5 shadow">
             <h2 className="font-bold text-lg">
               Halo, {user?.name || "User"} 👋
@@ -100,21 +101,23 @@ function Dashboard() {
           </div>
 
           {/* GAMIFICATION */}
-          <div className="bg-white rounded-xl p-4 shadow mb-5">
-            <div className="flex justify-between text-sm font-medium">
-              <p>⭐ XP: {user?.xp || 0}</p>
-              <p>🏆 Level: {user?.level || 1}</p>
+          <div className="bg-white p-4 rounded-xl shadow mb-5">
+            <div className="flex justify-between">
+              <p>⭐ XP: {user.xp}</p>
+              <p>🏆 Level: {user.level}</p>
             </div>
 
+            {/* Progress */}
             <div className="w-full bg-gray-200 rounded-full h-3 mt-2">
               <div
-                className="bg-green-500 h-3 rounded-full transition-all"
-                style={{ width: `${(user?.xp || 0) % 100}%` }}
-              />
+                className="bg-green-500 h-3 rounded-full"
+                style={{ width: `${user.xp}%` }}
+              ></div>
             </div>
 
-            <p className="text-sm text-gray-500 mt-2">
-              🔥 Streak: {user?.streak || 0} hari
+            {/* Title */}
+            <p className="mt-2 text-sm text-green-600 font-semibold">
+              {user.title}
             </p>
           </div>
 
@@ -171,42 +174,54 @@ function Dashboard() {
             </div>
           </div>
 
-          {/* KOSAKATA */}
-          <div className="mb-20">
-            <div className="flex justify-between items-center mb-3">
-              <h3 className="font-semibold">📚 Kosakata Pilihan</h3>
-              <span className="text-green-600 text-sm cursor-pointer">
-                Lihat Semua →
-              </span>
-            </div>
+          {/* ❤️ FAVORIT */}
+            <div className="mb-20">
+              <div className="flex justify-between items-center mb-3">
+                <h3 className="font-semibold">❤️ Favorit Kamu</h3>
+              </div>
 
-            <div className="flex flex-col gap-3">
-              {[
-                { indo: "Kayu", kaili: "Kaju" },
-                { indo: "Air", kaili: "Ue" },
-                { indo: "Rumah", kaili: "Banua" },
-              ].map((item, i) => (
-                <div
-                  key={i}
-                  className="bg-white p-4 rounded-xl shadow flex justify-between hover:bg-gray-50 cursor-pointer"
-                >
-                  <div>
-                    <p className="font-semibold">{item.indo}</p>
-                    <p className="text-sm text-green-600">
-                      {item.kaili}
-                    </p>
-                  </div>
-                  <span>›</span>
+              {favorites.length === 0 ? (
+                <p className="text-gray-500 text-sm">
+                  Belum ada favorit 😢
+                </p>
+              ) : (
+                <div className="flex flex-col gap-3">
+                  {favorites.map((item) => (
+                    <div
+                      key={item.id}
+                      className="bg-white p-4 rounded-xl shadow flex justify-between hover:bg-gray-50"
+                    >
+                      <div>
+                        <p className="font-semibold">{item.indonesia}</p>
+
+                        {/* TRANSLATION */}
+                        <div className="flex flex-wrap gap-2 mt-1">
+                          {Array.isArray(item.translations) &&
+                            item.translations.map((t, i) => (
+                            <span
+                              key={i}
+                              className="text-sm text-green-600"
+                            >
+                              {t.word}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      <span>❤️</span>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              )}
             </div>
           </div>
+        </main>
 
-        </div>
       </div>
 
       {/* MOBILE NAV */}
-      <BottomNav />
+      <BottomNav role="siswa" />
+
     </div>
   );
 }

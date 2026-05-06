@@ -18,3 +18,5 @@ app.listen(3000, () => {
 app.use("/api/game", require("./routes/gamification"));
 
 app.use("/api/vocab", vocabRoutes);
+app.use("/api/lesson", require("./routes/lessonRoutes"));
+app.use("/api/favorites", require("./routes/favoriteRoutes"));
