@@ -1,0 +1,17 @@
+[
+  {
+    "question": "Lengkapi kata: Ngan...",
+    "blocks": ["de", "nu", "la", "ru"],
+    "answer": "de"
+  },
+  {
+    "question": "Lengkapi kata: Noi...",
+    "blocks": ["nu", "de", "la", "ta"],
+    "answer": "nu"
+  },
+  {
+    "question": "Lengkapi kata: Nala...",
+    "blocks": ["u", "de", "ta", "ru"],
+    "answer": "u"
+  }
+]

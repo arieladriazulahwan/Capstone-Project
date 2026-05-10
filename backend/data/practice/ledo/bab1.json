@@ -1,0 +1,12 @@
+[
+  {
+    "question": "Apa arti 'Aku'?",
+    "options": ["Saya", "Makan", "Pergi", "Tidur"],
+    "answer": "Saya"
+  },
+  {
+    "question": "Apa arti 'Pagi'?",
+    "options": ["Selamat pagi", "Selamat malam", "Terima kasih", "Sampai jumpa"],
+    "answer": "Selamat pagi"
+  }
+]

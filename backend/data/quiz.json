@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "dialect": "ledo",
+    "bab": "bab1",
+    "question": "Apa arti 'Aku' dalam Bahasa Indonesia?",
+    "options": ["Saya", "Kamu", "Dia", "Mereka"],
+    "answer": "Saya"
+  },
+  {
+    "id": 2,
+    "dialect": "rai",
+    "bab": "bab1",
+    "question": "Apa arti 'Yaku'?",
+    "options": ["Saya", "Kamu", "Dia", "Kami"],
+    "answer": "Saya"
+  },
+  {
+    "id": 3,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "question": "Apa arti 'Ngana'?",
+    "options": ["Saya", "Kamu", "Dia", "Kami"],
+    "answer": "Kamu"
+  },
+
+  {
+    "id": 4,
+    "dialect": "ledo",
+    "bab": "bab1",
+    "question": "Apa arti 'Halo'?",
+    "options": ["Hai", "Terima kasih", "Maaf", "Selamat tinggal"],
+    "answer": "Hai"
+  },
+  {
+    "id": 5,
+    "dialect": "ledo",
+    "bab": "bab1",
+    "question": "Apa arti 'Pagi'?",
+    "options": ["Selamat pagi", "Selamat malam", "Apa kabar", "Sampai jumpa"],
+    "answer": "Selamat pagi"
+  },
+  {
+    "id": 6,
+    "dialect": "ledo",
+    "bab": "bab1",
+    "question": "Apa arti 'Napa kareba?'",
+    "options": ["Apa kabar?", "Siapa kamu?", "Terima kasih", "Mau ke mana?"],
+    "answer": "Apa kabar?"
+  },
+  {
+    "id": 7,
+    "dialect": "ledo",
+    "bab": "bab1",
+    "question": "Bagaimana mengatakan 'Nama saya' dalam dialek Ledo?",
+    "options": ["Yaku", "Ngana", "Halo", "Pagi"],
+    "answer": "Yaku"
+  },
+  {
+  "id": 8,
+  "dialect": "ledo",
+  "bab": "bab2",
+  "question": "Susun kata untuk arti 'Makan'",
+  "blocks": ["Nga", "nde", "la", "ru"],
+  "answer": "Ngande"
+},
+{
+  "id": 9,
+  "dialect": "ledo",
+  "bab": "bab2",
+  "question": "Susun kata untuk arti 'Minum'",
+  "blocks": ["No", "inu", "nde", "la"],
+  "answer": "Noinu"
+},
+{
+  "id": 10,
+  "dialect": "ledo",
+  "bab": "bab2",
+  "question": "Susun kata untuk arti 'Pergi'",
+  "blocks": ["Na", "lau", "nde", "ru"],
+  "answer": "Nalau"
+}
+]

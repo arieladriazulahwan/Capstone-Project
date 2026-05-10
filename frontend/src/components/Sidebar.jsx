@@ -1,17 +1,60 @@
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
-function Sidebar() {
+function Sidebar({ role = "siswa" }) {
   const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate();
   const location = useLocation(); // 🔥 ambil route aktif
 
-  const menu = [
-    { name: "Home", icon: "🏠", path: "/dashboard" },
-    { name: "Level", icon: "⭐", path: "/level" },
-    { name: "Kamus", icon: "📚", path: "/kamus" },
-    { name: "Riwayat", icon: "📜", path: "/riwayat" },
-  ];
+  const menu =
+    role === "guru"
+      ? [
+          {
+            name: "Dashboard",
+            icon: "🏠",
+            path: "/dashboard/guru",
+          },
+          {
+            name: "Room",
+            icon: "🎯",
+            path: "/guru/buat-room",
+          },
+        ]
+      : [
+          {
+            name: "Dashboard",
+            icon: "🏠",
+            path: "/dashboard",
+          },
+          {
+            name: "Level",
+            icon: "⭐",
+            path: "/level",
+          },
+          {
+            name: "Kamus",
+            icon: "📚",
+            path: "/kamus",
+          },
+        ];
+
+        const isGuru = role === "guru";
+
+      const activeClass = isGuru
+        ? "bg-blue-100 text-blue-600 font-semibold"
+        : "bg-green-100 text-green-600 font-semibold";
+
+      const hoverClass = isGuru
+        ? "hover:bg-blue-50 text-gray-700"
+        : "hover:bg-gray-100 text-gray-700";
+
+      const logoClass = isGuru
+        ? "bg-blue-500"
+        : "bg-green-500";
+
+      const titleClass = isGuru
+        ? "text-blue-600"
+        : "text-green-600";
 
   return (
     <div
@@ -24,12 +67,12 @@ function Sidebar() {
         onClick={() => setCollapsed(!collapsed)}
         className="flex items-center gap-2 p-3 cursor-pointer hover:bg-gray-100"
       >
-        <div className="w-10 h-10 bg-green-500 rounded-xl flex items-center justify-center text-white">
+        <div className={`w-10 h-10 ${logoClass} rounded-xl flex items-center justify-center text-white`}>
           🌿
         </div>
 
         {!collapsed && (
-          <h1 className="font-bold text-green-600 text-lg">
+          <h1 className={`font-bold ${titleClass} text-lg`}>
             Sora Kaili
           </h1>
         )}
@@ -47,8 +90,8 @@ function Sidebar() {
                 className={`flex items-center gap-3 p-3 mx-2 rounded-lg cursor-pointer transition
                   ${
                     isActive
-                      ? "bg-green-100 text-green-600 font-semibold"
-                      : "hover:bg-gray-100 text-gray-700"
+                      ? activeClass
+                      : hoverClass
                   }
                 `}
               >

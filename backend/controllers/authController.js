@@ -144,7 +144,7 @@ exports.getProfile = (req, res) => {
   const userId = req.user.id;
 
   db.query(
-    "SELECT id, name, username, role, xp, level, title, streak, progress FROM users WHERE id = ?",
+    "SELECT id, name, username, role, xp, level, title, streak, progress, dialect FROM users WHERE id = ?",
     [userId],
     (err, results) => {
       if (err) return res.status(500).json(err);
@@ -170,15 +170,20 @@ exports.addXP = (req, res) => {
   const userId = req.user.id;
   const { xp } = req.body;
 
-  if (!xp) {
-    return res.status(400).json({ message: "XP kosong" });
+  if (xp === undefined || xp === null) {
+    return res.status(400).json({
+      message: "XP kosong",
+    });
   }
 
   db.query(
     "SELECT xp, level FROM users WHERE id = ?",
     [userId],
     (err, results) => {
-      if (err) return res.status(500).json(err);
+
+      if (err) {
+        return res.status(500).json(err);
+      }
 
       let currentXP = results[0].xp || 0;
       let level = results[0].level || 1;
@@ -186,13 +191,11 @@ exports.addXP = (req, res) => {
       let newXP = currentXP + xp;
       let oldLevel = level;
 
-      // 🔥 LEVEL UP
       while (newXP >= 100) {
         newXP -= 100;
         level += 1;
       }
 
-      // 🎖️ TITLE
       let title = "Pemula 🌱";
 
       if (level >= 10) title = "Master 🏆";
@@ -204,10 +207,17 @@ exports.addXP = (req, res) => {
         "UPDATE users SET xp=?, level=?, title=? WHERE id=?",
         [newXP, level, title, userId],
         (err) => {
-          if (err) return res.status(500).json(err);
+
+          if (err) {
+            return res.status(500).json(err);
+          }
 
           res.json({
-            message: level > oldLevel ? "LEVEL UP! 🎉" : "XP bertambah",
+            message:
+              level > oldLevel
+                ? "LEVEL UP! 🎉"
+                : "XP bertambah",
+
             xp: newXP,
             level,
             title,
@@ -217,7 +227,6 @@ exports.addXP = (req, res) => {
     }
   );
 };
-
 // ================= COMPLETE BAB 1 =================
 exports.completeBab1 = (req, res) => {
   const userId = req.user.id;
@@ -245,6 +254,25 @@ exports.completeBab1 = (req, res) => {
           });
         }
       );
+    }
+  );
+};
+
+exports.updateDialect = (req, res) => {
+  const userId = req.user.id;
+  const { dialect } = req.body;
+
+  if (!dialect) {
+    return res.status(400).json({ message: "Dialek wajib diisi" });
+  }
+
+  db.query(
+    "UPDATE users SET dialect=? WHERE id=?",
+    [dialect, userId],
+    (err) => {
+      if (err) return res.status(500).json(err);
+
+      res.json({ message: "Dialek berhasil diubah", dialect });
     }
   );
 };

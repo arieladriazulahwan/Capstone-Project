@@ -8,7 +8,6 @@ function BottomNav({ role = "siswa" }) {
     { label: "Home", path: "/dashboard", icon: "🏠" },
     { label: "Level", path: "/level", icon: "⭐" },
     { label: "Kamus", path: "/kamus", icon: "📚" },
-    { label: "Riwayat", path: "/riwayat", icon: "🕘" },
   ];
 
   const menuGuru = [

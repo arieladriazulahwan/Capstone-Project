@@ -4,26 +4,32 @@ const router = express.Router();
 const fs = require("fs");
 const path = require("path");
 
-// 🔥 GET LESSON BERDASARKAN DIALEK & BAB
+// 🔥 GET PRACTICE
 router.get("/:dialect/:bab", (req, res) => {
   const { dialect, bab } = req.params;
 
   try {
-    // contoh:
-    // data/lesson/ledo/bab1.json
     const filePath = path.join(
       __dirname,
-      `../data/lesson/${dialect}/${bab}.json`
+      "..",
+      "data",
+      "practice",
+      dialect,
+      `${bab}.json`
     );
 
-    // cek file ada
+    console.log("PRACTICE FILE:", filePath);
+
+    // 🔥 cek file
     if (!fs.existsSync(filePath)) {
       return res.status(404).json({
-        message: "Lesson tidak ditemukan",
+        message: "Practice tidak ditemukan",
       });
     }
 
-    const data = JSON.parse(fs.readFileSync(filePath));
+    const data = JSON.parse(
+      fs.readFileSync(filePath, "utf-8")
+    );
 
     res.json(data);
 
@@ -31,7 +37,7 @@ router.get("/:dialect/:bab", (req, res) => {
     console.log(err);
 
     res.status(500).json({
-      message: "Gagal load lesson",
+      message: "Server error",
     });
   }
 });

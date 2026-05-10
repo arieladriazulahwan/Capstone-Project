@@ -9,9 +9,7 @@ function Navbar({ user }) {
 
         {/* LEFT */}
         <div className="flex items-center gap-2">
-          <div className="w-10 h-10 bg-green-500 rounded-xl flex items-center justify-center text-white">
-            🌿
-          </div>
+
           <h1 className="font-bold text-green-600 text-lg">
             Sora Kaili
           </h1>

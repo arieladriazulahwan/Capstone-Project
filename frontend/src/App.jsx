@@ -13,6 +13,12 @@ import Level from "./pages/Level";
 import LessonBab1 from "./pages/LessonBab1";
 import QuizBab1 from "./pages/QuizBab1";
 import PracticeBab1 from "./pages/PracticeBab1";
+import Lesson from "./pages/Lesson";
+import Practice from "./pages/Practice";
+import Quiz from "./pages/Quiz";
+import BuatRoom from "./pages/BuatRoom";
+import DetailRoom from "./pages/DetailRoom";
+import QuizPage from "./pages/QuizPage";
 
 function App() {
   return (
@@ -30,10 +36,19 @@ function App() {
         <Route path="/kamus" element={<Kamus />} />
         <Route path="/level" element={<Level />} />
         <Route path="/riwayat" element={<div>Halaman Riwayat</div>} />
-        <Route path="/guru/buat-room" element={<div>Buat Room</div>} />
+        <Route path="/guru/buat-room" element={<BuatRoom />} />
         <Route path="/lesson/bab1" element={<LessonBab1 />} />
         <Route path="/quiz/bab1" element={<QuizBab1 />} />
         <Route path="/practice/bab1" element={<PracticeBab1 />} />
+        <Route path="/lesson/:dialect/:bab" element={<Lesson />} />
+        <Route path="/lesson/:dialect/:bab/practice" element={<Practice />} />
+        <Route path="/lesson/:dialect/:bab/quiz" element={<Quiz />} />
+        <Route path="/quiz/:code" element={<QuizPage />} />
+        <Route path="/practice/:dialect/:bab" element={<Practice />} />
+        <Route path="/guru/room/:id" element={<DetailRoom />} />
+        <Route path="/quiz/:dialect/:bab" element={<Quiz />} />
+        <Route path="/lesson/:dialect/bab1" element={<LessonBab1 />} />
+
       </Routes>
     </Router>
   );
