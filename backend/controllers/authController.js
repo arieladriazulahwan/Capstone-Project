@@ -277,6 +277,7 @@ exports.updateDialect = (req, res) => {
   );
 };
 
+
 // ================= LOGOUT =================
 exports.logout = (req, res) => {
   res.json({ message: "Logout berhasil" });

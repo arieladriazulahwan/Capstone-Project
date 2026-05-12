@@ -1,13 +1,9 @@
 import { useEffect, useState } from "react";
-import {
-  useParams,
-  useNavigate,
-} from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-function QuizPage() {
+function QuizRoom() {
 
   const { code } = useParams();
-  const navigate = useNavigate();
 
   const [room, setRoom] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -46,20 +42,7 @@ function QuizPage() {
 
         }
 
-        const questions =
-          typeof data.room.questions === "string"
-            ? JSON.parse(data.room.questions)
-            : data.room.questions;
-
-        const roomData = {
-          ...data.room,
-          questions: questions.map(normalizeQuestion),
-        };
-
-        setRoom(roomData);
-
-        console.log("Room data:", roomData);
-        console.log("Questions:", questions.map(normalizeQuestion));
+        setRoom(data.room);
 
       } catch (err) {
 
@@ -78,38 +61,8 @@ function QuizPage() {
 
   }, [code]);
 
-  const normalizeQuestion = (q) => {
-    const normalized = { ...q };
-
-    if (q.type === "multiple") {
-      normalized.renderType = "pilihan_ganda";
-      return normalized;
-    }
-
-    if (q.type === "susun") {
-      normalized.renderType = "susun_kata";
-      return normalized;
-    }
-
-    if (q.type === "gambar" || q.type === "sambung") {
-      const answerType = String(q.answerType || "").toLowerCase();
-
-      if (answerType === "ketik" || answerType === "text") {
-        normalized.renderType = "ketik";
-      } else if (answerType === "blok" || answerType === "block") {
-        normalized.renderType = "susun_kata";
-      } else {
-        normalized.renderType = "pilihan_ganda";
-      }
-      return normalized;
-    }
-
-    normalized.renderType = "pilihan_ganda";
-    return normalized;
-  };
-
   // =====================================
-  // SIMPAN JAWABAN
+  // JAWABAN
   // =====================================
   const saveAnswer = (value) => {
 
@@ -160,9 +113,7 @@ function QuizPage() {
 
     console.log("Jawaban:", answers);
 
-    alert("Quiz selesai!");
-
-    navigate("/dashboard");
+    alert("Jawaban berhasil dikirim!");
 
   };
 
@@ -179,27 +130,10 @@ function QuizPage() {
 
   }
 
-  // =====================================
-  // ROOM KOSONG
-  // =====================================
-  if (
-    !room ||
-    !room.questions ||
-    room.questions.length === 0
-  ) {
-
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        Room belum memiliki soal
-      </div>
-    );
-
-  }
+  if (!room) return null;
 
   const question =
     room.questions[currentQuestion];
-
-  const renderType = question.renderType;
 
   return (
 
@@ -242,7 +176,7 @@ function QuizPage() {
           </h2>
 
           {/* ================================= */}
-          {/* GAMBAR */}
+          {/* SOAL GAMBAR */}
           {/* ================================= */}
           {question.image && (
 
@@ -257,25 +191,32 @@ function QuizPage() {
           {/* ================================= */}
           {/* PILIHAN GANDA */}
           {/* ================================= */}
-          {renderType === "pilihan_ganda" && (
+          {(question.answerType ===
+            "pilihan" ||
+            question.type === "multiple") && (
 
             <div className="space-y-3">
 
-              {question.options?.map((opt, index) => (
+              {question.options.map(
+                (opt, index) => (
 
-                <button
-                  key={index}
-                  onClick={() => saveAnswer(opt)}
-                  className={`w-full text-left p-4 rounded-2xl border transition ${
-                    answers[currentQuestion] === opt
-                      ? "bg-green-500 text-white border-green-500"
-                      : "bg-white hover:bg-gray-50"
-                  }`}
-                >
-                  {opt}
-                </button>
+                  <button
+                    key={index}
+                    onClick={() =>
+                      saveAnswer(opt)
+                    }
+                    className={`w-full text-left p-4 rounded-2xl border transition ${
+                      answers[currentQuestion] ===
+                      opt
+                        ? "bg-green-500 text-white border-green-500"
+                        : "bg-white hover:bg-gray-50"
+                    }`}
+                  >
+                    {opt}
+                  </button>
 
-              ))}
+                )
+              )}
 
             </div>
 
@@ -284,12 +225,15 @@ function QuizPage() {
           {/* ================================= */}
           {/* JAWABAN KETIK */}
           {/* ================================= */}
-          {renderType === "ketik" && (
+          {question.answerType ===
+            "ketik" && (
 
             <input
               type="text"
               placeholder="Ketik jawaban..."
-              value={answers[currentQuestion] || ""}
+              value={
+                answers[currentQuestion] || ""
+              }
               onChange={(e) =>
                 saveAnswer(e.target.value)
               }
@@ -299,61 +243,63 @@ function QuizPage() {
           )}
 
           {/* ================================= */}
-          {/* BLOK KATA / SUSUN */}
+          {/* BLOK KATA */}
           {/* ================================= */}
-          {renderType === "susun_kata" && (
+          {question.answerType ===
+            "blok" && (
 
             <div className="space-y-4">
 
               <div className="flex flex-wrap gap-3">
 
-                {question.blocks?.map((block, index) => {
-
-                  const currentAnswer =
-                    Array.isArray(
-                      answers[currentQuestion]
-                    )
-                      ? answers[currentQuestion]
-                      : [];
-
-                  return (
+                {question.blocks.map(
+                  (block, index) => (
 
                     <button
                       key={index}
                       onClick={() => {
 
+                        const current =
+                          answers[
+                            currentQuestion
+                          ] || [];
+
                         if (
-                          currentAnswer.includes(block)
+                          current.includes(block)
                         ) {
 
                           saveAnswer(
-                            currentAnswer.filter(
-                              (b) => b !== block
+                            current.filter(
+                              (b) =>
+                                b !== block
                             )
                           );
 
                         } else {
 
                           saveAnswer([
-                            ...currentAnswer,
+                            ...current,
                             block,
                           ]);
 
                         }
 
                       }}
-                      className={`px-4 py-3 rounded-2xl border transition ${
-                        currentAnswer.includes(block)
+                      className={`px-4 py-3 rounded-2xl border ${
+                        (
+                          answers[
+                            currentQuestion
+                          ] || []
+                        ).includes(block)
                           ? "bg-green-500 text-white"
-                          : "bg-white hover:bg-gray-100"
+                          : "bg-white"
                       }`}
                     >
                       {block}
                     </button>
 
-                  );
-
-                })}
+                  )
+                )}
 
               </div>
 
@@ -364,11 +310,10 @@ function QuizPage() {
                 </p>
 
                 <p className="text-green-700">
-                  {Array.isArray(
-                    answers[currentQuestion]
-                  )
-                    ? answers[currentQuestion].join(" ")
-                    : ""}
+                  {(
+                    answers[currentQuestion] ||
+                    []
+                  ).join(" ")}
                 </p>
 
               </div>
@@ -421,4 +366,4 @@ function QuizPage() {
 
 }
 
-export default QuizPage;
+export default QuizRoom;

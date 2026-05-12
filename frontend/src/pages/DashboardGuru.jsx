@@ -31,9 +31,13 @@ function DashboardGuru() {
         }
       );
 
-      const data = await res.json();
-
-      setUser(data);
+      if (res.ok) {
+        const data = await res.json();
+        setUser(data);
+      } else {
+        console.error("Failed to fetch user:", res.status);
+        // Handle error, perhaps redirect to login
+      }
 
     };
 
@@ -60,9 +64,13 @@ function DashboardGuru() {
         }
       );
 
-      const data = await res.json();
-
-      setRooms(data);
+      if (res.ok) {
+        const data = await res.json();
+        setRooms(data);
+      } else {
+        console.error("Failed to fetch rooms:", res.status);
+        setRooms([]);
+      }
 
     };
 

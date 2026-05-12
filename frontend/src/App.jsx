@@ -19,6 +19,7 @@ import Quiz from "./pages/Quiz";
 import BuatRoom from "./pages/BuatRoom";
 import DetailRoom from "./pages/DetailRoom";
 import QuizPage from "./pages/QuizPage";
+import QuizRoom from "./pages/QuizRoom";
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
         <Route path="/lesson/:dialect/:bab/practice" element={<Practice />} />
         <Route path="/lesson/:dialect/:bab/quiz" element={<Quiz />} />
         <Route path="/quiz/:code" element={<QuizPage />} />
+        <Route path="/quiz/:code" element={<QuizRoom />} />
         <Route path="/practice/:dialect/:bab" element={<Practice />} />
         <Route path="/guru/room/:id" element={<DetailRoom />} />
         <Route path="/quiz/:dialect/:bab" element={<Quiz />} />
