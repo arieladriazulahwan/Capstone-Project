@@ -5,6 +5,7 @@ const roomController = require("../controllers/roomController");
 
 const db = require("../config/db");
 const authMiddleware = require("../middleware/authMiddleware");
+const { onlyGuru } = require("../middleware/roleMiddleware");
 
 
 // ======================================
@@ -12,6 +13,8 @@ const authMiddleware = require("../middleware/authMiddleware");
 // ======================================
 router.post(
   "/create",
+  authMiddleware,
+  onlyGuru,
   roomController.createRoom
 );
 
@@ -21,6 +24,8 @@ router.post(
 // ======================================
 router.get(
   "/",
+  authMiddleware,
+  onlyGuru,
   roomController.getRooms
 );
 
@@ -155,7 +160,7 @@ const normalizeQuestion = async (q) => {
   };
 };
 
-router.get("/detail/:id", authMiddleware, async (req, res) => {
+router.get("/detail/:id", authMiddleware, onlyGuru, async (req, res) => {
   try {
     const roomId = req.params.id;
 
@@ -321,7 +326,7 @@ router.post("/submit/:code", authMiddleware, async (req, res) => {
   }
 });
 
-router.put("/questions/:id", authMiddleware, async (req, res) => {
+router.put("/questions/:id", authMiddleware, onlyGuru, async (req, res) => {
   try {
     const questionId = req.params.id;
     const {

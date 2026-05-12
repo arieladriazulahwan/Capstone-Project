@@ -78,34 +78,30 @@ function Kamus() {
     }
   };
 
+  const getSearchTokens = (text = "") =>
+    text
+      .toLowerCase()
+      .replace(/[^\p{L}\p{N}]+/gu, " ")
+      .trim()
+      .split(/\s+/)
+      .filter(Boolean);
+
   // 🔍 SEARCH + FILTER (SMART)
   const filtered = (() => {
   if (!search.trim()) return data;
 
-  const keywords = search
-    .toLowerCase()
-    .trim()
-    .split(" ")
-    .map((k) => k.trim());
+  const keywords = getSearchTokens(search);
 
   return data
     .map((item) => {
       let score = 0;
 
       // 🔥 pecah semua kata indonesia
-      const indoTokens = item.indonesia
-        .toLowerCase()
-        .split(";")
-        .flatMap((phrase) =>
-          phrase.trim().split(" ")
-        );
+      const indoTokens = getSearchTokens(item.indonesia);
 
       // 🔥 pecah semua kata kaili
       const kailiTokens = item.translations.flatMap((t) =>
-        t.word
-          .toLowerCase()
-          .split(";")
-          .flatMap((w) => w.trim().split(" "))
+        getSearchTokens(t.word)
       );
 
       // 🔥 MODE INDONESIA
@@ -232,7 +228,9 @@ function Kamus() {
                   >
                     <div className="flex justify-between items-center mb-2">
                       <h3 className="font-bold text-lg">
-                        {item.indonesia}
+                        {mode === "indo"
+                          ? item.indonesia
+                          : item.translations.map((t) => t.word).join(", ")}
                       </h3>
 
                       <button
@@ -248,20 +246,20 @@ function Kamus() {
                     </p>
 
                     <div className="flex flex-wrap gap-2">
-                      {item.translations.map((t, i) => (
-                        <span
-                          key={i}
-                          className={`px-3 py-1 rounded-full text-sm ${
-                            mode === "indo"
-                              ? "bg-green-100 text-green-700"
-                              : "bg-green-500 text-white"
-                          }`}
-                        >
-                          {mode === "indo"
-                            ? `${t.dialect}: ${t.word}`
-                            : `${t.word} (${t.dialect})`}
+                      {mode === "indo" ? (
+                        item.translations.map((t, i) => (
+                          <span
+                            key={i}
+                            className="px-3 py-1 rounded-full text-sm bg-green-100 text-green-700"
+                          >
+                            {`${t.dialect}: ${t.word}`}
+                          </span>
+                        ))
+                      ) : (
+                        <span className="px-3 py-1 rounded-full text-sm bg-green-500 text-white">
+                          {item.indonesia}
                         </span>
-                      ))}
+                      )}
                     </div>
                   </div>
                 ))}

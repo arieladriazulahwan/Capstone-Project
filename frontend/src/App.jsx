@@ -20,6 +20,7 @@ import BuatRoom from "./pages/BuatRoom";
 import DetailRoom from "./pages/DetailRoom";
 import QuizPage from "./pages/QuizPage";
 import QuizRoom from "./pages/QuizRoom";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
@@ -30,26 +31,145 @@ function App() {
         <Route path="/register" element={<RegisterSelect />} />
         <Route path="/register/siswa" element={<RegisterSiswa />} />
         <Route path="/register/guru" element={<RegisterGuru />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute allowedRole="siswa">
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/login/siswa" element={<LoginSiswa />} />
         <Route path="/login/guru" element={<LoginGuru />} />
-        <Route path="/dashboard/guru" element={<DashboardGuru />} />
-        <Route path="/kamus" element={<Kamus />} />
-        <Route path="/level" element={<Level />} />
+        <Route
+          path="/dashboard/guru"
+          element={
+            <ProtectedRoute allowedRole="guru">
+              <DashboardGuru />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/kamus"
+          element={
+            <ProtectedRoute allowedRole="siswa">
+              <Kamus />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/level"
+          element={
+            <ProtectedRoute allowedRole="siswa">
+              <Level />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/riwayat" element={<div>Halaman Riwayat</div>} />
-        <Route path="/guru/buat-room" element={<BuatRoom />} />
-        <Route path="/lesson/bab1" element={<LessonBab1 />} />
-        <Route path="/quiz/bab1" element={<QuizBab1 />} />
-        <Route path="/practice/bab1" element={<PracticeBab1 />} />
-        <Route path="/lesson/:dialect/:bab" element={<Lesson />} />
-        <Route path="/lesson/:dialect/:bab/practice" element={<Practice />} />
-        <Route path="/lesson/:dialect/:bab/quiz" element={<Quiz />} />
-        <Route path="/quiz/:code" element={<QuizPage />} />
-        <Route path="/quiz/:code" element={<QuizRoom />} />
-        <Route path="/practice/:dialect/:bab" element={<Practice />} />
-        <Route path="/guru/room/:id" element={<DetailRoom />} />
-        <Route path="/quiz/:dialect/:bab" element={<Quiz />} />
-        <Route path="/lesson/:dialect/bab1" element={<LessonBab1 />} />
+        <Route
+          path="/guru/buat-room"
+          element={
+            <ProtectedRoute allowedRole="guru">
+              <BuatRoom />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/lesson/bab1"
+          element={
+            <ProtectedRoute allowedRole="siswa">
+              <LessonBab1 />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/quiz/bab1"
+          element={
+            <ProtectedRoute allowedRole="siswa">
+              <QuizBab1 />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/practice/bab1"
+          element={
+            <ProtectedRoute allowedRole="siswa">
+              <PracticeBab1 />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/lesson/:dialect/:bab"
+          element={
+            <ProtectedRoute allowedRole="siswa">
+              <Lesson />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/lesson/:dialect/:bab/practice"
+          element={
+            <ProtectedRoute allowedRole="siswa">
+              <Practice />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/lesson/:dialect/:bab/quiz"
+          element={
+            <ProtectedRoute allowedRole="siswa">
+              <Quiz />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/quiz/:code"
+          element={
+            <ProtectedRoute allowedRole="siswa">
+              <QuizPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/quiz/:code"
+          element={
+            <ProtectedRoute allowedRole="siswa">
+              <QuizRoom />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/practice/:dialect/:bab"
+          element={
+            <ProtectedRoute allowedRole="siswa">
+              <Practice />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/guru/room/:id"
+          element={
+            <ProtectedRoute allowedRole="guru">
+              <DetailRoom />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/quiz/:dialect/:bab"
+          element={
+            <ProtectedRoute allowedRole="siswa">
+              <Quiz />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/lesson/:dialect/bab1"
+          element={
+            <ProtectedRoute allowedRole="siswa">
+              <LessonBab1 />
+            </ProtectedRoute>
+          }
+        />
 
       </Routes>
     </Router>

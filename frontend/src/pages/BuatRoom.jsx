@@ -248,6 +248,8 @@ function BuatRoom() {
         })),
       };
 
+      const token = localStorage.getItem("token");
+
       const res = await fetch(
         "http://localhost:3000/api/rooms/create",
         {
@@ -256,6 +258,7 @@ function BuatRoom() {
           headers: {
             "Content-Type":
               "application/json",
+            Authorization: "Bearer " + token,
           },
 
           body: JSON.stringify(payload),
