@@ -57,6 +57,25 @@ const createTables = () => {
       question_id INT NOT NULL,
       block_text TEXT,
       FOREIGN KEY (question_id) REFERENCES room_questions(id) ON DELETE CASCADE
+    )`,
+    `CREATE TABLE IF NOT EXISTS room_attempts (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      room_id INT NOT NULL,
+      user_id INT NOT NULL,
+      score INT DEFAULT 0,
+      total INT DEFAULT 0,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (room_id) REFERENCES rooms(id) ON DELETE CASCADE,
+      FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    )`,
+    `CREATE TABLE IF NOT EXISTS room_attempt_answers (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      attempt_id INT NOT NULL,
+      question_id INT NOT NULL,
+      answer LONGTEXT,
+      is_correct TINYINT(1) DEFAULT 0,
+      FOREIGN KEY (attempt_id) REFERENCES room_attempts(id) ON DELETE CASCADE,
+      FOREIGN KEY (question_id) REFERENCES room_questions(id) ON DELETE CASCADE
     )`
   ];
 

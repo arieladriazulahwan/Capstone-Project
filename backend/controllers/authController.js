@@ -258,6 +258,58 @@ exports.completeBab1 = (req, res) => {
   );
 };
 
+exports.completeBab = (req, res) => {
+  const userId = req.user.id;
+  const { bab } = req.body;
+
+  const validBab = ["bab1", "bab2", "bab3"];
+  if (!bab || !validBab.includes(bab)) {
+    return res.status(400).json({ message: "Bab tidak valid" });
+  }
+
+  db.query(
+    "SELECT progress FROM users WHERE id = ?",
+    [userId],
+    (err, results) => {
+      if (err) return res.status(500).json(err);
+
+      let progress = {};
+      try {
+        progress = JSON.parse(results[0].progress || "{}");
+      } catch {
+        progress = {};
+      }
+
+      if (bab === "bab1") {
+        progress.bab1 = true;
+        progress.bab2 = true;
+      }
+
+      if (bab === "bab2") {
+        progress.bab2 = true;
+        progress.bab3 = true;
+      }
+
+      if (bab === "bab3") {
+        progress.bab3 = true;
+      }
+
+      db.query(
+        "UPDATE users SET progress = ? WHERE id = ?",
+        [JSON.stringify(progress), userId],
+        (err) => {
+          if (err) return res.status(500).json(err);
+
+          res.json({
+            message: "Progress diperbarui",
+            progress,
+          });
+        }
+      );
+    }
+  );
+};
+
 exports.updateDialect = (req, res) => {
   const userId = req.user.id;
   const { dialect } = req.body;

@@ -17,6 +17,11 @@ function BottomNav({ role = "siswa" }) {
 
   const menu = role === "guru" ? menuGuru : menuSiswa;
 
+  // Don't render BottomNav for guru role
+  if (role === "guru") {
+    return null;
+  }
+
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-white border-t shadow md:hidden flex justify-around py-2">
       {menu.map((item, i) => (

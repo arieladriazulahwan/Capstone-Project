@@ -11,6 +11,7 @@ router.post("/register", authController.register);
 router.post("/login", authController.login);
 router.get("/profile", authMiddleware, authController.getProfile);
 router.post("/complete-bab1", authMiddleware, authController.completeBab1);
+router.post("/complete-bab", authMiddleware, authController.completeBab);
 router.put("/dialect", authMiddleware, authController.updateDialect);
 router.put("/add-xp", authMiddleware, authController.addXP);
 

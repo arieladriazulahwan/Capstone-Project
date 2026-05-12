@@ -56,6 +56,11 @@ function Sidebar({ role = "siswa" }) {
         ? "text-blue-600"
         : "text-green-600";
 
+  // Don't render Sidebar for guru role
+  if (role === "guru") {
+    return null;
+  }
+
   return (
     <div
       className={`hidden md:flex flex-col bg-white shadow-lg transition-all duration-300 ${

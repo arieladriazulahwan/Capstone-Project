@@ -1,6 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import ProfileDropdown from "./ProfileDropdown";
 
-function NavbarGuru({ user }) {
+function NavbarGuru({ user, showBackButton = false }) {
+  const navigate = useNavigate();
   return (
     <div className="sticky top-0 z-40 bg-white border-b">
 
@@ -9,6 +11,28 @@ function NavbarGuru({ user }) {
 
         {/* LEFT */}
         <div className="flex items-center gap-3">
+
+          {/* BACK BUTTON */}
+          {showBackButton && (
+            <button
+              onClick={() => navigate(-1)}
+              className="p-2 rounded-full hover:bg-gray-100 transition-colors"
+            >
+              <svg
+                className="w-5 h-5 text-gray-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M15 19l-7-7 7-7"
+                />
+              </svg>
+            </button>
+          )}
 
           {/* LOGO */}
           <div>

@@ -156,14 +156,34 @@ function QuizPage() {
   // =====================================
   // SUBMIT
   // =====================================
-  const submitQuiz = () => {
+  const submitQuiz = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const res = await fetch(
+        `http://localhost:3000/api/rooms/submit/${code}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+          body: JSON.stringify({ answers }),
+        }
+      );
 
-    console.log("Jawaban:", answers);
+      const data = await res.json();
 
-    alert("Quiz selesai!");
+      if (!res.ok) {
+        alert(data.message || "Gagal submit quiz");
+        return;
+      }
 
-    navigate("/dashboard");
-
+      alert(`Quiz selesai!\nNilai: ${data.score}/${data.total}`);
+      navigate("/dashboard");
+    } catch (err) {
+      console.log(err);
+      alert("Gagal submit quiz");
+    }
   };
 
   // =====================================

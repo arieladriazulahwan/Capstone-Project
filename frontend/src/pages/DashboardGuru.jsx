@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import Sidebar from "../components/Sidebar";
-import BottomNav from "../components/BottomNav";
 import NavbarGuru from "../components/NavbarGuru";
 import RoomCard from "../components/RoomCard";
 import { useNavigate } from "react-router-dom";
@@ -87,17 +85,13 @@ function DashboardGuru() {
   }
 
   return (
-    <div className="flex min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gray-100">
 
-      <Sidebar role="guru" />
+      <NavbarGuru user={user} />
 
-      <div className="flex-1 flex flex-col">
+      <main className="px-4 py-6 flex justify-center">
 
-        <NavbarGuru user={user} />
-
-        <main className="flex-1 px-4 py-6 flex justify-center">
-
-          <div className="w-full max-w-md md:max-w-4xl">
+        <div className="w-full max-w-md md:max-w-4xl">
 
             {/* GREETING */}
             <div className="bg-gradient-to-r from-blue-500 to-blue-400 text-white rounded-2xl p-5 mb-5 shadow">
@@ -144,10 +138,6 @@ function DashboardGuru() {
           </div>
 
         </main>
-
-      </div>
-
-      <BottomNav role="guru" />
 
     </div>
   );

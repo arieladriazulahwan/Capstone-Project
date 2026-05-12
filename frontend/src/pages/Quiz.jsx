@@ -97,6 +97,21 @@ function Quiz() {
         `XP +${updatedScore * 10}`
       );
 
+      if (bab) {
+        try {
+          await fetch("http://localhost:3000/api/auth/complete-bab", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+            body: JSON.stringify({ bab }),
+          });
+        } catch (err) {
+          console.log("Gagal update progress bab:", err);
+        }
+      }
+
       navigate("/level");
 
     } catch (err) {

@@ -3,19 +3,23 @@ CREATE DATABASE IF NOT EXISTS bahasa_kaili;
 USE bahasa_kaili;
 
 -- Users table
-CREATE TABLE IF NOT EXISTS users (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(255) NOT NULL,
-  username VARCHAR(255) UNIQUE NOT NULL,
-  password VARCHAR(255) NOT NULL,
-  role VARCHAR(50) DEFAULT 'siswa',
-  progress TEXT,
-  xp INT DEFAULT 0,
-  level INT DEFAULT 1,
-  title VARCHAR(255),
-  streak INT DEFAULT 0,
-  dialect VARCHAR(50)
-);
+CREATE TABLE users (
+    id INT(11) NOT NULL AUTO_INCREMENT,
+    name VARCHAR(100) DEFAULT NULL,
+    username VARCHAR(100) DEFAULT NULL,
+    password VARCHAR(255) DEFAULT NULL,
+    role ENUM('siswa', 'guru') DEFAULT 'siswa',
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+    xp INT(11) DEFAULT 0,
+    level INT(11) DEFAULT 1,
+    streak INT(11) DEFAULT 0,
+    last_login DATE DEFAULT NULL,
+    title VARCHAR(50) DEFAULT 'Pemula',
+    progress LONGTEXT DEFAULT NULL,
+    dialect VARCHAR(50) DEFAULT 'ledo',
+    PRIMARY KEY (id),
+    UNIQUE KEY (username)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Rooms table
 CREATE TABLE IF NOT EXISTS rooms (

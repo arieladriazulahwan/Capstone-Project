@@ -41,11 +41,13 @@ function QuizBab1() {
           body: JSON.stringify({ xp: newScore }),
         });
 
-        await fetch("http://localhost:3000/api/auth/complete-bab1", {
-            method: "POST",
-            headers: {
-                Authorization: "Bearer " + localStorage.getItem("token"),
-            },
+        await fetch("http://localhost:3000/api/auth/complete-bab", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+          body: JSON.stringify({ bab: "bab1" }),
         });
 
         // 🎉 ALERT HASIL

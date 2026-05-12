@@ -1,13 +1,54 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import NavbarGuru from "../components/NavbarGuru";
 
 function BuatRoom() {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [timer, setTimer] = useState(15);
+  const [user, setUser] = useState(null);
 
   const [questions, setQuestions] = useState([]);
+
+  // Fetch user data
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) {
+          navigate("/login/guru");
+          return;
+        }
+
+        const res = await fetch("http://localhost:3000/api/auth/profile", {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        });
+
+        const data = await res.json();
+        setUser(data.user || data);
+      } catch (err) {
+        console.log(err);
+        navigate("/login/guru");
+      }
+    };
+
+    fetchUser();
+  }, [navigate]);
+
+  // Loading state
+  if (!user) {
+    return (
+      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p>Loading...</p>
+        </div>
+      </div>
+    );
+  }
 
   // =========================
   // TAMBAH SOAL
@@ -89,6 +130,19 @@ function BuatRoom() {
       );
     }
 
+    setQuestions(temp);
+  };
+
+  const removeQuestion = (index) => {
+    const temp = [...questions];
+    temp.splice(index, 1);
+    setQuestions(temp);
+  };
+
+  const clearAnswer = (index) => {
+    const temp = [...questions];
+    temp[index].answer = "";
+    temp[index].answerBlocks = [];
     setQuestions(temp);
   };
 
@@ -235,12 +289,15 @@ function BuatRoom() {
   };
 
   return (
-    <div className="max-w-5xl mx-auto p-4">
+    <div className="min-h-screen bg-gray-100">
+      <NavbarGuru user={user} showBackButton={true} />
 
-      {/* HEADER */}
-      <h1 className="text-2xl font-bold mb-5">
-        🎯 Buat Room
-      </h1>
+      <div className="max-w-5xl mx-auto p-4">
+
+        {/* HEADER */}
+        <h1 className="text-2xl font-bold mb-5">
+          🎯 Buat Room
+        </h1>
 
       {/* ROOM */}
       <div className="bg-white p-5 rounded-2xl shadow mb-5">
@@ -327,9 +384,18 @@ function BuatRoom() {
             className="bg-white p-5 rounded-2xl shadow"
           >
 
-            <h2 className="font-bold mb-4">
-              Soal #{index + 1}
-            </h2>
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="font-bold">
+                Soal #{index + 1}
+              </h2>
+
+              <button
+                onClick={() => removeQuestion(index)}
+                className="text-red-500 font-semibold"
+              >
+                Hapus Soal
+              </button>
+            </div>
 
             {/* PERTANYAAN */}
             <input
@@ -618,6 +684,15 @@ function BuatRoom() {
               </>
             )}
 
+            {(q.answer || q.answerBlocks.length > 0) && (
+              <button
+                onClick={() => clearAnswer(index)}
+                className="mt-4 bg-red-500 text-white px-4 py-2 rounded-xl"
+              >
+                Hapus Jawaban
+              </button>
+            )}
+
           </div>
         ))}
 
@@ -631,6 +706,7 @@ function BuatRoom() {
         🚀 Buat Room
       </button>
 
+      </div>
     </div>
   );
 }
