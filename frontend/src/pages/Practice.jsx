@@ -39,11 +39,12 @@ function Practice() {
   }
 
   const current = data[index];
+  const options = current?.blocks ?? current?.options ?? [];
 
   // 🔥 cek jawaban
-  const checkAnswer = (block) => {
+  const checkAnswer = (option) => {
 
-    if (block === current.answer) {
+    if (option === current.answer) {
       alert("Benar 👍");
     } else {
       alert("Salah 😅");
@@ -93,17 +94,23 @@ function Practice() {
         {/* BLOK JAWABAN */}
         <div className="grid grid-cols-2 gap-3">
 
-          {current.blocks.map((block, i) => (
+          {options.map((option, i) => (
 
             <button
               key={i}
-              onClick={() => checkAnswer(block)}
+              onClick={() => checkAnswer(option)}
               className="p-4 bg-blue-100 rounded-xl font-bold text-lg hover:bg-blue-200 transition"
             >
-              {block}
+              {option}
             </button>
 
           ))}
+
+          {options.length === 0 && (
+            <div className="col-span-2 text-center text-gray-500">
+              Data jawaban tidak tersedia.
+            </div>
+          )}
 
         </div>
 
