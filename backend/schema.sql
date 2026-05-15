@@ -2,23 +2,44 @@
 CREATE DATABASE IF NOT EXISTS bahasa_kaili;
 USE bahasa_kaili;
 
--- Users table
-CREATE TABLE users (
+-- Users table (common fields for siswa and guru)
+CREATE TABLE IF NOT EXISTS users (
     id INT(11) NOT NULL AUTO_INCREMENT,
-    name VARCHAR(100) DEFAULT NULL,
-    username VARCHAR(100) DEFAULT NULL,
-    password VARCHAR(255) DEFAULT NULL,
-    role ENUM('siswa', 'guru') DEFAULT 'siswa',
+    name VARCHAR(100) NOT NULL,
+    username VARCHAR(100) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    role ENUM('siswa', 'guru') NOT NULL DEFAULT 'siswa',
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
-    xp INT(11) DEFAULT 0,
-    level INT(11) DEFAULT 1,
-    streak INT(11) DEFAULT 0,
     last_login DATE DEFAULT NULL,
-    title VARCHAR(50) DEFAULT 'Pemula',
-    progress LONGTEXT DEFAULT NULL,
-    dialect VARCHAR(50) DEFAULT 'ledo',
     PRIMARY KEY (id),
     UNIQUE KEY (username)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Student profiles (only for siswa)
+CREATE TABLE IF NOT EXISTS student_profiles (
+    id INT(11) NOT NULL AUTO_INCREMENT,
+    user_id INT(11) NOT NULL,
+    xp INT(11) NOT NULL DEFAULT 0,
+    level INT(11) NOT NULL DEFAULT 1,
+    streak INT(11) NOT NULL DEFAULT 0,
+    title VARCHAR(50) NOT NULL DEFAULT 'Pemula',
+    dialect VARCHAR(50) NOT NULL DEFAULT 'ledo',
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+    PRIMARY KEY (id),
+    UNIQUE KEY user_profile_unique (user_id),
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Student progress per dialect (only for siswa)
+CREATE TABLE IF NOT EXISTS student_progress (
+    id INT(11) NOT NULL AUTO_INCREMENT,
+    user_id INT(11) NOT NULL,
+    dialect VARCHAR(50) NOT NULL DEFAULT 'ledo',
+    progress LONGTEXT DEFAULT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+    PRIMARY KEY (id),
+    UNIQUE KEY user_dialect_unique (user_id, dialect),
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Rooms table
@@ -57,3 +78,11 @@ CREATE TABLE IF NOT EXISTS room_blocks (
   block_text TEXT,
   FOREIGN KEY (question_id) REFERENCES room_questions(id) ON DELETE CASCADE
 );
+
+CREATE TABLE IF NOT EXISTS favorites (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT,
+  vocab_id INT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+

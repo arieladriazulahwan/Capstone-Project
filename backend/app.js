@@ -21,13 +21,29 @@ const createTables = () => {
       name VARCHAR(255) NOT NULL,
       username VARCHAR(255) UNIQUE NOT NULL,
       password VARCHAR(255) NOT NULL,
-      role VARCHAR(50) DEFAULT 'siswa',
-      progress TEXT,
-      xp INT DEFAULT 0,
-      level INT DEFAULT 1,
-      title VARCHAR(255),
-      streak INT DEFAULT 0,
-      dialect VARCHAR(50)
+      role VARCHAR(50) NOT NULL DEFAULT 'siswa',
+      last_login DATE DEFAULT NULL
+    )`,
+    `CREATE TABLE IF NOT EXISTS student_profiles (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      user_id INT NOT NULL,
+      xp INT NOT NULL DEFAULT 0,
+      level INT NOT NULL DEFAULT 1,
+      streak INT NOT NULL DEFAULT 0,
+      title VARCHAR(255) NOT NULL DEFAULT 'Pemula',
+      dialect VARCHAR(50) NOT NULL DEFAULT 'ledo',
+      created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      UNIQUE KEY user_profile_unique (user_id),
+      FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    )`,
+    `CREATE TABLE IF NOT EXISTS student_progress (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      user_id INT NOT NULL,
+      dialect VARCHAR(50) NOT NULL DEFAULT 'ledo',
+      progress LONGTEXT DEFAULT NULL,
+      created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      UNIQUE KEY user_dialect_unique (user_id, dialect),
+      FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
     )`,
     `CREATE TABLE IF NOT EXISTS rooms (
       id INT AUTO_INCREMENT PRIMARY KEY,
