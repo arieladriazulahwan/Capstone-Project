@@ -2,6 +2,7 @@ const fs = require("fs");
 const path = require("path");
 
 const quizPath = path.join(__dirname, "../data/quiz.json");
+const validDialects = ["ledo", "rai"];
 
 // 🔥 GET QUIZ BY DIALECT + BAB
 exports.getQuiz = (req, res) => {
@@ -12,6 +13,10 @@ exports.getQuiz = (req, res) => {
   let result = data;
 
   if (dialect) {
+    if (!validDialects.includes(dialect.toLowerCase())) {
+      return res.status(400).json({ message: "Dialek tidak tersedia" });
+    }
+
     result = result.filter(
       (q) => q.dialect.toLowerCase() === dialect.toLowerCase()
     );

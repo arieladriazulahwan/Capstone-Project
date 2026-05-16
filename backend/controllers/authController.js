@@ -1,6 +1,7 @@
 const db = require("../config/db");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const JWT_SECRET = process.env.JWT_SECRET || "SECRET_KEY";
 
 // 🔥 helper tanggal (ANTI BUG TIMEZONE)
 const getToday = () => new Date().toLocaleDateString("en-CA");
@@ -11,13 +12,26 @@ const formatLocalDate = (date) => {
   });
 };
 
-const defaultProgressObject = () => ({ bab1: true, bab2: false, bab3: false });
+const totalBab = 10;
+const validBab = Array.from({ length: totalBab }, (_, index) => `bab${index + 1}`);
+
+const defaultProgressObject = () =>
+  validBab.reduce((progress, bab, index) => {
+    progress[bab] = index === 0;
+    return progress;
+  }, {});
+
 const defaultProgressString = () => JSON.stringify(defaultProgressObject());
+const validDialects = ["ledo", "rai"];
 
 const parseProgress = (raw) => {
+  const defaults = defaultProgressObject();
   if (!raw) return defaultProgressObject();
   try {
-    return JSON.parse(raw);
+    return {
+      ...defaults,
+      ...JSON.parse(raw),
+    };
   } catch {
     return defaultProgressObject();
   }
@@ -60,17 +74,18 @@ const saveStudentProgress = (userId, dialect, progress, callback) => {
 };
 
 const updateProgressByBab = (progress, bab) => {
-  if (bab === "bab1") {
-    progress.bab1 = true;
-    progress.bab2 = true;
+  const babIndex = validBab.indexOf(bab);
+  if (babIndex === -1) {
+    return progress;
   }
-  if (bab === "bab2") {
-    progress.bab2 = true;
-    progress.bab3 = true;
+
+  progress[bab] = true;
+
+  const nextBab = validBab[babIndex + 1];
+  if (nextBab) {
+    progress[nextBab] = true;
   }
-  if (bab === "bab3") {
-    progress.bab3 = true;
-  }
+
   return progress;
 };
 
@@ -100,8 +115,7 @@ exports.register = async (req, res) => {
         const userId = result.insertId;
         if (userRole === "siswa") {
           const dialect = "ledo";
-          const allDialects = ["ledo", "rai", "doi"];
-          const progressRows = allDialects.map((d) => [userId, d, defaultProgressString()]);
+          const progressRows = validDialects.map((d) => [userId, d, defaultProgressString()]);
 
           db.query(
             "INSERT INTO student_profiles (user_id, dialect, title) VALUES (?, ?, ?)",
@@ -180,7 +194,7 @@ exports.login = (req, res) => {
           if (updateErr) console.log("Gagal update last_login");
 
           const finalizeResponse = () => {
-            const token = jwt.sign({ id: user.id, role: user.role }, "SECRET_KEY", { expiresIn: "1d" });
+            const token = jwt.sign({ id: user.id, role: user.role }, JWT_SECRET, { expiresIn: "1d" });
             res.json({
               message: "Login berhasil",
               token,
@@ -243,19 +257,35 @@ exports.getProfile = (req, res) => {
 
           const progress = progressByDialect[currentDialect] || defaultProgressObject();
 
-          res.json({
-            id: profile.id,
-            name: profile.name,
-            username: profile.username,
-            role: profile.role,
-            xp: profile.xp || 0,
-            level: profile.level || 1,
-            title: profile.title || "Pemula",
-            streak: profile.streak || 0,
-            dialect: currentDialect,
-            progress,
-            progressByDialect,
-          });
+          db.query(
+            `SELECT
+              COUNT(*) AS total_quizzes,
+              COALESCE(SUM(score), 0) AS total_points
+            FROM room_attempts
+            WHERE user_id = ?`,
+            [userId],
+            (err, statsRows) => {
+              if (err) return res.status(500).json(err);
+
+              const stats = statsRows[0] || {};
+
+              res.json({
+                id: profile.id,
+                name: profile.name,
+                username: profile.username,
+                role: profile.role,
+                xp: profile.xp || 0,
+                level: profile.level || 1,
+                title: profile.title || "Pemula",
+                streak: profile.streak || 0,
+                dialect: currentDialect,
+                progress,
+                progressByDialect,
+                total_quizzes: Number(stats.total_quizzes) || 0,
+                total_points: Number(stats.total_points) || 0,
+              });
+            }
+          );
         }
       );
     }
@@ -265,10 +295,10 @@ exports.getProfile = (req, res) => {
 // ================= ADD XP =================
 exports.addXP = (req, res) => {
   const userId = req.user.id;
-  const { xp } = req.body;
+  const xp = Number(req.body.xp);
 
-  if (xp === undefined || xp === null) {
-    return res.status(400).json({ message: "XP kosong" });
+  if (!Number.isFinite(xp) || xp <= 0) {
+    return res.status(400).json({ message: "XP tidak valid" });
   }
 
   db.query(
@@ -339,7 +369,6 @@ exports.completeBab1 = (req, res) => {
 
 exports.completeBab = (req, res) => {
   const { bab } = req.body;
-  const validBab = ["bab1", "bab2", "bab3"];
   if (!bab || !validBab.includes(bab)) {
     return res.status(400).json({ message: "Bab tidak valid" });
   }
@@ -352,6 +381,10 @@ exports.updateDialect = (req, res) => {
 
   if (!dialect) {
     return res.status(400).json({ message: "Dialek wajib diisi" });
+  }
+
+  if (!validDialects.includes(dialect.toLowerCase())) {
+    return res.status(400).json({ message: "Dialek tidak tersedia" });
   }
 
   db.query("SELECT role FROM users WHERE id = ?", [userId], (err, results) => {

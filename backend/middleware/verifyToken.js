@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const JWT_SECRET = process.env.JWT_SECRET || "SECRET_KEY";
 
 const verifyToken = (req, res, next) => {
 
@@ -16,7 +17,7 @@ const verifyToken = (req, res, next) => {
 
     const decoded = jwt.verify(
       token,
-      "SECRET_KEY"
+      JWT_SECRET
     );
 
     req.user = decoded;

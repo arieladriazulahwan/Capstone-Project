@@ -8,7 +8,11 @@ const vocabPath = path.join(__dirname, "../data/vocab.json");
 // ➕ TAMBAH FAVORIT
 exports.addFavorite = (req, res) => {
   const userId = req.user.id;
-  const { vocabId } = req.body;
+  const vocabId = Number(req.body.vocabId);
+
+  if (!Number.isInteger(vocabId) || vocabId <= 0) {
+    return res.status(400).json({ message: "Vocab tidak valid" });
+  }
 
   // 🔍 cek dulu
   db.query(
@@ -37,7 +41,11 @@ exports.addFavorite = (req, res) => {
 // ❌ HAPUS FAVORIT
 exports.removeFavorite = (req, res) => {
   const userId = req.user.id;
-  const { vocabId } = req.body;
+  const vocabId = Number(req.body.vocabId);
+
+  if (!Number.isInteger(vocabId) || vocabId <= 0) {
+    return res.status(400).json({ message: "Vocab tidak valid" });
+  }
 
   db.query(
     "DELETE FROM favorites WHERE user_id=? AND vocab_id=?",

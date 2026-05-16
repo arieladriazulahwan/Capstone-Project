@@ -3,10 +3,17 @@ const router = express.Router();
 
 const fs = require("fs");
 const path = require("path");
+const validDialects = ["ledo", "rai"];
 
 // 🔥 GET PRACTICE
 router.get("/:dialect/:bab", (req, res) => {
   const { dialect, bab } = req.params;
+
+  if (!validDialects.includes(dialect.toLowerCase())) {
+    return res.status(400).json({
+      message: "Dialek tidak tersedia",
+    });
+  }
 
   try {
     const filePath = path.join(

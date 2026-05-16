@@ -56,6 +56,16 @@ function DetailRoom() {
     return type || "Soal";
   };
 
+  const getAnswerType = (question) => {
+    if (question.type === "multiple") return "pilihan";
+    if (question.type === "susun") return "blok";
+    return question.answerType || "pilihan";
+  };
+
+  const usesOptions = (question) => getAnswerType(question) === "pilihan";
+  const usesTextAnswer = (question) => getAnswerType(question) === "ketik";
+  const usesBlocks = (question) => getAnswerType(question) === "blok";
+
   const updateDraftField = (index, field, value) => {
     const temp = [...draftQuestions];
     temp[index][field] = value;
@@ -104,6 +114,9 @@ function DetailRoom() {
 
   const saveQuestion = async (index) => {
     const question = draftQuestions[index];
+    const answerType = getAnswerType(question);
+    const options = usesOptions(question) ? question.options || [] : [];
+    const blocks = usesBlocks(question) ? question.blocks || [] : [];
 
     try {
       const res = await fetch(
@@ -118,9 +131,9 @@ function DetailRoom() {
             question: question.question,
             type: question.type,
             answer: question.answer,
-            answerType: question.answerType,
-            options: question.options || [],
-            blocks: question.blocks || [],
+            answerType,
+            options,
+            blocks,
           }),
         }
       );
@@ -186,7 +199,7 @@ function DetailRoom() {
 
   return (
     <div className="min-h-screen bg-gray-100">
-      <NavbarGuru user={null} />
+      <NavbarGuru user={null} showBackButton />
 
       <main className="p-4 md:p-6 flex justify-center">
         <div className="w-full max-w-5xl">
@@ -211,6 +224,8 @@ function DetailRoom() {
             {draftQuestions.map((q, index) => {
               const isEditing = editingIndex === index;
               const currentQuestion = q;
+              const answerType = getAnswerType(currentQuestion);
+              const canChangeAnswerType = q.type === "gambar" || q.type === "sambung";
               return (
                 <div key={q.id} className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
                   <div className="flex flex-col gap-3 px-5 py-4 border-b bg-gray-50 md:flex-row md:items-center md:justify-between">
@@ -249,7 +264,24 @@ function DetailRoom() {
                           />
                         </div>
 
-                        {(q.type === "multiple" || q.type === "gambar" || q.type === "sambung") && (
+                        {canChangeAnswerType && (
+                          <div className="space-y-4">
+                            <div>
+                              <label className="block text-sm font-semibold mb-2">Tipe Jawaban</label>
+                              <select
+                                value={answerType}
+                                onChange={(e) => updateDraftField(index, "answerType", e.target.value)}
+                                className="w-full border p-3 rounded-xl"
+                              >
+                                <option value="pilihan">Pilihan Ganda</option>
+                                <option value="ketik">Ketik Jawaban</option>
+                                <option value="blok">Blok Kata</option>
+                              </select>
+                            </div>
+                          </div>
+                        )}
+
+                        {usesOptions(currentQuestion) && (
                           <div className="space-y-3">
                             <label className="block text-sm font-semibold">Opsi Jawaban</label>
                             {currentQuestion.options?.map((option, oIndex) => (
@@ -278,36 +310,19 @@ function DetailRoom() {
                           </div>
                         )}
 
-                        {(q.type === "susun" || q.type === "gambar" || q.type === "sambung") && (
-                          <div className="space-y-4">
-                            <div>
-                              <label className="block text-sm font-semibold mb-2">Tipe Jawaban</label>
-                              <select
-                                value={currentQuestion.answerType || "pilihan"}
-                                onChange={(e) => updateDraftField(index, "answerType", e.target.value)}
-                                className="w-full border p-3 rounded-xl"
-                              >
-                                <option value="pilihan">Pilihan Ganda</option>
-                                <option value="ketik">Ketik Jawaban</option>
-                                <option value="blok">Blok Kata</option>
-                              </select>
-                            </div>
-                          </div>
-                        )}
-
-                        {currentQuestion.answerType === "ketik" && (
+                        {usesTextAnswer(currentQuestion) && (
                           <div>
                             <label className="block text-sm font-semibold mb-2">Jawaban Benar</label>
                             <input
                               type="text"
-                              value={currentQuestion.answer}
+                              value={currentQuestion.answer || ""}
                               onChange={(e) => updateDraftField(index, "answer", e.target.value)}
                               className="w-full border p-3 rounded-xl"
                             />
                           </div>
                         )}
 
-                        {(q.type === "susun" || currentQuestion.answerType === "blok") && (
+                        {usesBlocks(currentQuestion) && (
                           <div className="space-y-4">
                             <label className="block text-sm font-semibold">Blok Kata</label>
                             {currentQuestion.blocks?.map((block, bIndex) => (
@@ -330,7 +345,7 @@ function DetailRoom() {
                               <label className="block text-sm font-semibold mb-2">Susunan Jawaban</label>
                               <input
                                 type="text"
-                                value={currentQuestion.answer}
+                                value={currentQuestion.answer || ""}
                                 onChange={(e) => updateDraftField(index, "answer", e.target.value)}
                                 className="w-full border p-3 rounded-xl"
                               />
@@ -338,12 +353,12 @@ function DetailRoom() {
                           </div>
                         )}
 
-                        {currentQuestion.answerType === "pilihan" && q.type !== "susun" && (
+                        {usesOptions(currentQuestion) && (
                           <div>
                             <label className="block text-sm font-semibold mb-2">Jawaban Benar</label>
                             <input
                               type="text"
-                              value={currentQuestion.answer}
+                              value={currentQuestion.answer || ""}
                               onChange={(e) => updateDraftField(index, "answer", e.target.value)}
                               className="w-full border p-3 rounded-xl"
                             />
@@ -355,9 +370,12 @@ function DetailRoom() {
                         <div className="bg-blue-50 border border-blue-100 rounded-2xl p-4 mb-5">
                           <p className="text-sm text-blue-500 font-semibold mb-2">Pertanyaan</p>
                           <p className="text-gray-800 text-lg font-medium leading-relaxed">{q.question}</p>
+                          <p className="text-xs text-blue-400 mt-2">
+                            Jawaban: {answerType === "pilihan" ? "Pilihan Ganda" : answerType === "ketik" ? "Ketik Jawaban" : "Blok Kata"}
+                          </p>
                         </div>
 
-                        {q.options?.length > 0 && (
+                        {usesOptions(q) && q.options?.length > 0 && (
                           <div className="space-y-3">
                             <p className="text-sm font-semibold text-gray-500">Opsi Jawaban</p>
                             {q.options.map((opt, oIndex) => (
@@ -371,7 +389,7 @@ function DetailRoom() {
                           </div>
                         )}
 
-                        {q.blocks?.length > 0 && (
+                        {usesBlocks(q) && q.blocks?.length > 0 && (
                           <div className="space-y-3">
                             <p className="text-sm font-semibold text-gray-500">Blok Kata</p>
                             <div className="flex flex-wrap gap-2">

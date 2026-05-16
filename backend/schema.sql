@@ -81,8 +81,10 @@ CREATE TABLE IF NOT EXISTS room_blocks (
 
 CREATE TABLE IF NOT EXISTS favorites (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  user_id INT,
-  vocab_id INT,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  user_id INT NOT NULL,
+  vocab_id INT NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE KEY user_vocab_unique (user_id, vocab_id),
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 

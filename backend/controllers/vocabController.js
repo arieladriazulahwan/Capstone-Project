@@ -2,6 +2,7 @@ const fs = require("fs");
 const path = require("path");
 
 const filePath = path.join(__dirname, "../data/vocab.json");
+const validDialects = ["ledo", "rai"];
 
 // 🔥 GET ALL
 exports.getAllVocab = (req, res) => {
@@ -24,6 +25,10 @@ exports.getVocabById = (req, res) => {
 // 🔥 SEARCH
 exports.searchVocab = (req, res) => {
   const { q, mode = "indo", dialect, category } = req.query;
+
+  if (dialect && !validDialects.includes(dialect.toLowerCase())) {
+    return res.status(400).json({ message: "Dialek tidak tersedia" });
+  }
 
   const data = JSON.parse(fs.readFileSync(filePath));
 

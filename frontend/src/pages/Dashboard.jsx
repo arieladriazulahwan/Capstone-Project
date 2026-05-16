@@ -272,63 +272,30 @@ function Dashboard() {
             </div>
 
             {/* STATS */}
-            <div className="grid grid-cols-2 gap-3 mb-5">
+            <div className="bg-white rounded-2xl p-5 shadow mb-5">
 
-              <div className="bg-white rounded-xl p-4 text-center shadow">
+              <h2 className="text-lg font-bold mb-2">
+                Statistik Belajar Room
+              </h2>
+              <div className="flex gap-4">
 
-                <h3 className="text-green-600 text-xl font-bold">
-                  5
-                </h3>
-
-                <p className="text-sm text-gray-500">
-                  Kuis Selesai
-                </p>
-
+                <div className="flex-1 bg-green-100 p-4 rounded-xl text-center">
+                  <p className="text-sm text-gray-600">
+                    Total Kuis
+                  </p>
+                  <p className="font-bold text-2xl">
+                    {user.total_quizzes || 0}
+                  </p>
+                </div>
+                <div className="flex-1 bg-yellow-100 p-4 rounded-xl text-center">
+                  <p className="text-sm text-gray-600">
+                    Total Poin
+                  </p>
+                  <p className="font-bold text-2xl">
+                    {user.total_points || 0}
+                  </p>
+                </div>
               </div>
-
-              <div className="bg-white rounded-xl p-4 text-center shadow">
-
-                <h3 className="text-yellow-500 text-xl font-bold">
-                  1240
-                </h3>
-
-                <p className="text-sm text-gray-500">
-                  Total Poin
-                </p>
-
-              </div>
-
-            </div>
-
-            {/* BADGE */}
-            <div className="mb-5">
-
-              <h3 className="font-semibold mb-2">
-                🏅 Badge
-              </h3>
-
-              <div className="flex gap-2 flex-wrap">
-
-                {user?.level >= 1 && (
-                  <span className="bg-green-100 text-green-600 px-3 py-1 rounded-full text-sm">
-                    Beginner
-                  </span>
-                )}
-
-                {user?.level >= 5 && (
-                  <span className="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm">
-                    Intermediate
-                  </span>
-                )}
-
-                {user?.level >= 10 && (
-                  <span className="bg-yellow-100 text-yellow-600 px-3 py-1 rounded-full text-sm">
-                    Expert
-                  </span>
-                )}
-
-              </div>
-
             </div>
 
             {/* FAVORIT */}
