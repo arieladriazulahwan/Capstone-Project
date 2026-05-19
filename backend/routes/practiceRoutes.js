@@ -25,8 +25,6 @@ router.get("/:dialect/:bab", (req, res) => {
       `${bab}.json`
     );
 
-    console.log("PRACTICE FILE:", filePath);
-
     // 🔥 cek file
     if (!fs.existsSync(filePath)) {
       return res.status(404).json({

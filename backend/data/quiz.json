@@ -1,83 +1,28 @@
 [
-  {
-    "id": 1,
-    "dialect": "ledo",
-    "bab": "bab1",
-    "question": "Apa arti 'Aku' dalam Bahasa Indonesia?",
-    "options": ["Saya", "Kamu", "Dia", "Mereka"],
-    "answer": "Saya"
-  },
-  {
-    "id": 2,
-    "dialect": "rai",
-    "bab": "bab1",
-    "question": "Apa arti 'Yaku'?",
-    "options": ["Saya", "Kamu", "Dia", "Kami"],
-    "answer": "Saya"
-  },
-  {
-    "id": 3,
-    "dialect": "ledo",
-    "bab": "bab2",
-    "question": "Apa arti 'Ngana'?",
-    "options": ["Saya", "Kamu", "Dia", "Kami"],
-    "answer": "Kamu"
-  },
+  { "id": 1, "dialect": "ledo", "bab": "bab1", "category": "kata benda", "question": "Kata 'Banua' termasuk kategori apa?", "options": ["Kata benda", "Kata kerja", "Kata sifat", "Kata seru"], "answer": "Kata benda" },
+  { "id": 2, "dialect": "ledo", "bab": "bab1", "category": "kata kerja", "question": "Kata kerja untuk 'makan' adalah?", "options": ["Ngande", "Banua", "Mabelo", "Yaku"], "answer": "Ngande" },
+  { "id": 3, "dialect": "ledo", "bab": "bab1", "category": "kata sifat", "question": "Apa arti 'Mabelo'?", "options": ["Baik", "Saya", "Dan", "Dua"], "answer": "Baik" },
+  { "id": 4, "dialect": "ledo", "bab": "bab1", "category": "kata keterangan", "question": "Kata keterangan waktu untuk morning adalah?", "options": ["Pagi", "Ante", "I", "Rua"], "answer": "Pagi" },
+  { "id": 5, "dialect": "ledo", "bab": "bab1", "category": "kata ganti", "question": "Apa arti 'Yaku'?", "options": ["Saya", "Kamu", "Dia", "Mereka"], "answer": "Saya" },
+  { "id": 6, "dialect": "ledo", "bab": "bab1", "category": "kata depan", "question": "Apa arti 'Ri'?", "options": ["Di", "Dan", "Si", "Wah"], "answer": "Di" },
+  { "id": 7, "dialect": "ledo", "bab": "bab1", "category": "kata sambung", "question": "Apa arti 'Ante'?", "options": ["Dan", "Di", "Ke", "Satu"], "answer": "Dan" },
+  { "id": 8, "dialect": "ledo", "bab": "bab1", "category": "kata bilangan", "question": "Apa arti 'Sangu'?", "options": ["Satu", "Dua", "Tiga", "Empat"], "answer": "Satu" },
+  { "id": 9, "dialect": "ledo", "bab": "bab1", "category": "kata seru", "question": "Kata untuk menyapa adalah?", "options": ["Halo", "Ri", "Ngande", "Banua"], "answer": "Halo" },
+  { "id": 10, "dialect": "ledo", "bab": "bab1", "category": "kata sandang", "question": "Kata sandang untuk 'si' adalah?", "options": ["I", "Ante", "Ue", "Rua"], "answer": "I" },
 
-  {
-    "id": 4,
-    "dialect": "ledo",
-    "bab": "bab1",
-    "question": "Apa arti 'Halo'?",
-    "options": ["Hai", "Terima kasih", "Maaf", "Selamat tinggal"],
-    "answer": "Hai"
-  },
-  {
-    "id": 5,
-    "dialect": "ledo",
-    "bab": "bab1",
-    "question": "Apa arti 'Pagi'?",
-    "options": ["Selamat pagi", "Selamat malam", "Apa kabar", "Sampai jumpa"],
-    "answer": "Selamat pagi"
-  },
-  {
-    "id": 6,
-    "dialect": "ledo",
-    "bab": "bab1",
-    "question": "Apa arti 'Napa kareba?'",
-    "options": ["Apa kabar?", "Siapa kamu?", "Terima kasih", "Mau ke mana?"],
-    "answer": "Apa kabar?"
-  },
-  {
-    "id": 7,
-    "dialect": "ledo",
-    "bab": "bab1",
-    "question": "Bagaimana mengatakan 'Nama saya' dalam dialek Ledo?",
-    "options": ["Yaku", "Ngana", "Halo", "Pagi"],
-    "answer": "Yaku"
-  },
-  {
-  "id": 8,
-  "dialect": "ledo",
-  "bab": "bab2",
-  "question": "Susun kata untuk arti 'Makan'",
-  "blocks": ["Nga", "nde", "la", "ru"],
-  "answer": "Ngande"
-},
-{
-  "id": 9,
-  "dialect": "ledo",
-  "bab": "bab2",
-  "question": "Susun kata untuk arti 'Minum'",
-  "blocks": ["No", "inu", "nde", "la"],
-  "answer": "Noinu"
-},
-{
-  "id": 10,
-  "dialect": "ledo",
-  "bab": "bab2",
-  "question": "Susun kata untuk arti 'Pergi'",
-  "blocks": ["Na", "lau", "nde", "ru"],
-  "answer": "Nalau"
-}
+  { "id": 11, "dialect": "rai", "bab": "bab1", "category": "kata benda", "question": "Kata 'Oe' berarti?", "options": ["Air", "Rumah", "Saya", "Dan"], "answer": "Air" },
+  { "id": 12, "dialect": "rai", "bab": "bab1", "category": "kata kerja", "question": "Kata kerja untuk 'makan' adalah?", "options": ["Kande", "Banua", "Mabelo", "Inggu"], "answer": "Kande" },
+  { "id": 13, "dialect": "rai", "bab": "bab1", "category": "kata sifat", "question": "Apa arti 'Mabelo'?", "options": ["Baik", "Saya", "Dan", "Dua"], "answer": "Baik" },
+  { "id": 14, "dialect": "rai", "bab": "bab1", "category": "kata keterangan", "question": "Apa arti 'Mongga pagi'?", "options": ["Pagi", "Dan", "Si", "Dua"], "answer": "Pagi" },
+  { "id": 15, "dialect": "rai", "bab": "bab1", "category": "kata ganti", "question": "Apa arti 'Inggu'?", "options": ["Saya", "Kamu", "Dia", "Mereka"], "answer": "Saya" },
+  { "id": 16, "dialect": "rai", "bab": "bab1", "category": "kata depan", "question": "Apa arti 'Ri'?", "options": ["Di", "Dan", "Si", "Wah"], "answer": "Di" },
+  { "id": 17, "dialect": "rai", "bab": "bab1", "category": "kata sambung", "question": "Apa arti 'Ante'?", "options": ["Dan", "Di", "Ke", "Satu"], "answer": "Dan" },
+  { "id": 18, "dialect": "rai", "bab": "bab1", "category": "kata bilangan", "question": "Apa arti 'Rua'?", "options": ["Dua", "Satu", "Tiga", "Empat"], "answer": "Dua" },
+  { "id": 19, "dialect": "rai", "bab": "bab1", "category": "kata seru", "question": "Kata untuk menyapa adalah?", "options": ["Hai", "Ri", "Kande", "Banua"], "answer": "Hai" },
+  { "id": 20, "dialect": "rai", "bab": "bab1", "category": "kata sandang", "question": "Kata sandang untuk 'si' adalah?", "options": ["I", "Ante", "Oe", "Rua"], "answer": "I" },
+
+  { "id": 21, "dialect": "ledo", "bab": "bab2", "category": "kalimat sederhana", "question": "Apa arti 'Yaku ngande pae'?", "options": ["Saya makan nasi", "Kamu pergi ke rumah", "Air itu baik", "Nama saya Yaku"], "answer": "Saya makan nasi" },
+  { "id": 22, "dialect": "rai", "bab": "bab2", "category": "kalimat sederhana", "question": "Apa arti 'Inggu kande pae'?", "options": ["Saya makan nasi", "Kamu pergi ke rumah", "Air itu baik", "Nama saya Inggu"], "answer": "Saya makan nasi" },
+  { "id": 23, "dialect": "ledo", "bab": "bab3", "category": "gambar kosakata", "question": "Gambar rumah cocok dengan kata?", "options": ["Banua", "Ue", "Ngande", "Nalau"], "answer": "Banua" },
+  { "id": 24, "dialect": "rai", "bab": "bab3", "category": "gambar kosakata", "question": "Gambar air cocok dengan kata?", "options": ["Oe", "Banua", "Kande", "Lau"], "answer": "Oe" }
 ]

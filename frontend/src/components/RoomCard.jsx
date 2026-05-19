@@ -20,7 +20,7 @@ function RoomCard({ room }) {
         </div>
 
         <span className="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm">
-          {room.room_code}
+          {room.code || room.room_code}
         </span>
       </div>
 

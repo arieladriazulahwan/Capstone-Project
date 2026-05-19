@@ -1,12 +1,12 @@
 [
-  {
-    "question": "Apa arti 'Aku'?",
-    "options": ["Saya", "Makan", "Pergi", "Tidur"],
-    "answer": "Saya"
-  },
-  {
-    "question": "Apa arti 'Pagi'?",
-    "options": ["Selamat pagi", "Selamat malam", "Terima kasih", "Sampai jumpa"],
-    "answer": "Selamat pagi"
-  }
+  { "category": "kata benda", "question": "Apa arti 'Banua'?", "options": ["Rumah", "Makan", "Saya", "Dan"], "answer": "Rumah" },
+  { "category": "kata kerja", "question": "Apa arti 'Ngande'?", "options": ["Rumah", "Makan", "Besar", "Satu"], "answer": "Makan" },
+  { "category": "kata sifat", "question": "Apa arti 'Mabelo'?", "options": ["Baik", "Kamu", "Di", "Atau"], "answer": "Baik" },
+  { "category": "kata keterangan", "question": "Apa arti 'Pagi'?", "options": ["Pagi", "Rumah", "Satu", "Si"], "answer": "Pagi" },
+  { "category": "kata ganti", "question": "Apa arti 'Yaku'?", "options": ["Saya", "Kamu", "Dia", "Mereka"], "answer": "Saya" },
+  { "category": "kata depan", "question": "Apa arti 'Ri'?", "options": ["Di", "Dan", "Satu", "Wah"], "answer": "Di" },
+  { "category": "kata sambung", "question": "Apa arti 'Ante'?", "options": ["Dan", "Di", "Ke", "Saya"], "answer": "Dan" },
+  { "category": "kata bilangan", "question": "Apa arti 'Sangu'?", "options": ["Satu", "Dua", "Tiga", "Empat"], "answer": "Satu" },
+  { "category": "kata seru", "question": "Kata seru untuk menyapa adalah?", "options": ["Halo", "Banua", "Yaku", "Ri"], "answer": "Halo" },
+  { "category": "kata sandang", "question": "Apa arti kata sandang 'I'?", "options": ["Si", "Dan", "Makan", "Pagi"], "answer": "Si" }
 ]

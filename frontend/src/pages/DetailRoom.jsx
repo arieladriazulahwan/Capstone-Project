@@ -209,8 +209,13 @@ function DetailRoom() {
                 <h1 className="text-3xl font-bold mb-2">{room.title}</h1>
                 <p className="text-blue-100">{room.category}</p>
               </div>
-              <div className="bg-white/20 px-5 py-3 rounded-2xl text-xl font-bold backdrop-blur-sm">
-                {room.room_code}
+              <div className="bg-white/20 px-5 py-3 rounded-2xl backdrop-blur-sm">
+                <p className="text-xs text-blue-100 font-semibold mb-1">
+                  Kode Room
+                </p>
+                <p className="text-2xl font-bold tracking-widest">
+                  {room.code || room.room_code}
+                </p>
               </div>
             </div>
 

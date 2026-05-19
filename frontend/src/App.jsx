@@ -10,6 +10,7 @@ import LoginGuru from "./pages/LoginGuru";
 import DashboardGuru from "./pages/DashboardGuru";
 import Kamus from "./pages/Kamus";
 import Level from "./pages/Level";
+import BabLevels from "./pages/BabLevels";
 import Lesson from "./pages/Lesson";
 import Practice from "./pages/Practice";
 import Quiz from "./pages/Quiz";
@@ -61,6 +62,14 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route
+          path="/level/:dialect/:bab"
+          element={
+            <ProtectedRoute allowedRole="siswa">
+              <BabLevels />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/riwayat" element={<div>Halaman Riwayat</div>} />
         <Route
           path="/guru/buat-room"
@@ -75,6 +84,14 @@ function App() {
         <Route path="/quiz/bab1" element={<Navigate to="/quiz/ledo/bab1" replace />} />
         <Route
           path="/lesson/:dialect/:bab"
+          element={
+            <ProtectedRoute allowedRole="siswa">
+              <Lesson />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/lesson/:dialect/:bab/:level"
           element={
             <ProtectedRoute allowedRole="siswa">
               <Lesson />
@@ -114,6 +131,14 @@ function App() {
           }
         />
         <Route
+          path="/practice/:dialect/:bab/:level"
+          element={
+            <ProtectedRoute allowedRole="siswa">
+              <Practice />
+            </ProtectedRoute>
+          }
+        />
+        <Route
           path="/guru/room/:id"
           element={
             <ProtectedRoute allowedRole="guru">
@@ -123,6 +148,14 @@ function App() {
         />
         <Route
           path="/quiz/:dialect/:bab"
+          element={
+            <ProtectedRoute allowedRole="siswa">
+              <Quiz />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/quiz/:dialect/:bab/:level"
           element={
             <ProtectedRoute allowedRole="siswa">
               <Quiz />

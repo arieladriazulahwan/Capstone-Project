@@ -1,21 +1,25 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import { filterByLevel, getBab, getLevel } from "../data/levelMap";
 
 function Lesson() {
   const [data, setData] = useState([]);
 
   const navigate = useNavigate();
-  const { dialect, bab } = useParams();
+  const { dialect, bab, level } = useParams();
+  const babInfo = getBab(bab);
+  const levelInfo = getLevel(bab, level);
 
   useEffect(() => {
     fetch(`http://localhost:3000/api/lesson/${dialect}/${bab}`)
       .then((res) => res.json())
       .then((res) => {
-        const filtered = res.map((item) => ({
-          indo: item.indo,
-          kaili: item.kaili,
-          tipe: item.tipe,
+        const items = Array.isArray(res) ? filterByLevel(res, bab, level) : [];
+        const filtered = items.map((item) => ({
+          indo: item.indo || item.indonesia || item.question || "-",
+          kaili: item.kaili || item.answer || "-",
+          tipe: item.tipe || item.category || levelInfo?.title || "materi",
         }));
 
         setData(filtered);
@@ -23,18 +27,18 @@ function Lesson() {
       .catch((err) => {
         console.log(err);
       });
-  }, [bab, dialect]);
+  }, [bab, dialect, level, levelInfo?.title]);
 
   return (
     <div className="min-h-screen bg-gray-100">
       <Navbar
         showBackButton
-        backTo="/level"
+        backTo={level ? `/level/${dialect}/${bab}` : "/level"}
       />
 
       <main className="p-4 max-w-xl mx-auto">
         <h1 className="text-2xl font-bold mb-5">
-          Materi {bab.toUpperCase()} ({dialect.toUpperCase()})
+          Materi {levelInfo?.title || babInfo?.title || bab.toUpperCase()} ({dialect.toUpperCase()})
         </h1>
 
         {data.length === 0 && (
@@ -61,7 +65,13 @@ function Lesson() {
 
         {data.length > 0 && (
           <button
-            onClick={() => navigate(`/practice/${dialect}/${bab}`)}
+            onClick={() =>
+              navigate(
+                level
+                  ? `/practice/${dialect}/${bab}/${level}`
+                  : `/practice/${dialect}/${bab}`
+              )
+            }
             className="w-full mt-6 bg-green-500 text-white p-3 rounded-xl"
           >
             Lanjut ke Latihan

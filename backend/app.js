@@ -1,3 +1,4 @@
+require("dotenv").config({ path: require("path").join(__dirname, ".env") });
 const express = require("express");
 const cors = require("cors");
 const vocabRoutes = require("./routes/vocabRoutes");
@@ -192,8 +193,9 @@ const removeDuplicateFavorites = async () => {
 const startServer = async () => {
   try {
     await createTables();
-    app.listen(3000, () => {
-      console.log("Server running on http://localhost:3000");
+    const port = process.env.PORT || 3000;
+    app.listen(port, () => {
+      console.log(`Server running on http://localhost:${port}`);
     });
   } catch (err) {
     console.error("Gagal menyiapkan database:", err);

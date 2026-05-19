@@ -14,10 +14,34 @@ const formatLocalDate = (date) => {
 
 const totalBab = 10;
 const validBab = Array.from({ length: totalBab }, (_, index) => `bab${index + 1}`);
+const validLevelsByBab = {
+  bab1: [
+    "kata-benda",
+    "kata-kerja",
+    "kata-sifat",
+    "kata-keterangan",
+    "kata-ganti",
+    "kata-depan",
+    "kata-sambung",
+    "kata-bilangan",
+    "kata-seru",
+    "kata-sandang",
+  ],
+  bab2: ["kalimat-sederhana"],
+  bab3: ["gambar-kosakata"],
+};
 
 const defaultProgressObject = () =>
   validBab.reduce((progress, bab, index) => {
     progress[bab] = index === 0;
+    progress.levels = progress.levels || {};
+    progress.levels[bab] = {};
+
+    const levels = validLevelsByBab[bab] || [];
+    levels.forEach((level, levelIndex) => {
+      progress.levels[bab][level] = index === 0 && levelIndex === 0;
+    });
+
     return progress;
   }, {});
 
@@ -28,9 +52,16 @@ const parseProgress = (raw) => {
   const defaults = defaultProgressObject();
   if (!raw) return defaultProgressObject();
   try {
+    const parsed = JSON.parse(raw);
+    const mergedLevels = {
+      ...defaults.levels,
+      ...(parsed.levels || {}),
+    };
+
     return {
       ...defaults,
-      ...JSON.parse(raw),
+      ...parsed,
+      levels: mergedLevels,
     };
   } catch {
     return defaultProgressObject();
@@ -73,17 +104,38 @@ const saveStudentProgress = (userId, dialect, progress, callback) => {
   );
 };
 
-const updateProgressByBab = (progress, bab) => {
+const updateProgressByBab = (progress, bab, level) => {
   const babIndex = validBab.indexOf(bab);
   if (babIndex === -1) {
     return progress;
   }
 
   progress[bab] = true;
+  progress.levels = progress.levels || {};
+  progress.levels[bab] = progress.levels[bab] || {};
+
+  const levels = validLevelsByBab[bab] || [];
+
+  if (level && levels.includes(level)) {
+    const levelIndex = levels.indexOf(level);
+    progress.levels[bab][level] = true;
+
+    const nextLevel = levels[levelIndex + 1];
+    if (nextLevel) {
+      progress.levels[bab][nextLevel] = true;
+      return progress;
+    }
+  }
 
   const nextBab = validBab[babIndex + 1];
   if (nextBab) {
     progress[nextBab] = true;
+    progress.levels[nextBab] = progress.levels[nextBab] || {};
+
+    const nextBabFirstLevel = validLevelsByBab[nextBab]?.[0];
+    if (nextBabFirstLevel) {
+      progress.levels[nextBab][nextBabFirstLevel] = true;
+    }
   }
 
   return progress;
@@ -344,7 +396,7 @@ exports.addXP = (req, res) => {
   );
 };
 
-const updateStudentProgress = (userId, bab, res) => {
+const updateStudentProgress = (userId, bab, res, level = null) => {
   getStudentDialect(userId, (err, dialect) => {
     if (err) return res.status(500).json(err);
     if (!dialect) return res.status(400).json({ message: "Profil siswa tidak ditemukan" });
@@ -352,7 +404,7 @@ const updateStudentProgress = (userId, bab, res) => {
     getStudentProgress(userId, dialect, (err, rawProgress) => {
       if (err) return res.status(500).json(err);
 
-      const progress = updateProgressByBab(parseProgress(rawProgress), bab);
+      const progress = updateProgressByBab(parseProgress(rawProgress), bab, level);
 
       saveStudentProgress(userId, dialect, JSON.stringify(progress), (err) => {
         if (err) return res.status(500).json(err);
@@ -368,11 +420,16 @@ exports.completeBab1 = (req, res) => {
 };
 
 exports.completeBab = (req, res) => {
-  const { bab } = req.body;
+  const { bab, level } = req.body;
   if (!bab || !validBab.includes(bab)) {
     return res.status(400).json({ message: "Bab tidak valid" });
   }
-  updateStudentProgress(req.user.id, bab, res);
+
+  if (level && !validLevelsByBab[bab]?.includes(level)) {
+    return res.status(400).json({ message: "Level tidak valid" });
+  }
+
+  updateStudentProgress(req.user.id, bab, res, level);
 };
 
 exports.updateDialect = (req, res) => {
@@ -417,4 +474,3 @@ exports.updateDialect = (req, res) => {
 exports.logout = (req, res) => {
   res.json({ message: "Logout berhasil" });
 };
-

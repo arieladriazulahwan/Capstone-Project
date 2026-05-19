@@ -1,17 +1,4 @@
 [
-  {
-    "question": "Lengkapi kata: Ngan...",
-    "blocks": ["de", "nu", "la", "ru"],
-    "answer": "de"
-  },
-  {
-    "question": "Lengkapi kata: Noi...",
-    "blocks": ["nu", "de", "la", "ta"],
-    "answer": "nu"
-  },
-  {
-    "question": "Lengkapi kata: Nala...",
-    "blocks": ["u", "de", "ta", "ru"],
-    "answer": "u"
-  }
+  { "category": "kalimat sederhana", "question": "Susun arti kalimat 'Yaku ngande pae'", "options": ["Saya makan nasi", "Kamu pergi rumah", "Air itu baik", "Nama saya Yaku"], "answer": "Saya makan nasi" },
+  { "category": "kalimat sederhana", "question": "Apa arti 'Ngana nalau lau banua'?", "options": ["Kamu pergi ke rumah", "Saya makan nasi", "Air itu baik", "Rumah itu besar"], "answer": "Kamu pergi ke rumah" }
 ]

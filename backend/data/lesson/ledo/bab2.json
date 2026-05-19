@@ -1,14 +1,6 @@
 [
-  {
-    "indonesia": "Makan",
-    "kaili": "Ngande"
-  },
-  {
-    "indonesia": "Minum",
-    "kaili": "Noinu"
-  },
-  {
-    "indonesia": "Pergi",
-    "kaili": "Nalau"
-  }
+  { "indo": "Nama saya Yaku", "kaili": "Ngaranaku Yaku", "tipe": "kalimat", "category": "kalimat sederhana" },
+  { "indo": "Saya makan nasi", "kaili": "Yaku ngande pae", "tipe": "kalimat", "category": "kalimat sederhana" },
+  { "indo": "Kamu pergi ke rumah", "kaili": "Ngana nalau lau banua", "tipe": "kalimat", "category": "kalimat sederhana" },
+  { "indo": "Air itu baik", "kaili": "Ue ia mabelo", "tipe": "kalimat", "category": "kalimat sederhana" }
 ]

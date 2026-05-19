@@ -1,20 +1,49 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import { filterByLevel, getBab, getLevel } from "../data/levelMap";
+
+const shuffleOptions = (items) => {
+  const shuffled = [...items];
+
+  for (let i = shuffled.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+
+  return shuffled;
+};
 
 function Practice() {
-  const { dialect, bab } = useParams();
+  const { dialect, bab, level } = useParams();
   const navigate = useNavigate();
 
   const [data, setData] = useState([]);
   const [index, setIndex] = useState(0);
+  const babInfo = getBab(bab);
+  const levelInfo = getLevel(bab, level);
+
+  const lessonPath = level
+    ? `/lesson/${dialect}/${bab}/${level}`
+    : `/lesson/${dialect}/${bab}`;
 
   useEffect(() => {
     fetch(`http://localhost:3000/api/practice/${dialect}/${bab}`)
       .then((res) => res.json())
       .then((result) => {
         if (Array.isArray(result)) {
-          setData(result);
+          const filtered = filterByLevel(result, bab, level).map((item) => ({
+            ...item,
+            options: Array.isArray(item.options)
+              ? shuffleOptions(item.options)
+              : item.options,
+            blocks: Array.isArray(item.blocks)
+              ? shuffleOptions(item.blocks)
+              : item.blocks,
+          }));
+
+          setData(filtered);
+          setIndex(0);
         } else {
           setData([]);
         }
@@ -22,15 +51,12 @@ function Practice() {
       .catch((err) => {
         console.log(err);
       });
-  }, [dialect, bab]);
+  }, [dialect, bab, level]);
 
   if (data.length === 0) {
     return (
       <div className="min-h-screen bg-gray-100">
-        <Navbar
-          showBackButton
-          backTo={`/lesson/${dialect}/${bab}`}
-        />
+        <Navbar showBackButton backTo={lessonPath} />
         <div className="p-5 text-center">Loading latihan...</div>
       </div>
     );
@@ -50,23 +76,24 @@ function Practice() {
       setIndex(index + 1);
     } else {
       alert("Latihan selesai");
-      navigate(`/lesson/${dialect}/${bab}/quiz`);
+      navigate(
+        level
+          ? `/quiz/${dialect}/${bab}/${level}`
+          : `/lesson/${dialect}/${bab}/quiz`
+      );
     }
   };
 
   return (
     <div className="min-h-screen bg-gray-100">
-      <Navbar
-        showBackButton
-        backTo={`/lesson/${dialect}/${bab}`}
-      />
+      <Navbar showBackButton backTo={lessonPath} />
 
       <main className="p-5 max-w-xl mx-auto">
         <div className="mb-5">
           <h1 className="text-2xl font-bold">Latihan Bahasa Kaili</h1>
 
           <p className="text-gray-500 mt-1">
-            Dialek: {dialect.toUpperCase()}
+            {dialect.toUpperCase()} - {levelInfo?.title || babInfo?.title || bab.toUpperCase()}
           </p>
         </div>
 

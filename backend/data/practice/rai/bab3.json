@@ -1,0 +1,4 @@
+[
+  { "category": "gambar kosakata", "question": "Gambar rumah cocok dengan kata?", "options": ["Banua", "Oe", "Kande", "Lau"], "answer": "Banua" },
+  { "category": "gambar kosakata", "question": "Gambar air cocok dengan kata?", "options": ["Oe", "Banua", "Inggu", "Ante"], "answer": "Oe" }
+]

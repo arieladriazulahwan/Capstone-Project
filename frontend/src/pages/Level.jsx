@@ -3,6 +3,7 @@ import Sidebar from "../components/Sidebar";
 import BottomNav from "../components/BottomNav";
 import Navbar from "../components/Navbar";
 import { useNavigate } from "react-router-dom";
+import { babList } from "../data/levelMap";
 
 function Level() {
   const [user, setUser] = useState(null);
@@ -89,19 +90,6 @@ function Level() {
     { level: 3, title: "Penjelajah" },
     { level: 5, title: "Ahli" },
     { level: 10, title: "Master" },
-  ];
-
-  const babList = [
-    { key: "bab1", label: "Bab 1", title: "Kata benda", color: "green" },
-    { key: "bab2", label: "Bab 2", title: "Kata kerja", color: "blue" },
-    { key: "bab3", label: "Bab 3", title: "Kata sifat", color: "purple" },
-    { key: "bab4", label: "Bab 4", title: "Kata keterangan", color: "yellow" },
-    { key: "bab5", label: "Bab 5", title: "Kata ganti", color: "pink" },
-    { key: "bab6", label: "Bab 6", title: "Kata depan", color: "indigo" },
-    { key: "bab7", label: "Bab 7", title: "Kata sambung", color: "teal" },
-    { key: "bab8", label: "Bab 8", title: "Kata bilangan", color: "orange" },
-    { key: "bab9", label: "Bab 9", title: "Kata seru", color: "red" },
-    { key: "bab10", label: "Bab 10", title: "Kata Sandang", color: "cyan" },
   ];
 
   const colorClass = {
@@ -259,7 +247,7 @@ function Level() {
 
                       {isUnlocked ? (
                         <button
-                          onClick={() => navigate(`/lesson/${dialect}/${bab.key}`)}
+                          onClick={() => navigate(`/level/${dialect}/${bab.key}`)}
                           className={`text-sm ${classes.button} text-white px-3 py-1 rounded`}
                         >
                           Mulai

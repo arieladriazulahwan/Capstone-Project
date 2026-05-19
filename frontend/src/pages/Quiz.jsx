@@ -1,6 +1,18 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import { filterByLevel, getBab, getLevel } from "../data/levelMap";
+
+const shuffleOptions = (items) => {
+  const shuffled = [...items];
+
+  for (let i = shuffled.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+
+  return shuffled;
+};
 
 function Quiz() {
   const [questions, setQuestions] = useState([]);
@@ -9,14 +21,33 @@ function Quiz() {
   const [selected, setSelected] = useState("");
 
   const navigate = useNavigate();
-  const { dialect, bab } = useParams();
+  const { dialect, bab, level } = useParams();
+  const babInfo = getBab(bab);
+  const levelInfo = getLevel(bab, level);
+
+  const practicePath = level
+    ? `/practice/${dialect}/${bab}/${level}`
+    : `/practice/${dialect}/${bab}`;
 
   useEffect(() => {
     fetch(`http://localhost:3000/api/quiz?dialect=${dialect}&bab=${bab}`)
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data)) {
-          setQuestions(data);
+          const filtered = filterByLevel(data, bab, level).map((item) => ({
+            ...item,
+            options: Array.isArray(item.options)
+              ? shuffleOptions(item.options)
+              : item.options,
+            blocks: Array.isArray(item.blocks)
+              ? shuffleOptions(item.blocks)
+              : item.blocks,
+          }));
+
+          setQuestions(filtered);
+          setIndex(0);
+          setScore(0);
+          setSelected("");
         } else {
           setQuestions([]);
         }
@@ -25,15 +56,12 @@ function Quiz() {
         console.log(err);
         setQuestions([]);
       });
-  }, [dialect, bab]);
+  }, [dialect, bab, level]);
 
   if (questions.length === 0) {
     return (
       <div className="min-h-screen bg-gray-100">
-        <Navbar
-          showBackButton
-          backTo={`/practice/${dialect}/${bab}`}
-        />
+        <Navbar showBackButton backTo={practicePath} />
         <div className="p-5 text-center">Loading quiz...</div>
       </div>
     );
@@ -50,46 +78,52 @@ function Quiz() {
 
     try {
       const token = localStorage.getItem("token");
+      const earnedXP = Math.max(updatedScore * 10, 10);
 
-      const res = await fetch("http://localhost:3000/api/auth/add-xp", {
+      if (bab) {
+        const progressRes = await fetch("http://localhost:3000/api/auth/complete-bab", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+          body: JSON.stringify({ bab, level }),
+        });
+
+        if (!progressRes.ok) {
+          const progressError = await progressRes.json().catch(() => ({}));
+          throw new Error(progressError.message || "Gagal update progress level");
+        }
+      }
+
+      const xpRes = await fetch("http://localhost:3000/api/auth/add-xp", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + token,
         },
         body: JSON.stringify({
-          xp: updatedScore * 10,
+          xp: earnedXP,
         }),
       });
 
-      const result = await res.json();
+      const result = await xpRes.json();
+      if (!xpRes.ok) {
+        throw new Error(result.message || "Gagal menambahkan XP");
+      }
+
       console.log("XP RESULT:", result);
 
       alert(
         `Quiz selesai!\n\n` +
           `Skor: ${updatedScore}/${questions.length}\n` +
-          `XP +${updatedScore * 10}`
+          `XP +${earnedXP}`
       );
 
-      if (bab) {
-        try {
-          await fetch("http://localhost:3000/api/auth/complete-bab", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: "Bearer " + localStorage.getItem("token"),
-            },
-            body: JSON.stringify({ bab }),
-          });
-        } catch (err) {
-          console.log("Gagal update progress bab:", err);
-        }
-      }
-
-      navigate("/level");
+      navigate(level ? `/level/${dialect}/${bab}` : "/level");
     } catch (err) {
       console.log("ERROR:", err);
-      alert("Gagal menambahkan XP");
+      alert(err.message || "Gagal menyimpan hasil quiz");
     }
   };
 
@@ -120,17 +154,14 @@ function Quiz() {
 
   return (
     <div className="min-h-screen bg-gray-100">
-      <Navbar
-        showBackButton
-        backTo={`/practice/${dialect}/${bab}`}
-      />
+      <Navbar showBackButton backTo={practicePath} />
 
       <main className="p-5 max-w-xl mx-auto">
         <div className="mb-5">
           <h1 className="text-2xl font-bold">Quiz Bahasa Kaili</h1>
 
           <p className="text-gray-500 mt-1">
-            Dialek: {dialect.toUpperCase()}
+            {dialect.toUpperCase()} - {levelInfo?.title || babInfo?.title || bab.toUpperCase()}
           </p>
         </div>
 
