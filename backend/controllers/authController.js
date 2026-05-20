@@ -376,7 +376,7 @@ exports.addXP = (req, res) => {
   const userId = req.user.id;
   const xp = Number(req.body.xp);
 
-  if (!Number.isFinite(xp) || xp <= 0) {
+  if (!Number.isFinite(xp) || xp < 0) {
     return res.status(400).json({ message: "XP tidak valid" });
   }
 
@@ -391,6 +391,23 @@ exports.addXP = (req, res) => {
 
       let currentXP = results[0].xp || 0;
       let level = results[0].level || 1;
+
+      // 🔥 Jika skor/XP yang didapat adalah 0
+      if (xp === 0) {
+        let title = "Pemula 🌱";
+        if (level >= 10) title = "Master 🏆";
+        else if (level >= 5) title = "Ahli 🧠";
+        else if (level >= 3) title = "Penjelajah 🧭";
+        else if (level >= 2) title = "Pelajar 📘";
+        
+        return res.json({
+          message: "Belum ada tambahan poin, tetap semangat! 💪",
+          xp: currentXP,
+          level,
+          title,
+        });
+      }
+
       let newXP = currentXP + xp;
       const oldLevel = level;
 

@@ -107,7 +107,7 @@ function Quiz() {
 
     try {
       const token = localStorage.getItem("token");
-      const earnedXP = Math.max(updatedScore * 10, 10);
+      const earnedXP = updatedScore * 10;
 
       if (bab) {
         const progressRes = await fetch("http://localhost:3000/api/auth/complete-bab", {
