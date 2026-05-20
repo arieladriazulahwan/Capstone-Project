@@ -7,6 +7,7 @@ function Kamus() {
   const [data, setData] = useState([]);
   const [favorites, setFavorites] = useState(new Set());
   const [loadingFav, setLoadingFav] = useState(true);
+  const [user, setUser] = useState(null);
 
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("");
@@ -18,6 +19,32 @@ function Kamus() {
     fetch("http://localhost:3000/api/vocab")
       .then((res) => res.json())
       .then((res) => setData(res));
+  }, []);
+
+  // 🙋‍♂️ GET USER
+  useEffect(() => {
+    const fetchUser = async () => {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        setUser({ name: "Pengguna" }); // Set default user if not logged in
+        return;
+      }
+
+      try {
+        const res = await fetch("http://localhost:3000/api/auth/profile", {
+          headers: { Authorization: "Bearer " + token },
+        });
+        if (res.ok) {
+          const data = await res.json();
+          setUser(data.user || data);
+        } else {
+          setUser({ name: "Pengguna" });
+        }
+      } catch (error) {
+        setUser({ name: "Pengguna" });
+      }
+    };
+    fetchUser();
   }, []);
 
   // ❤️ GET FAVORITES
@@ -88,11 +115,29 @@ function Kamus() {
 
   // 🔍 SEARCH + FILTER (SMART)
   const filtered = (() => {
-  if (!search.trim()) return data;
+  let result = data;
+
+  // 1. Terapkan filter Kategori dan Dialek terlebih dahulu
+  result = result.filter((item) => {
+    const matchCategory = category
+      ? item.category.toLowerCase() === category.toLowerCase()
+      : true;
+
+    const matchDialect = dialect
+      ? item.translations.some(
+          (t) => t.dialect.toLowerCase() === dialect.toLowerCase()
+        )
+      : true;
+
+    return matchCategory && matchDialect;
+  });
+
+  // 2. Jika tidak ada pencarian kata kunci, langsung kembalikan hasil filter kategori/dialek
+  if (!search.trim()) return result;
 
   const keywords = getSearchTokens(search);
 
-  return data
+  return result
     .map((item) => {
       let score = 0;
 
@@ -121,21 +166,7 @@ function Kamus() {
       return { ...item, score };
     })
     .filter((item) => item.score > 0)
-    .sort((a, b) => b.score - a.score)
-    .filter((item) => {
-      const matchCategory = category
-        ? item.category.toLowerCase() === category.toLowerCase()
-        : true;
-
-      const matchDialect = dialect
-        ? item.translations.some(
-            (t) =>
-              t.dialect.toLowerCase() === dialect.toLowerCase()
-          )
-        : true;
-
-      return matchCategory && matchDialect;
-    });
+    .sort((a, b) => b.score - a.score);
 })();
 
   return (
@@ -143,7 +174,7 @@ function Kamus() {
       <Sidebar role="siswa" />
 
       <div className="flex-1 flex flex-col">
-        <Navbar user={{ name: "User" }} />
+        <Navbar user={user} />
 
         <main className="flex-1 px-4 py-6 flex justify-center">
           <div className="w-full max-w-md md:max-w-3xl">

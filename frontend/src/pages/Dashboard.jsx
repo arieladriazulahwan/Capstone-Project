@@ -253,7 +253,7 @@ function Dashboard() {
                     e.target.value.toUpperCase()
                   )
                 }
-                placeholder="KAILI1"
+                placeholder="Kode Room"
                 className="w-full text-center text-2xl font-bold tracking-widest p-4 rounded-2xl border-2 border-yellow-200 mb-4 uppercase outline-none focus:border-yellow-500"
               />
 

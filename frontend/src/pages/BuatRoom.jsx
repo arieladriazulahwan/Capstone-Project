@@ -307,7 +307,7 @@ function BuatRoom() {
 
         <input
           type="text"
-          placeholder="Judul Room"
+          placeholder="Nama Room"
           value={title}
           onChange={(e) =>
             setTitle(e.target.value)
@@ -317,7 +317,7 @@ function BuatRoom() {
 
         <input
           type="text"
-          placeholder="Kategori"
+          placeholder="Subjek"
           value={category}
           onChange={(e) =>
             setCategory(e.target.value)

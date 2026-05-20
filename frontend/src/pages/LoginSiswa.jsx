@@ -98,7 +98,7 @@ function LoginSiswa() {
           <label className="text-sm text-gray-600">Username</label>
           <input
             type="text"
-            placeholder="nama_pengguna"
+            placeholder="username"
             className="w-full p-3 rounded-xl bg-green-50 border border-green-500 mb-3 focus:outline-none"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
@@ -107,7 +107,7 @@ function LoginSiswa() {
           <label className="text-sm text-gray-600">Kata Sandi</label>
           <input
             type="password"
-            placeholder="••••••••"
+            placeholder="password"
             className="w-full p-3 rounded-xl bg-gray-100 mb-4 focus:outline-none"
             value={password}
             onChange={(e) => setPassword(e.target.value)}

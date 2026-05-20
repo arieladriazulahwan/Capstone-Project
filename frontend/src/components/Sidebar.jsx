@@ -1,10 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 function Sidebar({ role = "siswa" }) {
-  const [collapsed, setCollapsed] = useState(false);
+  // Baca state awal dari localStorage, atau default ke `false` (terbuka)
+  const [collapsed, setCollapsed] = useState(
+    () => localStorage.getItem("sidebarCollapsed") === "true"
+  );
   const navigate = useNavigate();
   const location = useLocation(); // 🔥 ambil route aktif
+
+  // Simpan state ke localStorage setiap kali `collapsed` berubah
+  useEffect(() => {
+    localStorage.setItem("sidebarCollapsed", collapsed);
+  }, [collapsed]);
 
   const menu =
     role === "guru"
@@ -63,7 +71,7 @@ function Sidebar({ role = "siswa" }) {
 
   return (
     <div
-      className={`hidden md:flex flex-col bg-white shadow-lg transition-all duration-300 ${
+      className={`hidden md:flex flex-col bg-white shadow-lg transition-all duration-300 sticky top-0 h-screen z-50 ${
         collapsed ? "w-20" : "w-56"
       }`}
     >
@@ -83,39 +91,42 @@ function Sidebar({ role = "siswa" }) {
         )}
       </div>
 
-      {/* MENU */}
-      <div className="flex flex-col gap-2 mt-4">
-        {menu.map((item, i) => {
-          const isActive = location.pathname === item.path;
+      {/* WRAPPER FOR MENU */}
+      <div className="flex-1">
+        {/* MENU */}
+        <div className="flex flex-col gap-2 mt-4">
+          {menu.map((item, i) => {
+            const isActive = location.pathname === item.path;
 
-          return (
-            <div key={i} className="relative group">
-              <div
-                onClick={() => navigate(item.path)}
-                className={`flex items-center gap-3 p-3 mx-2 rounded-lg cursor-pointer transition
-                  ${
-                    isActive
-                      ? activeClass
-                      : hoverClass
-                  }
-                `}
-              >
-                <span className="text-xl">{item.icon}</span>
+            return (
+              <div key={i} className="relative group">
+                <div
+                  onClick={() => navigate(item.path)}
+                  className={`flex items-center gap-3 p-3 mx-2 rounded-lg cursor-pointer transition
+                    ${
+                      isActive
+                        ? activeClass
+                        : hoverClass
+                    }
+                  `}
+                >
+                  <span className="text-xl">{item.icon}</span>
 
-                {!collapsed && (
-                  <span className="text-sm">{item.name}</span>
+                  {!collapsed && (
+                    <span className="text-sm">{item.name}</span>
+                  )}
+                </div>
+
+                {/* TOOLTIP saat collapse */}
+                {collapsed && (
+                  <div className="absolute left-full ml-2 top-1/2 -translate-y-1/2 bg-black text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition whitespace-nowrap z-50">
+                    {item.name}
+                  </div>
                 )}
               </div>
-
-              {/* TOOLTIP saat collapse */}
-              {collapsed && (
-                <div className="absolute left-16 top-1/2 -translate-y-1/2 bg-black text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition">
-                  {item.name}
-                </div>
-              )}
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
     </div>
   );

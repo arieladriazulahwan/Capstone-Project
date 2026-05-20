@@ -94,7 +94,7 @@ function RegisterSiswa() {
           <label className="text-sm text-gray-600">Nama Lengkap</label>
           <input
             type="text"
-            placeholder="Budi Santoso"
+            placeholder="Nama Lengkap"
             className="w-full p-3 rounded-xl border border-green-500 bg-green-50 mb-3 focus:outline-none"
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -103,7 +103,7 @@ function RegisterSiswa() {
           <label className="text-sm text-gray-600">Username</label>
           <input
             type="text"
-            placeholder="budi_santoso"
+            placeholder="Username"
             className="w-full p-3 rounded-xl bg-gray-100 mb-3 focus:outline-none"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
@@ -114,7 +114,7 @@ function RegisterSiswa() {
           </label>
           <input
             type="password"
-            placeholder="••••••••"
+            placeholder="Password"
             className="w-full p-3 rounded-xl bg-gray-100 mb-4 focus:outline-none"
             value={password}
             onChange={(e) => setPassword(e.target.value)}

@@ -103,7 +103,7 @@ function RegisterGuru() {
           <label className="text-sm text-gray-600">Username</label>
           <input
             type="text"
-            placeholder="guru@sekolah.sch.id"
+            placeholder="Username"
             className="w-full p-3 rounded-xl bg-gray-100 mb-3 focus:outline-none"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
@@ -114,7 +114,7 @@ function RegisterGuru() {
           </label>
           <input
             type="password"
-            placeholder="••••••••"
+            placeholder="Password"
             className="w-full p-3 rounded-xl bg-gray-100 mb-4 focus:outline-none"
             value={password}
             onChange={(e) => setPassword(e.target.value)}

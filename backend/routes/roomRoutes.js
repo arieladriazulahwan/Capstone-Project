@@ -31,6 +31,28 @@ router.get(
 
 
 // ======================================
+// DELETE ROOM
+// ======================================
+router.delete(
+  "/:id",
+  authMiddleware,
+  onlyGuru,
+  roomController.deleteRoom
+);
+
+
+// ======================================
+// UPDATE ROOM
+// ======================================
+router.put(
+  "/:id",
+  authMiddleware,
+  onlyGuru,
+  roomController.updateRoom
+);
+
+
+// ======================================
 // JOIN ROOM
 // ======================================
 router.get("/join/:code", authMiddleware, async (req, res) => {

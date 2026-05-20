@@ -1,15 +1,19 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 import NavbarGuru from "../components/NavbarGuru";
 
 function DetailRoom() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [room, setRoom] = useState(null);
+  const [isEditingRoom, setIsEditingRoom] = useState(false);
+  const [draftRoomDetails, setDraftRoomDetails] = useState(null);
   const [draftQuestions, setDraftQuestions] = useState([]);
   const [editingIndex, setEditingIndex] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  const [user, setUser] = useState(null);
+  
   useEffect(() => {
     const fetchRoom = async () => {
       try {
@@ -28,6 +32,11 @@ function DetailRoom() {
         }
 
         setRoom(data.room);
+        setDraftRoomDetails({
+          title: data.room.title,
+          category: data.room.category,
+          timer: data.room.timer,
+        });
         setDraftQuestions(
           data.room.questions?.map((q) => ({
             ...q,
@@ -46,6 +55,25 @@ function DetailRoom() {
     };
 
     fetchRoom();
+
+    const fetchUser = async () => {
+      const token = localStorage.getItem("token");
+      if (!token) return;
+
+      try {
+        const res = await fetch("http://localhost:3000/api/auth/profile", {
+          headers: { Authorization: "Bearer " + token },
+        });
+        if (res.ok) {
+          const data = await res.json();
+          setUser(data);
+        }
+      } catch (error) {
+        console.error("Gagal mengambil data user", error);
+      }
+    };
+
+    fetchUser();
   }, [id]);
 
   const getTypeLabel = (type) => {
@@ -181,6 +209,72 @@ function DetailRoom() {
     return answer || "-";
   };
 
+  const handleDeleteRoom = async () => {
+    if (!window.confirm("Apakah Anda yakin ingin menghapus room ini? Tindakan ini tidak dapat dibatalkan.")) {
+      return;
+    }
+
+    try {
+      const token = localStorage.getItem("token");
+      const res = await fetch(`http://localhost:3000/api/rooms/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+
+      if (res.ok) {
+        alert("Room berhasil dihapus.");
+        navigate("/dashboard/guru");
+      } else {
+        const data = await res.json();
+        alert(data.message || "Gagal menghapus room.");
+      }
+    } catch (err) {
+      alert("Terjadi kesalahan saat menghapus room.");
+    }
+  };
+
+  const handleDetailChange = (field, value) => {
+    setDraftRoomDetails((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const handleSaveRoomDetails = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const res = await fetch(`http://localhost:3000/api/rooms/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+        body: JSON.stringify(draftRoomDetails),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        alert(data.message || "Gagal menyimpan detail room");
+        return;
+      }
+
+      setRoom((prev) => ({ ...prev, ...draftRoomDetails }));
+      setIsEditingRoom(false);
+      alert(data.message);
+    } catch (err) {
+      console.error(err);
+      alert("Terjadi kesalahan saat menyimpan detail room");
+    }
+  };
+
+  const handleCancelEdit = () => {
+    setIsEditingRoom(false);
+    setDraftRoomDetails({
+      title: room.title,
+      category: room.category,
+      timer: room.timer,
+    });
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -199,16 +293,33 @@ function DetailRoom() {
 
   return (
     <div className="min-h-screen bg-gray-100">
-      <NavbarGuru user={null} showBackButton />
+      <NavbarGuru user={user} showBackButton />
 
       <main className="p-4 md:p-6 flex justify-center">
         <div className="w-full max-w-5xl">
           <div className="bg-gradient-to-r from-blue-500 to-blue-400 rounded-3xl p-6 text-white shadow-lg mb-6">
             <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
-              <div>
-                <h1 className="text-3xl font-bold mb-2">{room.title}</h1>
-                <p className="text-blue-100">{room.category}</p>
-              </div>
+              {isEditingRoom ? (
+                <div className="flex-1 space-y-3">
+                  <input
+                    type="text"
+                    value={draftRoomDetails.title}
+                    onChange={(e) => handleDetailChange("title", e.target.value)}
+                    className="w-full bg-white/20 text-white placeholder-blue-200 text-3xl font-bold rounded-xl p-2"
+                  />
+                  <input
+                    type="text"
+                    value={draftRoomDetails.category}
+                    onChange={(e) => handleDetailChange("category", e.target.value)}
+                    className="w-full bg-white/20 text-white placeholder-blue-200 rounded-xl p-2"
+                  />
+                </div>
+              ) : (
+                <div>
+                  <h1 className="text-3xl font-bold mb-2">{room.title}</h1>
+                  <p className="text-blue-100">{room.category}</p>
+                </div>
+              )}
               <div className="bg-white/20 px-5 py-3 rounded-2xl backdrop-blur-sm">
                 <p className="text-xs text-blue-100 font-semibold mb-1">
                   Kode Room
@@ -219,9 +330,29 @@ function DetailRoom() {
               </div>
             </div>
 
-            <div className="flex flex-wrap gap-4 mt-6 text-sm">
-              <div className="bg-white/10 px-4 py-2 rounded-xl">⏱️ {room.timer} detik</div>
+            <div className="flex flex-wrap gap-4 mt-6 text-sm items-center">
+              {isEditingRoom ? (
+                <div className="bg-white/10 px-4 py-2 rounded-xl flex items-center gap-2">
+                  ⏱️
+                  <input
+                    type="number"
+                    value={draftRoomDetails.timer}
+                    onChange={(e) => handleDetailChange("timer", e.target.value)}
+                    className="bg-transparent w-16 text-white"
+                  />
+                  detik
+                </div>
+              ) : (
+                <div className="bg-white/10 px-4 py-2 rounded-xl">⏱️ {room.timer} detik</div>
+              )}
               <div className="bg-white/10 px-4 py-2 rounded-xl">📚 {room.questions?.length || 0} soal</div>
+              <div className="ml-auto">
+                {isEditingRoom ? (
+                  <button onClick={handleSaveRoomDetails} className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-xl">Simpan Detail</button>
+                ) : (
+                  <button onClick={() => setIsEditingRoom(true)} className="bg-white/20 hover:bg-white/30 text-white font-bold py-2 px-4 rounded-xl">Edit Detail</button>
+                )}
+              </div>
             </div>
           </div>
 

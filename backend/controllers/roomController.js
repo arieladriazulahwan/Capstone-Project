@@ -131,3 +131,48 @@ exports.getRooms = (req, res) => {
     }
   );
 };
+
+// 🗑️ HAPUS ROOM
+exports.deleteRoom = (req, res) => {
+  const roomId = req.params.id;
+
+  db.query(
+    "DELETE FROM rooms WHERE id = ?",
+    [roomId],
+    (err, result) => {
+      if (err) {
+        console.log("Error hapus room:", err);
+        return res.status(500).json({ message: "Server error gagal menghapus room" });
+      }
+      if (result.affectedRows === 0) {
+        return res.status(404).json({ message: "Room tidak ditemukan" });
+      }
+      res.json({ message: "Room berhasil dihapus" });
+    }
+  );
+};
+
+// ✏️ UPDATE ROOM
+exports.updateRoom = (req, res) => {
+  const roomId = req.params.id;
+  const { title, category, timer } = req.body;
+
+  if (!title || !String(title).trim()) {
+    return res.status(400).json({ message: "Judul room wajib diisi" });
+  }
+
+  db.query(
+    "UPDATE rooms SET title = ?, category = ?, timer = ? WHERE id = ?",
+    [title.trim(), category || null, Number(timer) || 0, roomId],
+    (err, result) => {
+      if (err) {
+        console.log("Error updating room:", err);
+        return res.status(500).json({ message: "Server error saat memperbarui room" });
+      }
+      if (result.affectedRows === 0) {
+        return res.status(404).json({ message: "Room tidak ditemukan" });
+      }
+      res.json({ message: "Detail room berhasil diperbarui" });
+    }
+  );
+};

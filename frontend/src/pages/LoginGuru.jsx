@@ -94,7 +94,7 @@ function LoginGuru() {
           <label className="text-sm text-gray-600">Username</label>
           <input
             type="text"
-            placeholder="guru@sekolah.sch.id"
+            placeholder="username"
             className="w-full p-3 rounded-xl bg-gray-100 mb-3 focus:outline-none"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
@@ -103,7 +103,7 @@ function LoginGuru() {
           <label className="text-sm text-gray-600">Kata Sandi</label>
           <input
             type="password"
-            placeholder="••••••••"
+            placeholder="password"
             className="w-full p-3 rounded-xl border border-blue-500 bg-blue-50 mb-4 focus:outline-none"
             value={password}
             onChange={(e) => setPassword(e.target.value)}

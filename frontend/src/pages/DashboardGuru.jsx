@@ -76,6 +76,35 @@ function DashboardGuru() {
 
   }, []);
 
+  // ========================================
+  // 🗑️ DELETE ROOM
+  // ========================================
+
+  const handleDeleteRoom = async (roomId) => {
+    if (!window.confirm("Apakah Anda yakin ingin menghapus room ini?")) {
+      return;
+    }
+
+    try {
+      const token = localStorage.getItem("token");
+      const res = await fetch(`http://localhost:3000/api/rooms/${roomId}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+
+      if (res.ok) {
+        setRooms((prevRooms) => prevRooms.filter((room) => room.id !== roomId));
+      } else {
+        alert("Gagal menghapus room, mungkin ada masalah pada server.");
+      }
+    } catch (err) {
+      console.error("Error deleting room:", err);
+      alert("Terjadi kesalahan saat menghapus room");
+    }
+  };
+
   if (!user) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -128,7 +157,19 @@ function DashboardGuru() {
               <div className="flex flex-col gap-3">
 
                 {rooms.map((room) => (
-                  <RoomCard key={room.id} room={room} />
+                  <div key={room.id} className="relative">
+                    <RoomCard room={room} />
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        handleDeleteRoom(room.id);
+                      }}
+                      className="absolute top-4 right-40 bg-red-100 text-red-600 hover:bg-red-500 hover:text-white px-3 py-1 rounded-lg text-sm font-semibold transition shadow-sm z-10"
+                    >
+                      Hapus
+                    </button>
+                  </div>
                 ))}
 
               </div>
