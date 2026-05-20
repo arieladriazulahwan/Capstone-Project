@@ -16,6 +16,8 @@ function QuizPage() {
     useState(0);
 
   const [answers, setAnswers] = useState({});
+  const [timeLeft, setTimeLeft] = useState(0);
+  const [quizResult, setQuizResult] = useState(null);
 
   // =====================================
   // FETCH ROOM
@@ -57,6 +59,7 @@ function QuizPage() {
         };
 
         setRoom(roomData);
+        setTimeLeft(roomData.timer || 0);
 
         console.log("Room data:", roomData);
         console.log("Questions:", questions.map(normalizeQuestion));
@@ -109,6 +112,37 @@ function QuizPage() {
   };
 
   // =====================================
+  // TIMER
+  // =====================================
+  useEffect(() => {
+    if (!room || room.questions.length === 0 || quizResult) return;
+
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev <= 1) {
+          clearInterval(timer);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [currentQuestion, room, quizResult]);
+
+  useEffect(() => {
+    if (timeLeft === 0 && room && room.questions.length > 0 && !quizResult) {
+      alert("Waktu Habis!");
+      if (currentQuestion < room.questions.length - 1) {
+        nextQuestion();
+      } else {
+        submitQuiz();
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [timeLeft, quizResult]);
+
+  // =====================================
   // SIMPAN JAWABAN
   // =====================================
   const saveAnswer = (value) => {
@@ -133,6 +167,7 @@ function QuizPage() {
       setCurrentQuestion(
         currentQuestion + 1
       );
+      setTimeLeft(room.timer || 0);
 
     }
 
@@ -148,6 +183,7 @@ function QuizPage() {
       setCurrentQuestion(
         currentQuestion - 1
       );
+      setTimeLeft(room.timer || 0);
 
     }
 
@@ -178,8 +214,7 @@ function QuizPage() {
         return;
       }
 
-      alert(`Quiz selesai!\nNilai: ${data.score}/${data.total}`);
-      navigate("/dashboard");
+      setQuizResult(data);
     } catch (err) {
       console.log(err);
       alert("Gagal submit quiz");
@@ -216,6 +251,47 @@ function QuizPage() {
 
   }
 
+  // =====================================
+  // TAMPILAN RESULT
+  // =====================================
+  if (quizResult) {
+    const correct = quizResult.score;
+    const total = quizResult.total;
+    const wrong = total - correct;
+    const percentage = Math.round((correct / total) * 100);
+
+    return (
+      <div className="min-h-screen bg-gray-100 p-5 flex items-center justify-center">
+        <div className="bg-white p-8 rounded-3xl shadow-xl max-w-md w-full text-center transform transition-all">
+          <h1 className="text-4xl font-bold mb-2">🎯 Selesai!</h1>
+          <p className="text-gray-500 mb-8">Kuis Room {room.title} telah diselesaikan.</p>
+          
+          <div className="grid grid-cols-2 gap-4 mb-8">
+            <div className="bg-green-100 p-4 rounded-2xl shadow-sm">
+              <p className="text-sm text-green-600 font-bold">Benar</p>
+              <p className="text-3xl font-black text-green-700">{correct}</p>
+            </div>
+            <div className="bg-red-100 p-4 rounded-2xl shadow-sm">
+              <p className="text-sm text-red-600 font-bold">Salah</p>
+              <p className="text-3xl font-black text-red-700">{wrong}</p>
+            </div>
+            <div className="bg-blue-100 p-5 rounded-2xl col-span-2 shadow-sm">
+              <p className="text-sm text-blue-600 font-bold">Total Nilai</p>
+              <p className="text-5xl font-black text-blue-700">{percentage}</p>
+            </div>
+          </div>
+
+          <button
+            onClick={() => navigate("/dashboard")}
+            className="w-full bg-blue-600 text-white py-4 rounded-2xl font-bold text-lg hover:bg-blue-700 transition shadow-lg"
+          >
+            Kembali ke Dashboard
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   const question =
     room.questions[currentQuestion];
 
@@ -244,9 +320,17 @@ function QuizPage() {
 
             </div>
 
-            <div className="bg-green-100 text-green-700 px-4 py-2 rounded-2xl font-bold">
-              Soal {currentQuestion + 1}/
-              {room.questions.length}
+            <div className="flex flex-col items-end gap-2">
+
+              <div className={`text-xl font-bold ${timeLeft <= 5 ? "text-red-500" : "text-green-600"}`}>
+                ⏱️ {timeLeft}s
+              </div>
+
+              <div className="bg-green-100 text-green-700 px-4 py-2 rounded-2xl font-bold">
+                Soal {currentQuestion + 1}/
+                {room.questions.length}
+              </div>
+
             </div>
 
           </div>

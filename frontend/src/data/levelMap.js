@@ -115,6 +115,16 @@ export const filterByLevel = (items, babKey, levelKey) => {
 
   if (!level || !Array.isArray(items)) return items;
 
+  // Khusus untuk BAB 1, lakukan pencocokan ketat (strict match) berdasarkan tipe/kategorinya
+  if (babKey === "bab1") {
+    const targetCategory = level.title.toLowerCase();
+    const matched = items.filter(
+      (item) => item.category && item.category.toLowerCase() === targetCategory
+    );
+    return matched.length > 0 ? matched : items;
+  }
+
+  // Untuk BAB lainnya, gunakan pencarian global berdasarkan kata kunci (keywords)
   const keywords = level.keywords.map((keyword) => keyword.toLowerCase());
   const matched = items.filter((item) => {
     const searchable = [

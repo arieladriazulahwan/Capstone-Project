@@ -330,7 +330,7 @@ function BuatRoom() {
           placeholder="Timer"
           value={timer}
           onChange={(e) =>
-            setTimer(e.target.value)
+            setTimer(parseInt(e.target.value) || 0)
           }
           className="w-full border p-3 rounded-xl"
         />

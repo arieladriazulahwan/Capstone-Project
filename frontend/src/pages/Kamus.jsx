@@ -200,7 +200,13 @@ function Kamus() {
                 <option value="kata benda">Kata Benda</option>
                 <option value="kata kerja">Kata Kerja</option>
                 <option value="kata sifat">Kata Sifat</option>
+                <option value="kata keterangan">Kata Keterangan</option>
                 <option value="kata ganti">Kata Ganti</option>
+                <option value="kata depan">Kata Depan</option>
+                <option value="kata sambung">Kata Sambung</option>
+                <option value="kata bilangan">Kata Bilangan</option>
+                <option value="kata seru">Kata Seru</option>
+                <option value="kata sandang">Kata Sandang</option>
               </select>
 
               <select
@@ -266,7 +272,7 @@ function Kamus() {
 
                 {filtered.length === 0 && (
                   <p className="text-center text-gray-500">
-                    Tidak ditemukan 😢
+                    Kata tidak ditemukan, Kosakata akan segera diperbarui
                   </p>
                 )}
 

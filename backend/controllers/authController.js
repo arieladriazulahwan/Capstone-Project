@@ -39,7 +39,10 @@ const defaultProgressObject = () =>
 
     const levels = validLevelsByBab[bab] || [];
     levels.forEach((level, levelIndex) => {
-      progress.levels[bab][level] = index === 0 && levelIndex === 0;
+      // Level pertama dari bab pertama akan terbuka dengan skor 0
+      if (index === 0 && levelIndex === 0) {
+        progress.levels[bab][level] = 0;
+      }
     });
 
     return progress;
@@ -50,21 +53,32 @@ const validDialects = ["ledo", "rai"];
 
 const parseProgress = (raw) => {
   const defaults = defaultProgressObject();
-  if (!raw) return defaultProgressObject();
+  if (!raw) return defaults;
   try {
-    const parsed = JSON.parse(raw);
-    const mergedLevels = {
-      ...defaults.levels,
-      ...(parsed.levels || {}),
-    };
+    const parsed = JSON.parse(raw) || {};
+    const finalProgress = { ...defaults, ...parsed };
+    finalProgress.levels = {};
 
-    return {
-      ...defaults,
-      ...parsed,
-      levels: mergedLevels,
-    };
-  } catch {
-    return defaultProgressObject();
+    // Lakukan deep merge untuk memastikan semua level ada
+    for (const babKey of validBab) {
+      finalProgress.levels[babKey] = {
+        ...(defaults.levels[babKey] || {}),
+        ...(parsed.levels ? parsed.levels[babKey] || {} : {}),
+      };
+    }
+
+    // Pastikan bab pertama dan level pertama selalu bisa diakses
+    if (finalProgress.levels.bab1["kata-benda"] === undefined) {
+      finalProgress.levels.bab1["kata-benda"] = 0;
+    }
+    if (finalProgress.bab1 === false) {
+      finalProgress.bab1 = true;
+    }
+
+    return finalProgress;
+  } catch (e) {
+    console.error("Error parsing progress:", e);
+    return defaults;
   }
 };
 
@@ -104,41 +118,54 @@ const saveStudentProgress = (userId, dialect, progress, callback) => {
   );
 };
 
-const updateProgressByBab = (progress, bab, level) => {
+const updateProgressByBab = (progress, bab, level, score, total) => {
+  const updatedProgress = { ...progress };
   const babIndex = validBab.indexOf(bab);
   if (babIndex === -1) {
-    return progress;
+    return updatedProgress;
   }
 
-  progress[bab] = true;
-  progress.levels = progress.levels || {};
-  progress.levels[bab] = progress.levels[bab] || {};
+  updatedProgress[bab] = true;
+  updatedProgress.levels = updatedProgress.levels || {};
+  updatedProgress.levels[bab] = updatedProgress.levels[bab] || {};
 
   const levels = validLevelsByBab[bab] || [];
 
   if (level && levels.includes(level)) {
-    const levelIndex = levels.indexOf(level);
-    progress.levels[bab][level] = true;
+    const percentage = Math.round((score / total) * 100);
+    const currentScore = updatedProgress.levels[bab][level] || 0;
 
-    const nextLevel = levels[levelIndex + 1];
-    if (nextLevel) {
-      progress.levels[bab][nextLevel] = true;
-      return progress;
+    // Update skor hanya jika lebih tinggi dari sebelumnya
+    if (percentage > currentScore) {
+      updatedProgress.levels[bab][level] = percentage;
+    }
+
+    // Buka level berikutnya jika skor >= 80%
+    if (percentage >= 80) {
+      const levelIndex = levels.indexOf(level);
+      const nextLevelKey = levels[levelIndex + 1];
+
+      if (nextLevelKey) {
+        // Buka level selanjutnya di bab yang sama jika belum terbuka
+        if (updatedProgress.levels[bab][nextLevelKey] === undefined) {
+          updatedProgress.levels[bab][nextLevelKey] = 0;
+        }
+      } else {
+        // Jika ini level terakhir, buka bab selanjutnya
+        const nextBabKey = validBab[babIndex + 1];
+        if (nextBabKey) {
+          updatedProgress[nextBabKey] = true;
+          const nextBabFirstLevelKey = validLevelsByBab[nextBabKey]?.[0];
+          if (nextBabFirstLevelKey && updatedProgress.levels[nextBabKey][nextBabFirstLevelKey] === undefined) {
+            updatedProgress.levels[nextBabKey] = updatedProgress.levels[nextBabKey] || {};
+            updatedProgress.levels[nextBabKey][nextBabFirstLevelKey] = 0;
+          }
+        }
+      }
     }
   }
 
-  const nextBab = validBab[babIndex + 1];
-  if (nextBab) {
-    progress[nextBab] = true;
-    progress.levels[nextBab] = progress.levels[nextBab] || {};
-
-    const nextBabFirstLevel = validLevelsByBab[nextBab]?.[0];
-    if (nextBabFirstLevel) {
-      progress.levels[nextBab][nextBabFirstLevel] = true;
-    }
-  }
-
-  return progress;
+  return updatedProgress;
 };
 
 // ================= REGISTER =================
@@ -152,7 +179,7 @@ exports.register = async (req, res) => {
   db.query("SELECT * FROM users WHERE username = ?", [username], async (err, results) => {
     if (err) return res.status(500).json(err);
     if (results.length > 0) {
-      return res.status(400).json({ message: "Username sudah digunakan" });
+      return res.status(400).json({ message: "Username sudah digunakan, silahkan cari username lain" });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -200,17 +227,17 @@ exports.login = (req, res) => {
   db.query("SELECT * FROM users WHERE username = ?", [username], async (err, results) => {
     if (err) return res.status(500).json(err);
     if (results.length === 0) {
-      return res.status(400).json({ message: "User tidak ditemukan" });
+      return res.status(400).json({ message: "username atau password salah" });
     }
 
     const user = results[0];
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(400).json({ message: "Password salah" });
+      return res.status(400).json({ message: "username atau password salah" });
     }
 
     if (role && user.role !== role) {
-      return res.status(403).json({ message: "Role tidak sesuai" });
+      return res.status(403).json({ message: "username atau password salah" });
     }
 
     db.query(
@@ -291,7 +318,7 @@ exports.getProfile = (req, res) => {
     [userId],
     (err, results) => {
       if (err) return res.status(500).json(err);
-      if (results.length === 0) return res.status(404).json({ message: "User tidak ditemukan" });
+      if (results.length === 0) return res.status(404).json({ message: "User atau password salah" });
 
       const profile = results[0];
       const currentDialect = profile.dialect || "ledo";
@@ -396,7 +423,7 @@ exports.addXP = (req, res) => {
   );
 };
 
-const updateStudentProgress = (userId, bab, res, level = null) => {
+const updateStudentProgress = (userId, bab, res, level = null, score = null, total = null) => {
   getStudentDialect(userId, (err, dialect) => {
     if (err) return res.status(500).json(err);
     if (!dialect) return res.status(400).json({ message: "Profil siswa tidak ditemukan" });
@@ -404,7 +431,7 @@ const updateStudentProgress = (userId, bab, res, level = null) => {
     getStudentProgress(userId, dialect, (err, rawProgress) => {
       if (err) return res.status(500).json(err);
 
-      const progress = updateProgressByBab(parseProgress(rawProgress), bab, level);
+      const progress = updateProgressByBab(parseProgress(rawProgress), bab, level, score, total);
 
       saveStudentProgress(userId, dialect, JSON.stringify(progress), (err) => {
         if (err) return res.status(500).json(err);
@@ -420,7 +447,7 @@ exports.completeBab1 = (req, res) => {
 };
 
 exports.completeBab = (req, res) => {
-  const { bab, level } = req.body;
+  const { bab, level, score, total } = req.body;
   if (!bab || !validBab.includes(bab)) {
     return res.status(400).json({ message: "Bab tidak valid" });
   }
@@ -429,7 +456,7 @@ exports.completeBab = (req, res) => {
     return res.status(400).json({ message: "Level tidak valid" });
   }
 
-  updateStudentProgress(req.user.id, bab, res, level);
+  updateStudentProgress(req.user.id, bab, res, level, score, total);
 };
 
 exports.updateDialect = (req, res) => {
@@ -446,7 +473,7 @@ exports.updateDialect = (req, res) => {
 
   db.query("SELECT role FROM users WHERE id = ?", [userId], (err, results) => {
     if (err) return res.status(500).json(err);
-    if (results.length === 0) return res.status(404).json({ message: "User tidak ditemukan" });
+    if (results.length === 0) return res.status(404).json({ message: "User atau password salah" });
     if (results[0].role !== "siswa") {
       return res.status(400).json({ message: "Hanya siswa yang dapat mengubah dialek" });
     }
@@ -468,6 +495,22 @@ exports.updateDialect = (req, res) => {
       }
     );
   });
+};
+
+// ================= LEADERBOARD =================
+exports.getLeaderboard = (req, res) => {
+  db.query(
+    `SELECT u.id, u.name, u.username, sp.xp, sp.level, sp.title
+     FROM users u
+     JOIN student_profiles sp ON u.id = sp.user_id
+     WHERE u.role = 'siswa'
+     ORDER BY sp.level DESC, sp.xp DESC
+     LIMIT 10`,
+    (err, results) => {
+      if (err) return res.status(500).json(err);
+      res.json(results);
+    }
+  );
 };
 
 // ================= LOGOUT =================

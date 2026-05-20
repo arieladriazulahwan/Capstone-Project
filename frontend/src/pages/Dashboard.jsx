@@ -3,6 +3,7 @@ import Sidebar from "../components/Sidebar";
 import BottomNav from "../components/BottomNav";
 import Navbar from "../components/Navbar";
 import { useNavigate } from "react-router-dom";
+import Leaderboard from "./Leaderboard";
 
 function Dashboard() {
 
@@ -297,6 +298,9 @@ function Dashboard() {
                 </div>
               </div>
             </div>
+
+            {/* LEADERBOARD WIDGET */}
+            <Leaderboard />
 
             {/* FAVORIT */}
             <div className="mb-20">

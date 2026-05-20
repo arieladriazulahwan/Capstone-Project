@@ -19,6 +19,9 @@ function Quiz() {
   const [index, setIndex] = useState(0);
   const [score, setScore] = useState(0);
   const [selected, setSelected] = useState("");
+  const [timeLeft, setTimeLeft] = useState(30);
+  const [isFinished, setIsFinished] = useState(false);
+  const [finalXP, setFinalXP] = useState(0);
 
   const navigate = useNavigate();
   const { dialect, bab, level } = useParams();
@@ -48,6 +51,7 @@ function Quiz() {
           setIndex(0);
           setScore(0);
           setSelected("");
+          setTimeLeft(30);
         } else {
           setQuestions([]);
         }
@@ -57,6 +61,30 @@ function Quiz() {
         setQuestions([]);
       });
   }, [dialect, bab, level]);
+
+  useEffect(() => {
+    if (questions.length === 0 || isFinished) return;
+    
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev <= 1) {
+          clearInterval(timer);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [index, questions.length, isFinished]);
+
+  useEffect(() => {
+    if (timeLeft === 0 && questions.length > 0 && !isFinished) {
+      alert("Waktu habis!");
+      nextQuestion(score);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [timeLeft, score, isFinished]);
 
   if (questions.length === 0) {
     return (
@@ -73,6 +101,7 @@ function Quiz() {
     if (index + 1 < questions.length) {
       setIndex(index + 1);
       setSelected("");
+      setTimeLeft(30);
       return;
     }
 
@@ -87,7 +116,7 @@ function Quiz() {
             "Content-Type": "application/json",
             Authorization: "Bearer " + token,
           },
-          body: JSON.stringify({ bab, level }),
+          body: JSON.stringify({ bab, level, score: updatedScore, total: questions.length }),
         });
 
         if (!progressRes.ok) {
@@ -114,13 +143,9 @@ function Quiz() {
 
       console.log("XP RESULT:", result);
 
-      alert(
-        `Quiz selesai!\n\n` +
-          `Skor: ${updatedScore}/${questions.length}\n` +
-          `XP +${earnedXP}`
-      );
-
-      navigate(level ? `/level/${dialect}/${bab}` : "/level");
+      // Tampilkan halaman result
+      setFinalXP(earnedXP);
+      setIsFinished(true);
     } catch (err) {
       console.log("ERROR:", err);
       alert(err.message || "Gagal menyimpan hasil quiz");
@@ -152,17 +177,63 @@ function Quiz() {
     }
   };
 
+  // TAMPILAN RESULT
+  if (isFinished) {
+    const correct = score;
+    const wrong = questions.length - score;
+    const percentage = Math.round((correct / questions.length) * 100);
+
+    return (
+      <div className="min-h-screen bg-gray-100 p-5 flex items-center justify-center">
+        <div className="bg-white p-8 rounded-3xl shadow-xl max-w-md w-full text-center transform transition-all">
+          <h1 className="text-4xl font-bold mb-2">🎉 Selesai!</h1>
+          <p className="text-gray-500 mb-8">Kuis Level {level} berhasil diselesaikan.</p>
+          
+          <div className="grid grid-cols-2 gap-4 mb-8">
+            <div className="bg-green-100 p-4 rounded-2xl shadow-sm">
+              <p className="text-sm text-green-600 font-bold">Benar</p>
+              <p className="text-3xl font-black text-green-700">{correct}</p>
+            </div>
+            <div className="bg-red-100 p-4 rounded-2xl shadow-sm">
+              <p className="text-sm text-red-600 font-bold">Salah</p>
+              <p className="text-3xl font-black text-red-700">{wrong}</p>
+            </div>
+            <div className="bg-blue-100 p-5 rounded-2xl col-span-2 shadow-sm">
+              <p className="text-sm text-blue-600 font-bold">Total Nilai</p>
+              <p className="text-5xl font-black text-blue-700">{percentage}</p>
+            </div>
+            <div className="bg-yellow-100 p-4 rounded-2xl col-span-2 shadow-sm">
+              <p className="text-sm text-yellow-600 font-bold">XP Didapat</p>
+              <p className="text-2xl font-black text-yellow-700">+{finalXP} XP</p>
+            </div>
+          </div>
+
+          <button
+            onClick={() => navigate(level ? `/level/${dialect}/${bab}` : "/level")}
+            className="w-full bg-green-500 text-white py-4 rounded-2xl font-bold text-lg hover:bg-green-600 transition shadow-lg"
+          >
+            Kembali
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gray-100">
       <Navbar showBackButton backTo={practicePath} />
 
       <main className="p-5 max-w-xl mx-auto">
-        <div className="mb-5">
-          <h1 className="text-2xl font-bold">Quiz Bahasa Kaili</h1>
-
-          <p className="text-gray-500 mt-1">
-            {dialect.toUpperCase()} - {levelInfo?.title || babInfo?.title || bab.toUpperCase()}
-          </p>
+        <div className="flex justify-between items-center mb-5">
+          <div>
+            <h1 className="text-2xl font-bold">Quiz Bahasa Kaili</h1>
+            <p className="text-gray-500 mt-1">
+              {dialect.toUpperCase()} - {levelInfo?.title || babInfo?.title || bab.toUpperCase()}
+            </p>
+          </div>
+          <div className={`text-xl font-bold ${timeLeft <= 5 ? "text-red-500" : "text-green-600"}`}>
+            ⏱️ {timeLeft}s
+          </div>
         </div>
 
         <div className="bg-white p-5 rounded-2xl shadow">

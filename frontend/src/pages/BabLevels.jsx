@@ -38,8 +38,32 @@ function BabLevels() {
   }, []);
 
   const isLevelUnlocked = (level, index) => {
-    if (!progress) return index === 0;
-    return Boolean(progress.levels?.[bab]?.[level.key]) || index === 0;
+    // Hanya level pertama dari Bab 1 yang otomatis terbuka tanpa syarat
+    if (bab === "bab1" && index === 0) return true;
+    
+    if (!progress) return false;
+
+    // Logika Ketat: Level 2 dan seterusnya HANYA terbuka jika skor level sebelumnya >= 80%
+    if (index > 0) {
+      const prevLevel = levels[index - 1];
+      const prevScore = progress.levels?.[bab]?.[prevLevel.key];
+
+      if (typeof prevScore === "number" && prevScore >= 80) return true;
+      if (prevScore === true) return true; // Kompatibilitas data akun lama
+
+      return false; // Kunci rapat jika belum 80%
+    }
+
+    // Untuk level 1 di Bab 2/Bab 3, terbuka jika dari backend sudah mendefinisikannya
+    return progress.levels?.[bab]?.[level.key] !== undefined;
+  };
+
+  const getLevelScore = (level) => {
+    if (!progress) return 0;
+    const score = progress.levels?.[bab]?.[level.key];
+    if (typeof score === "number") return score;
+    if (score === true) return 100; // Kompatibilitas dengan progress sistem lama
+    return 0;
   };
 
   return (
@@ -70,7 +94,7 @@ function BabLevels() {
                   unlocked ? "bg-white" : "bg-gray-100 opacity-75"
                 }`}
               >
-                <div>
+                <div className="flex-1 pr-2">
                   <p className="font-semibold">
                     Level {index + 1} - {level.title}
                   </p>
@@ -78,16 +102,30 @@ function BabLevels() {
                 </div>
 
                 {unlocked ? (
-                  <button
-                    onClick={() =>
-                      navigate(`/lesson/${dialect}/${bab}/${level.key}`)
-                    }
-                    className={`${buttonColor} text-white text-sm px-3 py-2 rounded-lg`}
-                  >
-                    Mulai
-                  </button>
+                  <div className="flex items-center gap-3">
+                    <div className="flex flex-col items-end">
+                      <div className="w-16 sm:w-24 h-2.5 bg-gray-200 rounded-full overflow-hidden">
+                        <div
+                          className="h-full bg-green-500 transition-all duration-500"
+                          style={{ width: `${getLevelScore(level)}%` }}
+                        ></div>
+                      </div>
+                      <span className="text-xs text-gray-500 font-bold mt-1">
+                        {getLevelScore(level)}% Benar
+                      </span>
+                    </div>
+
+                    <button
+                      onClick={() =>
+                        navigate(`/lesson/${dialect}/${bab}/${level.key}`)
+                      }
+                      className={`${buttonColor} text-white text-sm px-4 py-2 rounded-lg font-bold whitespace-nowrap`}
+                    >
+                      Mulai
+                    </button>
+                  </div>
                 ) : (
-                  <span className="text-sm text-gray-400">Terkunci</span>
+                  <span className="text-sm text-gray-400 font-semibold px-2">Terkunci 🔒</span>
                 )}
               </div>
             );
