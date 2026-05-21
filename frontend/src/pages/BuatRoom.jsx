@@ -21,7 +21,7 @@ function BuatRoom() {
           return;
         }
 
-        const res = await fetch("http://localhost:3000/api/auth/profile", {
+        const res = await fetch("/api/auth/profile", {
           headers: {
             Authorization: "Bearer " + token,
           },
@@ -251,7 +251,7 @@ function BuatRoom() {
       const token = localStorage.getItem("token");
 
       const res = await fetch(
-        "http://localhost:3000/api/rooms/create",
+        "/api/rooms/create",
         {
           method: "POST",
 

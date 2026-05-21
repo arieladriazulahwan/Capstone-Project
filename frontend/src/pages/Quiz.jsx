@@ -33,7 +33,7 @@ function Quiz() {
     : `/practice/${dialect}/${bab}`;
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/quiz?dialect=${dialect}&bab=${bab}`)
+    fetch(`/api/quiz?dialect=${dialect}&bab=${bab}`)
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data)) {

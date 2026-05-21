@@ -6,7 +6,7 @@ function Favorites() {
   useEffect(() => {
     const token = localStorage.getItem("token");
 
-    fetch("http://localhost:3000/api/favorites", {
+    fetch("/api/favorites", {
       headers: {
         Authorization: "Bearer " + token,
       },

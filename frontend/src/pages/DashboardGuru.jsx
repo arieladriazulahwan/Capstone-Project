@@ -21,7 +21,7 @@ function DashboardGuru() {
       const token = localStorage.getItem("token");
 
       const res = await fetch(
-        "http://localhost:3000/api/auth/profile",
+        "/api/auth/profile",
         {
           headers: {
             Authorization: "Bearer " + token,
@@ -54,7 +54,7 @@ function DashboardGuru() {
       const token = localStorage.getItem("token");
 
       const res = await fetch(
-        "http://localhost:3000/api/rooms",
+        "/api/rooms",
         {
           headers: {
             Authorization: "Bearer " + token,

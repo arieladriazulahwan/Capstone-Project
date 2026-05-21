@@ -33,7 +33,7 @@ function Dashboard() {
         }
 
         const res = await fetch(
-          "http://localhost:3000/api/auth/profile",
+          "/api/auth/profile",
           {
             headers: {
               Authorization: "Bearer " + token,
@@ -72,7 +72,7 @@ function Dashboard() {
         const token = localStorage.getItem("token");
 
         const res = await fetch(
-          "http://localhost:3000/api/favorites/full",
+          "/api/favorites/full",
           {
             headers: {
               Authorization: "Bearer " + token,
@@ -117,7 +117,7 @@ function Dashboard() {
       const token = localStorage.getItem("token");
 
       const res = await fetch(
-        `http://localhost:3000/api/rooms/join/${roomCode}`,
+        `/api/rooms/join/${roomCode}`,
         {
           headers: {
             Authorization: "Bearer " + token,

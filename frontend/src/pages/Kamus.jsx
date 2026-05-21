@@ -16,7 +16,7 @@ function Kamus() {
 
   // 🔥 GET VOCAB
   useEffect(() => {
-    fetch("http://localhost:3000/api/vocab")
+    fetch("/api/vocab")
       .then((res) => res.json())
       .then((res) => setData(res));
   }, []);
@@ -54,7 +54,7 @@ function Kamus() {
         const token = localStorage.getItem("token");
         if (!token) return;
 
-        const res = await fetch("http://localhost:3000/api/favorites", {
+        const res = await fetch("/api/favorites", {
           headers: {
             Authorization: "Bearer " + token,
           },
@@ -85,7 +85,7 @@ function Kamus() {
     const isFav = favorites.has(id);
 
     try {
-      await fetch("http://localhost:3000/api/favorites", {
+      await fetch("/api/favorites", {
         method: isFav ? "DELETE" : "POST",
         headers: {
           "Content-Type": "application/json",

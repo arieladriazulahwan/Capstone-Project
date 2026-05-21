@@ -16,7 +16,7 @@ function Navbar({ user, showBackButton = false, backTo = -1 }) {
     const token = localStorage.getItem("token");
     if (!token) return;
 
-    fetch("http://localhost:3000/api/auth/profile", {
+    fetch("/api/auth/profile", {
       headers: {
         Authorization: "Bearer " + token,
       },

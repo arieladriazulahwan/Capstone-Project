@@ -12,7 +12,7 @@ function Lesson() {
   const levelInfo = getLevel(bab, level);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/lesson/${dialect}/${bab}`)
+    fetch(`/api/lesson/${dialect}/${bab}`)
       .then((res) => res.json())
       .then((res) => {
         const items = Array.isArray(res) ? filterByLevel(res, bab, level) : [];

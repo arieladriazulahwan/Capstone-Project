@@ -18,7 +18,7 @@ function DetailRoom() {
     const fetchRoom = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await fetch(`http://localhost:3000/api/rooms/detail/${id}`, {
+        const res = await fetch(`/api/rooms/detail/${id}`, {
           headers: {
             Authorization: "Bearer " + token,
           },
@@ -148,7 +148,7 @@ function DetailRoom() {
 
     try {
       const res = await fetch(
-        `http://localhost:3000/api/rooms/questions/${question.id}`,
+        `/api/rooms/questions/${question.id}`,
         {
           method: "PUT",
           headers: {

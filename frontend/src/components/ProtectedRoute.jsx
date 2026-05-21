@@ -4,11 +4,13 @@ import { Navigate, useLocation } from "react-router-dom";
 const roleHome = {
   siswa: "/dashboard",
   guru: "/dashboard/guru",
+  admin: "/dashboard/admin",
 };
 
 const roleLogin = {
   siswa: "/login/siswa",
   guru: "/login/guru",
+  admin: "/login/admin",
 };
 
 function ProtectedRoute({ children, allowedRole }) {
@@ -31,7 +33,7 @@ function ProtectedRoute({ children, allowedRole }) {
       }
 
       try {
-        const res = await fetch("http://localhost:3000/api/auth/profile", {
+        const res = await fetch("/api/auth/profile", {
           headers: {
             Authorization: "Bearer " + token,
           },
