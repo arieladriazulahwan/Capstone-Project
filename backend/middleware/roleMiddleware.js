@@ -11,3 +11,10 @@ exports.onlySiswa = (req, res, next) => {
   }
   next();
 };
+
+exports.onlyAdmin = (req, res, next) => {
+  if (req.user.role !== "admin") {
+    return res.status(403).json({ message: "Hanya admin yang boleh akses" });
+  }
+  next();
+};

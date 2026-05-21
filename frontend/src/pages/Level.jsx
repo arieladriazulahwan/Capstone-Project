@@ -20,7 +20,7 @@ function Level() {
           return;
         }
 
-        const res = await fetch("http://localhost:3000/api/auth/profile", {
+        const res = await fetch("/api/auth/profile", {
           headers: {
             Authorization: "Bearer " + token,
           },
@@ -50,7 +50,7 @@ function Level() {
 
         if (!token) return;
 
-        const res = await fetch("http://localhost:3000/api/auth/profile", {
+        const res = await fetch("/api/auth/profile", {
           headers: {
             Authorization: "Bearer " + token,
           },
@@ -139,7 +139,7 @@ function Level() {
     const token = localStorage.getItem("token");
 
     try {
-      await fetch("http://localhost:3000/api/auth/dialect", {
+      await fetch("/api/auth/dialect", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

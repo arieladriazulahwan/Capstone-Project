@@ -190,6 +190,11 @@ exports.register = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     const userRole = role || "siswa";
 
+    // Jangan izinkan registrasi admin dari endpoint publik
+    if (userRole === "admin") {
+      return res.status(403).json({ message: "Tidak dapat mendaftar sebagai admin" });
+    }
+
     const [insertResult] = await db.promise().query(
       "INSERT INTO users (name, username, password, role) VALUES (?, ?, ?, ?)",
       [name, username, hashedPassword, userRole]
@@ -234,6 +239,11 @@ exports.login = async (req, res) => {
     }
 
     const user = results[0];
+
+    // Cek apakah akun diblokir
+    if (user.is_blocked) {
+      return res.status(403).json({ message: "Akun Anda telah diblokir. Hubungi admin." });
+    }
 
     let isMatch = false;
     if (!user.password) {

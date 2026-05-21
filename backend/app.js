@@ -7,6 +7,7 @@ const practiceRoutes = require("./routes/practiceRoutes");
 const roomRoutes = require("./routes/roomRoutes");
 const db = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
+const adminRoutes = require("./routes/adminRoutes");
 
 
 const app = express();
@@ -24,6 +25,7 @@ const createTables = async () => {
       username VARCHAR(255) UNIQUE NOT NULL,
       password VARCHAR(255) NOT NULL,
       role VARCHAR(50) NOT NULL DEFAULT 'siswa',
+      is_blocked TINYINT(1) NOT NULL DEFAULT 0,
       created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
       last_login DATE DEFAULT NULL
     )`,
@@ -111,6 +113,7 @@ const createTables = async () => {
   }
 
   await ensureColumn("users", "created_at", "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP");
+  await ensureColumn("users", "is_blocked", "TINYINT(1) NOT NULL DEFAULT 0");
   await ensureColumn("room_questions", "answer_type", "VARCHAR(50)");
   await ensureColumn("favorites", "vocab_id", "INT NULL");
   await migrateFavoriteColumn();
@@ -126,6 +129,7 @@ app.use("/api/quiz", require("./routes/quiz"));
 app.use("/api/lesson", lessonRoutes);
 app.use("/api/practice", practiceRoutes);
 app.use("/api/rooms", roomRoutes);
+app.use("/api/admin", adminRoutes);
 
 const ensureColumn = async (table, column, definition) => {
   const [rows] = await db.promise().query(
@@ -193,6 +197,7 @@ const removeDuplicateFavorites = async () => {
 const startServer = async () => {
   try {
     await createTables();
+    await seedAdmin();
     const port = process.env.PORT || 3000;
     app.listen(port, () => {
       console.log(`Server running on http://localhost:${port}`);
@@ -200,6 +205,19 @@ const startServer = async () => {
   } catch (err) {
     console.error("Gagal menyiapkan database:", err);
     process.exit(1);
+  }
+};
+
+const seedAdmin = async () => {
+  const bcrypt = require("bcrypt");
+  const [rows] = await db.promise().query("SELECT * FROM users WHERE role = 'admin' LIMIT 1");
+  if (rows.length === 0) {
+    const hashedPassword = await bcrypt.hash("admin123", 10);
+    await db.promise().query(
+      "INSERT INTO users (name, username, password, role) VALUES (?, ?, ?, ?)",
+      ["Administrator", "admin", hashedPassword, "admin"]
+    );
+    console.log("✅ Akun admin default berhasil dibuat (admin / admin123)");
   }
 };
 

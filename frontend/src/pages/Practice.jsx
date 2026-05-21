@@ -28,7 +28,7 @@ function Practice() {
     : `/lesson/${dialect}/${bab}`;
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/practice/${dialect}/${bab}`)
+    fetch(`/api/practice/${dialect}/${bab}`)
       .then((res) => res.json())
       .then((result) => {
         if (Array.isArray(result)) {

@@ -25,7 +25,7 @@ function QuizRoom() {
         const token = localStorage.getItem("token");
 
         const res = await fetch(
-          `http://localhost:3000/api/rooms/join/${code}`,
+          `/api/rooms/join/${code}`,
           {
             headers: {
               Authorization: "Bearer " + token,

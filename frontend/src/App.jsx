@@ -18,6 +18,12 @@ import BuatRoom from "./pages/BuatRoom";
 import DetailRoom from "./pages/DetailRoom";
 import QuizPage from "./pages/QuizPage";
 import ProtectedRoute from "./components/ProtectedRoute";
+import LoginAdmin from "./pages/LoginAdmin";
+import DashboardAdmin from "./pages/DashboardAdmin";
+import AdminKamus from "./pages/AdminKamus";
+import AdminMateri from "./pages/AdminMateri";
+import AdminUsers from "./pages/AdminUsers";
+import AdminRooms from "./pages/AdminRooms";
 
 function App() {
   return (
@@ -159,6 +165,49 @@ function App() {
           element={
             <ProtectedRoute allowedRole="siswa">
               <Quiz />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* ADMIN ROUTES */}
+        <Route path="/login/admin" element={<LoginAdmin />} />
+        <Route
+          path="/dashboard/admin"
+          element={
+            <ProtectedRoute allowedRole="admin">
+              <DashboardAdmin />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/kamus"
+          element={
+            <ProtectedRoute allowedRole="admin">
+              <AdminKamus />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/materi"
+          element={
+            <ProtectedRoute allowedRole="admin">
+              <AdminMateri />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/users"
+          element={
+            <ProtectedRoute allowedRole="admin">
+              <AdminUsers />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/rooms"
+          element={
+            <ProtectedRoute allowedRole="admin">
+              <AdminRooms />
             </ProtectedRoute>
           }
         />

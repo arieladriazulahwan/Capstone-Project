@@ -6,11 +6,13 @@ const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 const roleHome = {
   siswa: "/dashboard",
   guru: "/dashboard/guru",
+  admin: "/dashboard/admin",
 };
 
 const roleLogin = {
   siswa: "/login/siswa",
   guru: "/login/guru",
+  admin: "/login/admin",
 };
 
 function ProtectedRoute({ children, allowedRole }) {
