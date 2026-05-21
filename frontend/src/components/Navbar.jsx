@@ -3,6 +3,8 @@ import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
 function Navbar({ user, showBackButton = false, backTo = -1 }) {
   const navigate = useNavigate();
   const [profile, setProfile] = useState(user || null);
@@ -16,7 +18,7 @@ function Navbar({ user, showBackButton = false, backTo = -1 }) {
     const token = localStorage.getItem("token");
     if (!token) return;
 
-    fetch("/api/auth/profile", {
+    fetch(`${API_BASE_URL}/api/auth/profile`, {
       headers: {
         Authorization: "Bearer " + token,
       },

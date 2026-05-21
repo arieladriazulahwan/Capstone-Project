@@ -5,6 +5,8 @@ import Navbar from "../components/Navbar";
 import { useNavigate } from "react-router-dom";
 import { babList } from "../data/levelMap";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
 function Level() {
   const [user, setUser] = useState(null);
   const [dialect, setDialect] = useState("ledo");
@@ -20,7 +22,7 @@ function Level() {
           return;
         }
 
-        const res = await fetch("/api/auth/profile", {
+        const res = await fetch(`${API_BASE_URL}/api/auth/profile`, {
           headers: {
             Authorization: "Bearer " + token,
           },
@@ -50,7 +52,7 @@ function Level() {
 
         if (!token) return;
 
-        const res = await fetch("/api/auth/profile", {
+        const res = await fetch(`${API_BASE_URL}/api/auth/profile`, {
           headers: {
             Authorization: "Bearer " + token,
           },
@@ -139,7 +141,7 @@ function Level() {
     const token = localStorage.getItem("token");
 
     try {
-      await fetch("/api/auth/dialect", {
+      await fetch(`${API_BASE_URL}/api/auth/dialect`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

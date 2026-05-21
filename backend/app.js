@@ -11,6 +11,31 @@ const adminRoutes = require("./routes/adminRoutes");
 
 
 const app = express();
+const defaultProgressString = () =>
+  JSON.stringify({
+    bab1: true,
+    bab2: false,
+    bab3: false,
+    bab4: false,
+    bab5: false,
+    bab6: false,
+    bab7: false,
+    bab8: false,
+    bab9: false,
+    bab10: false,
+    levels: {
+      bab1: { "kata-benda": 0 },
+      bab2: {},
+      bab3: {},
+      bab4: {},
+      bab5: {},
+      bab6: {},
+      bab7: {},
+      bab8: {},
+      bab9: {},
+      bab10: {},
+    },
+  });
 
 app.use(cors());
 app.use(express.json({ limit: "10mb" }));
@@ -119,6 +144,7 @@ const createTables = async () => {
   await migrateFavoriteColumn();
   await removeDuplicateFavorites();
   await ensureUniqueIndex("favorites", "user_vocab_unique", "user_id, vocab_id");
+  await ensureExistingStudentData();
 };
 
 app.use("/api/auth", authRoutes);
@@ -192,6 +218,25 @@ const removeDuplicateFavorites = async () => {
       AND f1.id > f2.id
      WHERE f1.vocab_id IS NOT NULL`
   );
+};
+
+const ensureExistingStudentData = async () => {
+  await db.promise().query(
+    `INSERT IGNORE INTO student_profiles (user_id, dialect, title)
+     SELECT id, 'ledo', 'Pemula'
+     FROM users
+     WHERE role = 'siswa'`
+  );
+
+  for (const dialect of ["ledo", "rai"]) {
+    await db.promise().query(
+      `INSERT IGNORE INTO student_progress (user_id, dialect, progress)
+       SELECT id, ?, ?
+       FROM users
+       WHERE role = 'siswa'`,
+      [dialect, defaultProgressString()]
+    );
+  }
 };
 
 const startServer = async () => {

@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
 function Favorites() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
 
-    fetch("/api/favorites", {
+    fetch(`${API_BASE_URL}/api/favorites`, {
       headers: {
         Authorization: "Bearer " + token,
       },

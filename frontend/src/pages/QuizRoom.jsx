@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
 function QuizRoom() {
 
   const { code } = useParams();
@@ -25,7 +27,7 @@ function QuizRoom() {
         const token = localStorage.getItem("token");
 
         const res = await fetch(
-          `/api/rooms/join/${code}`,
+          `${API_BASE_URL}/api/rooms/join/${code}`,
           {
             headers: {
               Authorization: "Bearer " + token,

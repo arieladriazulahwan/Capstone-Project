@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import NavbarAdmin from "../components/NavbarAdmin";
 import SidebarAdmin from "../components/SidebarAdmin";
 
-const API = "/api/admin";
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+const API = `${API_BASE_URL}/api/admin`;
 
 const CATEGORIES = [
   { value: "kata benda", label: "Kata Benda", color: "bg-blue-50 text-blue-700" },
@@ -48,7 +49,7 @@ function AdminKamus() {
   }, [search, filterDialect, filterCategory, vocabList]);
 
   const fetchUser = async () => {
-    const res = await fetch("/api/auth/profile", {
+    const res = await fetch(`${API_BASE_URL}/api/auth/profile`, {
       headers: { Authorization: "Bearer " + token },
     });
     if (res.ok) setUser(await res.json());

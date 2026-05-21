@@ -3,6 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import { filterByLevel, getBab, getLevel } from "../data/levelMap";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
 function Lesson() {
   const [data, setData] = useState([]);
 
@@ -12,7 +14,7 @@ function Lesson() {
   const levelInfo = getLevel(bab, level);
 
   useEffect(() => {
-    fetch(`/api/lesson/${dialect}/${bab}`)
+    fetch(`${API_BASE_URL}/api/lesson/${dialect}/${bab}`)
       .then((res) => res.json())
       .then((res) => {
         const items = Array.isArray(res) ? filterByLevel(res, bab, level) : [];

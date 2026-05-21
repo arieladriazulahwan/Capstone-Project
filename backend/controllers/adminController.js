@@ -14,6 +14,55 @@ const readJSON = (filePath) => JSON.parse(fs.readFileSync(filePath, "utf-8"));
 const writeJSON = (filePath, data) =>
   fs.writeFileSync(filePath, JSON.stringify(data, null, 2), "utf-8");
 
+const validDialects = ["ledo", "rai"];
+const defaultProgressString = () =>
+  JSON.stringify({
+    bab1: true,
+    bab2: false,
+    bab3: false,
+    bab4: false,
+    bab5: false,
+    bab6: false,
+    bab7: false,
+    bab8: false,
+    bab9: false,
+    bab10: false,
+    levels: {
+      bab1: { "kata-benda": 0 },
+      bab2: {},
+      bab3: {},
+      bab4: {},
+      bab5: {},
+      bab6: {},
+      bab7: {},
+      bab8: {},
+      bab9: {},
+      bab10: {},
+    },
+  });
+
+const ensureStudentData = async (userId) => {
+  await db
+    .promise()
+    .query(
+      "INSERT IGNORE INTO student_profiles (user_id, dialect, title) VALUES (?, ?, ?)",
+      [userId, "ledo", "Pemula"]
+    );
+
+  const progressRows = validDialects.map((dialect) => [
+    userId,
+    dialect,
+    defaultProgressString(),
+  ]);
+
+  await db
+    .promise()
+    .query(
+      "INSERT IGNORE INTO student_progress (user_id, dialect, progress) VALUES ?",
+      [progressRows]
+    );
+};
+
 // ============================================
 // 📊 DASHBOARD STATS
 // ============================================
@@ -313,20 +362,24 @@ exports.deleteQuiz = (req, res) => {
 exports.getAllUsers = async (req, res) => {
   try {
     const { role, search } = req.query;
-    let query = "SELECT id, name, username, role, is_blocked, created_at, last_login FROM users WHERE role != 'admin'";
+    let query = `SELECT u.id, u.name, u.username, u.role, u.is_blocked, u.created_at, u.last_login,
+      sp.xp, sp.level, sp.title, sp.streak, sp.dialect
+      FROM users u
+      LEFT JOIN student_profiles sp ON u.id = sp.user_id
+      WHERE u.role != 'admin'`;
     const params = [];
 
     if (role) {
-      query += " AND role = ?";
+      query += " AND u.role = ?";
       params.push(role);
     }
 
     if (search) {
-      query += " AND (name LIKE ? OR username LIKE ?)";
+      query += " AND (u.name LIKE ? OR u.username LIKE ?)";
       params.push(`%${search}%`, `%${search}%`);
     }
 
-    query += " ORDER BY created_at DESC";
+    query += " ORDER BY u.created_at DESC";
 
     const [users] = await db.promise().query(query, params);
     res.json(users);
@@ -341,7 +394,11 @@ exports.getUserById = async (req, res) => {
     const [users] = await db
       .promise()
       .query(
-        "SELECT id, name, username, role, is_blocked, created_at, last_login FROM users WHERE id = ?",
+        `SELECT u.id, u.name, u.username, u.role, u.is_blocked, u.created_at, u.last_login,
+          sp.xp, sp.level, sp.title, sp.streak, sp.dialect
+         FROM users u
+         LEFT JOIN student_profiles sp ON u.id = sp.user_id
+         WHERE u.id = ?`,
         [req.params.id]
       );
 
@@ -452,6 +509,10 @@ exports.createUser = async (req, res) => {
         [name, username, hashedPassword, role]
       );
 
+    if (role === "siswa") {
+      await ensureStudentData(result.insertId);
+    }
+
     res.json({
       message: "Pengguna berhasil ditambahkan",
       userId: result.insertId,
@@ -525,6 +586,10 @@ exports.updateUser = async (req, res) => {
     await db
       .promise()
       .query(`UPDATE users SET ${updates.join(", ")} WHERE id = ?`, params);
+
+    if (role === "siswa") {
+      await ensureStudentData(userId);
+    }
 
     res.json({ message: "Pengguna berhasil diupdate" });
   } catch (err) {

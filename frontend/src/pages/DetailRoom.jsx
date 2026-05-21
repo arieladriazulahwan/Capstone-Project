@@ -3,6 +3,8 @@ import { useParams, useNavigate } from "react-router-dom";
 
 import NavbarGuru from "../components/NavbarGuru";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
 function DetailRoom() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -18,7 +20,7 @@ function DetailRoom() {
     const fetchRoom = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await fetch(`/api/rooms/detail/${id}`, {
+        const res = await fetch(`${API_BASE_URL}/api/rooms/detail/${id}`, {
           headers: {
             Authorization: "Bearer " + token,
           },
@@ -61,7 +63,7 @@ function DetailRoom() {
       if (!token) return;
 
       try {
-        const res = await fetch("http://localhost:3000/api/auth/profile", {
+        const res = await fetch(`${API_BASE_URL}/api/auth/profile`, {
           headers: { Authorization: "Bearer " + token },
         });
         if (res.ok) {
@@ -148,7 +150,7 @@ function DetailRoom() {
 
     try {
       const res = await fetch(
-        `/api/rooms/questions/${question.id}`,
+        `${API_BASE_URL}/api/rooms/questions/${question.id}`,
         {
           method: "PUT",
           headers: {
@@ -216,7 +218,7 @@ function DetailRoom() {
 
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch(`http://localhost:3000/api/rooms/${id}`, {
+      const res = await fetch(`${API_BASE_URL}/api/rooms/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: "Bearer " + token,
@@ -242,7 +244,7 @@ function DetailRoom() {
   const handleSaveRoomDetails = async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch(`http://localhost:3000/api/rooms/${id}`, {
+      const res = await fetch(`${API_BASE_URL}/api/rooms/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

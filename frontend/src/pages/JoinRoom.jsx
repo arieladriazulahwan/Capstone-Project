@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
 function JoinRoom() {
 
   const [code, setCode] = useState("");
@@ -12,7 +14,7 @@ function JoinRoom() {
     const token = localStorage.getItem("token");
 
     const res = await fetch(
-      `/api/rooms/join/${code}`,
+      `${API_BASE_URL}/api/rooms/join/${code}`,
       {
         headers: {
           Authorization: "Bearer " + token,

@@ -3,6 +3,8 @@ import Sidebar from "../components/Sidebar";
 import BottomNav from "../components/BottomNav";
 import Navbar from "../components/Navbar";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
 function Kamus() {
   const [data, setData] = useState([]);
   const [favorites, setFavorites] = useState(new Set());
@@ -16,7 +18,7 @@ function Kamus() {
 
   // 🔥 GET VOCAB
   useEffect(() => {
-    fetch("/api/vocab")
+    fetch(`${API_BASE_URL}/api/vocab`)
       .then((res) => res.json())
       .then((res) => setData(res));
   }, []);
@@ -31,7 +33,7 @@ function Kamus() {
       }
 
       try {
-        const res = await fetch("http://localhost:3000/api/auth/profile", {
+        const res = await fetch(`${API_BASE_URL}/api/auth/profile`, {
           headers: { Authorization: "Bearer " + token },
         });
         if (res.ok) {
@@ -54,7 +56,7 @@ function Kamus() {
         const token = localStorage.getItem("token");
         if (!token) return;
 
-        const res = await fetch("/api/favorites", {
+        const res = await fetch(`${API_BASE_URL}/api/favorites`, {
           headers: {
             Authorization: "Bearer " + token,
           },
@@ -85,7 +87,7 @@ function Kamus() {
     const isFav = favorites.has(id);
 
     try {
-      await fetch("/api/favorites", {
+      await fetch(`${API_BASE_URL}/api/favorites`, {
         method: isFav ? "DELETE" : "POST",
         headers: {
           "Content-Type": "application/json",

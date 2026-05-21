@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import NavbarAdmin from "../components/NavbarAdmin";
 import SidebarAdmin from "../components/SidebarAdmin";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
 function DashboardAdmin() {
   const [user, setUser] = useState(null);
   const [stats, setStats] = useState(null);
@@ -13,10 +15,10 @@ function DashboardAdmin() {
       const token = localStorage.getItem("token");
 
       const [userRes, statsRes] = await Promise.all([
-        fetch("/api/auth/profile", {
+        fetch(`${API_BASE_URL}/api/auth/profile`, {
           headers: { Authorization: "Bearer " + token },
         }),
-        fetch("/api/admin/stats", {
+        fetch(`${API_BASE_URL}/api/admin/stats`, {
           headers: { Authorization: "Bearer " + token },
         }),
       ]);

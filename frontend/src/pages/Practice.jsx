@@ -3,6 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import { filterByLevel, getBab, getLevel } from "../data/levelMap";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
 const shuffleOptions = (items) => {
   const shuffled = [...items];
 
@@ -28,7 +30,7 @@ function Practice() {
     : `/lesson/${dialect}/${bab}`;
 
   useEffect(() => {
-    fetch(`/api/practice/${dialect}/${bab}`)
+    fetch(`${API_BASE_URL}/api/practice/${dialect}/${bab}`)
       .then((res) => res.json())
       .then((result) => {
         if (Array.isArray(result)) {

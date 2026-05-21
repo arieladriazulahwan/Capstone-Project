@@ -4,6 +4,8 @@ import {
   useNavigate,
 } from "react-router-dom";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
 function QuizPage() {
 
   const { code } = useParams();
@@ -31,7 +33,7 @@ function QuizPage() {
         const token = localStorage.getItem("token");
 
         const res = await fetch(
-          `/api/rooms/join/${code}`,
+          `${API_BASE_URL}/api/rooms/join/${code}`,
           {
             headers: {
               Authorization: "Bearer " + token,
@@ -196,7 +198,7 @@ function QuizPage() {
     try {
       const token = localStorage.getItem("token");
       const res = await fetch(
-        `/api/rooms/submit/${code}`,
+        `${API_BASE_URL}/api/rooms/submit/${code}`,
         {
           method: "POST",
           headers: {
