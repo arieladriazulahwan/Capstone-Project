@@ -1,6 +1,7 @@
 const db = require("../config/db");
 
 const fs = require("fs");
+const fsPromises = require("fs").promises;
 const path = require("path");
 
 const vocabPath = path.join(__dirname, "../data/vocab.json");
@@ -72,32 +73,35 @@ exports.getFavorites = (req, res) => {
   );
 };
 
-exports.getFavoritesFull = (req, res) => {
+exports.getFavoritesFull = async (req, res) => {
   const userId = req.user.id;
 
-  // 1️⃣ ambil id favorit dari DB
-  db.query(
-    "SELECT vocab_id FROM favorites WHERE user_id=? ORDER BY id DESC",
-    [userId],
-    (err, results) => {
-      if (err) return res.status(500).json(err);
+  try {
+    // 1️⃣ ambil id favorit dari DB
+    const [results] = await db.promise().query(
+      "SELECT vocab_id FROM favorites WHERE user_id=? ORDER BY id DESC",
+      [userId]
+    );
 
-      const favIds = results.map((r) => r.vocab_id);
+    const favIds = results.map((r) => r.vocab_id);
 
-      // 2️⃣ ambil data vocab dari JSON
-      const vocabData = JSON.parse(fs.readFileSync(vocabPath));
+    // 2️⃣ ambil data vocab dari JSON
+    const rawData = await fsPromises.readFile(vocabPath, "utf-8");
+    const vocabData = JSON.parse(rawData);
 
-      // 3️⃣ filter sesuai favorit
-      const favorites = vocabData.filter((v) =>
-        favIds.includes(v.id)
-      );
+    // 3️⃣ filter sesuai favorit
+    const favorites = vocabData.filter((v) =>
+      favIds.includes(v.id)
+    );
 
-      // 4️⃣ urutkan sesuai urutan DB
-      const sorted = favIds
-        .map((id) => favorites.find((v) => v.id === id))
-        .filter(Boolean);
+    // 4️⃣ urutkan sesuai urutan DB
+    const sorted = favIds
+      .map((id) => favorites.find((v) => v.id === id))
+      .filter(Boolean);
 
-      res.json(sorted);
-    }
-  );
+    res.json(sorted);
+  } catch (err) {
+    console.error("Favorite Error:", err);
+    res.status(500).json({ message: "Gagal memuat favorit", error: err.message || err });
+  }
 };

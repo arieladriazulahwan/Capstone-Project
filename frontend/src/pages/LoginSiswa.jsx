@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
 function LoginSiswa() {
   const navigate = useNavigate();
 
@@ -12,7 +14,7 @@ function LoginSiswa() {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://localhost:3000/api/auth/login", {
+      const res = await fetch(`${API_BASE_URL}/api/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -31,7 +33,7 @@ function LoginSiswa() {
         alert("Login berhasil");
         navigate("/dashboard");
       } else {
-        alert(data.message);
+        alert(`Gagal: ${data.message}${data.error ? " | " + JSON.stringify(data.error) : ""}`);
       }
     } catch {
       alert("Terjadi kesalahan koneksi");

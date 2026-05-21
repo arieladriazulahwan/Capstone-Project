@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import NavbarGuru from "../components/NavbarGuru";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
 function BuatRoom() {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
@@ -21,7 +23,7 @@ function BuatRoom() {
           return;
         }
 
-        const res = await fetch("http://localhost:3000/api/auth/profile", {
+        const res = await fetch(`${API_BASE_URL}/api/auth/profile`, {
           headers: {
             Authorization: "Bearer " + token,
           },
@@ -251,7 +253,7 @@ function BuatRoom() {
       const token = localStorage.getItem("token");
 
       const res = await fetch(
-        "http://localhost:3000/api/rooms/create",
+        `${API_BASE_URL}/api/rooms/create`,
         {
           method: "POST",
 

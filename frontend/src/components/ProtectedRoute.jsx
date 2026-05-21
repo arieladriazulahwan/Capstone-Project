@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
 const roleHome = {
   siswa: "/dashboard",
   guru: "/dashboard/guru",
@@ -31,7 +33,7 @@ function ProtectedRoute({ children, allowedRole }) {
       }
 
       try {
-        const res = await fetch("http://localhost:3000/api/auth/profile", {
+        const res = await fetch(`${API_BASE_URL}/api/auth/profile`, {
           headers: {
             Authorization: "Bearer " + token,
           },
@@ -46,11 +48,12 @@ function ProtectedRoute({ children, allowedRole }) {
           return;
         }
 
-        const user = await res.json();
+        const data = await res.json();
+        const currentUser = data.user || data;
 
-        if (user.role !== allowedRole) {
+        if (currentUser.role !== allowedRole) {
           if (!ignore) {
-            setRedirectTo(roleHome[user.role] || "/login");
+            setRedirectTo(roleHome[currentUser.role] || "/login");
             setStatus("redirect");
           }
           return;

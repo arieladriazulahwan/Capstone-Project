@@ -333,6 +333,37 @@ router.post("/submit/:code", authMiddleware, async (req, res) => {
       )
     );
 
+    // 🔥 TAMBAHAN: Update XP Gamifikasi Siswa
+    const earnedXP = score * 10;
+    if (earnedXP > 0) {
+      const [profiles] = await db.promise().query(
+        "SELECT xp, level FROM student_profiles WHERE user_id = ?",
+        [userId]
+      );
+
+      if (profiles.length > 0) {
+        let currentXP = profiles[0].xp || 0;
+        let level = profiles[0].level || 1;
+        let newXP = currentXP + earnedXP;
+
+        while (newXP >= 100) {
+          newXP -= 100;
+          level += 1;
+        }
+
+        let title = "Pemula 🌱";
+        if (level >= 10) title = "Master 🏆";
+        else if (level >= 5) title = "Ahli 🧠";
+        else if (level >= 3) title = "Penjelajah 🧭";
+        else if (level >= 2) title = "Pelajar 📘";
+
+        await db.promise().query(
+          "UPDATE student_profiles SET xp = ?, level = ?, title = ? WHERE user_id = ?",
+          [newXP, level, title, userId]
+        );
+      }
+    }
+
     res.json({
       success: true,
       score,

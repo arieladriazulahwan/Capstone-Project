@@ -5,6 +5,8 @@ import Navbar from "../components/Navbar";
 import { useNavigate } from "react-router-dom";
 import Leaderboard from "./Leaderboard";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
 function Dashboard() {
 
   const [user, setUser] = useState(null);
@@ -33,7 +35,7 @@ function Dashboard() {
         }
 
         const res = await fetch(
-          "http://localhost:3000/api/auth/profile",
+          `${API_BASE_URL}/api/auth/profile`,
           {
             headers: {
               Authorization: "Bearer " + token,
@@ -41,7 +43,6 @@ function Dashboard() {
           }
         );
 
-        const data = await res.json();
 
         if (res.status === 401) {
 
@@ -51,11 +52,20 @@ function Dashboard() {
 
         }
 
+      const data = await res.json().catch(() => ({}));
+
+        if (!res.ok) {
+          alert("Gagal memuat profil: " + (data.message || "Server Error"));
+        navigate("/login/siswa");
+          return;
+        }
+
         setUser(data.user || data);
 
       } catch (err) {
 
         console.log(err);
+        alert("Terjadi kesalahan koneksi saat memuat profil");
 
       } finally {
 
@@ -72,7 +82,7 @@ function Dashboard() {
         const token = localStorage.getItem("token");
 
         const res = await fetch(
-          "http://localhost:3000/api/favorites/full",
+          `${API_BASE_URL}/api/favorites/full`,
           {
             headers: {
               Authorization: "Bearer " + token,
@@ -80,9 +90,8 @@ function Dashboard() {
           }
         );
 
-        const data = await res.json();
-
-        setFavorites(data);
+      const data = await res.json().catch(() => ([]));
+      setFavorites(Array.isArray(data) ? data : []);
 
       } catch (err) {
 
@@ -117,7 +126,7 @@ function Dashboard() {
       const token = localStorage.getItem("token");
 
       const res = await fetch(
-        `http://localhost:3000/api/rooms/join/${roomCode}`,
+        `${API_BASE_URL}/api/rooms/join/${roomCode}`,
         {
           headers: {
             Authorization: "Bearer " + token,
@@ -160,7 +169,16 @@ function Dashboard() {
 
   }
 
-  if (!user) return null;
+  if (!user) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-5 text-center">
+        <p className="text-gray-500 mb-4">Gagal memuat data pengguna. Sesi mungkin telah berakhir.</p>
+        <button onClick={() => navigate("/login/siswa")} className="bg-green-500 text-white px-6 py-3 rounded-xl font-bold shadow hover:bg-green-600 transition">
+          Kembali ke Halaman Login
+        </button>
+      </div>
+    );
+  }
 
   return (
 

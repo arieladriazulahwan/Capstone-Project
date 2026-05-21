@@ -3,6 +3,8 @@ import NavbarGuru from "../components/NavbarGuru";
 import RoomCard from "../components/RoomCard";
 import { useNavigate } from "react-router-dom";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
 function DashboardGuru() {
 
   const [user, setUser] = useState(null);
@@ -21,7 +23,7 @@ function DashboardGuru() {
       const token = localStorage.getItem("token");
 
       const res = await fetch(
-        "http://localhost:3000/api/auth/profile",
+        `${API_BASE_URL}/api/auth/profile`,
         {
           headers: {
             Authorization: "Bearer " + token,
@@ -31,7 +33,7 @@ function DashboardGuru() {
 
       if (res.ok) {
         const data = await res.json();
-        setUser(data);
+        setUser(data.user || data);
       } else {
         console.error("Failed to fetch user:", res.status);
         // Handle error, perhaps redirect to login
@@ -54,7 +56,7 @@ function DashboardGuru() {
       const token = localStorage.getItem("token");
 
       const res = await fetch(
-        "http://localhost:3000/api/rooms",
+        `${API_BASE_URL}/api/rooms`,
         {
           headers: {
             Authorization: "Bearer " + token,
@@ -87,7 +89,7 @@ function DashboardGuru() {
 
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch(`http://localhost:3000/api/rooms/${roomId}`, {
+      const res = await fetch(`${API_BASE_URL}/api/rooms/${roomId}`, {
         method: "DELETE",
         headers: {
           Authorization: "Bearer " + token,

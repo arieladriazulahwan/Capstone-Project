@@ -9,6 +9,8 @@ const colorClass = {
   purple: "bg-purple-500",
 };
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
 function BabLevels() {
   const navigate = useNavigate();
   const { dialect, bab } = useParams();
@@ -22,7 +24,7 @@ function BabLevels() {
     const token = localStorage.getItem("token");
     if (!token) return;
 
-    fetch("http://localhost:3000/api/auth/profile", {
+    fetch(`${API_BASE_URL}/api/auth/profile`, {
       headers: {
         Authorization: "Bearer " + token,
       },

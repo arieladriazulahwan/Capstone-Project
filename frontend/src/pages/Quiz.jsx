@@ -3,6 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import { filterByLevel, getBab, getLevel } from "../data/levelMap";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
 const shuffleOptions = (items) => {
   const shuffled = [...items];
 
@@ -33,7 +35,7 @@ function Quiz() {
     : `/practice/${dialect}/${bab}`;
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/quiz?dialect=${dialect}&bab=${bab}`)
+    fetch(`${API_BASE_URL}/api/quiz?dialect=${dialect}&bab=${bab}`)
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data)) {
@@ -110,7 +112,7 @@ function Quiz() {
       const earnedXP = updatedScore * 10;
 
       if (bab) {
-        const progressRes = await fetch("http://localhost:3000/api/auth/complete-bab", {
+        const progressRes = await fetch(`${API_BASE_URL}/api/auth/complete-bab`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -125,23 +127,25 @@ function Quiz() {
         }
       }
 
-      const xpRes = await fetch("http://localhost:3000/api/auth/add-xp", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + token,
-        },
-        body: JSON.stringify({
-          xp: earnedXP,
-        }),
-      });
+      // Lewati hit API add-xp jika skor = 0 agar terhindar dari Error 400 API Gamifikasi
+      if (earnedXP > 0) {
+        const xpRes = await fetch(`${API_BASE_URL}/api/auth/add-xp`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+          body: JSON.stringify({
+            xp: earnedXP,
+          }),
+        });
 
-      const result = await xpRes.json();
-      if (!xpRes.ok) {
-        throw new Error(result.message || "Gagal menambahkan XP");
+        const result = await xpRes.json();
+        if (!xpRes.ok) {
+          throw new Error(result.message || "Gagal menambahkan XP");
+        }
+        console.log("XP RESULT:", result);
       }
-
-      console.log("XP RESULT:", result);
 
       // Tampilkan halaman result
       setFinalXP(earnedXP);

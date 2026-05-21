@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
 function Leaderboard() {
   const [leaders, setLeaders] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -9,7 +11,7 @@ function Leaderboard() {
     const fetchLeaderboard = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await fetch("http://localhost:3000/api/auth/leaderboard", {
+        const res = await fetch(`${API_BASE_URL}/api/auth/leaderboard`, {
           headers: { Authorization: "Bearer " + token },
         });
 

@@ -14,7 +14,7 @@ exports.addXP = (req, res) => {
     (err, result) => {
       if (err) return res.status(500).json(err);
       if (result.length === 0) {
-        return res.status(400).json({ message: "Profil siswa tidak ditemukan" });
+                                                                                                                                                                                                                                    return res.status(200).json({ message: "Profil siswa tidak ditemukan", xp: 0, level: 1, title: "Guru" });
       }
 
       let totalXP = (result[0].xp || 0) + xp;
