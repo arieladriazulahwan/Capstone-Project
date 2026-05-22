@@ -171,6 +171,21 @@ function BuatRoom() {
     setQuestions(temp);
   };
 
+  const removeBlock = (
+    qIndex,
+    bIndex
+  ) => {
+    const temp = [...questions];
+    const removedBlock = temp[qIndex].blocks[bIndex];
+
+    temp[qIndex].blocks.splice(bIndex, 1);
+    temp[qIndex].answerBlocks = temp[qIndex].answerBlocks.filter(
+      (block) => block !== removedBlock
+    );
+
+    setQuestions(temp);
+  };
+
   // =========================
   // PILIH BLOK JAWABAN
   // =========================
@@ -611,22 +626,38 @@ function BuatRoom() {
 
                 {q.blocks.map(
                   (block, bIndex) => (
-                    <input
+                    <div
                       key={bIndex}
-                      type="text"
-                      placeholder={`Blok ${
-                        bIndex + 1
-                      }`}
-                      value={block}
-                      onChange={(e) =>
-                        updateBlock(
-                          index,
-                          bIndex,
-                          e.target.value
-                        )
-                      }
-                      className="w-full border p-2 rounded-xl mb-2"
-                    />
+                      className="flex gap-2 mb-2"
+                    >
+                      <input
+                        type="text"
+                        placeholder={`Blok ${
+                          bIndex + 1
+                        }`}
+                        value={block}
+                        onChange={(e) =>
+                          updateBlock(
+                            index,
+                            bIndex,
+                            e.target.value
+                          )
+                        }
+                        className="flex-1 border p-2 rounded-xl"
+                      />
+
+                      <button
+                        onClick={() =>
+                          removeBlock(
+                            index,
+                            bIndex
+                          )
+                        }
+                        className="bg-red-500 text-white px-3 rounded-xl"
+                      >
+                        X
+                      </button>
+                    </div>
                   )
                 )}
 
