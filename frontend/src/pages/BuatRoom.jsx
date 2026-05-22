@@ -66,6 +66,8 @@ function BuatRoom() {
         answerType:
           type === "multiple"
             ? "pilihan"
+            : type === "sambung"
+            ? "blok"
             : type === "susun"
             ? "blok"
             : "pilihan",
@@ -469,7 +471,11 @@ function BuatRoom() {
                 </p>
 
                 <select
-                  value={q.answerType}
+                  value={
+                    q.type === "sambung" && q.answerType === "pilihan"
+                      ? "blok"
+                      : q.answerType
+                  }
                   onChange={(e) =>
                     updateQuestion(
                       index,
@@ -479,9 +485,11 @@ function BuatRoom() {
                   }
                   className="w-full border p-3 rounded-xl"
                 >
-                  <option value="pilihan">
-                    Pilihan Ganda
-                  </option>
+                  {q.type === "gambar" && (
+                    <option value="pilihan">
+                      Pilihan Ganda
+                    </option>
+                  )}
 
                   <option value="ketik">
                     Ketik Jawaban

@@ -22,6 +22,7 @@ function Lesson() {
           indo: item.indo || item.indonesia || item.question || "-",
           kaili: item.kaili || item.answer || "-",
           tipe: item.category || item.tipe || levelInfo?.title || "materi",
+          image: item.image || item.gambar || "",
         }));
 
         setData(filtered);
@@ -51,6 +52,14 @@ function Lesson() {
 
         {data.map((item, i) => (
           <div key={i} className="bg-white p-4 rounded-xl shadow mb-3">
+            {item.image && (
+              <img
+                src={item.image}
+                alt={item.indo}
+                className="w-full h-48 object-contain rounded-xl bg-gray-50 border border-gray-100 mb-3"
+              />
+            )}
+
             <div className="flex justify-between items-center">
               <p className="font-semibold text-gray-700">{item.indo}</p>
 

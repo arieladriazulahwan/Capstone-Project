@@ -1,22 +1,7550 @@
 [
-  { "indo": "Rumah", "kaili": "Banua", "tipe": "kosakata", "category": "kata benda" },
-  { "indo": "Air", "kaili": "Ue", "tipe": "kosakata", "category": "kata benda" },
-  { "indo": "Makan", "kaili": "Ngande", "tipe": "kosakata", "category": "kata kerja" },
-  { "indo": "Pergi", "kaili": "Nalau", "tipe": "kosakata", "category": "kata kerja" },
-  { "indo": "Baik", "kaili": "Mabelo", "tipe": "kosakata", "category": "kata sifat" },
-  { "indo": "Besar", "kaili": "Lompe", "tipe": "kosakata", "category": "kata sifat" },
-  { "indo": "Pagi", "kaili": "Pagi", "tipe": "kosakata", "category": "kata keterangan" },
-  { "indo": "Di sini", "kaili": "Ri sei", "tipe": "kosakata", "category": "kata keterangan" },
-  { "indo": "Saya", "kaili": "Yaku", "tipe": "kosakata", "category": "kata ganti" },
-  { "indo": "Kamu", "kaili": "Ngana", "tipe": "kosakata", "category": "kata ganti" },
-  { "indo": "Di", "kaili": "Ri", "tipe": "kosakata", "category": "kata depan" },
-  { "indo": "Ke", "kaili": "Lau", "tipe": "kosakata", "category": "kata depan" },
-  { "indo": "Dan", "kaili": "Ante", "tipe": "kosakata", "category": "kata sambung" },
-  { "indo": "Atau", "kaili": "Atau", "tipe": "kosakata", "category": "kata sambung" },
-  { "indo": "Satu", "kaili": "Sangu", "tipe": "kosakata", "category": "kata bilangan" },
-  { "indo": "Dua", "kaili": "Rua", "tipe": "kosakata", "category": "kata bilangan" },
-  { "indo": "Halo", "kaili": "Halo", "tipe": "kosakata", "category": "kata seru" },
-  { "indo": "Wah", "kaili": "Wah", "tipe": "kosakata", "category": "kata seru" },
-  { "indo": "Si", "kaili": "I", "tipe": "kosakata", "category": "kata sandang" },
-  { "indo": "Sang", "kaili": "Nu", "tipe": "kosakata", "category": "kata sandang" }
+  {
+    "indo": "Rumah",
+    "kaili": "Banua",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Air",
+    "kaili": "Ue",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Makan",
+    "kaili": "Ngande",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Pergi",
+    "kaili": "Nalau",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Baik",
+    "kaili": "Mabelo",
+    "tipe": "kosakata",
+    "category": "kata sifat"
+  },
+  {
+    "indo": "Besar",
+    "kaili": "Lompe",
+    "tipe": "kosakata",
+    "category": "kata sifat"
+  },
+  {
+    "indo": "Pagi",
+    "kaili": "Pagi",
+    "tipe": "kosakata",
+    "category": "kata keterangan"
+  },
+  {
+    "indo": "Di sini",
+    "kaili": "Ri sei",
+    "tipe": "kosakata",
+    "category": "kata keterangan"
+  },
+  {
+    "indo": "Saya",
+    "kaili": "Yaku",
+    "tipe": "kosakata",
+    "category": "kata ganti"
+  },
+  {
+    "indo": "Kamu",
+    "kaili": "Ngana",
+    "tipe": "kosakata",
+    "category": "kata ganti"
+  },
+  {
+    "indo": "Di",
+    "kaili": "Ri",
+    "tipe": "kosakata",
+    "category": "kata depan"
+  },
+  {
+    "indo": "Ke",
+    "kaili": "Lau",
+    "tipe": "kosakata",
+    "category": "kata depan"
+  },
+  {
+    "indo": "Dan",
+    "kaili": "Ante",
+    "tipe": "kosakata",
+    "category": "kata sambung"
+  },
+  {
+    "indo": "Atau",
+    "kaili": "Atau",
+    "tipe": "kosakata",
+    "category": "kata sambung"
+  },
+  {
+    "indo": "Satu",
+    "kaili": "Sangu",
+    "tipe": "kosakata",
+    "category": "kata bilangan"
+  },
+  {
+    "indo": "Dua",
+    "kaili": "Rua",
+    "tipe": "kosakata",
+    "category": "kata bilangan"
+  },
+  {
+    "indo": "Halo",
+    "kaili": "Halo",
+    "tipe": "kosakata",
+    "category": "kata seru"
+  },
+  {
+    "indo": "Wah",
+    "kaili": "Wah",
+    "tipe": "kosakata",
+    "category": "kata seru"
+  },
+  {
+    "indo": "Si",
+    "kaili": "I",
+    "tipe": "kosakata",
+    "category": "kata sandang"
+  },
+  {
+    "indo": "Sang",
+    "kaili": "Nu",
+    "tipe": "kosakata",
+    "category": "kata sandang"
+  },
+  {
+    "indo": "Partikel dipakai untuk menunjukkan dia suka sesuatu",
+    "kaili": "Aa",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Kecelakaan, musibah, malapetaka",
+    "kaili": "Abalaa",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Adat",
+    "kaili": "Ada",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Ketua adat, kepala suku",
+    "kaili": "Totua nu ada",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Adat keturunan",
+    "kaili": "Ada turuna",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sopan, beradat, beradab",
+    "kaili": "Noada",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Orang yang beradat, yang bertingkah laku, sopan dan berbudi",
+    "kaili": "Topoada",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Meminjam",
+    "kaili": "Neada",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Dagu",
+    "kaili": "Ade",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bagian ujung gagang pedang yg melindungi tangan",
+    "kaili": "Adena",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bagian bawah tangkai buah pohon enau",
+    "kaili": "Ade ntule",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Aduh",
+    "kaili": "Adu",
+    "tipe": "kosakata",
+    "category": "kata seru"
+  },
+  {
+    "indo": "Melaporkan",
+    "kaili": "Nompangadu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Cuma, hanya",
+    "kaili": "Aga",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Tetapi, melainkan",
+    "kaili": "Aga",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Tetapi",
+    "kaili": "Agaiana",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Agama",
+    "kaili": "Agama",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Beragama",
+    "kaili": "Noagama",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Memilih isteri atau suami untuk anaknya",
+    "kaili": "Noagi",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Menjodohkan",
+    "kaili": "Nompoposiagi",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Mengandalkan kekuatan sendiri",
+    "kaili": "Nanggeni agi",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Mengancam",
+    "kaili": "Nangagi",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Lebih baik",
+    "kaili": "Agina",
+    "tipe": "kosakata",
+    "category": "kata sifat"
+  },
+  {
+    "indo": "Sebaiknya",
+    "kaili": "Aginamo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Lebih baik",
+    "kaili": "Aginapa",
+    "tipe": "kosakata",
+    "category": "kata sifat"
+  },
+  {
+    "indo": "Merampas",
+    "kaili": "Nangago",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Merampas",
+    "kaili": "Nangagosi",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Barang rampasan",
+    "kaili": "Mbara-mbara niago",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Orang yang suka merampas",
+    "kaili": "Topeago",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Saling merampas",
+    "kaili": "Nosiago",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Akhirat",
+    "kaili": "Ahera",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Mengajar",
+    "kaili": "Noajari",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Sejenis jamur coklat yang dimakan",
+    "kaili": "Aje",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Mengaji",
+    "kaili": "Nangaji",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Jimat",
+    "kaili": "Ajima",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Nada suara naik turun, seperti logat orang dari tempat lain",
+    "kaili": "Nangajo tesa",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Jalan sambil bergoyang mencari gaya",
+    "kaili": "Nangajo nolipa",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Berpura-pura menyerang dgn tombak, dibuat untuk menyambut tamu",
+    "kaili": "Neaju",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Hari minggu",
+    "kaili": "Eo aka",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Cara, jalan, siasat, niat",
+    "kaili": "Akala",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Memberi alasan",
+    "kaili": "Noakala",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Mengkhianat",
+    "kaili": "Nombaakalani",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Menipu",
+    "kaili": "Neakalani",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Penipu",
+    "kaili": "Topeakalani",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Menyembunyikan",
+    "kaili": "Nompangakalani",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Acara menyembelih kambing",
+    "kaili": "Noakeka",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Accu",
+    "kaili": "Aki",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Rakit",
+    "kaili": "Aki",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Saya",
+    "kaili": "Aku",
+    "tipe": "kosakata",
+    "category": "kata ganti"
+  },
+  {
+    "indo": "Giliran saya",
+    "kaili": "Akupa",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Mengaku",
+    "kaili": "Nangaku",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Mengakui",
+    "kaili": "Nompangaku",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Menyatakan hak atas milik orang lain",
+    "kaili": "Nompangakusi",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Mengambil",
+    "kaili": "Nangala",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Tempat mengambil",
+    "kaili": "Pangala",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Diambil tanpa izin pemilik",
+    "kaili": "Nialasi",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Mengambilkan",
+    "kaili": "Nombaala",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Tempat untuk mengambil",
+    "kaili": "Rapangala",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Istilah adat: membawa pinang secara wajar",
+    "kaili": "Neala ri belo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Saling bergilir dalam pekerjaan",
+    "kaili": "Nosiala pale",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Meniru",
+    "kaili": "Nompasiala",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Mempersenang hati orang supaya disayangi",
+    "kaili": "Nangala rara",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Agar, supaya",
+    "kaili": "Ala",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Alasan",
+    "kaili": "Alasa",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Alasan dibuat-buat",
+    "kaili": "Alasa mate",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Tempat bertolak perlombaan, tempat mulai",
+    "kaili": "Pangalataka",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Tempat memulai lomba",
+    "kaili": "Rapangalatakata",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Allah",
+    "kaili": "Aliaka Alatala",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Tuhan yang Maha Esa",
+    "kaili": "Ala ta ala",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Panggilan yang dipakai oleh sesama laki-laki",
+    "kaili": "Ale",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Menjalin-anyamkan",
+    "kaili": "Noale",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Mengikat dengan menjalin, biasa memakai rotan",
+    "kaili": "Niale",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Ikatan pada sarung pedang untuk mengeratkan",
+    "kaili": "Alena",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bagian kaki yg tipis",
+    "kaili": "Poale mbiti kada",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Ukuran dalam/tinggi dari tanah ke pertengahan kaki bawah",
+    "kaili": "Sarimpoale mbiti",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Membeli",
+    "kaili": "Nangali",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Harganya",
+    "kaili": "Alina",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Harga mati",
+    "kaili": "Ali mate",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Terbeli",
+    "kaili": "Nateali",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Saling dibeli-beli, banyak orang membeli",
+    "kaili": "Noposiali",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Pembeli",
+    "kaili": "Topangali",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Berharga",
+    "kaili": "Noali",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Semacam pembayaran adat kawin",
+    "kaili": "Ali papitu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Memindahkan, menyingkirkan,",
+    "kaili": "Nangaliaka",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Lima",
+    "kaili": "Alima",
+    "tipe": "kosakata",
+    "category": "kata bilangan"
+  },
+  {
+    "indo": "Yg kelima",
+    "kaili": "Kaalimana",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Paragraf, alinea",
+    "kaili": "Alinea",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Alis mata",
+    "kaili": "Alisi mata",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Burung enggang besar yg mempunyai jambul merah yg besar di kepalanya",
+    "kaili": "Alo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Burung enggang yg lebih besar dan tinggal di kelompok kecil",
+    "kaili": "Alo tani",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Alat penumbuk padi",
+    "kaili": "Alu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Zakar",
+    "kaili": "Alu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Semacam piring antik yg putih dan dangkal atau rata",
+    "kaili": "Alusu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Gilirannya melempar",
+    "kaili": "Peambana",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Di bawah",
+    "kaili": "Ambe",
+    "tipe": "kosakata",
+    "category": "kata keterangan"
+  },
+  {
+    "indo": "Di bawah",
+    "kaili": "Ri ambe",
+    "tipe": "kosakata",
+    "category": "kata keterangan"
+  },
+  {
+    "indo": "Di bawahnya",
+    "kaili": "Ri ambena",
+    "tipe": "kosakata",
+    "category": "kata keterangan"
+  },
+  {
+    "indo": "Merendahkan, taruh di bawah",
+    "kaili": "Nomparitambe",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Merendahkan diri",
+    "kaili": "Netiriambe",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Empat",
+    "kaili": "Ampa",
+    "tipe": "kosakata",
+    "category": "kata bilangan"
+  },
+  {
+    "indo": "Yg keempat",
+    "kaili": "Kaampana",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Keempat kali",
+    "kaili": "Kapata-nggani",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Empat kali",
+    "kaili": "Pata-nggani",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Empedu",
+    "kaili": "Ampayu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Perangainya",
+    "kaili": "Ampena",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Ampun",
+    "kaili": "Ampu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Minta ampun",
+    "kaili": "Nerapi ampu",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Mengampuni",
+    "kaili": "Nombaampungi",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Saling mengampuni",
+    "kaili": "Nosiampungi",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Enak, lunak karena serabut tidak keras, khusus keladi",
+    "kaili": "Noamu kadue",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Anak, khusus keturunan",
+    "kaili": "Ana",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bayi",
+    "kaili": "Ana kodi",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Anak bungsu",
+    "kaili": "Ana panggaupu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Anak sulung",
+    "kaili": "Ana lumbula",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Kemenakan",
+    "kaili": "Rapoana",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Melahirkan",
+    "kaili": "Noana",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Melahirkan",
+    "kaili": "Nompoanaka",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Sementara melahirkan",
+    "kaili": "Kapoanana",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Anak piara, anak angkat",
+    "kaili": "Ana patuvu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Anak piatu",
+    "kaili": "Ana pailusi",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Anak yatim piatu",
+    "kaili": "Ana pailumpaka",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Meninggal dalam bersalin",
+    "kaili": "Namate mpoana",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Susah melahirkan",
+    "kaili": "Nadaa poana",
+    "tipe": "kosakata",
+    "category": "kata sifat"
+  },
+  {
+    "indo": "Dilahirkan kembali",
+    "kaili": "Nipoanaka mpanjili",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Hamil",
+    "kaili": "Natiana",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Kehamilan",
+    "kaili": "Ana katiana",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Menghamili",
+    "kaili": "Nompakatiana",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Masih dalam kandungan",
+    "kaili": "Nikatianaka",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Membungakan uang",
+    "kaili": "Nompopoana doi",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Anak kutu yang baru menetas",
+    "kaili": "Ana rungga",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Anak domba",
+    "kaili": "Ana bimba",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Anak sapi",
+    "kaili": "Ana japi",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Murid",
+    "kaili": "Ana guru",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Ketua kelompok, anak buah kapal laut, majikan",
+    "kaili": "Anakoda",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Kalau, jika",
+    "kaili": "Ane",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Anai-anai, rayap",
+    "kaili": "Ane",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sejenis pohon yang dianggap terkutuk",
+    "kaili": "Kayu anga",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Berdiri",
+    "kaili": "Neangga",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Berdiri!",
+    "kaili": "Peangga!",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Tempat, tempat berdiri",
+    "kaili": "Peanggana",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Mendirikan",
+    "kaili": "Nompopeangga",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Didirikan kembali, seperti tangga yg jatuh",
+    "kaili": "Nipepeangga",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Berdiri bersama-sama",
+    "kaili": "Nosimpeangga",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Dianggap",
+    "kaili": "Niangga",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Saling naik emosi, amarah, dll",
+    "kaili": "Nosimpeanggasi",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Dilawan",
+    "kaili": "Nipeanggasi",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Mengangkat",
+    "kaili": "Nanganggataka",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Berangkat",
+    "kaili": "Neanggataka",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Terangkat",
+    "kaili": "Anto nateanggataka",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Mengangkat dgn kedua belah tangan",
+    "kaili": "Nianggataka ante robingga pale",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Kera, monyet",
+    "kaili": "Anggo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Buah anggur, dan minuman keras dibuat dari buah anggur",
+    "kaili": "Angguru",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Berbiji",
+    "kaili": "Noangu",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Menjadi bundar",
+    "kaili": "Naliangu",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Bundarkan",
+    "kaili": "Pokaliangu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bola mata",
+    "kaili": "Angu mata",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Mangga yang berbau, mangga kuini, mangga embacang",
+    "kaili": "Anja",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Dengan, dan, bersama",
+    "kaili": "Ante",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Meramal, khusus untuk mendapat yg hilang atau mengenal penyakit",
+    "kaili": "Neanto",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Ramalan",
+    "kaili": "Peanto",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Orang yang meramalkan",
+    "kaili": "Topeanto",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Minta ramalan",
+    "kaili": "Nompekianto",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Melihat bayangan badan sendiri di cermin atau di air",
+    "kaili": "Nanganto",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Memandang atau nonton dari tempat yg jauh",
+    "kaili": "Neantoaka",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Memandang pemandangan atau orang lain yg jauh",
+    "kaili": "Nangantoaka",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Yang",
+    "kaili": "Anu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Milik mereka",
+    "kaili": "Anu-ra",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Dipakai kalau sudah terlupa kata atau tidak tahu namanya",
+    "kaili": "Anu",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Kemaluan",
+    "kaili": "Anu langgai",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Silahkan, ayolah",
+    "kaili": "Anumo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Mengejek-ejek",
+    "kaili": "Neanyu-anyuka",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Pembayaran kepada dukun untuk belajar doa",
+    "kaili": "Ao",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Membayar dukun untuk doa dipelajari",
+    "kaili": "Nombaao",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Enam",
+    "kaili": "Aono",
+    "tipe": "kosakata",
+    "category": "kata bilangan"
+  },
+  {
+    "indo": "Yg keenam",
+    "kaili": "Kaaonona",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Karena, sebab",
+    "kaili": "Apa",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Kue apam, dibuat dengan ragi dan dikukus",
+    "kaili": "Roti apa",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Api",
+    "kaili": "Apu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Terbakar",
+    "kaili": "Napapu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Asap",
+    "kaili": "Unu nu apu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Masak, menanak",
+    "kaili": "Noriapu",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Dimasak",
+    "kaili": "Niporiapu",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Masakan",
+    "kaili": "Poriapu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Api mati, api padam",
+    "kaili": "Apu napaya",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Api unggun",
+    "kaili": "Apu nipanderu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Lapar",
+    "kaili": "Naara tai",
+    "tipe": "kosakata",
+    "category": "kata sifat"
+  },
+  {
+    "indo": "Menjadikan lapar",
+    "kaili": "Nearasi",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Kelaparan",
+    "kaili": "Ara mpai",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Musim kelaparan",
+    "kaili": "Kaara mpai",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sesudah itu",
+    "kaili": "Naara pangane",
+    "tipe": "kosakata",
+    "category": "kata keterangan"
+  },
+  {
+    "indo": "Menolak yg diberikan",
+    "kaili": "Nompoara",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Hari rabu",
+    "kaili": "Eo arabaa",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Arit",
+    "kaili": "Are",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Buah pohon lengkeng",
+    "kaili": "Aropi",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Meresmikan",
+    "kaili": "Nompakaasa",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Dapat dipercaya",
+    "kaili": "Naasa",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Dibuatkan pesta adat",
+    "kaili": "Niasa",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Orang yang dibuatkan pesta",
+    "kaili": "Toniasa",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Membersihkan bagian mata cincin yg rusak supaya menjadi baru",
+    "kaili": "Noasa",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Asal",
+    "kaili": "Asala, asaa",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Besi",
+    "kaili": "Ase",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Besi berani",
+    "kaili": "Ase mpesonde",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Orang yg bekerja dgn barang-barang besi",
+    "kaili": "Topobaluu ase",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Asyik",
+    "kaili": "Ase",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Asyik sekali",
+    "kaili": "Naase mpuu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Hasilnya",
+    "kaili": "Aselena",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Menyukseskan",
+    "kaili": "Nompopoasele",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Rasa kasihan",
+    "kaili": "Asi nu mata",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Merasa kasihan",
+    "kaili": "Naasi mata",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Larat",
+    "kaili": "Napakasi mpaka",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Kasih",
+    "kaili": "Poasi",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Mengasihani",
+    "kaili": "Nompoasi",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Saling berbelas kasihan",
+    "kaili": "Nosipoasi mata",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Kasihan!",
+    "kaili": "Pakasi ranga!",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Minta dikasihani",
+    "kaili": "Netiasi",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Padat",
+    "kaili": "Naaso",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Mengetatkan kulit tambur",
+    "kaili": "Noaso gimba",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Saling bersempit",
+    "kaili": "Nosiaso",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Bersesak",
+    "kaili": "Neaso",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Aspal",
+    "kaili": "Aspaa",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Anjing",
+    "kaili": "Asu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Berburu",
+    "kaili": "Noasu",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Pemburu",
+    "kaili": "Topoasu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Anjing pemburu",
+    "kaili": "Asu poasu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Seperti anjing",
+    "kaili": "Mpoasu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Diburu oleh mereka",
+    "kaili": "Niasukira",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Bersifat anjing",
+    "kaili": "Naasu",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Musang",
+    "kaili": "Asulaku",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Atap",
+    "kaili": "Ata",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Atap alang-alang",
+    "kaili": "Ata jono",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Atap genteng",
+    "kaili": "Ata gente",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Beratap",
+    "kaili": "Noata",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Membuat atap",
+    "kaili": "Nompeata",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Membuat atap dari rumbia",
+    "kaili": "Notosu ata",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Membuat atap dari rotan",
+    "kaili": "Nolati ata",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Atau",
+    "kaili": "Atau",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Hati",
+    "kaili": "Ate",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Rewel",
+    "kaili": "Naoge ate",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Paru-paru",
+    "kaili": "Ate bura",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bagian telapak kaki yg melengkung",
+    "kaili": "Ate nggada",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Ayam (biasanya jantan) dipakai sebagai umpan",
+    "kaili": "Manu poati",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Ratus",
+    "kaili": "Atu",
+    "tipe": "kosakata",
+    "category": "kata bilangan"
+  },
+  {
+    "indo": "Ratusan",
+    "kaili": "Noatu-atu",
+    "tipe": "kosakata",
+    "category": "kata bilangan"
+  },
+  {
+    "indo": "Aturan",
+    "kaili": "Atura",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Gonggongan",
+    "kaili": "Au",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Berjauhan",
+    "kaili": "Naava",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Berjauhan",
+    "kaili": "Naavaraka",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Dibawa oleh arus",
+    "kaili": "Naave",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Menghanyutkan dengan arus air",
+    "kaili": "Nombaavesaka",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Menghanyutkan diri",
+    "kaili": "Nokaave",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Wah",
+    "kaili": "Avei",
+    "tipe": "kosakata",
+    "category": "kata seru"
+  },
+  {
+    "indo": "Abu dapur",
+    "kaili": "Avu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Kelabu, abu-abu",
+    "kaili": "Naavu-avu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Dapur",
+    "kaili": "Avu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Panggilan untuk sesama anak-anak perempuan",
+    "kaili": "Aya",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Menapis",
+    "kaili": "Noaya",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Mengayak dari kiri ke kanan",
+    "kaili": "Noaya-aya",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Melaso binatang",
+    "kaili": "Noaya",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Terjerat",
+    "kaili": "Nateaya",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Menjeratkan tali",
+    "kaili": "Nompakateaya",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Jalan bolak-balik di antara dua atau lebih kampung atau tempat",
+    "kaili": "Noayo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Seperti ayam yg sudah mencari tempat bertelur",
+    "kaili": "Nangayo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Mengunjungi orang sakit",
+    "kaili": "Nombaayo",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Saling mengunjungi",
+    "kaili": "Nosiayo",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Atau",
+    "kaili": "Ba",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Menunjukkan tidak percaya atau tidak setuju",
+    "kaili": "Ba!",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Terbaring di tanah tanpa bergerak",
+    "kaili": "Kabaa-baa",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Dua orang memakai satu sarung atau satu baju sebagai mantel",
+    "kaili": "Nobaba",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sarung yang tidak dijahit",
+    "kaili": "Buya mpobaba",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sarung yg tidak dijahit yg dipakai untuk menggendong anak di belakang",
+    "kaili": "Nibaba buya",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Memakai sarung sebagai mantel untuk ditutup di belakang saja",
+    "kaili": "Nipobaba",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Luka garutan, berdarah",
+    "kaili": "Nababari",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sejenis sayur",
+    "kaili": "Babavoa",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Membaca",
+    "kaili": "Nombaca",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Bersumpah",
+    "kaili": "Baca yasi",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Bedak",
+    "kaili": "Bada",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Memakai bedak",
+    "kaili": "Nobada",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Ujungnya membengkok ke atas [besi, papan]",
+    "kaili": "Nombade",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Parang dengan ujungnya agak bundar",
+    "kaili": "Taono badi",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Pakaian bayi",
+    "kaili": "Bado",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Diberi pakaian bayi",
+    "kaili": "Nibado",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Saling berkelahi",
+    "kaili": "Nosibaga",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Berkelahi",
+    "kaili": "Nebaga",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Orang yang suka memakai kekerasan",
+    "kaili": "Topebaga",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Geraham",
+    "kaili": "Baga",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Geraham bungsu",
+    "kaili": "Baga supu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bagian pelepah daun sagu yg melekat pada batang sagu",
+    "kaili": "Baga ntabaro",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Keras kepala, bandel",
+    "kaili": "Nakaa baga",
+    "tipe": "kosakata",
+    "category": "kata sifat"
+  },
+  {
+    "indo": "Membagikan",
+    "kaili": "Nobagi",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Membagi-bagi",
+    "kaili": "Nombabagi-bagi",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Saling membagi-bagikan",
+    "kaili": "Nomposibagi",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Terpisah, tidak bersatu",
+    "kaili": "Natebagi-bagi",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Setengah perjalanan",
+    "kaili": "Kabagi-randuana polipana",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bagian",
+    "kaili": "Bagia",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Menipu",
+    "kaili": "Nebagiu",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Penipu",
+    "kaili": "Topebagiu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Mengganggu",
+    "kaili": "Nebago",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Sibukan, tugas",
+    "kaili": "Bago",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sibuk",
+    "kaili": "Nabago",
+    "tipe": "kosakata",
+    "category": "kata sifat"
+  },
+  {
+    "indo": "Kesibukannya",
+    "kaili": "Bagona",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bertugas",
+    "kaili": "Nobago",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Partikel menunjukkan tidak percaya atau tidak setuju",
+    "kaili": "Bai!",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Haus",
+    "kaili": "Nabai tambolo",
+    "tipe": "kosakata",
+    "category": "kata sifat"
+  },
+  {
+    "indo": "Tempat yg kering",
+    "kaili": "Kabaina",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Menjemur",
+    "kaili": "Nompovai",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Mengeringkan",
+    "kaili": "Nobaisi",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Kehabisan air pada saat dibutuhkan",
+    "kaili": "Nakabaisa",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sagu buluh",
+    "kaili": "Bai",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Ubi kayu yg dimasak di bambu",
+    "kaili": "Bai kasubi",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sekoi",
+    "kaili": "Bailo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Dulu, sudah lama",
+    "kaili": "Baipia",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Baja",
+    "kaili": "Baja",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bertopi baja",
+    "kaili": "Nosonggo baja",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Besi yg mempunyai baja",
+    "kaili": "Ase nobaja",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Kekerasan besi",
+    "kaili": "Baja ntaono",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Pelacur, tunasusila",
+    "kaili": "Bajinga",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Berpura-pura menjadi pelacur",
+    "kaili": "Netibajinga",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Baju, kameja, pakaian",
+    "kaili": "Baju",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Berbaju",
+    "kaili": "Nobaju",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Baju dalam, kaos gantung",
+    "kaili": "Baju soda",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Jas",
+    "kaili": "Baju mbaso",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Baju panjang",
+    "kaili": "Baju ndoe",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Blus",
+    "kaili": "Baju sanggoto",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Luka",
+    "kaili": "Baka",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Terluka",
+    "kaili": "Nabaka",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sejenis sukun, lebih besar daripada",
+    "kaili": "Baka",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Patek",
+    "kaili": "Baka tuvu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Kepompong, sarung ulat",
+    "kaili": "Baki",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bekal",
+    "kaili": "Baku",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Untuk menjadi bekal",
+    "kaili": "Rapobaku",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Berbekal",
+    "kaili": "Nobaku",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Membeku",
+    "kaili": "Nobaku",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Tempat simpan anak sumpit yang tidak beracun",
+    "kaili": "Bakua",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bekas luka",
+    "kaili": "Bala",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Perempuan yang bersifat atau berkelakuan seperti laki-laki",
+    "kaili": "Nabalaki",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Belenggu",
+    "kaili": "Balanggu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Dibelenggu",
+    "kaili": "Nibalanggu",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Keranjang besar dibuat dari daun pandan",
+    "kaili": "Tonda balanta",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Pekerjaan membeli untuk menjual kembali",
+    "kaili": "Nobalante",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Orang perantara yang membeli sapi dan kambing untuk menjual lagi",
+    "kaili": "Topobalante",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Membalas",
+    "kaili": "Nombabalasi",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Balasan",
+    "kaili": "Balasina",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Pajak",
+    "kaili": "Balasitee",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Kain belacu",
+    "kaili": "Balatu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Membuat bibir menjadi merah",
+    "kaili": "Nopabale",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Kepala",
+    "kaili": "Balengga",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sakit kepala",
+    "kaili": "Dua balengga",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Memimpin",
+    "kaili": "Nombabalenggai",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Lawan, musuh",
+    "kaili": "Bali",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Saling berbantah",
+    "kaili": "Nosibali",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Bermusuhan antara teman",
+    "kaili": "Nobali nte vega",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bermusuhan",
+    "kaili": "Nosimpobali",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Melawan",
+    "kaili": "Nebali",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Lawannya, musuh",
+    "kaili": "Balina",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sihir",
+    "kaili": "Sibali mata",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Tukang sihir",
+    "kaili": "Toposibalimata",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Menyembuhkan penyakit",
+    "kaili": "Nobali dua",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Berubah",
+    "kaili": "Nabali",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Tidak berubah",
+    "kaili": "Ledo nabali-bali",
+    "tipe": "kosakata",
+    "category": "kata sifat"
+  },
+  {
+    "indo": "Berubah",
+    "kaili": "Nombabali",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Merubah",
+    "kaili": "Nombabaliki",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Bayi tidak lurus dalam kandungan",
+    "kaili": "Natebalibi ngana",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Perubahan",
+    "kaili": "Kabali",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Merubah",
+    "kaili": "Nombaliaka",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Dukun",
+    "kaili": "Balia",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Upacara penyembuhan oleh dukun",
+    "kaili": "Nobalia",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Warna kuda yg merah-merah muda",
+    "kaili": "Nabalibi",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Tidur dgn kaki terangkat ke atas dan berbentuk menggulung",
+    "kaili": "Nobalingea",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Jatuh tunggang langgang",
+    "kaili": "Natebalingea",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Alis mata",
+    "kaili": "Balinggi mata",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Pendirian tidak teguh",
+    "kaili": "Nebalingoya",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Lengkuas",
+    "kaili": "Balintua",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Jatuh ke belakang sementara duduk",
+    "kaili": "Nabalintua",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Melanggar jatuh",
+    "kaili": "Nombabalintuasi",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Burung pelatuk",
+    "kaili": "Balitutu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Kapak",
+    "kaili": "Baliu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Semacam tali atau benang dipakai untuk menjahit sementara",
+    "kaili": "Baliura",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Gaba-gaba dibuat dari pelepah sagu untuk membuat atap",
+    "kaili": "Baloda",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Tempat air dibuat dari bambu dipakai sebagai tempat minum saguer",
+    "kaili": "Balonga",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Balok yg belum dipasang",
+    "kaili": "Baloti",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Barang untuk dijual",
+    "kaili": "Balu-balu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Menjual",
+    "kaili": "Nobalu",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Menjual",
+    "kaili": "Nompobalu",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Salah gunakan nama atau kuasa orang tua",
+    "kaili": "Nompobalu sanga ntotua",
+    "tipe": "kosakata",
+    "category": "kata sifat"
+  },
+  {
+    "indo": "Habis terjual",
+    "kaili": "Naupu natepobalu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Tempat menjual",
+    "kaili": "Pobalu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Berjualan",
+    "kaili": "Nobalu-balu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Dijual untuk harga sekian",
+    "kaili": "Nipobaluka",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Duda",
+    "kaili": "Tobalu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bengkok",
+    "kaili": "Nabalu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Melengkung ke bawah di tengah [kayu]",
+    "kaili": "Nombalu",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Pinggirnya dibengkokkan ke atas",
+    "kaili": "Nibalusaka",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Dibengkokkan tajam ke atas, lebih daripada kalau",
+    "kaili": "Nombau",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Melempar [kayu, batu]",
+    "kaili": "Nobalua",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Menggulung",
+    "kaili": "Nobalulu",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Gelombang, ombak",
+    "kaili": "Balumba",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Hiasan rambut dibuat dari besi yg dipakai pada upacara",
+    "kaili": "Balunggi",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Menggulung",
+    "kaili": "Nombabaluu",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Waktu yg akan datang",
+    "kaili": "Bamaipia",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Muara",
+    "kaili": "Bamba",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Kulit padi menjadi putih-putih dan tidak berisi",
+    "kaili": "Nabamba",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Dada",
+    "kaili": "Bambara",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Ukuran dari ujung jari tengah sampai pertengahan dada",
+    "kaili": "Saribambara",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Benang",
+    "kaili": "Bana",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Benang untuk layang-layang",
+    "kaili": "Bana goda",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Miring",
+    "kaili": "Nabanda",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Miring, seperti tiang bandera dipasang miring",
+    "kaili": "Nobanda",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bendera",
+    "kaili": "Bandera",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Tempurung",
+    "kaili": "Banga",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Cobek",
+    "kaili": "Banga marisa",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Tengkorak",
+    "kaili": "Banga balengga",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Batok kelapa, tempurung",
+    "kaili": "Banga vuu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Permainan dengan kemiri",
+    "kaili": "Banga",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bermain fv:banga",
+    "kaili": "Nobanga",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Dada binatang seperti ayam, sapi",
+    "kaili": "Bangasu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Basah",
+    "kaili": "Nabangga",
+    "tipe": "kosakata",
+    "category": "kata sifat"
+  },
+  {
+    "indo": "Bengkak",
+    "kaili": "Nebangga",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Merendam",
+    "kaili": "Nombangga",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Membasahi",
+    "kaili": "Nombabanggasi",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Membasahi",
+    "kaili": "Nompakabangga",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Jagung direbus, masih dengan",
+    "kaili": "Banggaroo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Merebus jagung",
+    "kaili": "Nobanggaroo",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Berguncang",
+    "kaili": "Nabanggesi",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Burung dara",
+    "kaili": "Banggebodo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Merpati mahkota, burung mambruk",
+    "kaili": "Banggebodo mpotomba",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Bergaruk",
+    "kaili": "Nobanggese",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Ujungnya terangkat ke atas karena berat sebelah",
+    "kaili": "Nabanggo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Jungkat-jungkit",
+    "kaili": "Nosibanggo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Kecut, takut",
+    "kaili": "Nabanggu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Orang yang cepat sakit kalau stres",
+    "kaili": "Nabanggu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Mengkudu",
+    "kaili": "Banggudu",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Lonceng diikat di leher sapi",
+    "kaili": "Banggula",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bangku",
+    "kaili": "Bangku",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Kelas",
+    "kaili": "Bangku",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bangun, bangkit",
+    "kaili": "Nembangu",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Berdirikan kembali yang jatuh, seperti tangga",
+    "kaili": "Nobangutaka",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bangunlah!",
+    "kaili": "Pembangumo!",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Kebangkitannya",
+    "kaili": "Pembanguna",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bangun",
+    "kaili": "Nombabangu",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Sedang dalam proses pembangunan",
+    "kaili": "Kapembangu-bangu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Dalam proses 3",
+    "kaili": "Kapombangu-bangu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Keadaan bangun dari tidur tetapi belum sadar",
+    "kaili": "Kapembangu-banguka",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Istilah adat",
+    "kaili": "Nebangumate",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bunga kelapa",
+    "kaili": "Banja",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Cocok",
+    "kaili": "Banja",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Warna kuda yg kuning-kuningan",
+    "kaili": "Nabanjarone",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Meremehkan",
+    "kaili": "Nombabanjereni",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Tulang yg patah menonjol keluar dari kaki/tangan",
+    "kaili": "Nombanji buku",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Dari posisi yang biasa dibengkokkan ujungnya ke atas",
+    "kaili": "Nobanjiraka",
+    "tipe": "kosakata",
+    "category": "kata keterangan"
+  },
+  {
+    "indo": "Terbengkok dari posisi normal",
+    "kaili": "Natebanjiraka",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Membengkok ke atas atau ke belakang",
+    "kaili": "Nombanji",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Bangunan",
+    "kaili": "Bantaya",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Memikul dengan barang di salah satu ujung pikul",
+    "kaili": "Nobantia",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Kura-kura darat",
+    "kaili": "Bantiluku",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Jatuh ke belakang waktu duduk di kursi atau batu",
+    "kaili": "Nabantu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Jaringan laba-laba",
+    "kaili": "Banua kanggaula",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Rumah sakit, klinik",
+    "kaili": "Banua nu tomadua",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bangunan besar, gedung besar",
+    "kaili": "Banua mbaso",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Tempat sabun",
+    "kaili": "Banua sabu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Serumah",
+    "kaili": "Sambanua",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Tinggal dalam satu rumah",
+    "kaili": "Nosambanua",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Orang yg memiliki rumah",
+    "kaili": "Topobanua",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Rumah lain",
+    "kaili": "Sambanuana",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Orang dari lain rumah tangga",
+    "kaili": "Tosambanuana",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Angsa",
+    "kaili": "Banya",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Cara mengikat sepotong bambu",
+    "kaili": "Nobaoa asu",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Barangkali, mungkin",
+    "kaili": "Bara",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Barangkali tetapi dengan perasaan ragu-ragu",
+    "kaili": "Bara kade",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Beberapa",
+    "kaili": "Bara sakuya",
+    "tipe": "kosakata",
+    "category": "kata bilangan"
+  },
+  {
+    "indo": "Dulu",
+    "kaili": "Bara ipia",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Kapan saja",
+    "kaili": "Bara maipia",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Barangkali siapa",
+    "kaili": "Bara isema",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Barangkali apa",
+    "kaili": "Bara nuapa",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Beberapa, tidak tentu berapa",
+    "kaili": "Bara sakuya",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bagaimanapun",
+    "kaili": "Nau bara berimba",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Barangkali di mana",
+    "kaili": "Bara riumba",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Yg manakah",
+    "kaili": "Bara mbana",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Atau, apakah",
+    "kaili": "Bara",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Atau...atau",
+    "kaili": "Bara...bara",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Angin dari barat, kalau hujan tidak banyak apalagi di lembah Palu",
+    "kaili": "Bara",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Keajaiban",
+    "kaili": "Baraka",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Mujizat",
+    "kaili": "Kabaraka",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Ajaib",
+    "kaili": "Nabaraka",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Berkeramat",
+    "kaili": "Nakabaraka",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Jeruk nipis",
+    "kaili": "Lemo baranga",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Berangkat",
+    "kaili": "Nobarangka",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Barzanji",
+    "kaili": "Nobarasanji",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Minta petunjuk dari roh-roh di batu, kayu, dll",
+    "kaili": "Nobaratapa",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Menjahit dengan jarak lebar-lebar",
+    "kaili": "Nobaribi",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Sirip belakang ikan",
+    "kaili": "Baribina",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Baru",
+    "kaili": "Nabaru",
+    "tipe": "kosakata",
+    "category": "kata sifat"
+  },
+  {
+    "indo": "Membarui",
+    "kaili": "Nombabaruki",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Tunas enau",
+    "kaili": "Baru nggonau",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Rumah adat dulu",
+    "kaili": "Baruga",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Memaksa",
+    "kaili": "Nebarusu",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Saling memaksa",
+    "kaili": "Nosibarusu",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Bahasa",
+    "kaili": "Basa",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Berbicara",
+    "kaili": "Nobasa",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Bosan",
+    "kaili": "Nabasa",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Kebosanan",
+    "kaili": "Basa kabasana",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bosan",
+    "kaili": "Nabasa rara",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Mengenyangkan",
+    "kaili": "Nompebasa",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Membaca",
+    "kaili": "Nombasa",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Pembacaannya",
+    "kaili": "Pombasana",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Dedak padi dicampur dengan air yang diberi makan kepada ayam dan itik",
+    "kaili": "Basaka manu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Menghempaskan",
+    "kaili": "Nombabasitaka",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Jatuh dgn keras",
+    "kaili": "Natebasitaka",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Membasuh",
+    "kaili": "Nobaso",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Tempat simpan sagu dibuat dari dasar pelepah daun sagu",
+    "kaili": "Basu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Batang kayu",
+    "kaili": "Bata",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Pohon sagu",
+    "kaili": "Bata ntabaro",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Pohon pinang",
+    "kaili": "Bata mpangana",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Nyiur, pohon kelapa",
+    "kaili": "Bata nggaluku",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Pohon pepaya",
+    "kaili": "Bata nggampaya",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Pohon pisang",
+    "kaili": "Bata loka",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Pohon pandan",
+    "kaili": "Bata lambori",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Pohon enau, pohon aren",
+    "kaili": "Bata nggonau",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Rasa curiga",
+    "kaili": "Nabata rara",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Mencurigai",
+    "kaili": "Nebata",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Mencurigai",
+    "kaili": "Nombabatai",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Mencurigakan",
+    "kaili": "Nompakabata rara",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Batako",
+    "kaili": "Batako",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Upacara kematian",
+    "kaili": "Nobatara",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Batu nisan",
+    "kaili": "Bate",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Berserakan",
+    "kaili": "Mpabate",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Tidak kurang, rata-rata, biasa, tidak berubah",
+    "kaili": "Batena",
+    "tipe": "kosakata",
+    "category": "kata sifat"
+  },
+  {
+    "indo": "Tidak berubah",
+    "kaili": "Bate-batena",
+    "tipe": "kosakata",
+    "category": "kata sifat"
+  },
+  {
+    "indo": "Terganggu",
+    "kaili": "Nabato",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Mengganggu",
+    "kaili": "Nebato",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Biji dalam buah",
+    "kaili": "Batuna",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Buah berbiji",
+    "kaili": "Vua nobatu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Kemaluan perempuan",
+    "kaili": "Batu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Batu bata",
+    "kaili": "Batu bata",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Jerawat",
+    "kaili": "Batu mbolu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Budak, hamba",
+    "kaili": "Batua",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Menjadikan hamba",
+    "kaili": "Nompobatua",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Artinya",
+    "kaili": "Batuana",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Mengartikan",
+    "kaili": "Nombabatuasi",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Tas dibuat dari kain",
+    "kaili": "Batutu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Ikan, daging",
+    "kaili": "Bau",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Daging, yaitu bukan ikan",
+    "kaili": "Bau koyo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Ikan emas",
+    "kaili": "Bau bulava",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Ikan penjas",
+    "kaili": "Bau duo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Ikan lajang, dari laut",
+    "kaili": "Bau laya",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sejenis ikan yg hidup di sawah, berkumis",
+    "kaili": "Bau lele",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Ikan belut",
+    "kaili": "Bau lindu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Ikan hiu",
+    "kaili": "Bau mangiva",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sejenis ikan laut yg kecil, dijual sebagai ikan kering",
+    "kaili": "Bau rono",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Ikan cakalan",
+    "kaili": "Bau tompi",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Ikan roa",
+    "kaili": "Bau tampai",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Ikan gabus",
+    "kaili": "Bau uru",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Mencari ikan",
+    "kaili": "Nangelo bau",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Menangkap ikan",
+    "kaili": "Nebau",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Tempat menangkap ikan",
+    "kaili": "Pebauna",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Orang yg mencari ikan",
+    "kaili": "Topebau",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Nelayan di laut",
+    "kaili": "Topebau rantasi",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Menangkap ikan",
+    "kaili": "Nosaka bau",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Meracuni ikan",
+    "kaili": "Norasu bau",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Membersihkan ikan",
+    "kaili": "Nompakagasa bau",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Ikan asin",
+    "kaili": "Bau gara",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Ikan bakar",
+    "kaili": "Bau tunu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Baru",
+    "kaili": "Nabau",
+    "tipe": "kosakata",
+    "category": "kata sifat"
+  },
+  {
+    "indo": "Bengkok",
+    "kaili": "Nabau",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sirih",
+    "kaili": "Baulu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Berbau tajam yg tidak enak",
+    "kaili": "Nebaumpusi",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Sekelompok kecil anjing yg biasa berteman untuk berburu",
+    "kaili": "Bavaa",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Atas",
+    "kaili": "Bavo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Di atas",
+    "kaili": "Ri bavo",
+    "tipe": "kosakata",
+    "category": "kata keterangan"
+  },
+  {
+    "indo": "Agak ke atas, teratas",
+    "kaili": "Naribavo",
+    "tipe": "kosakata",
+    "category": "kata sifat"
+  },
+  {
+    "indo": "Menghormati",
+    "kaili": "Nomparibavo",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Memotong kayu dgn memakai dua potongan di sisi berlawanan",
+    "kaili": "Nobavaoi",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Potongan utama",
+    "kaili": "Pobavoina",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Belakang bagian atas",
+    "kaili": "Bavoate",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Mengatakan sekali lagi untuk memperkuatkan pembicaraan pertama",
+    "kaili": "Nebavoi",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Babi",
+    "kaili": "Bavu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Babi hutan",
+    "kaili": "Bavu nggakayu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Tidak beres pikirannya",
+    "kaili": "Nabaya",
+    "tipe": "kosakata",
+    "category": "kata sifat"
+  },
+  {
+    "indo": "Orang sinting-seno",
+    "kaili": "Tobaya",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Hanya",
+    "kaili": "Bayangi",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Membayar",
+    "kaili": "Nombayari",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Kembali bertingkah sebagai anak",
+    "kaili": "Nombayari",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Waria, banci",
+    "kaili": "Bayasa",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Banci",
+    "kaili": "Kabayasa",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Penakut",
+    "kaili": "Nabayasa",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Penyelam",
+    "kaili": "Bayo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Menumbuk",
+    "kaili": "Nombayu",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Ditumbuk",
+    "kaili": "Nipombayu",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Menunjukkan menolak",
+    "kaili": "Be!",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bea, pajak",
+    "kaili": "Bea",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Membayar pajak atau bea di pasar",
+    "kaili": "Nobea",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Kemiri",
+    "kaili": "Beau",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Pohon kemiri",
+    "kaili": "Kayu beau",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bergeletak",
+    "kaili": "Nabebataka",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Terbelah tanah, pecah roti, buah-buahan, kayu, dsb",
+    "kaili": "Nebeka",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Bisul yg memecah",
+    "kaili": "Bisu mpebeka",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Batasan antara bidang padi ladang [bukan padi sawah]",
+    "kaili": "Pobeka pae",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Istilah adat",
+    "kaili": "Pombeka nganga",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Tempat simpan sagu dibuat dari kulit kayu",
+    "kaili": "Beka",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bekas luka, jejakan",
+    "kaili": "Bela",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Kena [tidak tentu sengaja]",
+    "kaili": "Nambela",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Dikenakan kepada",
+    "kaili": "Nipambela",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Melukai",
+    "kaili": "Nobelati",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Melukai, mencoba-coba memotong, buat garis sebelum memotong",
+    "kaili": "Nombabelati",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Seandainya, kalau-kalau, andaikata",
+    "kaili": "Belaka",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Blek",
+    "kaili": "Bele",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Juling",
+    "kaili": "Nabeli",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Belimbing",
+    "kaili": "Belira",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bagus",
+    "kaili": "Nabelo",
+    "tipe": "kosakata",
+    "category": "kata sifat"
+  },
+  {
+    "indo": "Kebaikan",
+    "kaili": "Kabelo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Orang yg baik",
+    "kaili": "Tobelo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Memberkati",
+    "kaili": "Nompobelo",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Memperbaiki",
+    "kaili": "Nompakabelo",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Hati-hati, jaga",
+    "kaili": "Pakabelo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Dgn hati-hati",
+    "kaili": "Mpakabelo-belo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Orang yang berkepala dingin",
+    "kaili": "Topompekiri pakabelo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Baik hati",
+    "kaili": "Nabelo rara",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Berpura-pura baik hati, munafik",
+    "kaili": "Netibelo rara",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Berdamai",
+    "kaili": "Nosinggabelo",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Memperdamaikan",
+    "kaili": "Nompoposinggabelo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Perdamaian",
+    "kaili": "Posinggabelo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Untungnya",
+    "kaili": "Kabelokana",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bengkok",
+    "kaili": "Nabelu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Hancur, khusus barang keras seperti tulang atau bambu",
+    "kaili": "Nabembe",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Merenggangkan yg terlalu sempit",
+    "kaili": "Nobenga",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Kerbau",
+    "kaili": "Bengga",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Merangkak",
+    "kaili": "Nobengga",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Besar perut",
+    "kaili": "Nabengge",
+    "tipe": "kosakata",
+    "category": "kata sifat"
+  },
+  {
+    "indo": "Hamil",
+    "kaili": "Nabengge tai",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Garis, kayu, atau besi yang tidak lurus",
+    "kaili": "Nabenggo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Membengkok ke samping",
+    "kaili": "Nombenggo",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Belakang, punggung",
+    "kaili": "Bengo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Di belakang",
+    "kaili": "Ri bengo",
+    "tipe": "kosakata",
+    "category": "kata keterangan"
+  },
+  {
+    "indo": "Membelakangi",
+    "kaili": "Benji notubengosi",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Terkupas, dipakai untuk kuku, kulit kayu, cet, dsb",
+    "kaili": "Nabenji",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Bintil kuku",
+    "kaili": "Nabenji koya",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Anjing mematahkan batang jagung dan makan isinya",
+    "kaili": "Nombenta",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Benteng",
+    "kaili": "Bente",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Menarik dengan keras berulang-ulang kali",
+    "kaili": "Nobentu",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Sabut kelapa",
+    "kaili": "Benu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Tepung sagu direbus sampai menjadi seperti lem",
+    "kaili": "Beo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Berlendir",
+    "kaili": "Nombeo",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Meremuk",
+    "kaili": "Nabere",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Meremukkan",
+    "kaili": "Noberesi",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Suami, isteri",
+    "kaili": "Berei",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Menikah",
+    "kaili": "Noberei",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Isteri",
+    "kaili": "Berei mombine",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Suami",
+    "kaili": "Berei langgai",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Mengawini",
+    "kaili": "Nompoberei",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Mengawinkan",
+    "kaili": "Nompopoberei",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Kawin antara golongan, antar suku, antar kampung, dll",
+    "kaili": "Nosipoberei",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Dipotong atau ditebang tetapi tidak putus",
+    "kaili": "Niberi",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Terpotong tetapi tidak putus, khusus kayu",
+    "kaili": "Naberi",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Bagaimana caranya",
+    "kaili": "Berimbana",
+    "tipe": "kosakata",
+    "category": "kata ganti"
+  },
+  {
+    "indo": "Melepaskan peluru dari umban",
+    "kaili": "Nobesi",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Jepretan",
+    "kaili": "Pobesi gata",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Melemparkan umban dgn jepretan",
+    "kaili": "Nombabesitaka",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Betina [binatang]",
+    "kaili": "Besina",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Menang main judi",
+    "kaili": "Nebeta",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Kalah dalam penjudian",
+    "kaili": "Nibeta",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Main judi",
+    "kaili": "Nosibeta",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sejenis talas",
+    "kaili": "Bete",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Muncul secara ajaib, tanpa orang tua",
+    "kaili": "Nebete",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Menyadap pohon untuk mengambil getahnya",
+    "kaili": "Nobete puu",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Percikan api",
+    "kaili": "Nebeti",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Lincah",
+    "kaili": "Nasabeti",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sejenis burung nuri yg kecil, suka istirahat terbalik",
+    "kaili": "Betiti",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Beton",
+    "kaili": "Betoo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bintang",
+    "kaili": "Betue",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Cirit bintang",
+    "kaili": "Betue mpolinja",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Melilitkan dgn rapi",
+    "kaili": "Nombeve",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Berani",
+    "kaili": "Nabia",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Memberanikan diri",
+    "kaili": "Nompebia",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Berani mati",
+    "kaili": "Nabia namate",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Berbuat seakan-akan berani",
+    "kaili": "Netibia",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Sapi menggalak",
+    "kaili": "Nekabianaka japi",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bicara dengan tegas seakan-akan",
+    "kaili": "Nangasabia",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Biasa",
+    "kaili": "Biasa",
+    "tipe": "kosakata",
+    "category": "kata sifat"
+  },
+  {
+    "indo": "Terbiasa",
+    "kaili": "Nabiasa",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Kebiasaannya",
+    "kaili": "Kabiasana",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bersegi",
+    "kaili": "Nobii",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Menjadikan bersegi",
+    "kaili": "Nompopobii",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sempit, misalnya jalan, pematang, kamar",
+    "kaili": "Nabiko",
+    "tipe": "kosakata",
+    "category": "kata sifat"
+  },
+  {
+    "indo": "Menghitung",
+    "kaili": "Nobila",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Jumlah, hitungannya",
+    "kaili": "Bilana",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sejenis kayu, buahnya seperti sejenis labu",
+    "kaili": "Bila",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sopan-santun",
+    "kaili": "Nebila",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Kalung",
+    "kaili": "Bili",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Melilitkan sarung di leher seperti kalung",
+    "kaili": "Nipobili buya",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Kosong, terutama kelapa, pinang",
+    "kaili": "Nabilo",
+    "tipe": "kosakata",
+    "category": "kata sifat"
+  },
+  {
+    "indo": "Kosong",
+    "kaili": "Pangana bilo",
+    "tipe": "kosakata",
+    "category": "kata sifat"
+  },
+  {
+    "indo": "Domba, biri-biri",
+    "kaili": "Bimba",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Seperti domba",
+    "kaili": "Mpobimba",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Memukul dgn tidak keras",
+    "kaili": "Nobimbi",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Daging kelapa",
+    "kaili": "Bimbi nggaluku",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sungai",
+    "kaili": "Binangga",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Binatang",
+    "kaili": "Binata",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Binatang berkantong",
+    "kaili": "Binata mpotamboka",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Binatang buruan",
+    "kaili": "Bianata niasu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Binatang piaraan",
+    "kaili": "Binata patuvu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Binatang liar",
+    "kaili": "Binata nggakayu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bibit padi",
+    "kaili": "Bine",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sejenis keranjang dibuat dari rotan",
+    "kaili": "Bingga",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Terbelah sehingga terpisah, bukan hanya retak",
+    "kaili": "Nabingga",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Membelah kayu atau rotan pada arah serat",
+    "kaili": "Nobingga",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Keadaan dibelah",
+    "kaili": "Kabinggana",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Akan dibelahnya",
+    "kaili": "Rakabinggana",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Sebelah",
+    "kaili": "Sabingga",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Kedua belah yg berpasang, seperti tangan, mata, kaki, sepatu, dll",
+    "kaili": "Robingga",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sebelah, di sampingnya",
+    "kaili": "Sabinggana",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Di balik sana",
+    "kaili": "Sabinggana hamai",
+    "tipe": "kosakata",
+    "category": "kata keterangan"
+  },
+  {
+    "indo": "Sebelah kanan",
+    "kaili": "Sabingga nggana",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sebelah kiri",
+    "kaili": "Sabingga njidi",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Memihak",
+    "kaili": "Nosabingga",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Tebing gunung",
+    "kaili": "Bingge",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Berlereng curam",
+    "kaili": "Nabingge",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Pinggul sebelah",
+    "kaili": "Binggi",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Peok",
+    "kaili": "Nabingo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Luas, lebar",
+    "kaili": "Nabini",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Lebar sebelah",
+    "kaili": "Nabini sabingga",
+    "tipe": "kosakata",
+    "category": "kata sifat"
+  },
+  {
+    "indo": "Memperlebarkan rok",
+    "kaili": "Nibiniaka roo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Lebarnya [kain]",
+    "kaili": "Binina",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Susuh ayam",
+    "kaili": "Bintara",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sejenis rumput yg berduri yg tumbuh dekat laut",
+    "kaili": "Valaa bintara manu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sop jagung dengan ikan",
+    "kaili": "Binte",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sejenis pohon yg lurus",
+    "kaili": "Kayu bintonu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bercabang seperti tanduk rusa",
+    "kaili": "Nobirangga",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Memperlihatkan gigi",
+    "kaili": "Nobiri ngisi",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Membuka mata dgn menarik kulit mata dengan jari",
+    "kaili": "Nombirisi mata",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Sejenis rumput yg tinggi",
+    "kaili": "Biro",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Dipasang di luar",
+    "kaili": "Nibiru",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Sanggup, mampan",
+    "kaili": "Nabisa",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Kesanggupan",
+    "kaili": "Kabisana",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bisul",
+    "kaili": "Bisu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Mata bisul",
+    "kaili": "Mata mbisu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Robek, sobek",
+    "kaili": "Nabite",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Merobek dgn sengaja",
+    "kaili": "Nobitesi",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Susah hati, gara-gara perbuatan anak",
+    "kaili": "Nabite rara",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bibir",
+    "kaili": "Bivi",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Pinggir jalan",
+    "kaili": "Bivi dala",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Tepi sungai",
+    "kaili": "Bivi binangga",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Tepi laut",
+    "kaili": "Bivi ntasi",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Di pinggir",
+    "kaili": "Ri bivi",
+    "tipe": "kosakata",
+    "category": "kata keterangan"
+  },
+  {
+    "indo": "Kata hubungan yang mengikat dua kata, frasa, atau kalimat",
+    "kaili": "Bo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sebagai",
+    "kaili": "Bo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Hangus",
+    "kaili": "Naboa",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Hangus sampai tidak bisa dimakan lagi",
+    "kaili": "Naboa ntarasi",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Hangus tangan",
+    "kaili": "Naboa pale",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sisa nasi yg keras dan hangus-hangus di belanga",
+    "kaili": "Boana",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Kosong",
+    "kaili": "Naboa",
+    "tipe": "kosakata",
+    "category": "kata sifat"
+  },
+  {
+    "indo": "Memukul",
+    "kaili": "Noboba",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Memukul berulang-ulang",
+    "kaili": "Neboba-boba",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Mengirik",
+    "kaili": "Noboba",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Pentung, alat pemukul",
+    "kaili": "Poboba",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Membanting",
+    "kaili": "Nombabobataka",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Pintu pagar",
+    "kaili": "Bobaa",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Subuh",
+    "kaili": "Bobayana",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Waktu subuh",
+    "kaili": "Nabobaya",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Pada waktu fajar",
+    "kaili": "Kabobayana",
+    "tipe": "kosakata",
+    "category": "kata keterangan"
+  },
+  {
+    "indo": "Bisu",
+    "kaili": "Nabobo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Orang bisu",
+    "kaili": "Tobobo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Rata, seperti dasar piring",
+    "kaili": "Nabobo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Tempurung kelapa yang masih utuh yang dipakai untuk tempat simpan air",
+    "kaili": "Bobo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Cangkir besi",
+    "kaili": "Boda",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Menengadah",
+    "kaili": "Nombode",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Menengadahkan",
+    "kaili": "Nomboderaka",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Hitam",
+    "kaili": "Naboga",
+    "tipe": "kosakata",
+    "category": "kata sifat"
+  },
+  {
+    "indo": "Sejenis kumbang yang merusakkan kelapa",
+    "kaili": "Bogo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Jahitan terbuka",
+    "kaili": "Naboka",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Saling melepaskan tangan",
+    "kaili": "Nosiboka pale",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Mencuci rambut dengan kelapa diparut",
+    "kaili": "Noboka",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Guruh yg bergema",
+    "kaili": "Nemboka guru",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Memancar air",
+    "kaili": "Nemboka uve",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Mata air, pancaran air",
+    "kaili": "Pemboka uve",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Menangis dengan tiba-tiba",
+    "kaili": "Nemboka tangi",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Berkas padi",
+    "kaili": "Boke",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Mengikat padi",
+    "kaili": "Noboke",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Ikatan padi",
+    "kaili": "Poboke",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bambu pagar",
+    "kaili": "Boki",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Tali dipasang di pinggul kalau menenun",
+    "kaili": "Boko-boko",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Mencuci piring",
+    "kaili": "Nombokoisi",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Bola",
+    "kaili": "Bola",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Acara meminang",
+    "kaili": "Pebolai",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Tidak jadi berpacaran",
+    "kaili": "Nabolemo janji",
+    "tipe": "kosakata",
+    "category": "kata sifat"
+  },
+  {
+    "indo": "Melepaskan ikatan perpacaran",
+    "kaili": "Nobole",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Menyimpan",
+    "kaili": "Nomboli",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Tempat simpan",
+    "kaili": "Pomboli",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Tempat simpan buku",
+    "kaili": "Pomboli buku",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Tempat nasi",
+    "kaili": "Pomboli talebe",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Dipakai sebagai tempat simpan",
+    "kaili": "Nipomboli",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Menyimpan",
+    "kaili": "Nomboliaka",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Taruh kembali, simpan kembali",
+    "kaili": "Nomboli mpanjili",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Harta peninggalan",
+    "kaili": "Kaboli",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Diwariskan",
+    "kaili": "Nikabolika",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Ahli waris",
+    "kaili": "Tona nikabolikana",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Manusia yg tertinggalkan tanpa sengaja",
+    "kaili": "Nakabolita",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sisa",
+    "kaili": "Naboli",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Menyimpan perasaan",
+    "kaili": "Nomboli riara",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Ditinggalkan untuk suatu maksud",
+    "kaili": "Nibolika",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sengaja meninggalkan diri, sengaja tertinggal",
+    "kaili": "Netiboli",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Orang yg tertinggal",
+    "kaili": "Tonabolina",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Ditinggalkan oleh teman yg berjanji akan jemput",
+    "kaili": "Nabolintoya",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Lobang",
+    "kaili": "Bolo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Gua",
+    "kaili": "Bolo vatu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Berlobang",
+    "kaili": "Nobolo",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Melobangi",
+    "kaili": "Nombabolo",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Lobang di telinga untuk anting-anting",
+    "kaili": "Bolo ntalinga",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Lobang dipakai binatang sebagai rumah",
+    "kaili": "Bolona",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Selaput jari",
+    "kaili": "Bolo baa",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Lubang hidung",
+    "kaili": "Bolo onge",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Jenis bambu yang besar dan tebal",
+    "kaili": "Bolovatu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sejenis bambu yg berduri, kurang dipakai karena sulit diambil",
+    "kaili": "Bolovatu nggarui",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Meramal",
+    "kaili": "Nebolovia",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Pergi ke peramal",
+    "kaili": "Nobolovia",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Minta ramalan dari tukang meramal",
+    "kaili": "Nekibolovia",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Sirih",
+    "kaili": "Bolu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Mengembang, seperti waktu dipompa balon atau ban",
+    "kaili": "Nebombo",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Mengisi lobang, menempel",
+    "kaili": "Nibombo",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Terbit, terutama matahari, bulan",
+    "kaili": "Nebonda",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Matahari terbit",
+    "kaili": "Eo nebonda",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bekas kebun yang sudah ditumbuhi pohon-pohon baru",
+    "kaili": "Bonde",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Pasir",
+    "kaili": "Bone",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Berenggang",
+    "kaili": "Nabonga",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Sumbing mata parang",
+    "kaili": "Nabonga mata nu taono",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Memotong sebagian kecil tanpa memutuskan",
+    "kaili": "Nibonga",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Robek pukang celana",
+    "kaili": "Nabongga emba",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Membongkar sebagian bendungan atau pematang supaya air bisa mengalir",
+    "kaili": "Nombongga",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Membocorkan ember",
+    "kaili": "Nombabonggasi embere",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Tempat pematang dibuka supaya air bisa masuk atau keluar sawah",
+    "kaili": "Pombongga",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Pembalut",
+    "kaili": "Pombonggo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Membalut",
+    "kaili": "Nombabonggo",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Membalutkan",
+    "kaili": "Nombabonggosi",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Malam",
+    "kaili": "Bongi",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sudah malam",
+    "kaili": "Nabongimo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Tadi malam",
+    "kaili": "Ibongi",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Tengah malam",
+    "kaili": "Tanga bongi",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Dua malam lagi",
+    "kaili": "Rombongipa",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Pada malam hari",
+    "kaili": "Bongina",
+    "tipe": "kosakata",
+    "category": "kata keterangan"
+  },
+  {
+    "indo": "Tidak tahu membuat apa, buntu akal",
+    "kaili": "Nabongi rara",
+    "tipe": "kosakata",
+    "category": "kata sifat"
+  },
+  {
+    "indo": "Sepanjang malam",
+    "kaili": "Njambongi",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Tempat bermalam",
+    "kaili": "Nikasambongi",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Terpaksa bermalam satu malam lagi, biasa karena banyak urusan",
+    "kaili": "Nikasambongika",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Satu malam",
+    "kaili": "Sambongi",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bermalam",
+    "kaili": "Bore masambongi",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Kemalaman",
+    "kaili": "Nisaka nu bongi",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Tuli",
+    "kaili": "Nabongo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Tuli sama sekali",
+    "kaili": "Nabongo mparo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Tidak mau mendengarkan",
+    "kaili": "Netibongo",
+    "tipe": "kosakata",
+    "category": "kata sifat"
+  },
+  {
+    "indo": "Tidak memperhatikan, tidak peduli",
+    "kaili": "Nabongo rara",
+    "tipe": "kosakata",
+    "category": "kata sifat"
+  },
+  {
+    "indo": "Mendengar tetapi tidak melaksanakan",
+    "kaili": "Nambongo",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Buncis",
+    "kaili": "Bonji",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Kacang merah",
+    "kaili": "Bonji lei",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Kacang panjang",
+    "kaili": "Bonji puti",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Terkupas [kulit], tidak berdarah atau sedikit saja darah",
+    "kaili": "Nabonji",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Mengupas kulit ari",
+    "kaili": "Nobonji",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Malu sekali",
+    "kaili": "Bonji ea",
+    "tipe": "kosakata",
+    "category": "kata sifat"
+  },
+  {
+    "indo": "Perangkap untuk monyet",
+    "kaili": "Bonjo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Dihalangi",
+    "kaili": "Nabonto",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Menghalangi",
+    "kaili": "Nompakabonto",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Merah tua khusus tumbuh-tumbuhan",
+    "kaili": "Nabonto",
+    "tipe": "kosakata",
+    "category": "kata sifat"
+  },
+  {
+    "indo": "Busuk",
+    "kaili": "Nabonyo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Buku",
+    "kaili": "Boo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Kitab Suci",
+    "kaili": "Boo nagasa",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Mengucapkan nama mertua",
+    "kaili": "Nesanga boo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Mengaku siapa bapak anaknya",
+    "kaili": "Nebore",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Pengakuan",
+    "kaili": "Boro pebore",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Borong",
+    "kaili": "Niboro",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sejenis ayam-ayaman yg suka air, perutnya putih",
+    "kaili": "Borokua",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Tugas, pekerjaan",
+    "kaili": "Boronga",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Orang yg memborong suatu pekerjaan, misalnya diborong memotong padi",
+    "kaili": "To noboronga",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bocor",
+    "kaili": "Naboru",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Melepuhkan tangan mencangkul",
+    "kaili": "Nomboru pale nevavo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Melepuh",
+    "kaili": "Nemboru",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Menyela percakapan",
+    "kaili": "Nosibosa tesa",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Percakapan yg tidak keruan dalam pertengkaran",
+    "kaili": "Posibosa",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Kenyang",
+    "kaili": "Nabosu",
+    "tipe": "kosakata",
+    "category": "kata sifat"
+  },
+  {
+    "indo": "Keadaan kenyang",
+    "kaili": "Kabosuna",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sampai",
+    "kaili": "Nabote",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Di seberang",
+    "kaili": "Sambotena",
+    "tipe": "kosakata",
+    "category": "kata keterangan"
+  },
+  {
+    "indo": "Di seberang",
+    "kaili": "Ri sambote",
+    "tipe": "kosakata",
+    "category": "kata keterangan"
+  },
+  {
+    "indo": "Menyeberang untuk mengambil",
+    "kaili": "Natebotesaka",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Baku muka",
+    "kaili": "Nosinjambote",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Menyeberangkan",
+    "kaili": "Nombabotesaka",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Yg dipakai olehnya untuk menyeberangkan",
+    "kaili": "Rapombabotesakana",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Pengantin",
+    "kaili": "Boti",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Menikah",
+    "kaili": "Noboti",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Jawaban teka-teki",
+    "kaili": "Boya boto",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Menerka",
+    "kaili": "Nombaboto",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Ahli ramal",
+    "kaili": "Pande mpoboto",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Jawaban",
+    "kaili": "Kabotona",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Botol",
+    "kaili": "Botolo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Botol",
+    "kaili": "Botoo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Main judi",
+    "kaili": "Nobotoro",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Putus [tali]",
+    "kaili": "Nabotu",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Persetujuan, keputusan",
+    "kaili": "Kabotu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Memutuskan",
+    "kaili": "Nombabotusi",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Luruh rambut, seperti orang tua",
+    "kaili": "Nabova",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Belakang bagian atas",
+    "kaili": "Bovate",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Kampung, dusun",
+    "kaili": "Boya",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Kampung lain",
+    "kaili": "Saboyana",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Gemuk, subur",
+    "kaili": "Naboya",
+    "tipe": "kosakata",
+    "category": "kata sifat"
+  },
+  {
+    "indo": "Terlalu gemuk sehingga lemaknya bergoyang",
+    "kaili": "Naboya nonduya",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Menjadikan gemuk",
+    "kaili": "Nepakaboya",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Menyebabkan gemuk",
+    "kaili": "Nakaboya",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Menjadikan gemuk",
+    "kaili": "Nompakaboya",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Rata-rata gemuk",
+    "kaili": "Buale nasinggaboya",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Berguling-guling di tanah [anjing, kuda]",
+    "kaili": "Nekabuale-ale",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Zinah",
+    "kaili": "Bualo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Berzinah",
+    "kaili": "Nobualo",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Berzinah secara fitnah, tidak terlaksana",
+    "kaili": "Bualo leve",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Semacam penyakit kelamin pria",
+    "kaili": "Nabubu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Kena penyakit",
+    "kaili": "Nakabubu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Mendidih",
+    "kaili": "Nombubu",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Tertumpah, tumpah",
+    "kaili": "Nabubu",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Terbuang",
+    "kaili": "Nabubusaka",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Suka berbuat cabul",
+    "kaili": "Nabuga",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Kaskado, jamur",
+    "kaili": "Nabugi",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Orang sakit kaskado",
+    "kaili": "Tonabugi",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bugis",
+    "kaili": "Bugi",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Orang Bugis",
+    "kaili": "ToBugi",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Orang berbahasa Bugis",
+    "kaili": "Topobasa Bugi",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Ujung tulang dada",
+    "kaili": "Bui",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Penyakit kelemahan, tidak bisa berjalan",
+    "kaili": "Nadungga bui",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Kulit padi yg tersisa dalam beras sesudah digiling",
+    "kaili": "Bui pae",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Kartu",
+    "kaili": "Buja",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Kartu klawer",
+    "kaili": "Tava kelor",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Kartu sekop",
+    "kaili": "Sikopa",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Kartu hart",
+    "kaili": "Pangga",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Kartu ret",
+    "kaili": "Sidu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Buka",
+    "kaili": "Nobuka",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Terbuka",
+    "kaili": "Natebuka",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Mencabut",
+    "kaili": "Nombuka",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Obat kaskado",
+    "kaili": "Buka",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Mengambil sulang asap untuk obat",
+    "kaili": "Nebuka",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Mahluk halus atau roh yang menjaga padi",
+    "kaili": "Buke",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Penuh seperti keranjang",
+    "kaili": "Nabuke",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Tali di leher sapi",
+    "kaili": "Bukolo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Memasang tali di leher sapi",
+    "kaili": "Nibukolo",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Tulang",
+    "kaili": "Buku",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bertulang",
+    "kaili": "Nobuku",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Mata kaki",
+    "kaili": "Buku dali",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Ukuran tinggi/dalam dari tanah ke pergelangan kaki",
+    "kaili": "Saribuku dali",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Tulang kering",
+    "kaili": "Buku mbulu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Rahang",
+    "kaili": "Buku baga",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Buku jari",
+    "kaili": "Buku",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Pasangan tulang di betis atau lengan",
+    "kaili": "Buku rapi",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Ukuran panjangnya",
+    "kaili": "Sambuku",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sedih",
+    "kaili": "Nabuku rara",
+    "tipe": "kosakata",
+    "category": "kata sifat"
+  },
+  {
+    "indo": "Buku",
+    "kaili": "Buku",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Perasaan agak berpasir, seperti rasa air yg belum masak dgn sempurna",
+    "kaili": "Nabuku",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Rasa air yg belum masak dgn sempurna",
+    "kaili": "Nebuku uve",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Nasi yg setengah masak",
+    "kaili": "Nantabuku",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Jagung giling yg kasar",
+    "kaili": "Buku dale",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Putih",
+    "kaili": "Nabula",
+    "tipe": "kosakata",
+    "category": "kata sifat"
+  },
+  {
+    "indo": "Tulus hati",
+    "kaili": "Nabula rara",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bulan",
+    "kaili": "Bula",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Gerhana bulan",
+    "kaili": "Mate bula",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bulan purnama",
+    "kaili": "Bula dongga",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bulan sabit",
+    "kaili": "Bula ngura",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bulan mati",
+    "kaili": "Bula mpanau",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bulan gelap",
+    "kaili": "Bula landa",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bulan yg lalu",
+    "kaili": "Bula naliu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bulan ini",
+    "kaili": "Bula hitu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bulan depan",
+    "kaili": "Bula meonga",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bulan Januari",
+    "kaili": "Bula sangu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bulan Pebruari",
+    "kaili": "Bula kura",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Tiap bulan",
+    "kaili": "Mbula-mbula",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Berbulan-bulan",
+    "kaili": "Nombula-mbula",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Makin banyak bulan",
+    "kaili": "Kadea-dea mbula",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Satu bulan",
+    "kaili": "Sa-mbula",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Membuka mata",
+    "kaili": "Nombula mata",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Ular kaki empat, kadal",
+    "kaili": "Bulaili",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Emas",
+    "kaili": "Bulava",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Pembantu dukun",
+    "kaili": "Bule",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Peranan tukang tambur yg membantu dukun dalam acara",
+    "kaili": "Bule nu gimba",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Tidak jadi sebagaimana diharapkan",
+    "kaili": "Nebule",
+    "tipe": "kosakata",
+    "category": "kata sifat"
+  },
+  {
+    "indo": "Tempat benang untuk layang-layang",
+    "kaili": "Bulelenga",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Cerita yg banyak gurau, tetapi tidak ada isinya",
+    "kaili": "Nabulelu tesa",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sejenis pohon",
+    "kaili": "Buli",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Tempat tumbuh rambut yg bentuknya lingkaran",
+    "kaili": "Bulili",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Gunung",
+    "kaili": "Bulu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Jajaran gunung-gunung",
+    "kaili": "Kabuluna",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Puncak gunung",
+    "kaili": "Tutu nu bulu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bulu",
+    "kaili": "Bulu bulu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bulu roma",
+    "kaili": "Bulu nggaro",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Berdiri tegak bulu roma",
+    "kaili": "Netumbu bulu nggaro",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Kumis",
+    "kaili": "Bulu sumi",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Berbulu",
+    "kaili": "Nobulu",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Bulu mata",
+    "kaili": "Bulu mata",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bulu babi, yaitu binatang laut yg mempunyai duri yg panjang dan tajam",
+    "kaili": "Bulu titi",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Rambut",
+    "kaili": "Bulua",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sejenis bunga yg membuat pagar halaman",
+    "kaili": "Buluntasi",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Pertengahan lengan bawah",
+    "kaili": "Bulusu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Ukuran panjangnya dari ujung jari tengah ke pertengahan lengan bawah",
+    "kaili": "Sampobulusu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sakit sebab bekerja keras",
+    "kaili": "Nabundu",
+    "tipe": "kosakata",
+    "category": "kata sifat"
+  },
+  {
+    "indo": "Sakit-sakit karena kerja berat",
+    "kaili": "Dua bundu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Penyakit yang tidak sembuh-sembuh, walaupun banyak obat diminum",
+    "kaili": "Dua mpebundusi",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sikat gigi",
+    "kaili": "Bunduru",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Menyikat gigi",
+    "kaili": "Nobunduru",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Bunga, hiasan",
+    "kaili": "Bunga",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Istilah",
+    "kaili": "Bunga nu tesa",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Ketam, kepiting",
+    "kaili": "Bungga",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Mencari tahu dengan ilmu gaib apakah akan terjadi atau tidak",
+    "kaili": "Notosu bungga",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Tiba-tiba berteriak keras sekali untuk menakutkan atau mengusir",
+    "kaili": "Nombabunggaasi",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Berguling kayu",
+    "kaili": "Nebunggoli kayu",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Membungkuk",
+    "kaili": "Nabunggu",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Bengkok ke atas di tengah, ujungnya bengkok ke bawah",
+    "kaili": "Nombunggu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Makan sendiri, tidak mengajak orang lain",
+    "kaili": "Nabungongo gaga",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Masih terbungkus seperti bunga yg belum terbuka",
+    "kaili": "Nombungu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Alat dipakai untuk membungkus",
+    "kaili": "Pombungu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Meliputi",
+    "kaili": "Nombabungusi",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Ampas kelapa",
+    "kaili": "Bungu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Ampas sagu sesudah kanjinya dikeluarkan",
+    "kaili": "Bungu tabaro",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Dijatuhkan dgn keras",
+    "kaili": "Nibunjanaka",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Kaki tembus lantai atau masuk lobang",
+    "kaili": "Nakabunjolo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Menceret",
+    "kaili": "Nabunjoro",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Berbukit",
+    "kaili": "Nobunti",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Bukit",
+    "kaili": "Buntina",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sakit kuning, mata kuning",
+    "kaili": "Nabunto",
+    "tipe": "kosakata",
+    "category": "kata sifat"
+  },
+  {
+    "indo": "Menjadi sakit kuning sebagai akibat melanggar larangan",
+    "kaili": "Nakabunto",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Sungai membanjir luar biasa, banyak air meluap",
+    "kaili": "Nanggabuntu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Dikikis oleh air dan dihanyutkan",
+    "kaili": "Nibuntulaka",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Meluap",
+    "kaili": "Nabuntuloo",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Sarung digantung untuk menidurkan bayi atau anak kecil",
+    "kaili": "Buntuyu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Menidurkan bayi dalam sarung digantung dari kasau",
+    "kaili": "Nibuntuyumo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Menombak, menikam",
+    "kaili": "Nebunu",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Busa",
+    "kaili": "Bura",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Berbusa",
+    "kaili": "Nobura",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Busa sabun",
+    "kaili": "Bura sabu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Mulut berbusa",
+    "kaili": "Nobura sumba",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Meneriaki dgn marah",
+    "kaili": "Noburarasi",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Nasi dibungkus dengan daun pisang dan dikukus",
+    "kaili": "Burasa",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Hitam, dipakai untuk domba, kambing, anjing, ayam",
+    "kaili": "Naburi",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Buta",
+    "kaili": "Naburo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Buta tetapi mata masih kelihatan normal",
+    "kaili": "Naburo mbula",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Orang buta",
+    "kaili": "Toburo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Suka merusakkan barang orang",
+    "kaili": "Naburo rara",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Makanan yg dimasak tetapi sudah menjadi dingin",
+    "kaili": "Naburu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bibir yg kering dan pecah-pecah",
+    "kaili": "Naburu bivina",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bertiup",
+    "kaili": "Neburu",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Ditiup oleh angin",
+    "kaili": "Niburu mpoiri",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Meniup [angin]",
+    "kaili": "Noburu",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Tiupan [angin]",
+    "kaili": "Peburu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Meniupi",
+    "kaili": "Nombaburusi",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Kulit telor",
+    "kaili": "Buruvi ntalu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Menumpahkan dgn sengaja",
+    "kaili": "Nombabusaka",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bunyi yg berat jatuh seperti kelapa, pohon, dll",
+    "kaili": "Nobusi nanavu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bunyi alu dalam lesung",
+    "kaili": "Nobusi-busi pombayu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Kentut dgn bunyi keras",
+    "kaili": "Nibusiraka otu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Embusan",
+    "kaili": "Buso",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Mengembus",
+    "kaili": "Nobuso",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Menggauli, dipakai untuk manusia",
+    "kaili": "Nobusu",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Seikat padi",
+    "kaili": "Busu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Ikan tembang",
+    "kaili": "Busuka",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sakit cacar, bekasnya dilihat di kulit",
+    "kaili": "Nabuti",
+    "tipe": "kosakata",
+    "category": "kata sifat"
+  },
+  {
+    "indo": "Manik-manik",
+    "kaili": "Butiga",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Malas",
+    "kaili": "Buto",
+    "tipe": "kosakata",
+    "category": "kata sifat"
+  },
+  {
+    "indo": "Malas",
+    "kaili": "Nabuto",
+    "tipe": "kosakata",
+    "category": "kata sifat"
+  },
+  {
+    "indo": "Malas luar biasa",
+    "kaili": "Nabuto raka",
+    "tipe": "kosakata",
+    "category": "kata sifat"
+  },
+  {
+    "indo": "Tidak mau disuruh",
+    "kaili": "Nabuto rara",
+    "tipe": "kosakata",
+    "category": "kata sifat"
+  },
+  {
+    "indo": "Cukup",
+    "kaili": "Nabutu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Palang pintu",
+    "kaili": "Cala",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Dipasang palang pintu",
+    "kaili": "Nicala",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Cambang",
+    "kaili": "Camba",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Cambuk",
+    "kaili": "Cambu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Berjalan keliling semua kampung",
+    "kaili": "Nompebutu ngata",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Setiap kali",
+    "kaili": "Butu nggani",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Kecukupannya, bagian",
+    "kaili": "Kabutuna",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Memberengut, merengek",
+    "kaili": "Nekabuu",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Sejenis rumput pendek",
+    "kaili": "Buurapa",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sarang ayam",
+    "kaili": "Buvu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sumur",
+    "kaili": "Buvu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Semacam penangkap ikan dibuat dari rotan",
+    "kaili": "Buvu bau",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Memakai penangkap ikan",
+    "kaili": "Nobuvu",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Sarung",
+    "kaili": "Buya",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sarung kecil",
+    "kaili": "Buya saboka",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sarung panjang, dipakai untuk tidur",
+    "kaili": "Buya sura",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sarung dijahit",
+    "kaili": "Buya mpobolo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sarung yang tidak dijahit, dipakai untuk menggendong bayi",
+    "kaili": "Buya njambeka",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sarung batik yg tidak dijahit",
+    "kaili": "Buya bate",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sarung sutera",
+    "kaili": "Buya sabe",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Mencambuk",
+    "kaili": "C nocambu",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Alat dipakai untuk mencambuk",
+    "kaili": "Pocambu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Panci dengan dua tempat pegang",
+    "kaili": "Cangko",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Kacang tanah",
+    "kaili": "Cangkore cangkore",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Saguer disuling",
+    "kaili": "Cap tikus",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Tidak menghiraukan nasehat",
+    "kaili": "Nacapa",
+    "tipe": "kosakata",
+    "category": "kata sifat"
+  },
+  {
+    "indo": "Menganggap enteng",
+    "kaili": "Nocapa",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Cara",
+    "kaili": "Cara",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Orang yang mengeritik, mencela teman",
+    "kaili": "Nacece",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Cet",
+    "kaili": "Cee",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Mencet",
+    "kaili": "Nocee",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Cara mengikat sarung di pinggang untuk pria, diikat dan digulung",
+    "kaili": "Nocemba",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Masih",
+    "kaili": "Da",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Jahat, jelek",
+    "kaili": "Nadaa",
+    "tipe": "kosakata",
+    "category": "kata sifat"
+  },
+  {
+    "indo": "Jelek, buruk",
+    "kaili": "Nadaa buluna",
+    "tipe": "kosakata",
+    "category": "kata sifat"
+  },
+  {
+    "indo": "Sakit perut",
+    "kaili": "Nadaa rara",
+    "tipe": "kosakata",
+    "category": "kata sifat"
+  },
+  {
+    "indo": "Menjelekkan",
+    "kaili": "Nompakadaa",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Kejahatan",
+    "kaili": "Kadaa",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Rugi, dirugikan",
+    "kaili": "Nipodaa",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Orang yg menyihir",
+    "kaili": "Topepakudaa",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Saling menjelekkan",
+    "kaili": "Nosipakadaa",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Saling memaki",
+    "kaili": "Nosipakadaaka tesa",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Timbangan",
+    "kaili": "Daci",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Hiasan yang dipakai di kepala mempelai wanita kalau memakai baju adat",
+    "kaili": "Dadasa",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Nyanyian",
+    "kaili": "Dade",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Cerek",
+    "kaili": "Dagi cere",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Mencicil",
+    "kaili": "Nocicil",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Serbuk hitam yang digariskan sekeliling mata",
+    "kaili": "Cila",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Mewarnai pinggir mata",
+    "kaili": "Nocila",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Cina",
+    "kaili": "Cina",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Cengkeh",
+    "kaili": "Cingke",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Pohon cengkeh",
+    "kaili": "Kayu cingke",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Ciu",
+    "kaili": "Ciu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Mencoba",
+    "kaili": "Nombacoba",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Beha",
+    "kaili": "Cole",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Korek api",
+    "kaili": "Colo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Belerang",
+    "kaili": "Colonggata",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Cuka",
+    "kaili": "Cuka",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Menyanyi",
+    "kaili": "- d nodade",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Penyanyi",
+    "kaili": "Topodade",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Lunak, seperti pepaya atau kelapa, dagingnya luar biasa lunak dan enak",
+    "kaili": "Nadadi",
+    "tipe": "kosakata",
+    "category": "kata sifat"
+  },
+  {
+    "indo": "Nama kecil",
+    "kaili": "Nidae",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Mengembara ke kampung lain",
+    "kaili": "Nodaga",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Berdagang",
+    "kaili": "Nodaga",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Pedagang",
+    "kaili": "Topodaga",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Mengalahkan",
+    "kaili": "Nodagi",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Dikalahkan",
+    "kaili": "Nidagi",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Orang yang suka membantah",
+    "kaili": "Dai nekadagi",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Pemenang",
+    "kaili": "Padagi",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Mengalahkan",
+    "kaili": "Nombadagi",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Daging dikeringkan, dendeng",
+    "kaili": "Dai",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Tersambung",
+    "kaili": "Nasidai",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Bersambung",
+    "kaili": "Nosidai",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Sepasang sapi",
+    "kaili": "Sandai japi",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Dua benda atau orang diikat, dua digandeng",
+    "kaili": "Nidaiti",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Mengikatkan kelapa",
+    "kaili": "Nomposidaiti kaluku",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Menyebabkan terikat",
+    "kaili": "Nompoposidai",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Berjangkit, menular",
+    "kaili": "Nendai",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Merebus",
+    "kaili": "Nodaka",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Dari, sejak",
+    "kaili": "Dako",
+    "tipe": "kosakata",
+    "category": "kata keterangan"
+  },
+  {
+    "indo": "Baru-baru ini",
+    "kaili": "Dako dako hitu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sejak sekarang",
+    "kaili": "Dako hitu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Baru saja",
+    "kaili": "Dakopa",
+    "tipe": "kosakata",
+    "category": "kata sifat"
+  },
+  {
+    "indo": "Jalan, cara",
+    "kaili": "Dala",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Jalan raya",
+    "kaili": "Dala mbaso",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Tersesat, salah jalan",
+    "kaili": "Nasala ndala",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Jalan lewat",
+    "kaili": "Nodala",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Baru dari",
+    "kaili": "Dalako",
+    "tipe": "kosakata",
+    "category": "kata sifat"
+  },
+  {
+    "indo": "Jagung",
+    "kaili": "Dale",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Jagung yg warna ungu",
+    "kaili": "Dale rido",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sejenis gandum atau padian",
+    "kaili": "Dale tie",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sejenis jagung yg mempunyai tongkol merah",
+    "kaili": "Dale manado",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Anting-anting",
+    "kaili": "Dali",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Keranjang kecil dibuat dari kulit kayu dan rotan",
+    "kaili": "Dali",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Babirusa",
+    "kaili": "Dalodo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Damar",
+    "kaili": "Dama",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Senang",
+    "kaili": "Nadamba",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Senang hati",
+    "kaili": "Nadamba rara",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Kegembiraan",
+    "kaili": "Kadambana",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Menyenangkan",
+    "kaili": "Nompakadamba",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Menyenangi",
+    "kaili": "Nompodamba",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Saling menunjukkan kegembiraan",
+    "kaili": "Nosipodamba",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Menjamu",
+    "kaili": "Dame nombakadambanaka",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Berdamai",
+    "kaili": "Nodame",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Masih ada",
+    "kaili": "Damo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Tinggal sedikit",
+    "kaili": "Damo sakide",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Caplak",
+    "kaili": "Dampele",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Mengukus",
+    "kaili": "Nodanda",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Alat kukus",
+    "kaili": "Kura danda",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Memperkudakan",
+    "kaili": "Nodanda",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Meletak tangan kiri di bahu orang di sebelah pada waktu main",
+    "kaili": "Nosidanda",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Kena dalam mainan",
+    "kaili": "Nadanda",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bersandar ke depan pada tongkat atau meja waktu berdiri",
+    "kaili": "Netidanda",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Sejengkal, jaraknya dari ibu jari ke kelingking",
+    "kaili": "Sandanga",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Ukuran dari ibu jari sampai kelingking",
+    "kaili": "Danga konjili",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Ukuran dari ibu jari sampai jari malang/panjang",
+    "kaili": "Danga topelio",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Semacam kue dibuat dari tepung beras yang dikukus",
+    "kaili": "Dange",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Menggoreng tanpa memakai minyak",
+    "kaili": "Nodange",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Telur dadar",
+    "kaili": "Ntalu nidange",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Kelihatan tidak baik [makanan]",
+    "kaili": "Nadangka",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sejenis merpati yg berwarna coklat, ekornya panjang",
+    "kaili": "Dao",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Warna",
+    "kaili": "Daoa",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sedepa",
+    "kaili": "Sandapa",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Mendepang",
+    "kaili": "Nombadapa",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Tebing",
+    "kaili": "Dapala",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sejenis tanaman yg mirip kumis kucing, harum baunya",
+    "kaili": "Darolo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Menjahit",
+    "kaili": "Nodau",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Jahitannya",
+    "kaili": "Podauna",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Mesin jahit",
+    "kaili": "Masina podau",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Tukang jahit",
+    "kaili": "Topodau",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Mengelim",
+    "kaili": "Nidau pule",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Menisik",
+    "kaili": "Nodaupi",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Tinta",
+    "kaili": "Daua",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Sejenis tanaman yg mirip kumis kucing, harum baunya",
+    "kaili": "Daulolo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Bohong, dusta",
+    "kaili": "Dava",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Berbohong",
+    "kaili": "Nodava",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Bohong sekali",
+    "kaili": "Nodava nggaraka",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Pembohong",
+    "kaili": "Topodava",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Tulus hati, jujur, tidak berbohong, benar",
+    "kaili": "Le nodava",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Membohongi",
+    "kaili": "Nombadavai",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Saling membohongi",
+    "kaili": "Nosidavai",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Nabi palsu",
+    "kaili": "Nabi mpodava",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Angin dari barat daya",
+    "kaili": "Poiri daya",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Kubur",
+    "kaili": "Dayo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Banyak",
+    "kaili": "Nadea",
+    "tipe": "kosakata",
+    "category": "kata bilangan"
+  },
+  {
+    "indo": "Orang banyak",
+    "kaili": "Todea",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Jumlah",
+    "kaili": "Kadeana",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Memperbanyak",
+    "kaili": "Nompakadea",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Mayoritas",
+    "kaili": "Deanapa",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Menegur secara kasar seorang yang baru mendapat kecelakaan",
+    "kaili": "Nombadee",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Panggilan untuk seorang gadis",
+    "kaili": "Dei",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Menonjol",
+    "kaili": "Nedeke",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Berdesakan",
+    "kaili": "Nosideke",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Memberi, menye-rahkan",
+    "kaili": "Nodekei",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Saling memberikan",
+    "kaili": "Nosidekeika",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Diberi imbalan",
+    "kaili": "Nidekei parasee",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Pemberian",
+    "kaili": "Deva pedekei",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Biarkanlah, tidak apa-apa",
+    "kaili": "Dekeikamo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Jembatan kecil di atas saluran",
+    "kaili": "Deker",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Kayu jelatang",
+    "kaili": "Delata",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Tanah yg tidak terlalu miring, hampir rata",
+    "kaili": "Nadele tana",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Dataran",
+    "kaili": "Kadelena",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Ukuran sepanjangnya satu kaki",
+    "kaili": "Sadempa",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Berdekatan",
+    "kaili": "Nosidempe",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Jalan agak cepat",
+    "kaili": "Nodende-dende",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Melompat-lompat di satu kaki",
+    "kaili": "Nokadende",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Capung",
+    "kaili": "Dendereu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Jalan pelan-pelan dan berdiam",
+    "kaili": "Nompedengga",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Gemerincing seperti cangkir di baki",
+    "kaili": "Nosidenggu",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Rakus sekali",
+    "kaili": "Nadoko deo",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Tarian",
+    "kaili": "Dero",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Menari tarian adat",
+    "kaili": "Nodero",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Menyerupai",
+    "kaili": "Deva",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Tertarik hati untuk melihat, memiliki, menonton , dll",
+    "kaili": "Nadidi rara",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Membujuk",
+    "kaili": "Nompadidi",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Membujuk dengan rayuan",
+    "kaili": "Nompadi",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Membujuk dengan rayuan",
+    "kaili": "Nompadi rara",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Tertarik untuk melihat, memiliki, menonton, dll",
+    "kaili": "Nadidi rara",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  }
 ]

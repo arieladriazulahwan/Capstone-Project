@@ -4,12 +4,14 @@ import SidebarAdmin from "../components/SidebarAdmin";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 const API = `${API_BASE_URL}/api/admin`;
+const MAX_LESSON_IMAGE_SIZE = 10 * 1024 * 1024;
 
 const emptyLessonItem = {
   indo: "",
   kaili: "",
   tipe: "kosakata",
   category: "kata benda",
+  image: "",
 };
 
 const lessonCategories = {
@@ -154,6 +156,7 @@ function AdminMateri() {
               kaili: item.kaili || item.answer || "",
               tipe: item.tipe || "kosakata",
               category: item.category || getLessonCategories(lesson.bab)[0],
+              image: item.image || item.gambar || "",
             }))
           : [{ ...emptyLessonItem, category: getLessonCategories(lesson.bab)[0] }],
       });
@@ -168,6 +171,7 @@ function AdminMateri() {
         kaili: item.kaili.trim(),
         tipe: item.tipe.trim() || "materi",
         category: item.category.trim(),
+        image: (item.image || "").trim(),
       }))
       .filter((item) => item.indo && item.kaili && item.category);
 
@@ -219,6 +223,26 @@ function AdminMateri() {
           ? prev.items.filter((_, itemIndex) => itemIndex !== index)
           : prev.items,
     }));
+  };
+
+  const handleLessonImage = (index, file) => {
+    if (!file) return;
+
+    if (!file.type.startsWith("image/")) {
+      alert("File harus berupa gambar.");
+      return;
+    }
+
+    if (file.size > MAX_LESSON_IMAGE_SIZE) {
+      alert("Gambar maksimal 10MB.");
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      updateLessonItem(index, "image", reader.result || "");
+    };
+    reader.readAsDataURL(file);
   };
 
   const deleteLesson = async (lesson) => {
@@ -662,6 +686,38 @@ function AdminMateri() {
                                 </option>
                               ))}
                             </select>
+                          </div>
+
+                          <div className="md:col-span-2">
+                            <label className="text-xs font-medium text-gray-600 mb-1 block">
+                              Gambar
+                            </label>
+                            <input
+                              type="file"
+                              accept="image/*"
+                              onChange={(e) =>
+                                handleLessonImage(index, e.target.files?.[0])
+                              }
+                              className="w-full px-3 py-2 border rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-purple-400 bg-white"
+                            />
+                            {item.image && (
+                              <div className="mt-2 flex items-center gap-3">
+                                <img
+                                  src={item.image}
+                                  alt={item.indo || "Preview gambar"}
+                                  className="h-20 w-28 object-contain rounded-lg border bg-white"
+                                />
+                                <button
+                                  type="button"
+                                  onClick={() =>
+                                    updateLessonItem(index, "image", "")
+                                  }
+                                  className="text-xs font-semibold text-red-500"
+                                >
+                                  Hapus Gambar
+                                </button>
+                              </div>
+                            )}
                           </div>
                         </div>
                       </div>

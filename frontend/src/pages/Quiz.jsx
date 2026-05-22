@@ -281,6 +281,14 @@ function Quiz() {
 
           <h2 className="text-lg font-semibold mb-5">{current.question}</h2>
 
+          {current.image && (
+            <img
+              src={current.image}
+              alt={current.question}
+              className="w-full h-48 object-contain rounded-xl bg-gray-50 border border-gray-100 mb-5"
+            />
+          )}
+
           {hasOptions && (
             <div className="flex flex-col gap-3">
               {current.options?.map((opt, i) => (

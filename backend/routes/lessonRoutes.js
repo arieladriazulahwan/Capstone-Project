@@ -3,7 +3,6 @@ const router = express.Router();
 
 const fs = require("fs");
 const path = require("path");
-const { generateVocabLessons } = require("../utils/vocabQuestionGenerator");
 const validDialects = ["ledo", "rai"];
 
 // 🔥 GET LESSON BERDASARKAN DIALEK & BAB
@@ -17,14 +16,11 @@ router.get("/:dialect/:bab", (req, res) => {
   }
 
   try {
-    // contoh:
-    // data/lesson/ledo/bab1.json
     const filePath = path.join(
       __dirname,
       `../data/lesson/${dialect}/${bab}.json`
     );
 
-    // cek file ada
     if (!fs.existsSync(filePath)) {
       return res.status(404).json({
         message: "Lesson tidak ditemukan",
@@ -32,13 +28,7 @@ router.get("/:dialect/:bab", (req, res) => {
     }
 
     const data = JSON.parse(fs.readFileSync(filePath));
-    const vocabLessons = generateVocabLessons({
-      dialect,
-      bab,
-      startId: 40000,
-    });
-
-    res.json([...data, ...vocabLessons]);
+    res.json(data);
 
   } catch (err) {
     console.log(err);

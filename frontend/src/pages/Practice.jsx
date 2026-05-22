@@ -160,6 +160,14 @@ function Practice() {
 
           <h2 className="text-lg font-semibold mb-5">{current.question}</h2>
 
+          {current.image && (
+            <img
+              src={current.image}
+              alt={current.question}
+              className="w-full h-48 object-contain rounded-xl bg-gray-50 border border-gray-100 mb-5"
+            />
+          )}
+
           <div className="grid grid-cols-2 gap-3">
             {options.map((option, i) => (
               <button

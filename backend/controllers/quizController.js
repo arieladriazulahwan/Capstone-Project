@@ -1,6 +1,5 @@
 const fs = require("fs");
 const path = require("path");
-const { generateVocabQuestions } = require("../utils/vocabQuestionGenerator");
 
 const quizPath = path.join(__dirname, "../data/quiz.json");
 const validDialects = ["ledo", "rai"];
@@ -27,17 +26,6 @@ exports.getQuiz = (req, res) => {
     result = result.filter(
       (q) => q.bab.toLowerCase() === bab.toLowerCase()
     );
-  }
-
-  if (dialect && bab) {
-    const vocabQuestions = generateVocabQuestions({
-      dialect,
-      bab,
-      type: "quiz",
-      startId: 30000,
-    });
-
-    result = [...result, ...vocabQuestions];
   }
 
   res.json(result);
