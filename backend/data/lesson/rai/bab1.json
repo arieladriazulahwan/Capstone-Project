@@ -1,22 +1,122 @@
 [
-  { "indo": "Rumah", "kaili": "Banua", "tipe": "kosakata", "category": "kata benda" },
-  { "indo": "Air", "kaili": "Oe", "tipe": "kosakata", "category": "kata benda" },
-  { "indo": "Makan", "kaili": "Kande", "tipe": "kosakata", "category": "kata kerja" },
-  { "indo": "Pergi", "kaili": "Lau", "tipe": "kosakata", "category": "kata kerja" },
-  { "indo": "Baik", "kaili": "Mabelo", "tipe": "kosakata", "category": "kata sifat" },
-  { "indo": "Besar", "kaili": "Lompe", "tipe": "kosakata", "category": "kata sifat" },
-  { "indo": "Pagi", "kaili": "Mongga pagi", "tipe": "kosakata", "category": "kata keterangan" },
-  { "indo": "Di sini", "kaili": "Ri sei", "tipe": "kosakata", "category": "kata keterangan" },
-  { "indo": "Saya", "kaili": "Inggu", "tipe": "kosakata", "category": "kata ganti" },
-  { "indo": "Kamu", "kaili": "Iko", "tipe": "kosakata", "category": "kata ganti" },
-  { "indo": "Di", "kaili": "Ri", "tipe": "kosakata", "category": "kata depan" },
-  { "indo": "Ke", "kaili": "Lau", "tipe": "kosakata", "category": "kata depan" },
-  { "indo": "Dan", "kaili": "Ante", "tipe": "kosakata", "category": "kata sambung" },
-  { "indo": "Atau", "kaili": "Atau", "tipe": "kosakata", "category": "kata sambung" },
-  { "indo": "Satu", "kaili": "Sangu", "tipe": "kosakata", "category": "kata bilangan" },
-  { "indo": "Dua", "kaili": "Rua", "tipe": "kosakata", "category": "kata bilangan" },
-  { "indo": "Halo", "kaili": "Hai", "tipe": "kosakata", "category": "kata seru" },
-  { "indo": "Wah", "kaili": "Wah", "tipe": "kosakata", "category": "kata seru" },
-  { "indo": "Si", "kaili": "I", "tipe": "kosakata", "category": "kata sandang" },
-  { "indo": "Sang", "kaili": "Nu", "tipe": "kosakata", "category": "kata sandang" }
+  {
+    "indo": "Rumah",
+    "kaili": "Banua",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Air",
+    "kaili": "Oe",
+    "tipe": "kosakata",
+    "category": "kata benda"
+  },
+  {
+    "indo": "Makan",
+    "kaili": "Kande",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Pergi",
+    "kaili": "Lau",
+    "tipe": "kosakata",
+    "category": "kata kerja"
+  },
+  {
+    "indo": "Baik",
+    "kaili": "Mabelo",
+    "tipe": "kosakata",
+    "category": "kata sifat"
+  },
+  {
+    "indo": "Besar",
+    "kaili": "Lompe",
+    "tipe": "kosakata",
+    "category": "kata sifat"
+  },
+  {
+    "indo": "Pagi",
+    "kaili": "Mongga pagi",
+    "tipe": "kosakata",
+    "category": "kata keterangan"
+  },
+  {
+    "indo": "Di sini",
+    "kaili": "Ri sei",
+    "tipe": "kosakata",
+    "category": "kata keterangan"
+  },
+  {
+    "indo": "Saya",
+    "kaili": "Inggu",
+    "tipe": "kosakata",
+    "category": "kata ganti"
+  },
+  {
+    "indo": "Kamu",
+    "kaili": "Iko",
+    "tipe": "kosakata",
+    "category": "kata ganti"
+  },
+  {
+    "indo": "Di",
+    "kaili": "Ri",
+    "tipe": "kosakata",
+    "category": "kata depan"
+  },
+  {
+    "indo": "Ke",
+    "kaili": "Lau",
+    "tipe": "kosakata",
+    "category": "kata depan"
+  },
+  {
+    "indo": "Dan",
+    "kaili": "Ante",
+    "tipe": "kosakata",
+    "category": "kata sambung"
+  },
+  {
+    "indo": "Atau",
+    "kaili": "Atau",
+    "tipe": "kosakata",
+    "category": "kata sambung"
+  },
+  {
+    "indo": "Satu",
+    "kaili": "Sangu",
+    "tipe": "kosakata",
+    "category": "kata bilangan"
+  },
+  {
+    "indo": "Dua",
+    "kaili": "Rua",
+    "tipe": "kosakata",
+    "category": "kata bilangan"
+  },
+  {
+    "indo": "Halo",
+    "kaili": "Hai",
+    "tipe": "kosakata",
+    "category": "kata seru"
+  },
+  {
+    "indo": "Wah",
+    "kaili": "Wah",
+    "tipe": "kosakata",
+    "category": "kata seru"
+  },
+  {
+    "indo": "Si",
+    "kaili": "I",
+    "tipe": "kosakata",
+    "category": "kata sandang"
+  },
+  {
+    "indo": "Sang",
+    "kaili": "Nu",
+    "tipe": "kosakata",
+    "category": "kata sandang"
+  }
 ]

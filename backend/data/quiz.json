@@ -1,28 +1,3105 @@
 [
-  { "id": 1, "dialect": "ledo", "bab": "bab1", "category": "kata benda", "question": "Kata 'Banua' termasuk kategori apa?", "options": ["Kata benda", "Kata kerja", "Kata sifat", "Kata seru"], "answer": "Kata benda" },
-  { "id": 2, "dialect": "ledo", "bab": "bab1", "category": "kata kerja", "question": "Kata kerja untuk 'makan' adalah?", "options": ["Ngande", "Banua", "Mabelo", "Yaku"], "answer": "Ngande" },
-  { "id": 3, "dialect": "ledo", "bab": "bab1", "category": "kata sifat", "question": "Apa arti 'Mabelo'?", "options": ["Baik", "Saya", "Dan", "Dua"], "answer": "Baik" },
-  { "id": 4, "dialect": "ledo", "bab": "bab1", "category": "kata keterangan", "question": "Kata keterangan waktu untuk morning adalah?", "options": ["Pagi", "Ante", "I", "Rua"], "answer": "Pagi" },
-  { "id": 5, "dialect": "ledo", "bab": "bab1", "category": "kata ganti", "question": "Apa arti 'Yaku'?", "options": ["Saya", "Kamu", "Dia", "Mereka"], "answer": "Saya" },
-  { "id": 6, "dialect": "ledo", "bab": "bab1", "category": "kata depan", "question": "Apa arti 'Ri'?", "options": ["Di", "Dan", "Si", "Wah"], "answer": "Di" },
-  { "id": 7, "dialect": "ledo", "bab": "bab1", "category": "kata sambung", "question": "Apa arti 'Ante'?", "options": ["Dan", "Di", "Ke", "Satu"], "answer": "Dan" },
-  { "id": 8, "dialect": "ledo", "bab": "bab1", "category": "kata bilangan", "question": "Apa arti 'Sangu'?", "options": ["Satu", "Dua", "Tiga", "Empat"], "answer": "Satu" },
-  { "id": 9, "dialect": "ledo", "bab": "bab1", "category": "kata seru", "question": "Kata untuk menyapa adalah?", "options": ["Halo", "Ri", "Ngande", "Banua"], "answer": "Halo" },
-  { "id": 10, "dialect": "ledo", "bab": "bab1", "category": "kata sandang", "question": "Kata sandang untuk 'si' adalah?", "options": ["I", "Ante", "Ue", "Rua"], "answer": "I" },
-
-  { "id": 11, "dialect": "rai", "bab": "bab1", "category": "kata benda", "question": "Kata 'Oe' berarti?", "options": ["Air", "Rumah", "Saya", "Dan"], "answer": "Air" },
-  { "id": 12, "dialect": "rai", "bab": "bab1", "category": "kata kerja", "question": "Kata kerja untuk 'makan' adalah?", "options": ["Kande", "Banua", "Mabelo", "Inggu"], "answer": "Kande" },
-  { "id": 13, "dialect": "rai", "bab": "bab1", "category": "kata sifat", "question": "Apa arti 'Mabelo'?", "options": ["Baik", "Saya", "Dan", "Dua"], "answer": "Baik" },
-  { "id": 14, "dialect": "rai", "bab": "bab1", "category": "kata keterangan", "question": "Apa arti 'Mongga pagi'?", "options": ["Pagi", "Dan", "Si", "Dua"], "answer": "Pagi" },
-  { "id": 15, "dialect": "rai", "bab": "bab1", "category": "kata ganti", "question": "Apa arti 'Inggu'?", "options": ["Saya", "Kamu", "Dia", "Mereka"], "answer": "Saya" },
-  { "id": 16, "dialect": "rai", "bab": "bab1", "category": "kata depan", "question": "Apa arti 'Ri'?", "options": ["Di", "Dan", "Si", "Wah"], "answer": "Di" },
-  { "id": 17, "dialect": "rai", "bab": "bab1", "category": "kata sambung", "question": "Apa arti 'Ante'?", "options": ["Dan", "Di", "Ke", "Satu"], "answer": "Dan" },
-  { "id": 18, "dialect": "rai", "bab": "bab1", "category": "kata bilangan", "question": "Apa arti 'Rua'?", "options": ["Dua", "Satu", "Tiga", "Empat"], "answer": "Dua" },
-  { "id": 19, "dialect": "rai", "bab": "bab1", "category": "kata seru", "question": "Kata untuk menyapa adalah?", "options": ["Hai", "Ri", "Kande", "Banua"], "answer": "Hai" },
-  { "id": 20, "dialect": "rai", "bab": "bab1", "category": "kata sandang", "question": "Kata sandang untuk 'si' adalah?", "options": ["I", "Ante", "Oe", "Rua"], "answer": "I" },
-
-  { "id": 21, "dialect": "ledo", "bab": "bab2", "category": "kalimat sederhana", "question": "Apa arti 'Yaku ngande pae'?", "options": ["Saya makan nasi", "Kamu pergi ke rumah", "Air itu baik", "Nama saya Yaku"], "answer": "Saya makan nasi" },
-  { "id": 22, "dialect": "rai", "bab": "bab2", "category": "kalimat sederhana", "question": "Apa arti 'Inggu kande pae'?", "options": ["Saya makan nasi", "Kamu pergi ke rumah", "Air itu baik", "Nama saya Inggu"], "answer": "Saya makan nasi" },
-  { "id": 23, "dialect": "ledo", "bab": "bab3", "category": "gambar kosakata", "question": "Gambar rumah cocok dengan kata?", "options": ["Banua", "Ue", "Ngande", "Nalau"], "answer": "Banua" },
-  { "id": 24, "dialect": "rai", "bab": "bab3", "category": "gambar kosakata", "question": "Gambar air cocok dengan kata?", "options": ["Oe", "Banua", "Kande", "Lau"], "answer": "Oe" }
+  {
+    "id": 1,
+    "dialect": "ledo",
+    "bab": "bab1",
+    "category": "kata benda",
+    "question": "Susun jawaban: Kata 'Banua' termasuk kategori apa?",
+    "blocks": [
+      "Kata ",
+      "benda",
+      "Kata ",
+      "kerja",
+      "sifat"
+    ],
+    "answer": "Kata benda"
+  },
+  {
+    "id": 2,
+    "dialect": "ledo",
+    "bab": "bab1",
+    "category": "kata kerja",
+    "question": "Kata kerja untuk 'makan' adalah?",
+    "options": [
+      "Ngande",
+      "Banua",
+      "Mabelo",
+      "Yaku"
+    ],
+    "answer": "Ngande"
+  },
+  {
+    "id": 3,
+    "dialect": "ledo",
+    "bab": "bab1",
+    "category": "kata sifat",
+    "question": "Susun arti kata 'Mabelo'.",
+    "blocks": [
+      "Ba",
+      "ik",
+      "Sa",
+      "ya",
+      "Dan"
+    ],
+    "answer": "Baik"
+  },
+  {
+    "id": 4,
+    "dialect": "ledo",
+    "bab": "bab1",
+    "category": "kata keterangan",
+    "question": "Kata keterangan waktu untuk morning adalah?",
+    "options": [
+      "Pagi",
+      "Ante",
+      "I",
+      "Rua"
+    ],
+    "answer": "Pagi"
+  },
+  {
+    "id": 5,
+    "dialect": "ledo",
+    "bab": "bab1",
+    "category": "kata ganti",
+    "question": "Susun arti kata 'Yaku'.",
+    "blocks": [
+      "Sa",
+      "ya",
+      "Ka",
+      "mu",
+      "Dia"
+    ],
+    "answer": "Saya"
+  },
+  {
+    "id": 6,
+    "dialect": "ledo",
+    "bab": "bab1",
+    "category": "kata depan",
+    "question": "Apa arti 'Ri'?",
+    "options": [
+      "Di",
+      "Dan",
+      "Si",
+      "Wah"
+    ],
+    "answer": "Di"
+  },
+  {
+    "id": 7,
+    "dialect": "ledo",
+    "bab": "bab1",
+    "category": "kata sambung",
+    "question": "Susun arti kata 'Ante'.",
+    "blocks": [
+      "Da",
+      "n",
+      "Di",
+      "Ke",
+      "Si"
+    ],
+    "answer": "Dan"
+  },
+  {
+    "id": 8,
+    "dialect": "ledo",
+    "bab": "bab1",
+    "category": "kata bilangan",
+    "question": "Apa arti 'Sangu'?",
+    "options": [
+      "Satu",
+      "Dua",
+      "Tiga",
+      "Empat"
+    ],
+    "answer": "Satu"
+  },
+  {
+    "id": 9,
+    "dialect": "ledo",
+    "bab": "bab1",
+    "category": "kata seru",
+    "question": "Susun kata seru untuk menyapa.",
+    "blocks": [
+      "Ha",
+      "lo",
+      "Ba",
+      "nua",
+      "Ri"
+    ],
+    "answer": "Halo"
+  },
+  {
+    "id": 10,
+    "dialect": "ledo",
+    "bab": "bab1",
+    "category": "kata sandang",
+    "question": "Kata sandang untuk 'si' adalah?",
+    "options": [
+      "I",
+      "Ante",
+      "Ue",
+      "Rua"
+    ],
+    "answer": "I"
+  },
+  {
+    "id": 11,
+    "dialect": "rai",
+    "bab": "bab1",
+    "category": "kata benda",
+    "question": "Susun arti kata 'Oe'.",
+    "blocks": [
+      "A",
+      "ir",
+      "Ru",
+      "mah",
+      "Dan"
+    ],
+    "answer": "Air"
+  },
+  {
+    "id": 12,
+    "dialect": "rai",
+    "bab": "bab1",
+    "category": "kata kerja",
+    "question": "Kata kerja untuk 'makan' adalah?",
+    "options": [
+      "Kande",
+      "Banua",
+      "Mabelo",
+      "Inggu"
+    ],
+    "answer": "Kande"
+  },
+  {
+    "id": 13,
+    "dialect": "rai",
+    "bab": "bab1",
+    "category": "kata sifat",
+    "question": "Susun arti kata 'Mabelo'.",
+    "blocks": [
+      "Ba",
+      "ik",
+      "Sa",
+      "ya",
+      "Dan"
+    ],
+    "answer": "Baik"
+  },
+  {
+    "id": 14,
+    "dialect": "rai",
+    "bab": "bab1",
+    "category": "kata keterangan",
+    "question": "Apa arti 'Mongga pagi'?",
+    "options": [
+      "Pagi",
+      "Dan",
+      "Si",
+      "Dua"
+    ],
+    "answer": "Pagi"
+  },
+  {
+    "id": 15,
+    "dialect": "rai",
+    "bab": "bab1",
+    "category": "kata ganti",
+    "question": "Susun arti kata 'Inggu'.",
+    "blocks": [
+      "Sa",
+      "ya",
+      "Ka",
+      "mu",
+      "Dia"
+    ],
+    "answer": "Saya"
+  },
+  {
+    "id": 16,
+    "dialect": "rai",
+    "bab": "bab1",
+    "category": "kata depan",
+    "question": "Apa arti 'Ri'?",
+    "options": [
+      "Di",
+      "Dan",
+      "Si",
+      "Wah"
+    ],
+    "answer": "Di"
+  },
+  {
+    "id": 17,
+    "dialect": "rai",
+    "bab": "bab1",
+    "category": "kata sambung",
+    "question": "Susun arti kata 'Ante'.",
+    "blocks": [
+      "Da",
+      "n",
+      "Di",
+      "Ke",
+      "Si"
+    ],
+    "answer": "Dan"
+  },
+  {
+    "id": 18,
+    "dialect": "rai",
+    "bab": "bab1",
+    "category": "kata bilangan",
+    "question": "Apa arti 'Rua'?",
+    "options": [
+      "Dua",
+      "Satu",
+      "Tiga",
+      "Empat"
+    ],
+    "answer": "Dua"
+  },
+  {
+    "id": 19,
+    "dialect": "rai",
+    "bab": "bab1",
+    "category": "kata seru",
+    "question": "Susun kata untuk menyapa.",
+    "blocks": [
+      "Ha",
+      "i",
+      "Kan",
+      "de",
+      "Ri"
+    ],
+    "answer": "Hai"
+  },
+  {
+    "id": 20,
+    "dialect": "rai",
+    "bab": "bab1",
+    "category": "kata sandang",
+    "question": "Kata sandang untuk 'si' adalah?",
+    "options": [
+      "I",
+      "Ante",
+      "Oe",
+      "Rua"
+    ],
+    "answer": "I"
+  },
+  {
+    "id": 23,
+    "dialect": "ledo",
+    "bab": "bab3",
+    "category": "gambar kosakata",
+    "question": "Gambar rumah cocok dengan kata?",
+    "options": [
+      "Banua",
+      "Ue",
+      "Ngande",
+      "Nalau"
+    ],
+    "answer": "Banua"
+  },
+  {
+    "id": 24,
+    "dialect": "rai",
+    "bab": "bab3",
+    "category": "gambar kosakata",
+    "question": "Susun kata Kaili Rai untuk air.",
+    "blocks": [
+      "O",
+      "e",
+      "Ba",
+      "nua",
+      "Kan"
+    ],
+    "answer": "Oe"
+  },
+  {
+    "id": 21000,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat sederhana",
+    "answer": "Nama saya Yaku",
+    "question": "Susun arti kalimat 'Ngaranaku Yaku'.",
+    "blocks": [
+      "Nama ",
+      "saya ",
+      "Yaku"
+    ]
+  },
+  {
+    "id": 21001,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat sederhana",
+    "answer": "Saya makan nasi",
+    "question": "Apa arti 'Yaku ngande pae'?",
+    "options": [
+      "Saya makan nasi",
+      "Nama saya Yaku",
+      "Kamu pergi ke rumah",
+      "Air itu baik"
+    ]
+  },
+  {
+    "id": 21002,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat sederhana",
+    "answer": "Kamu pergi ke rumah",
+    "question": "Apa arti 'Ngana nalau lau banua'?",
+    "options": [
+      "Kamu pergi ke rumah",
+      "Nama saya Yaku",
+      "Saya makan nasi",
+      "Air itu baik"
+    ]
+  },
+  {
+    "id": 21003,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat sederhana",
+    "answer": "Air itu baik",
+    "question": "Susun arti kalimat 'Ue ia mabelo'.",
+    "blocks": [
+      "Air ",
+      "itu ",
+      "baik"
+    ]
+  },
+  {
+    "id": 21004,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat sederhana",
+    "answer": "Nama saya Yaku",
+    "question": "Apa arti 'Ngaranaku Yaku'?",
+    "options": [
+      "Nama saya Yaku",
+      "Saya makan nasi",
+      "Kamu pergi ke rumah",
+      "Air itu baik"
+    ]
+  },
+  {
+    "id": 21005,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat sederhana",
+    "answer": "Saya makan nasi",
+    "question": "Apa arti 'Yaku ngande pae'?",
+    "options": [
+      "Saya makan nasi",
+      "Nama saya Yaku",
+      "Kamu pergi ke rumah",
+      "Air itu baik"
+    ]
+  },
+  {
+    "id": 21006,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat sederhana",
+    "answer": "Kamu pergi ke rumah",
+    "question": "Susun arti kalimat 'Ngana nalau lau banua'.",
+    "blocks": [
+      "Kamu ",
+      "pergi ",
+      "ke ",
+      "rumah"
+    ]
+  },
+  {
+    "id": 21007,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat sederhana",
+    "answer": "Air itu baik",
+    "question": "Apa arti 'Ue ia mabelo'?",
+    "options": [
+      "Air itu baik",
+      "Nama saya Yaku",
+      "Saya makan nasi",
+      "Kamu pergi ke rumah"
+    ]
+  },
+  {
+    "id": 21008,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat sederhana",
+    "answer": "Nama saya Yaku",
+    "question": "Apa arti 'Ngaranaku Yaku'?",
+    "options": [
+      "Nama saya Yaku",
+      "Saya makan nasi",
+      "Kamu pergi ke rumah",
+      "Air itu baik"
+    ]
+  },
+  {
+    "id": 21009,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat sederhana",
+    "answer": "Saya makan nasi",
+    "question": "Susun arti kalimat 'Yaku ngande pae'.",
+    "blocks": [
+      "Saya ",
+      "makan ",
+      "nasi"
+    ]
+  },
+  {
+    "id": 21010,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat berita",
+    "answer": "Ibu memasak nasi",
+    "question": "Susun arti kalimat 'Ina nompaju pae'.",
+    "blocks": [
+      "Ibu ",
+      "memasak ",
+      "nasi"
+    ]
+  },
+  {
+    "id": 21011,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat berita",
+    "answer": "Ayah pergi ke kebun",
+    "question": "Apa arti 'Papa nalau lau talua'?",
+    "options": [
+      "Ayah pergi ke kebun",
+      "Ibu memasak nasi",
+      "Rumah itu besar",
+      "Anak itu belajar"
+    ]
+  },
+  {
+    "id": 21012,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat berita",
+    "answer": "Rumah itu besar",
+    "question": "Apa arti 'Banua ia lompe'?",
+    "options": [
+      "Rumah itu besar",
+      "Ibu memasak nasi",
+      "Ayah pergi ke kebun",
+      "Anak itu belajar"
+    ]
+  },
+  {
+    "id": 21013,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat berita",
+    "answer": "Anak itu belajar",
+    "question": "Susun arti kalimat 'Ana ia noajari'.",
+    "blocks": [
+      "Anak ",
+      "itu ",
+      "belajar"
+    ]
+  },
+  {
+    "id": 21014,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat berita",
+    "answer": "Ibu memasak nasi",
+    "question": "Apa arti 'Ina nompaju pae'?",
+    "options": [
+      "Ibu memasak nasi",
+      "Ayah pergi ke kebun",
+      "Rumah itu besar",
+      "Anak itu belajar"
+    ]
+  },
+  {
+    "id": 21015,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat berita",
+    "answer": "Ayah pergi ke kebun",
+    "question": "Apa arti 'Papa nalau lau talua'?",
+    "options": [
+      "Ayah pergi ke kebun",
+      "Ibu memasak nasi",
+      "Rumah itu besar",
+      "Anak itu belajar"
+    ]
+  },
+  {
+    "id": 21016,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat berita",
+    "answer": "Rumah itu besar",
+    "question": "Susun arti kalimat 'Banua ia lompe'.",
+    "blocks": [
+      "Rumah ",
+      "itu ",
+      "besar"
+    ]
+  },
+  {
+    "id": 21017,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat berita",
+    "answer": "Anak itu belajar",
+    "question": "Apa arti 'Ana ia noajari'?",
+    "options": [
+      "Anak itu belajar",
+      "Ibu memasak nasi",
+      "Ayah pergi ke kebun",
+      "Rumah itu besar"
+    ]
+  },
+  {
+    "id": 21018,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat berita",
+    "answer": "Ibu memasak nasi",
+    "question": "Apa arti 'Ina nompaju pae'?",
+    "options": [
+      "Ibu memasak nasi",
+      "Ayah pergi ke kebun",
+      "Rumah itu besar",
+      "Anak itu belajar"
+    ]
+  },
+  {
+    "id": 21019,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat berita",
+    "answer": "Ayah pergi ke kebun",
+    "question": "Susun arti kalimat 'Papa nalau lau talua'.",
+    "blocks": [
+      "Ayah ",
+      "pergi ",
+      "ke ",
+      "kebun"
+    ]
+  },
+  {
+    "id": 21020,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat tanya",
+    "answer": "Siapa nama kamu?",
+    "question": "Susun arti kalimat 'Nisei ngaranamu?'.",
+    "blocks": [
+      "Siapa ",
+      "nama ",
+      "kamu?"
+    ]
+  },
+  {
+    "id": 21021,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat tanya",
+    "answer": "Apa kamu makan nasi?",
+    "question": "Apa arti 'Ngapa ngana ngande pae?'?",
+    "options": [
+      "Apa kamu makan nasi?",
+      "Siapa nama kamu?",
+      "Di mana rumah kamu?",
+      "Kapan kamu pergi?"
+    ]
+  },
+  {
+    "id": 21022,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat tanya",
+    "answer": "Di mana rumah kamu?",
+    "question": "Apa arti 'Ri apa banuamu?'?",
+    "options": [
+      "Di mana rumah kamu?",
+      "Siapa nama kamu?",
+      "Apa kamu makan nasi?",
+      "Kapan kamu pergi?"
+    ]
+  },
+  {
+    "id": 21023,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat tanya",
+    "answer": "Kapan kamu pergi?",
+    "question": "Susun arti kalimat 'Nakuya ngana nalau?'.",
+    "blocks": [
+      "Kapan ",
+      "kamu ",
+      "pergi?"
+    ]
+  },
+  {
+    "id": 21024,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat tanya",
+    "answer": "Siapa nama kamu?",
+    "question": "Apa arti 'Nisei ngaranamu?'?",
+    "options": [
+      "Siapa nama kamu?",
+      "Apa kamu makan nasi?",
+      "Di mana rumah kamu?",
+      "Kapan kamu pergi?"
+    ]
+  },
+  {
+    "id": 21025,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat tanya",
+    "answer": "Apa kamu makan nasi?",
+    "question": "Apa arti 'Ngapa ngana ngande pae?'?",
+    "options": [
+      "Apa kamu makan nasi?",
+      "Siapa nama kamu?",
+      "Di mana rumah kamu?",
+      "Kapan kamu pergi?"
+    ]
+  },
+  {
+    "id": 21026,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat tanya",
+    "answer": "Di mana rumah kamu?",
+    "question": "Susun arti kalimat 'Ri apa banuamu?'.",
+    "blocks": [
+      "Di ",
+      "mana ",
+      "rumah ",
+      "kamu?"
+    ]
+  },
+  {
+    "id": 21027,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat tanya",
+    "answer": "Kapan kamu pergi?",
+    "question": "Apa arti 'Nakuya ngana nalau?'?",
+    "options": [
+      "Kapan kamu pergi?",
+      "Siapa nama kamu?",
+      "Apa kamu makan nasi?",
+      "Di mana rumah kamu?"
+    ]
+  },
+  {
+    "id": 21028,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat tanya",
+    "answer": "Siapa nama kamu?",
+    "question": "Apa arti 'Nisei ngaranamu?'?",
+    "options": [
+      "Siapa nama kamu?",
+      "Apa kamu makan nasi?",
+      "Di mana rumah kamu?",
+      "Kapan kamu pergi?"
+    ]
+  },
+  {
+    "id": 21029,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat tanya",
+    "answer": "Apa kamu makan nasi?",
+    "question": "Susun arti kalimat 'Ngapa ngana ngande pae?'.",
+    "blocks": [
+      "Apa ",
+      "kamu ",
+      "makan ",
+      "nasi?"
+    ]
+  },
+  {
+    "id": 21030,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat perintah",
+    "answer": "Makanlah nasi itu",
+    "question": "Susun arti kalimat 'Ngande pae ia'.",
+    "blocks": [
+      "Makanlah ",
+      "nasi ",
+      "itu"
+    ]
+  },
+  {
+    "id": 21031,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat perintah",
+    "answer": "Pergilah ke rumah",
+    "question": "Apa arti 'Nalau lau banua'?",
+    "options": [
+      "Pergilah ke rumah",
+      "Makanlah nasi itu",
+      "Duduklah di sini",
+      "Ambil air itu"
+    ]
+  },
+  {
+    "id": 21032,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat perintah",
+    "answer": "Duduklah di sini",
+    "question": "Apa arti 'Motiro ri sei'?",
+    "options": [
+      "Duduklah di sini",
+      "Makanlah nasi itu",
+      "Pergilah ke rumah",
+      "Ambil air itu"
+    ]
+  },
+  {
+    "id": 21033,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat perintah",
+    "answer": "Ambil air itu",
+    "question": "Susun arti kalimat 'Ala ue ia'.",
+    "blocks": [
+      "Ambil ",
+      "air ",
+      "itu"
+    ]
+  },
+  {
+    "id": 21034,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat perintah",
+    "answer": "Makanlah nasi itu",
+    "question": "Apa arti 'Ngande pae ia'?",
+    "options": [
+      "Makanlah nasi itu",
+      "Pergilah ke rumah",
+      "Duduklah di sini",
+      "Ambil air itu"
+    ]
+  },
+  {
+    "id": 21035,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat perintah",
+    "answer": "Pergilah ke rumah",
+    "question": "Apa arti 'Nalau lau banua'?",
+    "options": [
+      "Pergilah ke rumah",
+      "Makanlah nasi itu",
+      "Duduklah di sini",
+      "Ambil air itu"
+    ]
+  },
+  {
+    "id": 21036,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat perintah",
+    "answer": "Duduklah di sini",
+    "question": "Susun arti kalimat 'Motiro ri sei'.",
+    "blocks": [
+      "Duduklah ",
+      "di ",
+      "sini"
+    ]
+  },
+  {
+    "id": 21037,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat perintah",
+    "answer": "Ambil air itu",
+    "question": "Apa arti 'Ala ue ia'?",
+    "options": [
+      "Ambil air itu",
+      "Makanlah nasi itu",
+      "Pergilah ke rumah",
+      "Duduklah di sini"
+    ]
+  },
+  {
+    "id": 21038,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat perintah",
+    "answer": "Makanlah nasi itu",
+    "question": "Apa arti 'Ngande pae ia'?",
+    "options": [
+      "Makanlah nasi itu",
+      "Pergilah ke rumah",
+      "Duduklah di sini",
+      "Ambil air itu"
+    ]
+  },
+  {
+    "id": 21039,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat perintah",
+    "answer": "Pergilah ke rumah",
+    "question": "Susun arti kalimat 'Nalau lau banua'.",
+    "blocks": [
+      "Pergilah ",
+      "ke ",
+      "rumah"
+    ]
+  },
+  {
+    "id": 21040,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat seruan",
+    "answer": "Wah, rumah itu besar!",
+    "question": "Susun arti kalimat 'Wah, banua ia lompe!'.",
+    "blocks": [
+      "Wah, ",
+      "rumah ",
+      "itu ",
+      "besar!"
+    ]
+  },
+  {
+    "id": 21041,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat seruan",
+    "answer": "Aduh, air itu dingin!",
+    "question": "Apa arti 'Adu, ue ia nindi!'?",
+    "options": [
+      "Aduh, air itu dingin!",
+      "Wah, rumah itu besar!",
+      "Bagus sekali pekerjaanmu!",
+      "Hai, datanglah ke sini!"
+    ]
+  },
+  {
+    "id": 21042,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat seruan",
+    "answer": "Bagus sekali pekerjaanmu!",
+    "question": "Apa arti 'Mabelo tuu penggawemu!'?",
+    "options": [
+      "Bagus sekali pekerjaanmu!",
+      "Wah, rumah itu besar!",
+      "Aduh, air itu dingin!",
+      "Hai, datanglah ke sini!"
+    ]
+  },
+  {
+    "id": 21043,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat seruan",
+    "answer": "Hai, datanglah ke sini!",
+    "question": "Susun arti kalimat 'Halo, rata ri sei!'.",
+    "blocks": [
+      "Hai, ",
+      "datanglah ",
+      "ke ",
+      "sini!"
+    ]
+  },
+  {
+    "id": 21044,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat seruan",
+    "answer": "Wah, rumah itu besar!",
+    "question": "Apa arti 'Wah, banua ia lompe!'?",
+    "options": [
+      "Wah, rumah itu besar!",
+      "Aduh, air itu dingin!",
+      "Bagus sekali pekerjaanmu!",
+      "Hai, datanglah ke sini!"
+    ]
+  },
+  {
+    "id": 21045,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat seruan",
+    "answer": "Aduh, air itu dingin!",
+    "question": "Apa arti 'Adu, ue ia nindi!'?",
+    "options": [
+      "Aduh, air itu dingin!",
+      "Wah, rumah itu besar!",
+      "Bagus sekali pekerjaanmu!",
+      "Hai, datanglah ke sini!"
+    ]
+  },
+  {
+    "id": 21046,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat seruan",
+    "answer": "Bagus sekali pekerjaanmu!",
+    "question": "Susun arti kalimat 'Mabelo tuu penggawemu!'.",
+    "blocks": [
+      "Bagus ",
+      "sekali ",
+      "pekerjaanmu!"
+    ]
+  },
+  {
+    "id": 21047,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat seruan",
+    "answer": "Hai, datanglah ke sini!",
+    "question": "Apa arti 'Halo, rata ri sei!'?",
+    "options": [
+      "Hai, datanglah ke sini!",
+      "Wah, rumah itu besar!",
+      "Aduh, air itu dingin!",
+      "Bagus sekali pekerjaanmu!"
+    ]
+  },
+  {
+    "id": 21048,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat seruan",
+    "answer": "Wah, rumah itu besar!",
+    "question": "Apa arti 'Wah, banua ia lompe!'?",
+    "options": [
+      "Wah, rumah itu besar!",
+      "Aduh, air itu dingin!",
+      "Bagus sekali pekerjaanmu!",
+      "Hai, datanglah ke sini!"
+    ]
+  },
+  {
+    "id": 21049,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat seruan",
+    "answer": "Aduh, air itu dingin!",
+    "question": "Susun arti kalimat 'Adu, ue ia nindi!'.",
+    "blocks": [
+      "Aduh, ",
+      "air ",
+      "itu ",
+      "dingin!"
+    ]
+  },
+  {
+    "id": 21050,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat tunggal",
+    "answer": "Saya tidur",
+    "question": "Susun arti kalimat 'Yaku moturi'.",
+    "blocks": [
+      "Saya ",
+      "tidur"
+    ]
+  },
+  {
+    "id": 21051,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat tunggal",
+    "answer": "Ibu datang",
+    "question": "Apa arti 'Ina rata'?",
+    "options": [
+      "Ibu datang",
+      "Saya tidur",
+      "Anak makan",
+      "Air mengalir"
+    ]
+  },
+  {
+    "id": 21052,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat tunggal",
+    "answer": "Anak makan",
+    "question": "Apa arti 'Ana ngande'?",
+    "options": [
+      "Anak makan",
+      "Saya tidur",
+      "Ibu datang",
+      "Air mengalir"
+    ]
+  },
+  {
+    "id": 21053,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat tunggal",
+    "answer": "Air mengalir",
+    "question": "Susun arti kalimat 'Ue noili'.",
+    "blocks": [
+      "Air ",
+      "mengalir"
+    ]
+  },
+  {
+    "id": 21054,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat tunggal",
+    "answer": "Saya tidur",
+    "question": "Apa arti 'Yaku moturi'?",
+    "options": [
+      "Saya tidur",
+      "Ibu datang",
+      "Anak makan",
+      "Air mengalir"
+    ]
+  },
+  {
+    "id": 21055,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat tunggal",
+    "answer": "Ibu datang",
+    "question": "Apa arti 'Ina rata'?",
+    "options": [
+      "Ibu datang",
+      "Saya tidur",
+      "Anak makan",
+      "Air mengalir"
+    ]
+  },
+  {
+    "id": 21056,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat tunggal",
+    "answer": "Anak makan",
+    "question": "Susun arti kalimat 'Ana ngande'.",
+    "blocks": [
+      "Anak ",
+      "makan"
+    ]
+  },
+  {
+    "id": 21057,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat tunggal",
+    "answer": "Air mengalir",
+    "question": "Apa arti 'Ue noili'?",
+    "options": [
+      "Air mengalir",
+      "Saya tidur",
+      "Ibu datang",
+      "Anak makan"
+    ]
+  },
+  {
+    "id": 21058,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat tunggal",
+    "answer": "Saya tidur",
+    "question": "Apa arti 'Yaku moturi'?",
+    "options": [
+      "Saya tidur",
+      "Ibu datang",
+      "Anak makan",
+      "Air mengalir"
+    ]
+  },
+  {
+    "id": 21059,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat tunggal",
+    "answer": "Ibu datang",
+    "question": "Susun arti kalimat 'Ina rata'.",
+    "blocks": [
+      "Ibu ",
+      "datang"
+    ]
+  },
+  {
+    "id": 21060,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat majemuk setara",
+    "answer": "Saya makan nasi dan kamu minum air",
+    "question": "Susun arti kalimat 'Yaku ngande pae ante ngana noinu ue'.",
+    "blocks": [
+      "Saya ",
+      "makan ",
+      "nasi ",
+      "dan ",
+      "kamu ",
+      "minum ",
+      "air"
+    ]
+  },
+  {
+    "id": 21061,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat majemuk setara",
+    "answer": "Ibu memasak dan ayah bekerja",
+    "question": "Apa arti 'Ina nompaju ante papa mogavi'?",
+    "options": [
+      "Ibu memasak dan ayah bekerja",
+      "Saya makan nasi dan kamu minum air",
+      "Saya pergi tetapi kamu tinggal",
+      "Anak belajar dan guru mengajar"
+    ]
+  },
+  {
+    "id": 21062,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat majemuk setara",
+    "answer": "Saya pergi tetapi kamu tinggal",
+    "question": "Apa arti 'Yaku nalau tapi ngana tomo'?",
+    "options": [
+      "Saya pergi tetapi kamu tinggal",
+      "Saya makan nasi dan kamu minum air",
+      "Ibu memasak dan ayah bekerja",
+      "Anak belajar dan guru mengajar"
+    ]
+  },
+  {
+    "id": 21063,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat majemuk setara",
+    "answer": "Anak belajar dan guru mengajar",
+    "question": "Susun arti kalimat 'Ana noajari ante guru nompajari'.",
+    "blocks": [
+      "Anak ",
+      "belajar ",
+      "dan ",
+      "guru ",
+      "mengajar"
+    ]
+  },
+  {
+    "id": 21064,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat majemuk setara",
+    "answer": "Saya makan nasi dan kamu minum air",
+    "question": "Apa arti 'Yaku ngande pae ante ngana noinu ue'?",
+    "options": [
+      "Saya makan nasi dan kamu minum air",
+      "Ibu memasak dan ayah bekerja",
+      "Saya pergi tetapi kamu tinggal",
+      "Anak belajar dan guru mengajar"
+    ]
+  },
+  {
+    "id": 21065,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat majemuk setara",
+    "answer": "Ibu memasak dan ayah bekerja",
+    "question": "Apa arti 'Ina nompaju ante papa mogavi'?",
+    "options": [
+      "Ibu memasak dan ayah bekerja",
+      "Saya makan nasi dan kamu minum air",
+      "Saya pergi tetapi kamu tinggal",
+      "Anak belajar dan guru mengajar"
+    ]
+  },
+  {
+    "id": 21066,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat majemuk setara",
+    "answer": "Saya pergi tetapi kamu tinggal",
+    "question": "Susun arti kalimat 'Yaku nalau tapi ngana tomo'.",
+    "blocks": [
+      "Saya ",
+      "pergi ",
+      "tetapi ",
+      "kamu ",
+      "tinggal"
+    ]
+  },
+  {
+    "id": 21067,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat majemuk setara",
+    "answer": "Anak belajar dan guru mengajar",
+    "question": "Apa arti 'Ana noajari ante guru nompajari'?",
+    "options": [
+      "Anak belajar dan guru mengajar",
+      "Saya makan nasi dan kamu minum air",
+      "Ibu memasak dan ayah bekerja",
+      "Saya pergi tetapi kamu tinggal"
+    ]
+  },
+  {
+    "id": 21068,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat majemuk setara",
+    "answer": "Saya makan nasi dan kamu minum air",
+    "question": "Apa arti 'Yaku ngande pae ante ngana noinu ue'?",
+    "options": [
+      "Saya makan nasi dan kamu minum air",
+      "Ibu memasak dan ayah bekerja",
+      "Saya pergi tetapi kamu tinggal",
+      "Anak belajar dan guru mengajar"
+    ]
+  },
+  {
+    "id": 21069,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat majemuk setara",
+    "answer": "Ibu memasak dan ayah bekerja",
+    "question": "Susun arti kalimat 'Ina nompaju ante papa mogavi'.",
+    "blocks": [
+      "Ibu ",
+      "memasak ",
+      "dan ",
+      "ayah ",
+      "bekerja"
+    ]
+  },
+  {
+    "id": 21070,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat majemuk bertingkat",
+    "answer": "Saya makan karena lapar",
+    "question": "Susun arti kalimat 'Yaku ngande apa nalapa'.",
+    "blocks": [
+      "Saya ",
+      "makan ",
+      "karena ",
+      "lapar"
+    ]
+  },
+  {
+    "id": 21071,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat majemuk bertingkat",
+    "answer": "Kamu pergi ketika pagi",
+    "question": "Apa arti 'Ngana nalau tempo pagi'?",
+    "options": [
+      "Kamu pergi ketika pagi",
+      "Saya makan karena lapar",
+      "Ibu datang setelah ayah pergi",
+      "Anak belajar supaya pintar"
+    ]
+  },
+  {
+    "id": 21072,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat majemuk bertingkat",
+    "answer": "Ibu datang setelah ayah pergi",
+    "question": "Apa arti 'Ina rata moli papa nalau'?",
+    "options": [
+      "Ibu datang setelah ayah pergi",
+      "Saya makan karena lapar",
+      "Kamu pergi ketika pagi",
+      "Anak belajar supaya pintar"
+    ]
+  },
+  {
+    "id": 21073,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat majemuk bertingkat",
+    "answer": "Anak belajar supaya pintar",
+    "question": "Susun arti kalimat 'Ana noajari ala mabelo pangisi'.",
+    "blocks": [
+      "Anak ",
+      "belajar ",
+      "supaya ",
+      "pintar"
+    ]
+  },
+  {
+    "id": 21074,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat majemuk bertingkat",
+    "answer": "Saya makan karena lapar",
+    "question": "Apa arti 'Yaku ngande apa nalapa'?",
+    "options": [
+      "Saya makan karena lapar",
+      "Kamu pergi ketika pagi",
+      "Ibu datang setelah ayah pergi",
+      "Anak belajar supaya pintar"
+    ]
+  },
+  {
+    "id": 21075,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat majemuk bertingkat",
+    "answer": "Kamu pergi ketika pagi",
+    "question": "Apa arti 'Ngana nalau tempo pagi'?",
+    "options": [
+      "Kamu pergi ketika pagi",
+      "Saya makan karena lapar",
+      "Ibu datang setelah ayah pergi",
+      "Anak belajar supaya pintar"
+    ]
+  },
+  {
+    "id": 21076,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat majemuk bertingkat",
+    "answer": "Ibu datang setelah ayah pergi",
+    "question": "Susun arti kalimat 'Ina rata moli papa nalau'.",
+    "blocks": [
+      "Ibu ",
+      "datang ",
+      "setelah ",
+      "ayah ",
+      "pergi"
+    ]
+  },
+  {
+    "id": 21077,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat majemuk bertingkat",
+    "answer": "Anak belajar supaya pintar",
+    "question": "Apa arti 'Ana noajari ala mabelo pangisi'?",
+    "options": [
+      "Anak belajar supaya pintar",
+      "Saya makan karena lapar",
+      "Kamu pergi ketika pagi",
+      "Ibu datang setelah ayah pergi"
+    ]
+  },
+  {
+    "id": 21078,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat majemuk bertingkat",
+    "answer": "Saya makan karena lapar",
+    "question": "Apa arti 'Yaku ngande apa nalapa'?",
+    "options": [
+      "Saya makan karena lapar",
+      "Kamu pergi ketika pagi",
+      "Ibu datang setelah ayah pergi",
+      "Anak belajar supaya pintar"
+    ]
+  },
+  {
+    "id": 21079,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat majemuk bertingkat",
+    "answer": "Kamu pergi ketika pagi",
+    "question": "Susun arti kalimat 'Ngana nalau tempo pagi'.",
+    "blocks": [
+      "Kamu ",
+      "pergi ",
+      "ketika ",
+      "pagi"
+    ]
+  },
+  {
+    "id": 21080,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat langsung",
+    "answer": "Ibu berkata, \"Saya memasak nasi\"",
+    "question": "Susun arti kalimat 'Ina natesa, \"Yaku nompaju pae\"'.",
+    "blocks": [
+      "Ibu ",
+      "berkata, ",
+      "\"Saya ",
+      "memasak ",
+      "nasi\""
+    ]
+  },
+  {
+    "id": 21081,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat langsung",
+    "answer": "Ayah berkata, \"Saya pergi\"",
+    "question": "Apa arti 'Papa natesa, \"Yaku nalau\"'?",
+    "options": [
+      "Ayah berkata, \"Saya pergi\"",
+      "Ibu berkata, \"Saya memasak nasi\"",
+      "Guru berkata, \"Belajarlah\"",
+      "Yaku berkata, \"Saya minum air\""
+    ]
+  },
+  {
+    "id": 21082,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat langsung",
+    "answer": "Guru berkata, \"Belajarlah\"",
+    "question": "Apa arti 'Guru natesa, \"Noajarimo\"'?",
+    "options": [
+      "Guru berkata, \"Belajarlah\"",
+      "Ibu berkata, \"Saya memasak nasi\"",
+      "Ayah berkata, \"Saya pergi\"",
+      "Yaku berkata, \"Saya minum air\""
+    ]
+  },
+  {
+    "id": 21083,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat langsung",
+    "answer": "Yaku berkata, \"Saya minum air\"",
+    "question": "Susun arti kalimat 'Yaku natesa, \"Yaku noinu ue\"'.",
+    "blocks": [
+      "Yaku ",
+      "berkata, ",
+      "\"Saya ",
+      "minum ",
+      "air\""
+    ]
+  },
+  {
+    "id": 21084,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat langsung",
+    "answer": "Ibu berkata, \"Saya memasak nasi\"",
+    "question": "Apa arti 'Ina natesa, \"Yaku nompaju pae\"'?",
+    "options": [
+      "Ibu berkata, \"Saya memasak nasi\"",
+      "Ayah berkata, \"Saya pergi\"",
+      "Guru berkata, \"Belajarlah\"",
+      "Yaku berkata, \"Saya minum air\""
+    ]
+  },
+  {
+    "id": 21085,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat langsung",
+    "answer": "Ayah berkata, \"Saya pergi\"",
+    "question": "Apa arti 'Papa natesa, \"Yaku nalau\"'?",
+    "options": [
+      "Ayah berkata, \"Saya pergi\"",
+      "Ibu berkata, \"Saya memasak nasi\"",
+      "Guru berkata, \"Belajarlah\"",
+      "Yaku berkata, \"Saya minum air\""
+    ]
+  },
+  {
+    "id": 21086,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat langsung",
+    "answer": "Guru berkata, \"Belajarlah\"",
+    "question": "Susun arti kalimat 'Guru natesa, \"Noajarimo\"'.",
+    "blocks": [
+      "Guru ",
+      "berkata, ",
+      "\"Belajarlah\""
+    ]
+  },
+  {
+    "id": 21087,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat langsung",
+    "answer": "Yaku berkata, \"Saya minum air\"",
+    "question": "Apa arti 'Yaku natesa, \"Yaku noinu ue\"'?",
+    "options": [
+      "Yaku berkata, \"Saya minum air\"",
+      "Ibu berkata, \"Saya memasak nasi\"",
+      "Ayah berkata, \"Saya pergi\"",
+      "Guru berkata, \"Belajarlah\""
+    ]
+  },
+  {
+    "id": 21088,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat langsung",
+    "answer": "Ibu berkata, \"Saya memasak nasi\"",
+    "question": "Apa arti 'Ina natesa, \"Yaku nompaju pae\"'?",
+    "options": [
+      "Ibu berkata, \"Saya memasak nasi\"",
+      "Ayah berkata, \"Saya pergi\"",
+      "Guru berkata, \"Belajarlah\"",
+      "Yaku berkata, \"Saya minum air\""
+    ]
+  },
+  {
+    "id": 21089,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat langsung",
+    "answer": "Ayah berkata, \"Saya pergi\"",
+    "question": "Susun arti kalimat 'Papa natesa, \"Yaku nalau\"'.",
+    "blocks": [
+      "Ayah ",
+      "berkata, ",
+      "\"Saya ",
+      "pergi\""
+    ]
+  },
+  {
+    "id": 21090,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat tidak langsung",
+    "answer": "Ibu mengatakan bahwa ia memasak nasi",
+    "question": "Susun arti kalimat 'Ina natesa ia nompaju pae'.",
+    "blocks": [
+      "Ibu ",
+      "mengatakan ",
+      "bahwa ",
+      "ia ",
+      "memasak ",
+      "nasi"
+    ]
+  },
+  {
+    "id": 21091,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat tidak langsung",
+    "answer": "Ayah mengatakan bahwa ia pergi",
+    "question": "Apa arti 'Papa natesa ia nalau'?",
+    "options": [
+      "Ayah mengatakan bahwa ia pergi",
+      "Ibu mengatakan bahwa ia memasak nasi",
+      "Guru menyuruh anak belajar",
+      "Yaku mengatakan bahwa saya minum air"
+    ]
+  },
+  {
+    "id": 21092,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat tidak langsung",
+    "answer": "Guru menyuruh anak belajar",
+    "question": "Apa arti 'Guru nompakoni ana noajari'?",
+    "options": [
+      "Guru menyuruh anak belajar",
+      "Ibu mengatakan bahwa ia memasak nasi",
+      "Ayah mengatakan bahwa ia pergi",
+      "Yaku mengatakan bahwa saya minum air"
+    ]
+  },
+  {
+    "id": 21093,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat tidak langsung",
+    "answer": "Yaku mengatakan bahwa saya minum air",
+    "question": "Susun arti kalimat 'Yaku natesa yaku noinu ue'.",
+    "blocks": [
+      "Yaku ",
+      "mengatakan ",
+      "bahwa ",
+      "saya ",
+      "minum ",
+      "air"
+    ]
+  },
+  {
+    "id": 21094,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat tidak langsung",
+    "answer": "Ibu mengatakan bahwa ia memasak nasi",
+    "question": "Apa arti 'Ina natesa ia nompaju pae'?",
+    "options": [
+      "Ibu mengatakan bahwa ia memasak nasi",
+      "Ayah mengatakan bahwa ia pergi",
+      "Guru menyuruh anak belajar",
+      "Yaku mengatakan bahwa saya minum air"
+    ]
+  },
+  {
+    "id": 21095,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat tidak langsung",
+    "answer": "Ayah mengatakan bahwa ia pergi",
+    "question": "Apa arti 'Papa natesa ia nalau'?",
+    "options": [
+      "Ayah mengatakan bahwa ia pergi",
+      "Ibu mengatakan bahwa ia memasak nasi",
+      "Guru menyuruh anak belajar",
+      "Yaku mengatakan bahwa saya minum air"
+    ]
+  },
+  {
+    "id": 21096,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat tidak langsung",
+    "answer": "Guru menyuruh anak belajar",
+    "question": "Susun arti kalimat 'Guru nompakoni ana noajari'.",
+    "blocks": [
+      "Guru ",
+      "menyuruh ",
+      "anak ",
+      "belajar"
+    ]
+  },
+  {
+    "id": 21097,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat tidak langsung",
+    "answer": "Yaku mengatakan bahwa saya minum air",
+    "question": "Apa arti 'Yaku natesa yaku noinu ue'?",
+    "options": [
+      "Yaku mengatakan bahwa saya minum air",
+      "Ibu mengatakan bahwa ia memasak nasi",
+      "Ayah mengatakan bahwa ia pergi",
+      "Guru menyuruh anak belajar"
+    ]
+  },
+  {
+    "id": 21098,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat tidak langsung",
+    "answer": "Ibu mengatakan bahwa ia memasak nasi",
+    "question": "Apa arti 'Ina natesa ia nompaju pae'?",
+    "options": [
+      "Ibu mengatakan bahwa ia memasak nasi",
+      "Ayah mengatakan bahwa ia pergi",
+      "Guru menyuruh anak belajar",
+      "Yaku mengatakan bahwa saya minum air"
+    ]
+  },
+  {
+    "id": 21099,
+    "dialect": "ledo",
+    "bab": "bab2",
+    "category": "kalimat tidak langsung",
+    "answer": "Ayah mengatakan bahwa ia pergi",
+    "question": "Susun arti kalimat 'Papa natesa ia nalau'.",
+    "blocks": [
+      "Ayah ",
+      "mengatakan ",
+      "bahwa ",
+      "ia ",
+      "pergi"
+    ]
+  },
+  {
+    "id": 22000,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat sederhana",
+    "answer": "Nama saya Inggu",
+    "question": "Susun arti kalimat 'Ngarana inggu Inggu'.",
+    "blocks": [
+      "Nama ",
+      "saya ",
+      "Inggu"
+    ]
+  },
+  {
+    "id": 22001,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat sederhana",
+    "answer": "Saya makan nasi",
+    "question": "Apa arti 'Inggu kande pae'?",
+    "options": [
+      "Saya makan nasi",
+      "Nama saya Inggu",
+      "Kamu pergi ke rumah",
+      "Air itu baik"
+    ]
+  },
+  {
+    "id": 22002,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat sederhana",
+    "answer": "Kamu pergi ke rumah",
+    "question": "Apa arti 'Iko lau ri banua'?",
+    "options": [
+      "Kamu pergi ke rumah",
+      "Nama saya Inggu",
+      "Saya makan nasi",
+      "Air itu baik"
+    ]
+  },
+  {
+    "id": 22003,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat sederhana",
+    "answer": "Air itu baik",
+    "question": "Susun arti kalimat 'Oe ia mabelo'.",
+    "blocks": [
+      "Air ",
+      "itu ",
+      "baik"
+    ]
+  },
+  {
+    "id": 22004,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat sederhana",
+    "answer": "Nama saya Inggu",
+    "question": "Apa arti 'Ngarana inggu Inggu'?",
+    "options": [
+      "Nama saya Inggu",
+      "Saya makan nasi",
+      "Kamu pergi ke rumah",
+      "Air itu baik"
+    ]
+  },
+  {
+    "id": 22005,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat sederhana",
+    "answer": "Saya makan nasi",
+    "question": "Apa arti 'Inggu kande pae'?",
+    "options": [
+      "Saya makan nasi",
+      "Nama saya Inggu",
+      "Kamu pergi ke rumah",
+      "Air itu baik"
+    ]
+  },
+  {
+    "id": 22006,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat sederhana",
+    "answer": "Kamu pergi ke rumah",
+    "question": "Susun arti kalimat 'Iko lau ri banua'.",
+    "blocks": [
+      "Kamu ",
+      "pergi ",
+      "ke ",
+      "rumah"
+    ]
+  },
+  {
+    "id": 22007,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat sederhana",
+    "answer": "Air itu baik",
+    "question": "Apa arti 'Oe ia mabelo'?",
+    "options": [
+      "Air itu baik",
+      "Nama saya Inggu",
+      "Saya makan nasi",
+      "Kamu pergi ke rumah"
+    ]
+  },
+  {
+    "id": 22008,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat sederhana",
+    "answer": "Nama saya Inggu",
+    "question": "Apa arti 'Ngarana inggu Inggu'?",
+    "options": [
+      "Nama saya Inggu",
+      "Saya makan nasi",
+      "Kamu pergi ke rumah",
+      "Air itu baik"
+    ]
+  },
+  {
+    "id": 22009,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat sederhana",
+    "answer": "Saya makan nasi",
+    "question": "Susun arti kalimat 'Inggu kande pae'.",
+    "blocks": [
+      "Saya ",
+      "makan ",
+      "nasi"
+    ]
+  },
+  {
+    "id": 22010,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat berita",
+    "answer": "Ibu memasak nasi",
+    "question": "Susun arti kalimat 'Ina nompaju pae'.",
+    "blocks": [
+      "Ibu ",
+      "memasak ",
+      "nasi"
+    ]
+  },
+  {
+    "id": 22011,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat berita",
+    "answer": "Ayah pergi ke kebun",
+    "question": "Apa arti 'Papa lau ri talua'?",
+    "options": [
+      "Ayah pergi ke kebun",
+      "Ibu memasak nasi",
+      "Rumah itu besar",
+      "Anak itu belajar"
+    ]
+  },
+  {
+    "id": 22012,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat berita",
+    "answer": "Rumah itu besar",
+    "question": "Apa arti 'Banua ia lompe'?",
+    "options": [
+      "Rumah itu besar",
+      "Ibu memasak nasi",
+      "Ayah pergi ke kebun",
+      "Anak itu belajar"
+    ]
+  },
+  {
+    "id": 22013,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat berita",
+    "answer": "Anak itu belajar",
+    "question": "Susun arti kalimat 'Ana ia noajari'.",
+    "blocks": [
+      "Anak ",
+      "itu ",
+      "belajar"
+    ]
+  },
+  {
+    "id": 22014,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat berita",
+    "answer": "Ibu memasak nasi",
+    "question": "Apa arti 'Ina nompaju pae'?",
+    "options": [
+      "Ibu memasak nasi",
+      "Ayah pergi ke kebun",
+      "Rumah itu besar",
+      "Anak itu belajar"
+    ]
+  },
+  {
+    "id": 22015,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat berita",
+    "answer": "Ayah pergi ke kebun",
+    "question": "Apa arti 'Papa lau ri talua'?",
+    "options": [
+      "Ayah pergi ke kebun",
+      "Ibu memasak nasi",
+      "Rumah itu besar",
+      "Anak itu belajar"
+    ]
+  },
+  {
+    "id": 22016,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat berita",
+    "answer": "Rumah itu besar",
+    "question": "Susun arti kalimat 'Banua ia lompe'.",
+    "blocks": [
+      "Rumah ",
+      "itu ",
+      "besar"
+    ]
+  },
+  {
+    "id": 22017,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat berita",
+    "answer": "Anak itu belajar",
+    "question": "Apa arti 'Ana ia noajari'?",
+    "options": [
+      "Anak itu belajar",
+      "Ibu memasak nasi",
+      "Ayah pergi ke kebun",
+      "Rumah itu besar"
+    ]
+  },
+  {
+    "id": 22018,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat berita",
+    "answer": "Ibu memasak nasi",
+    "question": "Apa arti 'Ina nompaju pae'?",
+    "options": [
+      "Ibu memasak nasi",
+      "Ayah pergi ke kebun",
+      "Rumah itu besar",
+      "Anak itu belajar"
+    ]
+  },
+  {
+    "id": 22019,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat berita",
+    "answer": "Ayah pergi ke kebun",
+    "question": "Susun arti kalimat 'Papa lau ri talua'.",
+    "blocks": [
+      "Ayah ",
+      "pergi ",
+      "ke ",
+      "kebun"
+    ]
+  },
+  {
+    "id": 22020,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat tanya",
+    "answer": "Siapa nama kamu?",
+    "question": "Susun arti kalimat 'Nisei ngaranamu?'.",
+    "blocks": [
+      "Siapa ",
+      "nama ",
+      "kamu?"
+    ]
+  },
+  {
+    "id": 22021,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat tanya",
+    "answer": "Apa kamu makan nasi?",
+    "question": "Apa arti 'Ngapa iko kande pae?'?",
+    "options": [
+      "Apa kamu makan nasi?",
+      "Siapa nama kamu?",
+      "Di mana rumah kamu?",
+      "Kapan kamu pergi?"
+    ]
+  },
+  {
+    "id": 22022,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat tanya",
+    "answer": "Di mana rumah kamu?",
+    "question": "Apa arti 'Ri ava banuamu?'?",
+    "options": [
+      "Di mana rumah kamu?",
+      "Siapa nama kamu?",
+      "Apa kamu makan nasi?",
+      "Kapan kamu pergi?"
+    ]
+  },
+  {
+    "id": 22023,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat tanya",
+    "answer": "Kapan kamu pergi?",
+    "question": "Susun arti kalimat 'Nakuya iko lau?'.",
+    "blocks": [
+      "Kapan ",
+      "kamu ",
+      "pergi?"
+    ]
+  },
+  {
+    "id": 22024,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat tanya",
+    "answer": "Siapa nama kamu?",
+    "question": "Apa arti 'Nisei ngaranamu?'?",
+    "options": [
+      "Siapa nama kamu?",
+      "Apa kamu makan nasi?",
+      "Di mana rumah kamu?",
+      "Kapan kamu pergi?"
+    ]
+  },
+  {
+    "id": 22025,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat tanya",
+    "answer": "Apa kamu makan nasi?",
+    "question": "Apa arti 'Ngapa iko kande pae?'?",
+    "options": [
+      "Apa kamu makan nasi?",
+      "Siapa nama kamu?",
+      "Di mana rumah kamu?",
+      "Kapan kamu pergi?"
+    ]
+  },
+  {
+    "id": 22026,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat tanya",
+    "answer": "Di mana rumah kamu?",
+    "question": "Susun arti kalimat 'Ri ava banuamu?'.",
+    "blocks": [
+      "Di ",
+      "mana ",
+      "rumah ",
+      "kamu?"
+    ]
+  },
+  {
+    "id": 22027,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat tanya",
+    "answer": "Kapan kamu pergi?",
+    "question": "Apa arti 'Nakuya iko lau?'?",
+    "options": [
+      "Kapan kamu pergi?",
+      "Siapa nama kamu?",
+      "Apa kamu makan nasi?",
+      "Di mana rumah kamu?"
+    ]
+  },
+  {
+    "id": 22028,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat tanya",
+    "answer": "Siapa nama kamu?",
+    "question": "Apa arti 'Nisei ngaranamu?'?",
+    "options": [
+      "Siapa nama kamu?",
+      "Apa kamu makan nasi?",
+      "Di mana rumah kamu?",
+      "Kapan kamu pergi?"
+    ]
+  },
+  {
+    "id": 22029,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat tanya",
+    "answer": "Apa kamu makan nasi?",
+    "question": "Susun arti kalimat 'Ngapa iko kande pae?'.",
+    "blocks": [
+      "Apa ",
+      "kamu ",
+      "makan ",
+      "nasi?"
+    ]
+  },
+  {
+    "id": 22030,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat perintah",
+    "answer": "Makanlah nasi itu",
+    "question": "Susun arti kalimat 'Kande pae ia'.",
+    "blocks": [
+      "Makanlah ",
+      "nasi ",
+      "itu"
+    ]
+  },
+  {
+    "id": 22031,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat perintah",
+    "answer": "Pergilah ke rumah",
+    "question": "Apa arti 'Lau ri banua'?",
+    "options": [
+      "Pergilah ke rumah",
+      "Makanlah nasi itu",
+      "Duduklah di sini",
+      "Ambil air itu"
+    ]
+  },
+  {
+    "id": 22032,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat perintah",
+    "answer": "Duduklah di sini",
+    "question": "Apa arti 'Motiro ri sei'?",
+    "options": [
+      "Duduklah di sini",
+      "Makanlah nasi itu",
+      "Pergilah ke rumah",
+      "Ambil air itu"
+    ]
+  },
+  {
+    "id": 22033,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat perintah",
+    "answer": "Ambil air itu",
+    "question": "Susun arti kalimat 'Ala oe ia'.",
+    "blocks": [
+      "Ambil ",
+      "air ",
+      "itu"
+    ]
+  },
+  {
+    "id": 22034,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat perintah",
+    "answer": "Makanlah nasi itu",
+    "question": "Apa arti 'Kande pae ia'?",
+    "options": [
+      "Makanlah nasi itu",
+      "Pergilah ke rumah",
+      "Duduklah di sini",
+      "Ambil air itu"
+    ]
+  },
+  {
+    "id": 22035,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat perintah",
+    "answer": "Pergilah ke rumah",
+    "question": "Apa arti 'Lau ri banua'?",
+    "options": [
+      "Pergilah ke rumah",
+      "Makanlah nasi itu",
+      "Duduklah di sini",
+      "Ambil air itu"
+    ]
+  },
+  {
+    "id": 22036,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat perintah",
+    "answer": "Duduklah di sini",
+    "question": "Susun arti kalimat 'Motiro ri sei'.",
+    "blocks": [
+      "Duduklah ",
+      "di ",
+      "sini"
+    ]
+  },
+  {
+    "id": 22037,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat perintah",
+    "answer": "Ambil air itu",
+    "question": "Apa arti 'Ala oe ia'?",
+    "options": [
+      "Ambil air itu",
+      "Makanlah nasi itu",
+      "Pergilah ke rumah",
+      "Duduklah di sini"
+    ]
+  },
+  {
+    "id": 22038,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat perintah",
+    "answer": "Makanlah nasi itu",
+    "question": "Apa arti 'Kande pae ia'?",
+    "options": [
+      "Makanlah nasi itu",
+      "Pergilah ke rumah",
+      "Duduklah di sini",
+      "Ambil air itu"
+    ]
+  },
+  {
+    "id": 22039,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat perintah",
+    "answer": "Pergilah ke rumah",
+    "question": "Susun arti kalimat 'Lau ri banua'.",
+    "blocks": [
+      "Pergilah ",
+      "ke ",
+      "rumah"
+    ]
+  },
+  {
+    "id": 22040,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat seruan",
+    "answer": "Wah, rumah itu besar!",
+    "question": "Susun arti kalimat 'Wah, banua ia lompe!'.",
+    "blocks": [
+      "Wah, ",
+      "rumah ",
+      "itu ",
+      "besar!"
+    ]
+  },
+  {
+    "id": 22041,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat seruan",
+    "answer": "Aduh, air itu dingin!",
+    "question": "Apa arti 'Adu, oe ia nindi!'?",
+    "options": [
+      "Aduh, air itu dingin!",
+      "Wah, rumah itu besar!",
+      "Bagus sekali pekerjaanmu!",
+      "Hai, datanglah ke sini!"
+    ]
+  },
+  {
+    "id": 22042,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat seruan",
+    "answer": "Bagus sekali pekerjaanmu!",
+    "question": "Apa arti 'Mabelo tuu penggawemu!'?",
+    "options": [
+      "Bagus sekali pekerjaanmu!",
+      "Wah, rumah itu besar!",
+      "Aduh, air itu dingin!",
+      "Hai, datanglah ke sini!"
+    ]
+  },
+  {
+    "id": 22043,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat seruan",
+    "answer": "Hai, datanglah ke sini!",
+    "question": "Susun arti kalimat 'Hai, rata ri sei!'.",
+    "blocks": [
+      "Hai, ",
+      "datanglah ",
+      "ke ",
+      "sini!"
+    ]
+  },
+  {
+    "id": 22044,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat seruan",
+    "answer": "Wah, rumah itu besar!",
+    "question": "Apa arti 'Wah, banua ia lompe!'?",
+    "options": [
+      "Wah, rumah itu besar!",
+      "Aduh, air itu dingin!",
+      "Bagus sekali pekerjaanmu!",
+      "Hai, datanglah ke sini!"
+    ]
+  },
+  {
+    "id": 22045,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat seruan",
+    "answer": "Aduh, air itu dingin!",
+    "question": "Apa arti 'Adu, oe ia nindi!'?",
+    "options": [
+      "Aduh, air itu dingin!",
+      "Wah, rumah itu besar!",
+      "Bagus sekali pekerjaanmu!",
+      "Hai, datanglah ke sini!"
+    ]
+  },
+  {
+    "id": 22046,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat seruan",
+    "answer": "Bagus sekali pekerjaanmu!",
+    "question": "Susun arti kalimat 'Mabelo tuu penggawemu!'.",
+    "blocks": [
+      "Bagus ",
+      "sekali ",
+      "pekerjaanmu!"
+    ]
+  },
+  {
+    "id": 22047,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat seruan",
+    "answer": "Hai, datanglah ke sini!",
+    "question": "Apa arti 'Hai, rata ri sei!'?",
+    "options": [
+      "Hai, datanglah ke sini!",
+      "Wah, rumah itu besar!",
+      "Aduh, air itu dingin!",
+      "Bagus sekali pekerjaanmu!"
+    ]
+  },
+  {
+    "id": 22048,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat seruan",
+    "answer": "Wah, rumah itu besar!",
+    "question": "Apa arti 'Wah, banua ia lompe!'?",
+    "options": [
+      "Wah, rumah itu besar!",
+      "Aduh, air itu dingin!",
+      "Bagus sekali pekerjaanmu!",
+      "Hai, datanglah ke sini!"
+    ]
+  },
+  {
+    "id": 22049,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat seruan",
+    "answer": "Aduh, air itu dingin!",
+    "question": "Susun arti kalimat 'Adu, oe ia nindi!'.",
+    "blocks": [
+      "Aduh, ",
+      "air ",
+      "itu ",
+      "dingin!"
+    ]
+  },
+  {
+    "id": 22050,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat tunggal",
+    "answer": "Saya tidur",
+    "question": "Susun arti kalimat 'Inggu moturi'.",
+    "blocks": [
+      "Saya ",
+      "tidur"
+    ]
+  },
+  {
+    "id": 22051,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat tunggal",
+    "answer": "Ibu datang",
+    "question": "Apa arti 'Ina rata'?",
+    "options": [
+      "Ibu datang",
+      "Saya tidur",
+      "Anak makan",
+      "Air mengalir"
+    ]
+  },
+  {
+    "id": 22052,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat tunggal",
+    "answer": "Anak makan",
+    "question": "Apa arti 'Ana kande'?",
+    "options": [
+      "Anak makan",
+      "Saya tidur",
+      "Ibu datang",
+      "Air mengalir"
+    ]
+  },
+  {
+    "id": 22053,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat tunggal",
+    "answer": "Air mengalir",
+    "question": "Susun arti kalimat 'Oe noili'.",
+    "blocks": [
+      "Air ",
+      "mengalir"
+    ]
+  },
+  {
+    "id": 22054,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat tunggal",
+    "answer": "Saya tidur",
+    "question": "Apa arti 'Inggu moturi'?",
+    "options": [
+      "Saya tidur",
+      "Ibu datang",
+      "Anak makan",
+      "Air mengalir"
+    ]
+  },
+  {
+    "id": 22055,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat tunggal",
+    "answer": "Ibu datang",
+    "question": "Apa arti 'Ina rata'?",
+    "options": [
+      "Ibu datang",
+      "Saya tidur",
+      "Anak makan",
+      "Air mengalir"
+    ]
+  },
+  {
+    "id": 22056,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat tunggal",
+    "answer": "Anak makan",
+    "question": "Susun arti kalimat 'Ana kande'.",
+    "blocks": [
+      "Anak ",
+      "makan"
+    ]
+  },
+  {
+    "id": 22057,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat tunggal",
+    "answer": "Air mengalir",
+    "question": "Apa arti 'Oe noili'?",
+    "options": [
+      "Air mengalir",
+      "Saya tidur",
+      "Ibu datang",
+      "Anak makan"
+    ]
+  },
+  {
+    "id": 22058,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat tunggal",
+    "answer": "Saya tidur",
+    "question": "Apa arti 'Inggu moturi'?",
+    "options": [
+      "Saya tidur",
+      "Ibu datang",
+      "Anak makan",
+      "Air mengalir"
+    ]
+  },
+  {
+    "id": 22059,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat tunggal",
+    "answer": "Ibu datang",
+    "question": "Susun arti kalimat 'Ina rata'.",
+    "blocks": [
+      "Ibu ",
+      "datang"
+    ]
+  },
+  {
+    "id": 22060,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat majemuk setara",
+    "answer": "Saya makan nasi dan kamu minum air",
+    "question": "Susun arti kalimat 'Inggu kande pae ante iko noinu oe'.",
+    "blocks": [
+      "Saya ",
+      "makan ",
+      "nasi ",
+      "dan ",
+      "kamu ",
+      "minum ",
+      "air"
+    ]
+  },
+  {
+    "id": 22061,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat majemuk setara",
+    "answer": "Ibu memasak dan ayah bekerja",
+    "question": "Apa arti 'Ina nompaju ante papa mogavi'?",
+    "options": [
+      "Ibu memasak dan ayah bekerja",
+      "Saya makan nasi dan kamu minum air",
+      "Saya pergi tetapi kamu tinggal",
+      "Anak belajar dan guru mengajar"
+    ]
+  },
+  {
+    "id": 22062,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat majemuk setara",
+    "answer": "Saya pergi tetapi kamu tinggal",
+    "question": "Apa arti 'Inggu lau tapi iko tomo'?",
+    "options": [
+      "Saya pergi tetapi kamu tinggal",
+      "Saya makan nasi dan kamu minum air",
+      "Ibu memasak dan ayah bekerja",
+      "Anak belajar dan guru mengajar"
+    ]
+  },
+  {
+    "id": 22063,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat majemuk setara",
+    "answer": "Anak belajar dan guru mengajar",
+    "question": "Susun arti kalimat 'Ana noajari ante guru nompajari'.",
+    "blocks": [
+      "Anak ",
+      "belajar ",
+      "dan ",
+      "guru ",
+      "mengajar"
+    ]
+  },
+  {
+    "id": 22064,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat majemuk setara",
+    "answer": "Saya makan nasi dan kamu minum air",
+    "question": "Apa arti 'Inggu kande pae ante iko noinu oe'?",
+    "options": [
+      "Saya makan nasi dan kamu minum air",
+      "Ibu memasak dan ayah bekerja",
+      "Saya pergi tetapi kamu tinggal",
+      "Anak belajar dan guru mengajar"
+    ]
+  },
+  {
+    "id": 22065,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat majemuk setara",
+    "answer": "Ibu memasak dan ayah bekerja",
+    "question": "Apa arti 'Ina nompaju ante papa mogavi'?",
+    "options": [
+      "Ibu memasak dan ayah bekerja",
+      "Saya makan nasi dan kamu minum air",
+      "Saya pergi tetapi kamu tinggal",
+      "Anak belajar dan guru mengajar"
+    ]
+  },
+  {
+    "id": 22066,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat majemuk setara",
+    "answer": "Saya pergi tetapi kamu tinggal",
+    "question": "Susun arti kalimat 'Inggu lau tapi iko tomo'.",
+    "blocks": [
+      "Saya ",
+      "pergi ",
+      "tetapi ",
+      "kamu ",
+      "tinggal"
+    ]
+  },
+  {
+    "id": 22067,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat majemuk setara",
+    "answer": "Anak belajar dan guru mengajar",
+    "question": "Apa arti 'Ana noajari ante guru nompajari'?",
+    "options": [
+      "Anak belajar dan guru mengajar",
+      "Saya makan nasi dan kamu minum air",
+      "Ibu memasak dan ayah bekerja",
+      "Saya pergi tetapi kamu tinggal"
+    ]
+  },
+  {
+    "id": 22068,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat majemuk setara",
+    "answer": "Saya makan nasi dan kamu minum air",
+    "question": "Apa arti 'Inggu kande pae ante iko noinu oe'?",
+    "options": [
+      "Saya makan nasi dan kamu minum air",
+      "Ibu memasak dan ayah bekerja",
+      "Saya pergi tetapi kamu tinggal",
+      "Anak belajar dan guru mengajar"
+    ]
+  },
+  {
+    "id": 22069,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat majemuk setara",
+    "answer": "Ibu memasak dan ayah bekerja",
+    "question": "Susun arti kalimat 'Ina nompaju ante papa mogavi'.",
+    "blocks": [
+      "Ibu ",
+      "memasak ",
+      "dan ",
+      "ayah ",
+      "bekerja"
+    ]
+  },
+  {
+    "id": 22070,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat majemuk bertingkat",
+    "answer": "Saya makan karena lapar",
+    "question": "Susun arti kalimat 'Inggu kande apa nalapa'.",
+    "blocks": [
+      "Saya ",
+      "makan ",
+      "karena ",
+      "lapar"
+    ]
+  },
+  {
+    "id": 22071,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat majemuk bertingkat",
+    "answer": "Kamu pergi ketika pagi",
+    "question": "Apa arti 'Iko lau tempo pagi'?",
+    "options": [
+      "Kamu pergi ketika pagi",
+      "Saya makan karena lapar",
+      "Ibu datang setelah ayah pergi",
+      "Anak belajar supaya pintar"
+    ]
+  },
+  {
+    "id": 22072,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat majemuk bertingkat",
+    "answer": "Ibu datang setelah ayah pergi",
+    "question": "Apa arti 'Ina rata moli papa lau'?",
+    "options": [
+      "Ibu datang setelah ayah pergi",
+      "Saya makan karena lapar",
+      "Kamu pergi ketika pagi",
+      "Anak belajar supaya pintar"
+    ]
+  },
+  {
+    "id": 22073,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat majemuk bertingkat",
+    "answer": "Anak belajar supaya pintar",
+    "question": "Susun arti kalimat 'Ana noajari ala mabelo pangisi'.",
+    "blocks": [
+      "Anak ",
+      "belajar ",
+      "supaya ",
+      "pintar"
+    ]
+  },
+  {
+    "id": 22074,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat majemuk bertingkat",
+    "answer": "Saya makan karena lapar",
+    "question": "Apa arti 'Inggu kande apa nalapa'?",
+    "options": [
+      "Saya makan karena lapar",
+      "Kamu pergi ketika pagi",
+      "Ibu datang setelah ayah pergi",
+      "Anak belajar supaya pintar"
+    ]
+  },
+  {
+    "id": 22075,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat majemuk bertingkat",
+    "answer": "Kamu pergi ketika pagi",
+    "question": "Apa arti 'Iko lau tempo pagi'?",
+    "options": [
+      "Kamu pergi ketika pagi",
+      "Saya makan karena lapar",
+      "Ibu datang setelah ayah pergi",
+      "Anak belajar supaya pintar"
+    ]
+  },
+  {
+    "id": 22076,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat majemuk bertingkat",
+    "answer": "Ibu datang setelah ayah pergi",
+    "question": "Susun arti kalimat 'Ina rata moli papa lau'.",
+    "blocks": [
+      "Ibu ",
+      "datang ",
+      "setelah ",
+      "ayah ",
+      "pergi"
+    ]
+  },
+  {
+    "id": 22077,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat majemuk bertingkat",
+    "answer": "Anak belajar supaya pintar",
+    "question": "Apa arti 'Ana noajari ala mabelo pangisi'?",
+    "options": [
+      "Anak belajar supaya pintar",
+      "Saya makan karena lapar",
+      "Kamu pergi ketika pagi",
+      "Ibu datang setelah ayah pergi"
+    ]
+  },
+  {
+    "id": 22078,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat majemuk bertingkat",
+    "answer": "Saya makan karena lapar",
+    "question": "Apa arti 'Inggu kande apa nalapa'?",
+    "options": [
+      "Saya makan karena lapar",
+      "Kamu pergi ketika pagi",
+      "Ibu datang setelah ayah pergi",
+      "Anak belajar supaya pintar"
+    ]
+  },
+  {
+    "id": 22079,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat majemuk bertingkat",
+    "answer": "Kamu pergi ketika pagi",
+    "question": "Susun arti kalimat 'Iko lau tempo pagi'.",
+    "blocks": [
+      "Kamu ",
+      "pergi ",
+      "ketika ",
+      "pagi"
+    ]
+  },
+  {
+    "id": 22080,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat langsung",
+    "answer": "Ibu berkata, \"Saya memasak nasi\"",
+    "question": "Susun arti kalimat 'Ina natesa, \"Inggu nompaju pae\"'.",
+    "blocks": [
+      "Ibu ",
+      "berkata, ",
+      "\"Saya ",
+      "memasak ",
+      "nasi\""
+    ]
+  },
+  {
+    "id": 22081,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat langsung",
+    "answer": "Ayah berkata, \"Saya pergi\"",
+    "question": "Apa arti 'Papa natesa, \"Inggu lau\"'?",
+    "options": [
+      "Ayah berkata, \"Saya pergi\"",
+      "Ibu berkata, \"Saya memasak nasi\"",
+      "Guru berkata, \"Belajarlah\"",
+      "Inggu berkata, \"Saya minum air\""
+    ]
+  },
+  {
+    "id": 22082,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat langsung",
+    "answer": "Guru berkata, \"Belajarlah\"",
+    "question": "Apa arti 'Guru natesa, \"Noajarimo\"'?",
+    "options": [
+      "Guru berkata, \"Belajarlah\"",
+      "Ibu berkata, \"Saya memasak nasi\"",
+      "Ayah berkata, \"Saya pergi\"",
+      "Inggu berkata, \"Saya minum air\""
+    ]
+  },
+  {
+    "id": 22083,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat langsung",
+    "answer": "Inggu berkata, \"Saya minum air\"",
+    "question": "Susun arti kalimat 'Inggu natesa, \"Inggu noinu oe\"'.",
+    "blocks": [
+      "Inggu ",
+      "berkata, ",
+      "\"Saya ",
+      "minum ",
+      "air\""
+    ]
+  },
+  {
+    "id": 22084,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat langsung",
+    "answer": "Ibu berkata, \"Saya memasak nasi\"",
+    "question": "Apa arti 'Ina natesa, \"Inggu nompaju pae\"'?",
+    "options": [
+      "Ibu berkata, \"Saya memasak nasi\"",
+      "Ayah berkata, \"Saya pergi\"",
+      "Guru berkata, \"Belajarlah\"",
+      "Inggu berkata, \"Saya minum air\""
+    ]
+  },
+  {
+    "id": 22085,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat langsung",
+    "answer": "Ayah berkata, \"Saya pergi\"",
+    "question": "Apa arti 'Papa natesa, \"Inggu lau\"'?",
+    "options": [
+      "Ayah berkata, \"Saya pergi\"",
+      "Ibu berkata, \"Saya memasak nasi\"",
+      "Guru berkata, \"Belajarlah\"",
+      "Inggu berkata, \"Saya minum air\""
+    ]
+  },
+  {
+    "id": 22086,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat langsung",
+    "answer": "Guru berkata, \"Belajarlah\"",
+    "question": "Susun arti kalimat 'Guru natesa, \"Noajarimo\"'.",
+    "blocks": [
+      "Guru ",
+      "berkata, ",
+      "\"Belajarlah\""
+    ]
+  },
+  {
+    "id": 22087,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat langsung",
+    "answer": "Inggu berkata, \"Saya minum air\"",
+    "question": "Apa arti 'Inggu natesa, \"Inggu noinu oe\"'?",
+    "options": [
+      "Inggu berkata, \"Saya minum air\"",
+      "Ibu berkata, \"Saya memasak nasi\"",
+      "Ayah berkata, \"Saya pergi\"",
+      "Guru berkata, \"Belajarlah\""
+    ]
+  },
+  {
+    "id": 22088,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat langsung",
+    "answer": "Ibu berkata, \"Saya memasak nasi\"",
+    "question": "Apa arti 'Ina natesa, \"Inggu nompaju pae\"'?",
+    "options": [
+      "Ibu berkata, \"Saya memasak nasi\"",
+      "Ayah berkata, \"Saya pergi\"",
+      "Guru berkata, \"Belajarlah\"",
+      "Inggu berkata, \"Saya minum air\""
+    ]
+  },
+  {
+    "id": 22089,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat langsung",
+    "answer": "Ayah berkata, \"Saya pergi\"",
+    "question": "Susun arti kalimat 'Papa natesa, \"Inggu lau\"'.",
+    "blocks": [
+      "Ayah ",
+      "berkata, ",
+      "\"Saya ",
+      "pergi\""
+    ]
+  },
+  {
+    "id": 22090,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat tidak langsung",
+    "answer": "Ibu mengatakan bahwa ia memasak nasi",
+    "question": "Susun arti kalimat 'Ina natesa ia nompaju pae'.",
+    "blocks": [
+      "Ibu ",
+      "mengatakan ",
+      "bahwa ",
+      "ia ",
+      "memasak ",
+      "nasi"
+    ]
+  },
+  {
+    "id": 22091,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat tidak langsung",
+    "answer": "Ayah mengatakan bahwa ia pergi",
+    "question": "Apa arti 'Papa natesa ia lau'?",
+    "options": [
+      "Ayah mengatakan bahwa ia pergi",
+      "Ibu mengatakan bahwa ia memasak nasi",
+      "Guru menyuruh anak belajar",
+      "Inggu mengatakan bahwa saya minum air"
+    ]
+  },
+  {
+    "id": 22092,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat tidak langsung",
+    "answer": "Guru menyuruh anak belajar",
+    "question": "Apa arti 'Guru nompakoni ana noajari'?",
+    "options": [
+      "Guru menyuruh anak belajar",
+      "Ibu mengatakan bahwa ia memasak nasi",
+      "Ayah mengatakan bahwa ia pergi",
+      "Inggu mengatakan bahwa saya minum air"
+    ]
+  },
+  {
+    "id": 22093,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat tidak langsung",
+    "answer": "Inggu mengatakan bahwa saya minum air",
+    "question": "Susun arti kalimat 'Inggu natesa inggu noinu oe'.",
+    "blocks": [
+      "Inggu ",
+      "mengatakan ",
+      "bahwa ",
+      "saya ",
+      "minum ",
+      "air"
+    ]
+  },
+  {
+    "id": 22094,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat tidak langsung",
+    "answer": "Ibu mengatakan bahwa ia memasak nasi",
+    "question": "Apa arti 'Ina natesa ia nompaju pae'?",
+    "options": [
+      "Ibu mengatakan bahwa ia memasak nasi",
+      "Ayah mengatakan bahwa ia pergi",
+      "Guru menyuruh anak belajar",
+      "Inggu mengatakan bahwa saya minum air"
+    ]
+  },
+  {
+    "id": 22095,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat tidak langsung",
+    "answer": "Ayah mengatakan bahwa ia pergi",
+    "question": "Apa arti 'Papa natesa ia lau'?",
+    "options": [
+      "Ayah mengatakan bahwa ia pergi",
+      "Ibu mengatakan bahwa ia memasak nasi",
+      "Guru menyuruh anak belajar",
+      "Inggu mengatakan bahwa saya minum air"
+    ]
+  },
+  {
+    "id": 22096,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat tidak langsung",
+    "answer": "Guru menyuruh anak belajar",
+    "question": "Susun arti kalimat 'Guru nompakoni ana noajari'.",
+    "blocks": [
+      "Guru ",
+      "menyuruh ",
+      "anak ",
+      "belajar"
+    ]
+  },
+  {
+    "id": 22097,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat tidak langsung",
+    "answer": "Inggu mengatakan bahwa saya minum air",
+    "question": "Apa arti 'Inggu natesa inggu noinu oe'?",
+    "options": [
+      "Inggu mengatakan bahwa saya minum air",
+      "Ibu mengatakan bahwa ia memasak nasi",
+      "Ayah mengatakan bahwa ia pergi",
+      "Guru menyuruh anak belajar"
+    ]
+  },
+  {
+    "id": 22098,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat tidak langsung",
+    "answer": "Ibu mengatakan bahwa ia memasak nasi",
+    "question": "Apa arti 'Ina natesa ia nompaju pae'?",
+    "options": [
+      "Ibu mengatakan bahwa ia memasak nasi",
+      "Ayah mengatakan bahwa ia pergi",
+      "Guru menyuruh anak belajar",
+      "Inggu mengatakan bahwa saya minum air"
+    ]
+  },
+  {
+    "id": 22099,
+    "dialect": "rai",
+    "bab": "bab2",
+    "category": "kalimat tidak langsung",
+    "answer": "Ayah mengatakan bahwa ia pergi",
+    "question": "Susun arti kalimat 'Papa natesa ia lau'.",
+    "blocks": [
+      "Ayah ",
+      "mengatakan ",
+      "bahwa ",
+      "ia ",
+      "pergi"
+    ]
+  }
 ]

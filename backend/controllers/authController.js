@@ -32,8 +32,39 @@ const validLevelsByBab = {
     "kata-seru",
     "kata-sandang",
   ],
-  bab2: ["kalimat-sederhana"],
-  bab3: ["gambar-kosakata"],
+  bab2: [
+    "kalimat-sederhana",
+    "kalimat-berita",
+    "kalimat-tanya",
+    "kalimat-perintah",
+    "kalimat-seruan",
+    "kalimat-tunggal",
+    "kalimat-majemuk-setara",
+    "kalimat-majemuk-bertingkat",
+    "kalimat-langsung",
+    "kalimat-tidak-langsung",
+  ],
+  bab3: [
+    "kehidupan-desa-dan-masyarakat",
+    "penyakit-dan-pengobatan",
+    "sistem-kekerabatan",
+    "bagian-tubuh",
+    "gerak-dan-kerja",
+    "tanaman",
+    "kata-tugas",
+    "perangai-kata-sifat-dan-warna",
+    "makanan-dan-minuman",
+    "peralatan-dan-perlengkapan",
+    "binatang",
+    "kata-ganti-sapaan",
+    "mata-pencaharian",
+    "permainan",
+    "kata-bilangan",
+    "rumah-dan-bagian-bagiannya",
+    "musim-keadaan-alam",
+    "pakaian-dan-perhiasan",
+    "swadesh-list",
+  ],
 };
 
 const defaultProgressObject = () =>
@@ -70,6 +101,15 @@ const parseProgress = (raw) => {
         ...(defaults.levels[babKey] || {}),
         ...(parsed.levels ? parsed.levels[babKey] || {} : {}),
       };
+
+      const firstLevelKey = validLevelsByBab[babKey]?.[0];
+      if (
+        parsed[babKey] === true &&
+        firstLevelKey &&
+        finalProgress.levels[babKey][firstLevelKey] === undefined
+      ) {
+        finalProgress.levels[babKey][firstLevelKey] = 0;
+      }
     }
 
     // Pastikan bab pertama dan level pertama selalu bisa diakses
@@ -511,9 +551,8 @@ exports.addXP = (req, res) => {
   );
 };
 
-const updateStudentProgress = (userId, bab, res, level = null, score = null, total = null) => {
-  getStudentDialect(userId, (err, dialect) => {
-    if (err) return res.status(500).json(err);
+const updateStudentProgress = (userId, bab, res, level = null, score = null, total = null, requestedDialect = null) => {
+  const applyProgress = (dialect) => {
     if (!dialect) return res.status(200).json({ message: "Profil siswa tidak ditemukan, progress diabaikan", progress: {} });
 
     getStudentProgress(userId, dialect, (err, rawProgress) => {
@@ -527,6 +566,15 @@ const updateStudentProgress = (userId, bab, res, level = null, score = null, tot
         res.json({ message: "Progress diperbarui", progress });
       });
     });
+  };
+
+  if (requestedDialect) {
+    return applyProgress(requestedDialect);
+  }
+
+  getStudentDialect(userId, (err, dialect) => {
+    if (err) return res.status(500).json(err);
+    applyProgress(dialect);
   });
 };
 
@@ -535,16 +583,28 @@ exports.completeBab1 = (req, res) => {
 };
 
 exports.completeBab = (req, res) => {
-  const { bab, level, score, total } = req.body;
+  const { bab, dialect, level, score, total } = req.body;
   if (!bab || !validBab.includes(bab)) {
     return res.status(400).json({ message: "Bab tidak valid" });
+  }
+
+  if (dialect && !validDialects.includes(dialect.toLowerCase())) {
+    return res.status(400).json({ message: "Dialek tidak tersedia" });
   }
 
   if (level && !validLevelsByBab[bab]?.includes(level)) {
     return res.status(400).json({ message: "Level tidak valid" });
   }
 
-  updateStudentProgress(req.user.id, bab, res, level, score, total);
+  updateStudentProgress(
+    req.user.id,
+    bab,
+    res,
+    level,
+    score,
+    total,
+    dialect?.toLowerCase()
+  );
 };
 
 exports.updateDialect = (req, res) => {

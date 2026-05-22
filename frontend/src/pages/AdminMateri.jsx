@@ -5,6 +5,68 @@ import SidebarAdmin from "../components/SidebarAdmin";
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 const API = `${API_BASE_URL}/api/admin`;
 
+const emptyLessonItem = {
+  indo: "",
+  kaili: "",
+  tipe: "kosakata",
+  category: "kata benda",
+};
+
+const lessonCategories = {
+  bab1: [
+    "kata benda",
+    "kata kerja",
+    "kata sifat",
+    "kata keterangan",
+    "kata ganti",
+    "kata depan",
+    "kata sambung",
+    "kata bilangan",
+    "kata seru",
+    "kata sandang",
+  ],
+  bab2: [
+    "kalimat sederhana",
+    "kalimat berita",
+    "kalimat tanya",
+    "kalimat perintah",
+    "kalimat seruan",
+    "kalimat tunggal",
+    "kalimat majemuk setara",
+    "kalimat majemuk bertingkat",
+    "kalimat langsung",
+    "kalimat tidak langsung",
+  ],
+  bab3: [
+    "Kehidupan Desa dan Masyarakat",
+    "Penyakit dan Pengobatan",
+    "Sistem Kekerabatan",
+    "Bagian Tubuh",
+    "Gerak dan Kerja",
+    "Tanaman",
+    "Kata Tugas",
+    "Perangai, Kata sifat, dan Warna",
+    "Makanan dan Minuman",
+    "Peralatan dan Perlengkapan",
+    "Binatang",
+    "Kata Ganti, Sapaan",
+    "Mata Pencaharian",
+    "Permainan",
+    "Kata Bilangan",
+    "Rumah dan Bagian-bagiannya",
+    "Musim, Keadaan Alam",
+    "Pakaian dan Perhiasan",
+    "Swadesh List",
+  ],
+};
+
+const getLessonCategories = (bab) =>
+  lessonCategories[bab] || [
+    "kosakata",
+    "kalimat",
+    "gambar kosakata",
+  ];
+
 function AdminMateri() {
   const [user, setUser] = useState(null);
   const [tab, setTab] = useState("materi"); // materi | quiz
@@ -18,7 +80,7 @@ function AdminMateri() {
     dialect: "ledo",
     bab: "bab1",
     title: "",
-    content: "",
+    items: [{ ...emptyLessonItem }],
   });
   const [editLesson, setEditLesson] = useState(null);
 
@@ -66,7 +128,12 @@ function AdminMateri() {
   // ========= MATERI HANDLERS =========
   const openAddLesson = () => {
     setEditLesson(null);
-    setLessonForm({ dialect: "ledo", bab: "bab1", title: "", content: "" });
+    setLessonForm({
+      dialect: "ledo",
+      bab: "bab1",
+      title: "",
+      items: [{ ...emptyLessonItem }],
+    });
     setShowLessonModal(true);
   };
 
@@ -81,28 +148,77 @@ function AdminMateri() {
         dialect: lesson.dialect,
         bab: lesson.bab,
         title: data.title || "",
-        content: JSON.stringify(data, null, 2),
+        items: Array.isArray(data) && data.length > 0
+          ? data.map((item) => ({
+              indo: item.indo || item.indonesia || "",
+              kaili: item.kaili || item.answer || "",
+              tipe: item.tipe || "kosakata",
+              category: item.category || getLessonCategories(lesson.bab)[0],
+            }))
+          : [{ ...emptyLessonItem, category: getLessonCategories(lesson.bab)[0] }],
       });
       setShowLessonModal(true);
     }
   };
 
   const saveLesson = async () => {
-    try {
-      const body = JSON.parse(lessonForm.content);
-      const res = await fetch(
-        `${API}/lessons/${lessonForm.dialect}/${lessonForm.bab}`,
-        { method: "PUT", headers, body: JSON.stringify(body) }
-      );
-      if (res.ok) {
-        setShowLessonModal(false);
-        fetchLessons();
-      } else {
-        alert("Gagal menyimpan materi");
-      }
-    } catch {
-      alert("Format JSON tidak valid!");
+    const body = lessonForm.items
+      .map((item) => ({
+        indo: item.indo.trim(),
+        kaili: item.kaili.trim(),
+        tipe: item.tipe.trim() || "materi",
+        category: item.category.trim(),
+      }))
+      .filter((item) => item.indo && item.kaili && item.category);
+
+    if (body.length === 0) {
+      alert("Minimal satu materi harus diisi lengkap.");
+      return;
     }
+
+    const res = await fetch(
+      `${API}/lessons/${lessonForm.dialect}/${lessonForm.bab}`,
+      { method: "PUT", headers, body: JSON.stringify(body) }
+    );
+    if (res.ok) {
+      setShowLessonModal(false);
+      fetchLessons();
+    } else {
+      alert("Gagal menyimpan materi");
+    }
+  };
+
+  const updateLessonItem = (index, field, value) => {
+    setLessonForm((prev) => ({
+      ...prev,
+      items: prev.items.map((item, itemIndex) =>
+        itemIndex === index ? { ...item, [field]: value } : item
+      ),
+    }));
+  };
+
+  const addLessonItem = () => {
+    setLessonForm((prev) => ({
+      ...prev,
+      items: [
+        ...prev.items,
+        {
+          ...emptyLessonItem,
+          tipe: prev.bab === "bab2" ? "kalimat" : prev.bab === "bab3" ? "kosakata" : "kosakata",
+          category: getLessonCategories(prev.bab)[0],
+        },
+      ],
+    }));
+  };
+
+  const removeLessonItem = (index) => {
+    setLessonForm((prev) => ({
+      ...prev,
+      items:
+        prev.items.length > 1
+          ? prev.items.filter((_, itemIndex) => itemIndex !== index)
+          : prev.items,
+    }));
   };
 
   const deleteLesson = async (lesson) => {
@@ -419,7 +535,20 @@ function AdminMateri() {
                     <select
                       value={lessonForm.bab}
                       onChange={(e) =>
-                        setLessonForm({ ...lessonForm, bab: e.target.value })
+                        setLessonForm((prev) => ({
+                          ...prev,
+                          bab: e.target.value,
+                          items: prev.items.map((item) => ({
+                            ...item,
+                            tipe:
+                              e.target.value === "bab2"
+                                ? "kalimat"
+                                : e.target.value === "bab3"
+                                ? "kosakata"
+                                : "kosakata",
+                            category: getLessonCategories(e.target.value)[0],
+                          })),
+                        }))
                       }
                       disabled={!!editLesson}
                       className="w-full px-3 py-2.5 border rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-purple-400 disabled:bg-gray-100"
@@ -434,17 +563,110 @@ function AdminMateri() {
                 </div>
 
                 <div>
-                  <label className="text-sm font-medium text-gray-700 mb-1 block">
-                    Konten (JSON)
-                  </label>
-                  <textarea
-                    value={lessonForm.content}
-                    onChange={(e) =>
-                      setLessonForm({ ...lessonForm, content: e.target.value })
-                    }
-                    className="w-full px-4 py-3 border rounded-xl text-sm font-mono focus:outline-none focus:ring-2 focus:ring-purple-400 h-64 resize-y"
-                    placeholder='{"title": "Bab 1", "content": [...]}'
-                  />
+                  <div className="flex items-center justify-between mb-2">
+                    <label className="text-sm font-medium text-gray-700 block">
+                      Daftar Materi
+                    </label>
+                    <button
+                      type="button"
+                      onClick={addLessonItem}
+                      className="px-3 py-1.5 rounded-lg bg-purple-50 text-purple-700 text-xs font-semibold hover:bg-purple-100"
+                    >
+                      + Tambah Baris
+                    </button>
+                  </div>
+
+                  <div className="space-y-3">
+                    {lessonForm.items.map((item, index) => (
+                      <div
+                        key={index}
+                        className="border rounded-xl p-3 bg-gray-50"
+                      >
+                        <div className="flex items-center justify-between mb-3">
+                          <p className="text-xs font-bold text-gray-500">
+                            Materi {index + 1}
+                          </p>
+                          <button
+                            type="button"
+                            onClick={() => removeLessonItem(index)}
+                            disabled={lessonForm.items.length === 1}
+                            className="text-xs font-semibold text-red-500 disabled:text-gray-300"
+                          >
+                            Hapus
+                          </button>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                          <div>
+                            <label className="text-xs font-medium text-gray-600 mb-1 block">
+                              Indonesia
+                            </label>
+                            <input
+                              type="text"
+                              value={item.indo}
+                              onChange={(e) =>
+                                updateLessonItem(index, "indo", e.target.value)
+                              }
+                              className="w-full px-3 py-2 border rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
+                              placeholder="Contoh: Rumah"
+                            />
+                          </div>
+
+                          <div>
+                            <label className="text-xs font-medium text-gray-600 mb-1 block">
+                              Kaili
+                            </label>
+                            <input
+                              type="text"
+                              value={item.kaili}
+                              onChange={(e) =>
+                                updateLessonItem(index, "kaili", e.target.value)
+                              }
+                              className="w-full px-3 py-2 border rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
+                              placeholder="Contoh: Banua"
+                            />
+                          </div>
+
+                          <div>
+                            <label className="text-xs font-medium text-gray-600 mb-1 block">
+                              Tipe
+                            </label>
+                            <select
+                              value={item.tipe}
+                              onChange={(e) =>
+                                updateLessonItem(index, "tipe", e.target.value)
+                              }
+                              className="w-full px-3 py-2 border rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
+                            >
+                              <option value="kosakata">Kosakata</option>
+                              <option value="kalimat">Kalimat</option>
+                              <option value="gambar">Gambar</option>
+                              <option value="materi">Materi</option>
+                            </select>
+                          </div>
+
+                          <div>
+                            <label className="text-xs font-medium text-gray-600 mb-1 block">
+                              Kategori
+                            </label>
+                            <select
+                              value={item.category}
+                              onChange={(e) =>
+                                updateLessonItem(index, "category", e.target.value)
+                              }
+                              className="w-full px-3 py-2 border rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
+                            >
+                              {getLessonCategories(lessonForm.bab).map((category) => (
+                                <option key={category} value={category}>
+                                  {category}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
 

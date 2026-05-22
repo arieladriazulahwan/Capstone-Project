@@ -21,7 +21,7 @@ function Lesson() {
         const filtered = items.map((item) => ({
           indo: item.indo || item.indonesia || item.question || "-",
           kaili: item.kaili || item.answer || "-",
-          tipe: item.tipe || item.category || levelInfo?.title || "materi",
+          tipe: item.category || item.tipe || levelInfo?.title || "materi",
         }));
 
         setData(filtered);
@@ -65,21 +65,27 @@ function Lesson() {
           </div>
         ))}
 
-        {data.length > 0 && (
-          <button
-            onClick={() =>
-              navigate(
-                level
-                  ? `/practice/${dialect}/${bab}/${level}`
-                  : `/practice/${dialect}/${bab}`
-              )
-            }
-            className="w-full mt-6 bg-green-500 text-white p-3 rounded-xl"
-          >
-            Lanjut ke Latihan
-          </button>
-        )}
+        {data.length > 0 && <div className="h-24" />}
       </main>
+
+      {data.length > 0 && (
+        <div className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur border-t border-gray-200 px-4 py-3 md:left-0">
+          <div className="max-w-xl mx-auto">
+            <button
+              onClick={() =>
+                navigate(
+                  level
+                    ? `/practice/${dialect}/${bab}/${level}`
+                    : `/practice/${dialect}/${bab}`
+                )
+              }
+              className="w-full bg-green-500 text-white p-3 rounded-xl font-bold shadow-lg hover:bg-green-600 transition"
+            >
+              Lanjut ke Latihan
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

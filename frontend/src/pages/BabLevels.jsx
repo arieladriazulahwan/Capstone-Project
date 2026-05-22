@@ -11,6 +11,43 @@ const colorClass = {
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
+const mergeProgress = (fallback = {}, current = {}) => {
+  const merged = {
+    ...fallback,
+    ...current,
+    levels: {
+      ...(fallback.levels || {}),
+      ...(current.levels || {}),
+    },
+  };
+
+  const babKeys = new Set([
+    ...Object.keys(fallback.levels || {}),
+    ...Object.keys(current.levels || {}),
+  ]);
+
+  babKeys.forEach((babKey) => {
+    const fallbackLevels = fallback.levels?.[babKey] || {};
+    const currentLevels = current.levels?.[babKey] || {};
+
+    merged.levels[babKey] = {
+      ...fallbackLevels,
+      ...currentLevels,
+    };
+
+    Object.keys(fallbackLevels).forEach((levelKey) => {
+      const fallbackScore = fallbackLevels[levelKey];
+      const currentScore = currentLevels[levelKey];
+
+      if (typeof fallbackScore === "number" && typeof currentScore === "number") {
+        merged.levels[babKey][levelKey] = Math.max(fallbackScore, currentScore);
+      }
+    });
+  });
+
+  return merged;
+};
+
 function BabLevels() {
   const navigate = useNavigate();
   const { dialect, bab } = useParams();
@@ -32,12 +69,15 @@ function BabLevels() {
       .then((res) => res.json())
       .then((data) => {
         const userData = data.user || data;
-        setProgress(userData.progress || {});
+        setProgress(mergeProgress(
+          userData.progress || {},
+          userData.progressByDialect?.[dialect] || {}
+        ));
       })
       .catch((err) => {
         console.log("Gagal ambil progress level:", err);
       });
-  }, []);
+  }, [dialect]);
 
   const isLevelUnlocked = (level, index) => {
     // Hanya level pertama dari Bab 1 yang otomatis terbuka tanpa syarat
@@ -57,7 +97,7 @@ function BabLevels() {
     }
 
     // Untuk level 1 di Bab 2/Bab 3, terbuka jika dari backend sudah mendefinisikannya
-    return progress.levels?.[bab]?.[level.key] !== undefined;
+    return progress.levels?.[bab]?.[level.key] !== undefined || progress[bab] === true;
   };
 
   const getLevelScore = (level) => {

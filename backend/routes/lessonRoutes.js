@@ -3,6 +3,7 @@ const router = express.Router();
 
 const fs = require("fs");
 const path = require("path");
+const { generateVocabLessons } = require("../utils/vocabQuestionGenerator");
 const validDialects = ["ledo", "rai"];
 
 // 🔥 GET LESSON BERDASARKAN DIALEK & BAB
@@ -31,8 +32,13 @@ router.get("/:dialect/:bab", (req, res) => {
     }
 
     const data = JSON.parse(fs.readFileSync(filePath));
+    const vocabLessons = generateVocabLessons({
+      dialect,
+      bab,
+      startId: 40000,
+    });
 
-    res.json(data);
+    res.json([...data, ...vocabLessons]);
 
   } catch (err) {
     console.log(err);

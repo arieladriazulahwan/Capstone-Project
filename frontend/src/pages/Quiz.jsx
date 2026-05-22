@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 import { filterByLevel, getBab, getLevel } from "../data/levelMap";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+const QUIZ_QUESTION_COUNT = 10;
 
 const shuffleOptions = (items) => {
   const shuffled = [...items];
@@ -14,6 +15,30 @@ const shuffleOptions = (items) => {
   }
 
   return shuffled;
+};
+
+const prepareQuizItem = (item) => ({
+  ...item,
+  options: Array.isArray(item.options)
+    ? shuffleOptions(item.options)
+    : item.options,
+  blocks: Array.isArray(item.blocks)
+    ? shuffleOptions(item.blocks)
+    : item.blocks,
+});
+
+const pickQuizQuestions = (items, bab, level) => {
+  const filtered = filterByLevel(items, bab, level);
+  const pool = level ? filtered : items;
+  const shuffled = shuffleOptions(pool);
+  const questions = shuffled.slice(0, QUIZ_QUESTION_COUNT);
+
+  for (let i = 0; questions.length < QUIZ_QUESTION_COUNT && shuffled.length > 0; i += 1) {
+    questions.push({ ...shuffled[i % shuffled.length] });
+  }
+
+  return questions
+    .map(prepareQuizItem);
 };
 
 function Quiz() {
@@ -39,21 +64,14 @@ function Quiz() {
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data)) {
-          const filtered = filterByLevel(data, bab, level).map((item) => ({
-            ...item,
-            options: Array.isArray(item.options)
-              ? shuffleOptions(item.options)
-              : item.options,
-            blocks: Array.isArray(item.blocks)
-              ? shuffleOptions(item.blocks)
-              : item.blocks,
-          }));
+          const filtered = pickQuizQuestions(data, bab, level);
 
           setQuestions(filtered);
           setIndex(0);
           setScore(0);
           setSelected("");
           setTimeLeft(30);
+          setIsFinished(false);
         } else {
           setQuestions([]);
         }
@@ -98,6 +116,8 @@ function Quiz() {
   }
 
   const current = questions[index];
+  const hasBlocks = Array.isArray(current.blocks) && current.blocks.length > 0;
+  const hasOptions = !hasBlocks && Array.isArray(current.options) && current.options.length > 0;
 
   const nextQuestion = async (updatedScore) => {
     if (index + 1 < questions.length) {
@@ -118,7 +138,13 @@ function Quiz() {
             "Content-Type": "application/json",
             Authorization: "Bearer " + token,
           },
-          body: JSON.stringify({ bab, level, score: updatedScore, total: questions.length }),
+          body: JSON.stringify({
+            bab,
+            dialect,
+            level,
+            score: updatedScore,
+            total: questions.length,
+          }),
         });
 
         if (!progressRes.ok) {
@@ -168,17 +194,25 @@ function Quiz() {
   };
 
   const blockHandler = (block) => {
-    const newWord = selected + block;
-    setSelected(newWord);
+    setSelected((currentSelected) => currentSelected + block);
+  };
 
-    if (newWord.toLowerCase() === current.answer.toLowerCase()) {
-      const updatedScore = score + 1;
-      setScore(updatedScore);
-
-      setTimeout(() => {
-        nextQuestion(updatedScore);
-      }, 500);
+  const submitBlockAnswer = () => {
+    if (!selected.trim()) {
+      alert("Susun jawaban dulu");
+      return;
     }
+
+    let updatedScore = score;
+    const userAnswer = selected.trim().toLowerCase();
+    const correctAnswer = current.answer.trim().toLowerCase();
+
+    if (userAnswer === correctAnswer) {
+      updatedScore += 1;
+      setScore(updatedScore);
+    }
+
+    nextQuestion(updatedScore);
   };
 
   // TAMPILAN RESULT
@@ -247,7 +281,7 @@ function Quiz() {
 
           <h2 className="text-lg font-semibold mb-5">{current.question}</h2>
 
-          {current.options && (
+          {hasOptions && (
             <div className="flex flex-col gap-3">
               {current.options?.map((opt, i) => (
                 <button
@@ -261,7 +295,7 @@ function Quiz() {
             </div>
           )}
 
-          {current.blocks && (
+          {hasBlocks && (
             <>
               <div className="mb-5 p-4 bg-gray-100 rounded-xl text-center text-2xl font-bold min-h-[70px] flex items-center justify-center">
                 {selected || "..."}
@@ -279,12 +313,20 @@ function Quiz() {
                 ))}
               </div>
 
-              <button
-                onClick={() => setSelected("")}
-                className="w-full bg-red-500 text-white py-3 rounded-xl mt-4"
-              >
-                Reset
-              </button>
+              <div className="grid grid-cols-2 gap-3 mt-4">
+                <button
+                  onClick={() => setSelected("")}
+                  className="w-full bg-red-500 text-white py-3 rounded-xl font-bold hover:bg-red-600 transition"
+                >
+                  Reset
+                </button>
+                <button
+                  onClick={submitBlockAnswer}
+                  className="w-full bg-green-500 text-white py-3 rounded-xl font-bold hover:bg-green-600 transition"
+                >
+                  Jawab
+                </button>
+              </div>
             </>
           )}
 

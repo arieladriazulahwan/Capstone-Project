@@ -3,6 +3,7 @@ const router = express.Router();
 
 const fs = require("fs");
 const path = require("path");
+const { generateVocabQuestions } = require("../utils/vocabQuestionGenerator");
 const validDialects = ["ledo", "rai"];
 
 // 🔥 GET PRACTICE
@@ -36,7 +37,14 @@ router.get("/:dialect/:bab", (req, res) => {
       fs.readFileSync(filePath, "utf-8")
     );
 
-    res.json(data);
+    const vocabQuestions = generateVocabQuestions({
+      dialect,
+      bab,
+      type: "practice",
+      startId: 20000,
+    });
+
+    res.json([...data, ...vocabQuestions]);
 
   } catch (err) {
     console.log(err);

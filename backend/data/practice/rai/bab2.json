@@ -1,4 +1,552 @@
 [
-  { "category": "kalimat sederhana", "question": "Apa arti 'Inggu kande pae'?", "options": ["Saya makan nasi", "Kamu pergi rumah", "Air itu baik", "Nama saya Inggu"], "answer": "Saya makan nasi" },
-  { "category": "kalimat sederhana", "question": "Apa arti 'Iko lau ri banua'?", "options": ["Kamu pergi ke rumah", "Saya makan nasi", "Air itu baik", "Rumah itu besar"], "answer": "Kamu pergi ke rumah" }
+  {
+    "category": "kalimat sederhana",
+    "question": "Apa arti 'Ngarana inggu Inggu'?",
+    "options": [
+      "Nama saya Inggu",
+      "Saya makan nasi",
+      "Kamu pergi ke rumah",
+      "Air itu baik"
+    ],
+    "answer": "Nama saya Inggu"
+  },
+  {
+    "category": "kalimat sederhana",
+    "question": "Apa arti 'Inggu kande pae'?",
+    "options": [
+      "Saya makan nasi",
+      "Nama saya Inggu",
+      "Kamu pergi ke rumah",
+      "Air itu baik"
+    ],
+    "answer": "Saya makan nasi"
+  },
+  {
+    "category": "kalimat sederhana",
+    "question": "Apa arti 'Iko lau ri banua'?",
+    "options": [
+      "Kamu pergi ke rumah",
+      "Nama saya Inggu",
+      "Saya makan nasi",
+      "Air itu baik"
+    ],
+    "answer": "Kamu pergi ke rumah"
+  },
+  {
+    "category": "kalimat sederhana",
+    "question": "Apa arti 'Oe ia mabelo'?",
+    "options": [
+      "Air itu baik",
+      "Nama saya Inggu",
+      "Saya makan nasi",
+      "Kamu pergi ke rumah"
+    ],
+    "answer": "Air itu baik"
+  },
+  {
+    "category": "kalimat sederhana",
+    "question": "Apa arti 'Ngarana inggu Inggu'?",
+    "options": [
+      "Nama saya Inggu",
+      "Saya makan nasi",
+      "Kamu pergi ke rumah",
+      "Air itu baik"
+    ],
+    "answer": "Nama saya Inggu"
+  },
+  {
+    "category": "kalimat berita",
+    "question": "Apa arti 'Ina nompaju pae'?",
+    "options": [
+      "Ibu memasak nasi",
+      "Ayah pergi ke kebun",
+      "Rumah itu besar",
+      "Anak itu belajar"
+    ],
+    "answer": "Ibu memasak nasi"
+  },
+  {
+    "category": "kalimat berita",
+    "question": "Apa arti 'Papa lau ri talua'?",
+    "options": [
+      "Ayah pergi ke kebun",
+      "Ibu memasak nasi",
+      "Rumah itu besar",
+      "Anak itu belajar"
+    ],
+    "answer": "Ayah pergi ke kebun"
+  },
+  {
+    "category": "kalimat berita",
+    "question": "Apa arti 'Banua ia lompe'?",
+    "options": [
+      "Rumah itu besar",
+      "Ibu memasak nasi",
+      "Ayah pergi ke kebun",
+      "Anak itu belajar"
+    ],
+    "answer": "Rumah itu besar"
+  },
+  {
+    "category": "kalimat berita",
+    "question": "Apa arti 'Ana ia noajari'?",
+    "options": [
+      "Anak itu belajar",
+      "Ibu memasak nasi",
+      "Ayah pergi ke kebun",
+      "Rumah itu besar"
+    ],
+    "answer": "Anak itu belajar"
+  },
+  {
+    "category": "kalimat berita",
+    "question": "Apa arti 'Ina nompaju pae'?",
+    "options": [
+      "Ibu memasak nasi",
+      "Ayah pergi ke kebun",
+      "Rumah itu besar",
+      "Anak itu belajar"
+    ],
+    "answer": "Ibu memasak nasi"
+  },
+  {
+    "category": "kalimat tanya",
+    "question": "Apa arti 'Nisei ngaranamu?'?",
+    "options": [
+      "Siapa nama kamu?",
+      "Apa kamu makan nasi?",
+      "Di mana rumah kamu?",
+      "Kapan kamu pergi?"
+    ],
+    "answer": "Siapa nama kamu?"
+  },
+  {
+    "category": "kalimat tanya",
+    "question": "Apa arti 'Ngapa iko kande pae?'?",
+    "options": [
+      "Apa kamu makan nasi?",
+      "Siapa nama kamu?",
+      "Di mana rumah kamu?",
+      "Kapan kamu pergi?"
+    ],
+    "answer": "Apa kamu makan nasi?"
+  },
+  {
+    "category": "kalimat tanya",
+    "question": "Apa arti 'Ri ava banuamu?'?",
+    "options": [
+      "Di mana rumah kamu?",
+      "Siapa nama kamu?",
+      "Apa kamu makan nasi?",
+      "Kapan kamu pergi?"
+    ],
+    "answer": "Di mana rumah kamu?"
+  },
+  {
+    "category": "kalimat tanya",
+    "question": "Apa arti 'Nakuya iko lau?'?",
+    "options": [
+      "Kapan kamu pergi?",
+      "Siapa nama kamu?",
+      "Apa kamu makan nasi?",
+      "Di mana rumah kamu?"
+    ],
+    "answer": "Kapan kamu pergi?"
+  },
+  {
+    "category": "kalimat tanya",
+    "question": "Apa arti 'Nisei ngaranamu?'?",
+    "options": [
+      "Siapa nama kamu?",
+      "Apa kamu makan nasi?",
+      "Di mana rumah kamu?",
+      "Kapan kamu pergi?"
+    ],
+    "answer": "Siapa nama kamu?"
+  },
+  {
+    "category": "kalimat perintah",
+    "question": "Apa arti 'Kande pae ia'?",
+    "options": [
+      "Makanlah nasi itu",
+      "Pergilah ke rumah",
+      "Duduklah di sini",
+      "Ambil air itu"
+    ],
+    "answer": "Makanlah nasi itu"
+  },
+  {
+    "category": "kalimat perintah",
+    "question": "Apa arti 'Lau ri banua'?",
+    "options": [
+      "Pergilah ke rumah",
+      "Makanlah nasi itu",
+      "Duduklah di sini",
+      "Ambil air itu"
+    ],
+    "answer": "Pergilah ke rumah"
+  },
+  {
+    "category": "kalimat perintah",
+    "question": "Apa arti 'Motiro ri sei'?",
+    "options": [
+      "Duduklah di sini",
+      "Makanlah nasi itu",
+      "Pergilah ke rumah",
+      "Ambil air itu"
+    ],
+    "answer": "Duduklah di sini"
+  },
+  {
+    "category": "kalimat perintah",
+    "question": "Apa arti 'Ala oe ia'?",
+    "options": [
+      "Ambil air itu",
+      "Makanlah nasi itu",
+      "Pergilah ke rumah",
+      "Duduklah di sini"
+    ],
+    "answer": "Ambil air itu"
+  },
+  {
+    "category": "kalimat perintah",
+    "question": "Apa arti 'Kande pae ia'?",
+    "options": [
+      "Makanlah nasi itu",
+      "Pergilah ke rumah",
+      "Duduklah di sini",
+      "Ambil air itu"
+    ],
+    "answer": "Makanlah nasi itu"
+  },
+  {
+    "category": "kalimat seruan",
+    "question": "Apa arti 'Wah, banua ia lompe!'?",
+    "options": [
+      "Wah, rumah itu besar!",
+      "Aduh, air itu dingin!",
+      "Bagus sekali pekerjaanmu!",
+      "Hai, datanglah ke sini!"
+    ],
+    "answer": "Wah, rumah itu besar!"
+  },
+  {
+    "category": "kalimat seruan",
+    "question": "Apa arti 'Adu, oe ia nindi!'?",
+    "options": [
+      "Aduh, air itu dingin!",
+      "Wah, rumah itu besar!",
+      "Bagus sekali pekerjaanmu!",
+      "Hai, datanglah ke sini!"
+    ],
+    "answer": "Aduh, air itu dingin!"
+  },
+  {
+    "category": "kalimat seruan",
+    "question": "Apa arti 'Mabelo tuu penggawemu!'?",
+    "options": [
+      "Bagus sekali pekerjaanmu!",
+      "Wah, rumah itu besar!",
+      "Aduh, air itu dingin!",
+      "Hai, datanglah ke sini!"
+    ],
+    "answer": "Bagus sekali pekerjaanmu!"
+  },
+  {
+    "category": "kalimat seruan",
+    "question": "Apa arti 'Hai, rata ri sei!'?",
+    "options": [
+      "Hai, datanglah ke sini!",
+      "Wah, rumah itu besar!",
+      "Aduh, air itu dingin!",
+      "Bagus sekali pekerjaanmu!"
+    ],
+    "answer": "Hai, datanglah ke sini!"
+  },
+  {
+    "category": "kalimat seruan",
+    "question": "Apa arti 'Wah, banua ia lompe!'?",
+    "options": [
+      "Wah, rumah itu besar!",
+      "Aduh, air itu dingin!",
+      "Bagus sekali pekerjaanmu!",
+      "Hai, datanglah ke sini!"
+    ],
+    "answer": "Wah, rumah itu besar!"
+  },
+  {
+    "category": "kalimat tunggal",
+    "question": "Apa arti 'Inggu moturi'?",
+    "options": [
+      "Saya tidur",
+      "Ibu datang",
+      "Anak makan",
+      "Air mengalir"
+    ],
+    "answer": "Saya tidur"
+  },
+  {
+    "category": "kalimat tunggal",
+    "question": "Apa arti 'Ina rata'?",
+    "options": [
+      "Ibu datang",
+      "Saya tidur",
+      "Anak makan",
+      "Air mengalir"
+    ],
+    "answer": "Ibu datang"
+  },
+  {
+    "category": "kalimat tunggal",
+    "question": "Apa arti 'Ana kande'?",
+    "options": [
+      "Anak makan",
+      "Saya tidur",
+      "Ibu datang",
+      "Air mengalir"
+    ],
+    "answer": "Anak makan"
+  },
+  {
+    "category": "kalimat tunggal",
+    "question": "Apa arti 'Oe noili'?",
+    "options": [
+      "Air mengalir",
+      "Saya tidur",
+      "Ibu datang",
+      "Anak makan"
+    ],
+    "answer": "Air mengalir"
+  },
+  {
+    "category": "kalimat tunggal",
+    "question": "Apa arti 'Inggu moturi'?",
+    "options": [
+      "Saya tidur",
+      "Ibu datang",
+      "Anak makan",
+      "Air mengalir"
+    ],
+    "answer": "Saya tidur"
+  },
+  {
+    "category": "kalimat majemuk setara",
+    "question": "Apa arti 'Inggu kande pae ante iko noinu oe'?",
+    "options": [
+      "Saya makan nasi dan kamu minum air",
+      "Ibu memasak dan ayah bekerja",
+      "Saya pergi tetapi kamu tinggal",
+      "Anak belajar dan guru mengajar"
+    ],
+    "answer": "Saya makan nasi dan kamu minum air"
+  },
+  {
+    "category": "kalimat majemuk setara",
+    "question": "Apa arti 'Ina nompaju ante papa mogavi'?",
+    "options": [
+      "Ibu memasak dan ayah bekerja",
+      "Saya makan nasi dan kamu minum air",
+      "Saya pergi tetapi kamu tinggal",
+      "Anak belajar dan guru mengajar"
+    ],
+    "answer": "Ibu memasak dan ayah bekerja"
+  },
+  {
+    "category": "kalimat majemuk setara",
+    "question": "Apa arti 'Inggu lau tapi iko tomo'?",
+    "options": [
+      "Saya pergi tetapi kamu tinggal",
+      "Saya makan nasi dan kamu minum air",
+      "Ibu memasak dan ayah bekerja",
+      "Anak belajar dan guru mengajar"
+    ],
+    "answer": "Saya pergi tetapi kamu tinggal"
+  },
+  {
+    "category": "kalimat majemuk setara",
+    "question": "Apa arti 'Ana noajari ante guru nompajari'?",
+    "options": [
+      "Anak belajar dan guru mengajar",
+      "Saya makan nasi dan kamu minum air",
+      "Ibu memasak dan ayah bekerja",
+      "Saya pergi tetapi kamu tinggal"
+    ],
+    "answer": "Anak belajar dan guru mengajar"
+  },
+  {
+    "category": "kalimat majemuk setara",
+    "question": "Apa arti 'Inggu kande pae ante iko noinu oe'?",
+    "options": [
+      "Saya makan nasi dan kamu minum air",
+      "Ibu memasak dan ayah bekerja",
+      "Saya pergi tetapi kamu tinggal",
+      "Anak belajar dan guru mengajar"
+    ],
+    "answer": "Saya makan nasi dan kamu minum air"
+  },
+  {
+    "category": "kalimat majemuk bertingkat",
+    "question": "Apa arti 'Inggu kande apa nalapa'?",
+    "options": [
+      "Saya makan karena lapar",
+      "Kamu pergi ketika pagi",
+      "Ibu datang setelah ayah pergi",
+      "Anak belajar supaya pintar"
+    ],
+    "answer": "Saya makan karena lapar"
+  },
+  {
+    "category": "kalimat majemuk bertingkat",
+    "question": "Apa arti 'Iko lau tempo pagi'?",
+    "options": [
+      "Kamu pergi ketika pagi",
+      "Saya makan karena lapar",
+      "Ibu datang setelah ayah pergi",
+      "Anak belajar supaya pintar"
+    ],
+    "answer": "Kamu pergi ketika pagi"
+  },
+  {
+    "category": "kalimat majemuk bertingkat",
+    "question": "Apa arti 'Ina rata moli papa lau'?",
+    "options": [
+      "Ibu datang setelah ayah pergi",
+      "Saya makan karena lapar",
+      "Kamu pergi ketika pagi",
+      "Anak belajar supaya pintar"
+    ],
+    "answer": "Ibu datang setelah ayah pergi"
+  },
+  {
+    "category": "kalimat majemuk bertingkat",
+    "question": "Apa arti 'Ana noajari ala mabelo pangisi'?",
+    "options": [
+      "Anak belajar supaya pintar",
+      "Saya makan karena lapar",
+      "Kamu pergi ketika pagi",
+      "Ibu datang setelah ayah pergi"
+    ],
+    "answer": "Anak belajar supaya pintar"
+  },
+  {
+    "category": "kalimat majemuk bertingkat",
+    "question": "Apa arti 'Inggu kande apa nalapa'?",
+    "options": [
+      "Saya makan karena lapar",
+      "Kamu pergi ketika pagi",
+      "Ibu datang setelah ayah pergi",
+      "Anak belajar supaya pintar"
+    ],
+    "answer": "Saya makan karena lapar"
+  },
+  {
+    "category": "kalimat langsung",
+    "question": "Apa arti 'Ina natesa, \"Inggu nompaju pae\"'?",
+    "options": [
+      "Ibu berkata, \"Saya memasak nasi\"",
+      "Ayah berkata, \"Saya pergi\"",
+      "Guru berkata, \"Belajarlah\"",
+      "Inggu berkata, \"Saya minum air\""
+    ],
+    "answer": "Ibu berkata, \"Saya memasak nasi\""
+  },
+  {
+    "category": "kalimat langsung",
+    "question": "Apa arti 'Papa natesa, \"Inggu lau\"'?",
+    "options": [
+      "Ayah berkata, \"Saya pergi\"",
+      "Ibu berkata, \"Saya memasak nasi\"",
+      "Guru berkata, \"Belajarlah\"",
+      "Inggu berkata, \"Saya minum air\""
+    ],
+    "answer": "Ayah berkata, \"Saya pergi\""
+  },
+  {
+    "category": "kalimat langsung",
+    "question": "Apa arti 'Guru natesa, \"Noajarimo\"'?",
+    "options": [
+      "Guru berkata, \"Belajarlah\"",
+      "Ibu berkata, \"Saya memasak nasi\"",
+      "Ayah berkata, \"Saya pergi\"",
+      "Inggu berkata, \"Saya minum air\""
+    ],
+    "answer": "Guru berkata, \"Belajarlah\""
+  },
+  {
+    "category": "kalimat langsung",
+    "question": "Apa arti 'Inggu natesa, \"Inggu noinu oe\"'?",
+    "options": [
+      "Inggu berkata, \"Saya minum air\"",
+      "Ibu berkata, \"Saya memasak nasi\"",
+      "Ayah berkata, \"Saya pergi\"",
+      "Guru berkata, \"Belajarlah\""
+    ],
+    "answer": "Inggu berkata, \"Saya minum air\""
+  },
+  {
+    "category": "kalimat langsung",
+    "question": "Apa arti 'Ina natesa, \"Inggu nompaju pae\"'?",
+    "options": [
+      "Ibu berkata, \"Saya memasak nasi\"",
+      "Ayah berkata, \"Saya pergi\"",
+      "Guru berkata, \"Belajarlah\"",
+      "Inggu berkata, \"Saya minum air\""
+    ],
+    "answer": "Ibu berkata, \"Saya memasak nasi\""
+  },
+  {
+    "category": "kalimat tidak langsung",
+    "question": "Apa arti 'Ina natesa ia nompaju pae'?",
+    "options": [
+      "Ibu mengatakan bahwa ia memasak nasi",
+      "Ayah mengatakan bahwa ia pergi",
+      "Guru menyuruh anak belajar",
+      "Inggu mengatakan bahwa saya minum air"
+    ],
+    "answer": "Ibu mengatakan bahwa ia memasak nasi"
+  },
+  {
+    "category": "kalimat tidak langsung",
+    "question": "Apa arti 'Papa natesa ia lau'?",
+    "options": [
+      "Ayah mengatakan bahwa ia pergi",
+      "Ibu mengatakan bahwa ia memasak nasi",
+      "Guru menyuruh anak belajar",
+      "Inggu mengatakan bahwa saya minum air"
+    ],
+    "answer": "Ayah mengatakan bahwa ia pergi"
+  },
+  {
+    "category": "kalimat tidak langsung",
+    "question": "Apa arti 'Guru nompakoni ana noajari'?",
+    "options": [
+      "Guru menyuruh anak belajar",
+      "Ibu mengatakan bahwa ia memasak nasi",
+      "Ayah mengatakan bahwa ia pergi",
+      "Inggu mengatakan bahwa saya minum air"
+    ],
+    "answer": "Guru menyuruh anak belajar"
+  },
+  {
+    "category": "kalimat tidak langsung",
+    "question": "Apa arti 'Inggu natesa inggu noinu oe'?",
+    "options": [
+      "Inggu mengatakan bahwa saya minum air",
+      "Ibu mengatakan bahwa ia memasak nasi",
+      "Ayah mengatakan bahwa ia pergi",
+      "Guru menyuruh anak belajar"
+    ],
+    "answer": "Inggu mengatakan bahwa saya minum air"
+  },
+  {
+    "category": "kalimat tidak langsung",
+    "question": "Apa arti 'Ina natesa ia nompaju pae'?",
+    "options": [
+      "Ibu mengatakan bahwa ia memasak nasi",
+      "Ayah mengatakan bahwa ia pergi",
+      "Guru menyuruh anak belajar",
+      "Inggu mengatakan bahwa saya minum air"
+    ],
+    "answer": "Ibu mengatakan bahwa ia memasak nasi"
+  }
 ]

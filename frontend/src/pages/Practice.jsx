@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 import { filterByLevel, getBab, getLevel } from "../data/levelMap";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+const PRACTICE_QUESTION_COUNT = 5;
 
 const shuffleOptions = (items) => {
   const shuffled = [...items];
@@ -16,36 +17,57 @@ const shuffleOptions = (items) => {
   return shuffled;
 };
 
+const preparePracticeItem = (item) => ({
+  ...item,
+  options: Array.isArray(item.options)
+    ? shuffleOptions(item.options)
+    : item.options,
+  blocks: Array.isArray(item.blocks)
+    ? shuffleOptions(item.blocks)
+    : item.blocks,
+});
+
+const pickPracticeQuestions = (items, bab, level) => {
+  const filtered = filterByLevel(items, bab, level);
+  const pool = level ? filtered : items;
+  const shuffled = shuffleOptions(pool);
+  const questions = shuffled.slice(0, PRACTICE_QUESTION_COUNT);
+
+  for (let i = 0; questions.length < PRACTICE_QUESTION_COUNT && shuffled.length > 0; i += 1) {
+    questions.push({ ...shuffled[i % shuffled.length] });
+  }
+
+  return questions
+    .map(preparePracticeItem);
+};
+
 function Practice() {
   const { dialect, bab, level } = useParams();
   const navigate = useNavigate();
 
   const [data, setData] = useState([]);
   const [index, setIndex] = useState(0);
+  const [isCompleted, setIsCompleted] = useState(false);
   const babInfo = getBab(bab);
   const levelInfo = getLevel(bab, level);
 
   const lessonPath = level
     ? `/lesson/${dialect}/${bab}/${level}`
     : `/lesson/${dialect}/${bab}`;
+  const quizPath = level
+    ? `/quiz/${dialect}/${bab}/${level}`
+    : `/lesson/${dialect}/${bab}/quiz`;
 
   useEffect(() => {
     fetch(`${API_BASE_URL}/api/practice/${dialect}/${bab}`)
       .then((res) => res.json())
       .then((result) => {
         if (Array.isArray(result)) {
-          const filtered = filterByLevel(result, bab, level).map((item) => ({
-            ...item,
-            options: Array.isArray(item.options)
-              ? shuffleOptions(item.options)
-              : item.options,
-            blocks: Array.isArray(item.blocks)
-              ? shuffleOptions(item.blocks)
-              : item.blocks,
-          }));
+          const filtered = pickPracticeQuestions(result, bab, level);
 
           setData(filtered);
           setIndex(0);
+          setIsCompleted(false);
         } else {
           setData([]);
         }
@@ -77,14 +99,46 @@ function Practice() {
     if (index + 1 < data.length) {
       setIndex(index + 1);
     } else {
-      alert("Latihan selesai");
-      navigate(
-        level
-          ? `/quiz/${dialect}/${bab}/${level}`
-          : `/lesson/${dialect}/${bab}/quiz`
-      );
+      setIsCompleted(true);
     }
   };
+
+  if (isCompleted) {
+    return (
+      <div className="min-h-screen bg-gray-100">
+        <Navbar showBackButton backTo={lessonPath} />
+
+        <main className="p-5 max-w-xl mx-auto">
+          <div className="bg-white p-6 rounded-2xl shadow text-center">
+            <p className="text-sm font-semibold text-green-600 mb-2">
+              Latihan selesai
+            </p>
+            <h1 className="text-2xl font-bold mb-3">
+              Ingin lanjut ke quiz?
+            </h1>
+            <p className="text-gray-500 mb-6">
+              Kamu bisa langsung mengerjakan quiz atau kembali dulu ke materi.
+            </p>
+
+            <div className="grid gap-3 sm:grid-cols-2">
+              <button
+                onClick={() => navigate(lessonPath)}
+                className="w-full py-3 rounded-xl border border-gray-300 font-bold text-gray-700 hover:bg-gray-100 transition"
+              >
+                Tidak, kembali ke lesson
+              </button>
+              <button
+                onClick={() => navigate(quizPath)}
+                className="w-full py-3 rounded-xl bg-green-500 text-white font-bold hover:bg-green-600 transition shadow"
+              >
+                Ya, lanjut quiz
+              </button>
+            </div>
+          </div>
+        </main>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-100">

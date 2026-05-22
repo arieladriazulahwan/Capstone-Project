@@ -1,6 +1,242 @@
 [
-  { "indo": "Nama saya Inggu", "kaili": "Ngarana inggu Inggu", "tipe": "kalimat", "category": "kalimat sederhana" },
-  { "indo": "Saya makan nasi", "kaili": "Inggu kande pae", "tipe": "kalimat", "category": "kalimat sederhana" },
-  { "indo": "Kamu pergi ke rumah", "kaili": "Iko lau ri banua", "tipe": "kalimat", "category": "kalimat sederhana" },
-  { "indo": "Air itu baik", "kaili": "Oe ia mabelo", "tipe": "kalimat", "category": "kalimat sederhana" }
+  {
+    "indo": "Nama saya Inggu",
+    "kaili": "Ngarana inggu Inggu",
+    "tipe": "kalimat",
+    "category": "kalimat sederhana"
+  },
+  {
+    "indo": "Saya makan nasi",
+    "kaili": "Inggu kande pae",
+    "tipe": "kalimat",
+    "category": "kalimat sederhana"
+  },
+  {
+    "indo": "Kamu pergi ke rumah",
+    "kaili": "Iko lau ri banua",
+    "tipe": "kalimat",
+    "category": "kalimat sederhana"
+  },
+  {
+    "indo": "Air itu baik",
+    "kaili": "Oe ia mabelo",
+    "tipe": "kalimat",
+    "category": "kalimat sederhana"
+  },
+  {
+    "indo": "Ibu memasak nasi",
+    "kaili": "Ina nompaju pae",
+    "tipe": "kalimat",
+    "category": "kalimat berita"
+  },
+  {
+    "indo": "Ayah pergi ke kebun",
+    "kaili": "Papa lau ri talua",
+    "tipe": "kalimat",
+    "category": "kalimat berita"
+  },
+  {
+    "indo": "Rumah itu besar",
+    "kaili": "Banua ia lompe",
+    "tipe": "kalimat",
+    "category": "kalimat berita"
+  },
+  {
+    "indo": "Anak itu belajar",
+    "kaili": "Ana ia noajari",
+    "tipe": "kalimat",
+    "category": "kalimat berita"
+  },
+  {
+    "indo": "Siapa nama kamu?",
+    "kaili": "Nisei ngaranamu?",
+    "tipe": "kalimat",
+    "category": "kalimat tanya"
+  },
+  {
+    "indo": "Apa kamu makan nasi?",
+    "kaili": "Ngapa iko kande pae?",
+    "tipe": "kalimat",
+    "category": "kalimat tanya"
+  },
+  {
+    "indo": "Di mana rumah kamu?",
+    "kaili": "Ri ava banuamu?",
+    "tipe": "kalimat",
+    "category": "kalimat tanya"
+  },
+  {
+    "indo": "Kapan kamu pergi?",
+    "kaili": "Nakuya iko lau?",
+    "tipe": "kalimat",
+    "category": "kalimat tanya"
+  },
+  {
+    "indo": "Makanlah nasi itu",
+    "kaili": "Kande pae ia",
+    "tipe": "kalimat",
+    "category": "kalimat perintah"
+  },
+  {
+    "indo": "Pergilah ke rumah",
+    "kaili": "Lau ri banua",
+    "tipe": "kalimat",
+    "category": "kalimat perintah"
+  },
+  {
+    "indo": "Duduklah di sini",
+    "kaili": "Motiro ri sei",
+    "tipe": "kalimat",
+    "category": "kalimat perintah"
+  },
+  {
+    "indo": "Ambil air itu",
+    "kaili": "Ala oe ia",
+    "tipe": "kalimat",
+    "category": "kalimat perintah"
+  },
+  {
+    "indo": "Wah, rumah itu besar!",
+    "kaili": "Wah, banua ia lompe!",
+    "tipe": "kalimat",
+    "category": "kalimat seruan"
+  },
+  {
+    "indo": "Aduh, air itu dingin!",
+    "kaili": "Adu, oe ia nindi!",
+    "tipe": "kalimat",
+    "category": "kalimat seruan"
+  },
+  {
+    "indo": "Bagus sekali pekerjaanmu!",
+    "kaili": "Mabelo tuu penggawemu!",
+    "tipe": "kalimat",
+    "category": "kalimat seruan"
+  },
+  {
+    "indo": "Hai, datanglah ke sini!",
+    "kaili": "Hai, rata ri sei!",
+    "tipe": "kalimat",
+    "category": "kalimat seruan"
+  },
+  {
+    "indo": "Saya tidur",
+    "kaili": "Inggu moturi",
+    "tipe": "kalimat",
+    "category": "kalimat tunggal"
+  },
+  {
+    "indo": "Ibu datang",
+    "kaili": "Ina rata",
+    "tipe": "kalimat",
+    "category": "kalimat tunggal"
+  },
+  {
+    "indo": "Anak makan",
+    "kaili": "Ana kande",
+    "tipe": "kalimat",
+    "category": "kalimat tunggal"
+  },
+  {
+    "indo": "Air mengalir",
+    "kaili": "Oe noili",
+    "tipe": "kalimat",
+    "category": "kalimat tunggal"
+  },
+  {
+    "indo": "Saya makan nasi dan kamu minum air",
+    "kaili": "Inggu kande pae ante iko noinu oe",
+    "tipe": "kalimat",
+    "category": "kalimat majemuk setara"
+  },
+  {
+    "indo": "Ibu memasak dan ayah bekerja",
+    "kaili": "Ina nompaju ante papa mogavi",
+    "tipe": "kalimat",
+    "category": "kalimat majemuk setara"
+  },
+  {
+    "indo": "Saya pergi tetapi kamu tinggal",
+    "kaili": "Inggu lau tapi iko tomo",
+    "tipe": "kalimat",
+    "category": "kalimat majemuk setara"
+  },
+  {
+    "indo": "Anak belajar dan guru mengajar",
+    "kaili": "Ana noajari ante guru nompajari",
+    "tipe": "kalimat",
+    "category": "kalimat majemuk setara"
+  },
+  {
+    "indo": "Saya makan karena lapar",
+    "kaili": "Inggu kande apa nalapa",
+    "tipe": "kalimat",
+    "category": "kalimat majemuk bertingkat"
+  },
+  {
+    "indo": "Kamu pergi ketika pagi",
+    "kaili": "Iko lau tempo pagi",
+    "tipe": "kalimat",
+    "category": "kalimat majemuk bertingkat"
+  },
+  {
+    "indo": "Ibu datang setelah ayah pergi",
+    "kaili": "Ina rata moli papa lau",
+    "tipe": "kalimat",
+    "category": "kalimat majemuk bertingkat"
+  },
+  {
+    "indo": "Anak belajar supaya pintar",
+    "kaili": "Ana noajari ala mabelo pangisi",
+    "tipe": "kalimat",
+    "category": "kalimat majemuk bertingkat"
+  },
+  {
+    "indo": "Ibu berkata, \"Saya memasak nasi\"",
+    "kaili": "Ina natesa, \"Inggu nompaju pae\"",
+    "tipe": "kalimat",
+    "category": "kalimat langsung"
+  },
+  {
+    "indo": "Ayah berkata, \"Saya pergi\"",
+    "kaili": "Papa natesa, \"Inggu lau\"",
+    "tipe": "kalimat",
+    "category": "kalimat langsung"
+  },
+  {
+    "indo": "Guru berkata, \"Belajarlah\"",
+    "kaili": "Guru natesa, \"Noajarimo\"",
+    "tipe": "kalimat",
+    "category": "kalimat langsung"
+  },
+  {
+    "indo": "Inggu berkata, \"Saya minum air\"",
+    "kaili": "Inggu natesa, \"Inggu noinu oe\"",
+    "tipe": "kalimat",
+    "category": "kalimat langsung"
+  },
+  {
+    "indo": "Ibu mengatakan bahwa ia memasak nasi",
+    "kaili": "Ina natesa ia nompaju pae",
+    "tipe": "kalimat",
+    "category": "kalimat tidak langsung"
+  },
+  {
+    "indo": "Ayah mengatakan bahwa ia pergi",
+    "kaili": "Papa natesa ia lau",
+    "tipe": "kalimat",
+    "category": "kalimat tidak langsung"
+  },
+  {
+    "indo": "Guru menyuruh anak belajar",
+    "kaili": "Guru nompakoni ana noajari",
+    "tipe": "kalimat",
+    "category": "kalimat tidak langsung"
+  },
+  {
+    "indo": "Inggu mengatakan bahwa saya minum air",
+    "kaili": "Inggu natesa inggu noinu oe",
+    "tipe": "kalimat",
+    "category": "kalimat tidak langsung"
+  }
 ]
