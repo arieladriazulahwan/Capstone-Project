@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import ProfileDropdown from "./ProfileDropdown";
+import SoraKailiLogo from "./SoraKailiLogo";
 
 function NavbarGuru({ user, showBackButton = false }) {
   const navigate = useNavigate();
@@ -7,7 +8,7 @@ function NavbarGuru({ user, showBackButton = false }) {
     <div className="sticky top-0 z-40 bg-white border-b">
 
       {/* WRAPPER */}
-      <div className="w-full max-w-md md:max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
+      <div className="w-full max-w-md md:max-w-4xl mx-auto px-4 py-2 flex justify-between items-center">
 
         {/* LEFT */}
         <div className="flex items-center gap-3">
@@ -16,7 +17,7 @@ function NavbarGuru({ user, showBackButton = false }) {
           {showBackButton && (
             <button
               onClick={() => navigate(-1)}
-              className="p-2 rounded-full hover:bg-gray-100 transition-colors"
+              className="p-2 rounded-full hover:bg-gray-100 transition hover:-translate-y-0.5"
             >
               <svg
                 className="w-5 h-5 text-gray-600"
@@ -35,11 +36,10 @@ function NavbarGuru({ user, showBackButton = false }) {
           )}
 
           {/* LOGO */}
-          <div>
-            <h1 className="font-bold text-blue-600 text-lg leading-none">
-              Sora Kaili
-            </h1>
-          </div>
+          <SoraKailiLogo
+            className={`w-30 h-20 overflow-hidden ${showBackButton ? "" : "-ml-1"}`}
+            imgClassName="scale-[1.7] -translate-x-1 translate-y-2"
+          />
 
         </div>
 

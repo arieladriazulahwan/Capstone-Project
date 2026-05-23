@@ -1,14 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import AuthPageShell from "../components/AuthPageShell";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
 function LoginSiswa() {
   const navigate = useNavigate();
-
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("siswa");
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -41,109 +40,84 @@ function LoginSiswa() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-200 flex items-center justify-center px-4">
-      <div className="w-full max-w-md md:max-w-lg bg-white rounded-3xl shadow-xl p-6 md:p-8">
+    <AuthPageShell
+      title="Selamat datang kembali"
+      subtitle="Masuk sebagai siswa untuk melanjutkan level, menjaga streak, dan mengerjakan kuis."
+    >
+      <div className="text-center">
+        <h2 className="text-2xl font-black text-green-600">Login Siswa</h2>
+        <p className="mt-2 text-sm text-gray-500">Masukkan info akunmu.</p>
+      </div>
 
-        {/* Logo */}
-        <div className="flex justify-center mb-4">
-          <div className="w-16 h-16 bg-green-500 rounded-xl flex items-center justify-center text-white text-xl shadow">
-            👨‍🎓
-          </div>
-        </div>
+      <div className="mt-5 flex rounded-2xl bg-gray-100 p-1">
+        <button className="flex-1 rounded-xl bg-white py-2 text-sm font-bold text-gray-800 shadow">
+          Masuk
+        </button>
+        <button
+          type="button"
+          onClick={() => navigate("/register/siswa")}
+          className="flex-1 rounded-xl py-2 text-sm font-semibold text-gray-500"
+        >
+          Daftar
+        </button>
+      </div>
 
-        {/* Title */}
-        <h2 className="text-center text-xl md:text-2xl font-bold text-green-600">
-          Login Siswa
-        </h2>
+      <div className="mt-4 grid grid-cols-2 gap-2">
+        <button className="rounded-2xl border border-green-300 bg-green-50 p-3 text-sm font-bold text-green-700">
+          Siswa
+        </button>
+        <button
+          type="button"
+          onClick={() => navigate("/login/guru")}
+          className="rounded-2xl border border-gray-200 bg-white p-3 text-sm font-semibold text-gray-500 hover:bg-blue-50"
+        >
+          Guru
+        </button>
+      </div>
 
-        <p className="text-center text-gray-500 text-sm mb-4">
-          Masukkan info akunmu
-        </p>
-
-             {/* TAB */}
-        <div className="flex mb-4 bg-gray-100 rounded-xl p-1">
-          <button
-            className="flex-1 py-2 rounded-xl bg-white shadow text-sm font-semibold"
-          >
-            Masuk
-          </button>
-          <button onClick={() => navigate("/register/siswa")}
-            className="flex-1 py-2 rounded-xl text-sm">
-            Daftar
-          </button>
-        </div>
-
-
-        {/* Role Switch */}
-        <div className="flex gap-2 mb-4">
-          <button
-            onClick={() => setRole("siswa")}
-            className={`flex-1 p-3 rounded-xl border ${
-              role === "siswa"
-                ? "bg-green-100 border-green-500"
-                : "bg-gray-100"
-            }`}
-          >
-            👨‍🎓 Siswa
-          </button>
-
-          <button
-            onClick={() => navigate("/login/guru")}
-            className="flex-1 p-3 rounded-xl border bg-gray-100"
-          >
-            👨‍🏫 Guru
-          </button>
-        </div>
-
-        {/* FORM */}
-        <form onSubmit={handleLogin}>
-          <label className="text-sm text-gray-600">Username</label>
+      <form onSubmit={handleLogin} className="mt-5 space-y-4">
+        <div>
+          <label className="mb-1.5 block text-sm font-semibold text-gray-600">Username</label>
           <input
             type="text"
-            placeholder="username"
-            className="w-full p-3 rounded-xl bg-green-50 border border-green-500 mb-3 focus:outline-none"
+            placeholder="Masukkan username"
+            className="w-full rounded-2xl border border-green-200 bg-green-50 px-4 py-3 outline-none transition focus:border-green-500 focus:ring-2 focus:ring-green-100"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
+        </div>
 
-          <label className="text-sm text-gray-600">Kata Sandi</label>
+        <div>
+          <label className="mb-1.5 block text-sm font-semibold text-gray-600">Kata Sandi</label>
           <input
             type="password"
-            placeholder="password"
-            className="w-full p-3 rounded-xl bg-gray-100 mb-4 focus:outline-none"
+            placeholder="Masukkan kata sandi"
+            className="w-full rounded-2xl border border-gray-200 bg-gray-50 px-4 py-3 outline-none transition focus:border-green-500 focus:ring-2 focus:ring-green-100"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-
-          {/* BUTTON */}
-          <button className="w-full bg-green-600 text-white p-3 rounded-xl font-semibold hover:bg-green-700 transition">
-            Masuk Sekarang 🚀
-          </button>
-        </form>
-
-        {/* LUPA PASSWORD */}
-        <p className="text-center text-sm mt-3 text-green-600 cursor-pointer">
-          Lupa Kata Sandi?
-        </p>
-
-        {/* ALERT BOX */}
-        <div className="bg-yellow-100 text-yellow-700 text-sm p-3 rounded-xl mt-4">
-          ⚠️ Belum punya akun? Klik "Daftar di sini" untuk membuat akun baru!
         </div>
 
-        {/* REGISTER LINK */}
-        <p className="text-center text-sm mt-3 text-gray-500">
-          Belum punya akun?{" "}
-          <span
-            onClick={() => navigate("/register/siswa")}
-            className="text-green-600 cursor-pointer"
-          >
-            Daftar di sini
-          </span>
-        </p>
+        <button className="w-full rounded-2xl bg-green-600 p-3 font-bold text-white shadow-lg shadow-green-600/20 transition hover:-translate-y-0.5 hover:bg-green-700">
+          Masuk Sekarang
+        </button>
+      </form>
 
+      <div className="mt-5 rounded-2xl border border-yellow-200 bg-yellow-50 p-3 text-sm text-yellow-700">
+        Belum punya akun? Daftar dulu untuk mulai belajar.
       </div>
-    </div>
+
+      <p className="mt-4 text-center text-sm text-gray-500">
+        Belum punya akun?{" "}
+        <button
+          type="button"
+          onClick={() => navigate("/register/siswa")}
+          className="font-bold text-green-600"
+        >
+          Daftar di sini
+        </button>
+      </p>
+    </AuthPageShell>
   );
 }
 

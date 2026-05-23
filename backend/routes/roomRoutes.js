@@ -31,6 +31,33 @@ router.get(
 
 
 // ======================================
+// DELETE QUESTION
+// ======================================
+router.delete("/questions/:id", authMiddleware, onlyGuru, async (req, res) => {
+  try {
+    const questionId = req.params.id;
+
+    const [result] = await db.promise().query(
+      `DELETE FROM room_questions WHERE id = ?`,
+      [questionId]
+    );
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: "Soal tidak ditemukan" });
+    }
+
+    res.json({ message: "Soal berhasil dihapus" });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      message: "Server error saat menghapus soal",
+      error: err.message,
+    });
+  }
+});
+
+
+// ======================================
 // DELETE ROOM
 // ======================================
 router.delete(

@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import NavbarAdmin from "../components/NavbarAdmin";
 import SidebarAdmin from "../components/SidebarAdmin";
+import BottomNavAdmin from "../components/BottomNavAdmin";
+import ConfirmDialog from "../components/ConfirmDialog";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 const API = `${API_BASE_URL}/api/admin`;
@@ -11,6 +13,7 @@ function AdminRooms() {
   const [loading, setLoading] = useState(true);
   const [selectedRoom, setSelectedRoom] = useState(null);
   const [showDetail, setShowDetail] = useState(false);
+  const [deleteTarget, setDeleteTarget] = useState(null);
 
   const token = localStorage.getItem("token");
   const headers = {
@@ -46,13 +49,8 @@ function AdminRooms() {
     }
   };
 
-  const handleDelete = async (roomId, title) => {
-    if (
-      !confirm(
-        `Yakin ingin menghapus room "${title}"? Semua soal dan riwayat percobaan akan ikut terhapus.`
-      )
-    )
-      return;
+  const handleDelete = async (roomId) => {
+    setDeleteTarget(null);
 
     const res = await fetch(`${API}/rooms/${roomId}`, {
       method: "DELETE",
@@ -65,6 +63,9 @@ function AdminRooms() {
         setShowDetail(false);
         setSelectedRoom(null);
       }
+      alert("Room berhasil dihapus.");
+    } else {
+      alert("Gagal menghapus room.");
     }
   };
 
@@ -84,7 +85,7 @@ function AdminRooms() {
       <SidebarAdmin />
       <div className="flex-1 flex flex-col">
         <NavbarAdmin user={user} />
-        <main className="flex-1 p-4 md:p-6 overflow-y-auto">
+        <main className="flex-1 p-4 pb-24 md:p-6 overflow-y-auto">
           <div className="max-w-6xl mx-auto">
             {/* HEADER */}
             <div className="mb-5">
@@ -97,7 +98,7 @@ function AdminRooms() {
             </div>
 
             {/* TABLE */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+            <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-x-auto">
               {loading ? (
                 <div className="p-8 text-center text-gray-400">Memuat...</div>
               ) : rooms.length === 0 ? (
@@ -106,7 +107,7 @@ function AdminRooms() {
                 </div>
               ) : (
                 <div className="overflow-x-auto">
-                  <table className="w-full text-sm">
+                  <table className="w-full min-w-[760px] text-sm">
                     <thead className="bg-gray-50 border-b">
                       <tr>
                         <th className="px-4 py-3 text-left text-gray-600 font-semibold">
@@ -161,7 +162,7 @@ function AdminRooms() {
                               Detail
                             </button>
                             <button
-                              onClick={() => handleDelete(room.id, room.title)}
+                              onClick={() => setDeleteTarget(room)}
                               className="text-xs font-medium px-2.5 py-1 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition"
                             >
                               Hapus
@@ -197,7 +198,7 @@ function AdminRooms() {
 
               {/* Room Info */}
               <div className="bg-gray-50 rounded-xl p-4 mb-4">
-                <div className="grid grid-cols-2 gap-3 text-sm">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
                   <div>
                     <span className="text-gray-500">Judul:</span>
                     <p className="font-semibold text-gray-800">
@@ -281,7 +282,7 @@ function AdminRooms() {
                 </button>
                 <button
                   onClick={() =>
-                    handleDelete(selectedRoom.id, selectedRoom.title)
+                    setDeleteTarget(selectedRoom)
                   }
                   className="flex-1 py-2.5 bg-red-500 text-white rounded-xl text-sm font-semibold hover:bg-red-600 transition"
                 >
@@ -292,6 +293,15 @@ function AdminRooms() {
           </div>
         </div>
       )}
+      <BottomNavAdmin />
+      <ConfirmDialog
+        open={Boolean(deleteTarget)}
+        title="Hapus Room?"
+        message={`Room "${deleteTarget?.title || "ini"}" beserta soal dan riwayat percobaan akan ikut terhapus.`}
+        confirmLabel="Hapus Room"
+        onConfirm={() => handleDelete(deleteTarget?.id)}
+        onCancel={() => setDeleteTarget(null)}
+      />
     </div>
   );
 }

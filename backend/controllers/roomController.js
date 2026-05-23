@@ -4,6 +4,8 @@ const generateCode = () => {
   return Math.random().toString(36).substring(2, 8).toUpperCase();
 };
 
+const MAX_IMAGE_SIZE = 50 * 1024 * 1024;
+
 exports.createRoom = async (req, res) => {
   const connection = db.promise();
 
@@ -27,12 +29,12 @@ exports.createRoom = async (req, res) => {
       const parts = q.image.split(",");
       const base64String = parts[1] || "";
       const decodedSize = Math.floor((base64String.length * 3) / 4);
-      return decodedSize > 2 * 1024 * 1024; // 2MB decoded
+      return decodedSize > MAX_IMAGE_SIZE;
     });
 
     if (oversizedImage) {
       return res.status(400).json({
-        message: "Gambar terlalu besar. Maksimal sekitar 2MB setelah dikodekan.",
+        message: "Gambar terlalu besar. Maksimal sekitar 50MB.",
       });
     }
 

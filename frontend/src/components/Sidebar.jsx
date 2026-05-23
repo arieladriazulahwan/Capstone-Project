@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import hideSidebarIcon from "../assets/hide-sidebar.svg";
 
 function Sidebar({ role = "siswa" }) {
   // Baca state awal dari localStorage, atau default ke `false` (terbuka)
@@ -56,10 +57,6 @@ function Sidebar({ role = "siswa" }) {
         ? "hover:bg-blue-50 text-gray-700"
         : "hover:bg-gray-100 text-gray-700";
 
-      const logoClass = isGuru
-        ? "bg-blue-500"
-        : "bg-green-500";
-
       const titleClass = isGuru
         ? "text-blue-600"
         : "text-green-600";
@@ -78,10 +75,14 @@ function Sidebar({ role = "siswa" }) {
       {/* LOGO + TOGGLE */}
       <div
         onClick={() => setCollapsed(!collapsed)}
-        className="flex items-center gap-2 p-3 cursor-pointer hover:bg-gray-100"
+        className="flex items-center gap-2 p-3 cursor-pointer hover:bg-gray-100 transition"
       >
-        <div className={`w-10 h-10 ${logoClass} rounded-xl flex items-center justify-center text-white`}>
-          🌿
+        <div className="w-8 h-8 flex items-center justify-center">
+          <img
+            src={hideSidebarIcon}
+            alt="Sembunyikan sidebar"
+            className="w-5 h-5 object-contain"
+          />
         </div>
 
         {!collapsed && (

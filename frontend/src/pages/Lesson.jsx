@@ -33,16 +33,24 @@ function Lesson() {
   }, [bab, dialect, level, levelInfo?.title]);
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="student-page-bg min-h-screen bg-gray-100">
       <Navbar
         showBackButton
         backTo={level ? `/level/${dialect}/${bab}` : "/level"}
       />
 
       <main className="p-4 max-w-xl mx-auto">
-        <h1 className="text-2xl font-bold mb-5">
-          Materi {levelInfo?.title || babInfo?.title || bab.toUpperCase()} ({dialect.toUpperCase()})
-        </h1>
+        <div className="student-hero-card mb-5 rounded-3xl p-5 shadow">
+          <p className="text-sm font-semibold text-green-700">
+            Materi {dialect.toUpperCase()}
+          </p>
+          <h1 className="text-2xl font-bold text-gray-900">
+            {levelInfo?.title || babInfo?.title || bab.toUpperCase()}
+          </h1>
+          <p className="mt-1 text-sm text-gray-600">
+            Pelajari kata dan arti sebelum masuk latihan.
+          </p>
+        </div>
 
         {data.length === 0 && (
           <div className="bg-red-100 text-red-600 p-4 rounded-xl">
@@ -51,7 +59,7 @@ function Lesson() {
         )}
 
         {data.map((item, i) => (
-          <div key={i} className="bg-white p-4 rounded-xl shadow mb-3">
+          <div key={i} className="student-card bg-white p-4 rounded-xl shadow mb-3">
             {item.image && (
               <img
                 src={item.image}
@@ -63,7 +71,7 @@ function Lesson() {
             <div className="flex justify-between items-center">
               <p className="font-semibold text-gray-700">{item.indo}</p>
 
-              <span className="text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">
+              <span className="student-chip text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">
                 {item.tipe}
               </span>
             </div>
@@ -88,7 +96,7 @@ function Lesson() {
                     : `/practice/${dialect}/${bab}`
                 )
               }
-              className="w-full bg-green-500 text-white p-3 rounded-xl font-bold shadow-lg hover:bg-green-600 transition"
+              className="w-full flag-wave text-white p-3 rounded-xl font-bold shadow-lg transition hover:scale-[1.01]"
             >
               Lanjut ke Latihan
             </button>

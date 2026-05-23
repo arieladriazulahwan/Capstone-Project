@@ -26,6 +26,11 @@ router.get("/lessons/:dialect/:bab", authMiddleware, onlyAdmin, adminController.
 router.put("/lessons/:dialect/:bab", authMiddleware, onlyAdmin, adminController.updateLesson);
 router.delete("/lessons/:dialect/:bab", authMiddleware, onlyAdmin, adminController.deleteLesson);
 
+router.get("/practices", authMiddleware, onlyAdmin, adminController.getPractices);
+router.get("/practices/:dialect/:bab", authMiddleware, onlyAdmin, adminController.getPractice);
+router.put("/practices/:dialect/:bab", authMiddleware, onlyAdmin, adminController.updatePractice);
+router.delete("/practices/:dialect/:bab", authMiddleware, onlyAdmin, adminController.deletePractice);
+
 // ======================================
 // 📝 CRUD KUIS
 // ======================================

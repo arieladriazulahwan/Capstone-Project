@@ -1,14 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import AuthPageShell from "../components/AuthPageShell";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
 function LoginGuru() {
   const navigate = useNavigate();
-
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("guru");
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -41,105 +40,85 @@ function LoginGuru() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-200 flex items-center justify-center px-4">
-      <div className="w-full max-w-md md:max-w-lg bg-white rounded-3xl shadow-xl p-6 md:p-8">
+    <AuthPageShell
+      tone="blue"
+      title="Kelola kelas dengan mudah"
+      subtitle="Masuk sebagai guru untuk membuat room, mengelola soal, dan melihat nilai siswa."
+    >
+      <div className="text-center">
+        <h2 className="text-2xl font-black text-blue-600">Login Guru</h2>
+        <p className="mt-2 text-sm text-gray-500">Masuk dengan akun gurumu.</p>
+      </div>
 
-        {/* Logo */}
-        <div className="flex justify-center mb-4">
-          <div className="w-16 h-16 bg-blue-500 rounded-xl flex items-center justify-center text-white text-xl shadow">
-            👨‍🏫
-          </div>
-        </div>
+      <div className="mt-5 flex rounded-2xl bg-gray-100 p-1">
+        <button className="flex-1 rounded-xl bg-white py-2 text-sm font-bold text-gray-800 shadow">
+          Masuk
+        </button>
+        <button
+          type="button"
+          onClick={() => navigate("/register/guru")}
+          className="flex-1 rounded-xl py-2 text-sm font-semibold text-gray-500"
+        >
+          Daftar
+        </button>
+      </div>
 
-        {/* Title */}
-        <h2 className="text-center text-xl md:text-2xl font-bold text-blue-600">
-          Login Guru
-        </h2>
+      <div className="mt-4 grid grid-cols-2 gap-2">
+        <button
+          type="button"
+          onClick={() => navigate("/login/siswa")}
+          className="rounded-2xl border border-gray-200 bg-white p-3 text-sm font-semibold text-gray-500 hover:bg-green-50"
+        >
+          Siswa
+        </button>
+        <button className="rounded-2xl border border-blue-300 bg-blue-50 p-3 text-sm font-bold text-blue-700">
+          Guru
+        </button>
+      </div>
 
-        <p className="text-center text-gray-500 text-sm mb-4">
-          Masuk dengan akun gurumu
-        </p>
-        
-       {/* TAB */}
-        <div className="flex mb-4 bg-gray-100 rounded-xl p-1">
-          <button
-            className="flex-1 py-2 rounded-xl bg-white shadow text-sm font-semibold"
-          >
-            Masuk
-          </button>
-          <button onClick={() => navigate("/register/guru")}
-            className="flex-1 py-2 rounded-xl text-sm">
-            Daftar
-          </button>
-        </div>
-
-
-        {/* Role Switch */}
-        <div className="flex gap-2 mb-4">
-          <button
-            onClick={() => navigate("/login/siswa")}
-            className="flex-1 p-3 rounded-xl border bg-gray-100"
-          >
-            👨‍🎓 Siswa
-          </button>
-
-          <button
-            onClick={() => setRole("guru")}
-            className="flex-1 p-3 rounded-xl border bg-blue-100 border-blue-500"
-          >
-            👨‍🏫 Guru
-          </button>
-        </div>
-
-        {/* FORM */}
-        <form onSubmit={handleLogin}>
-          <label className="text-sm text-gray-600">Username</label>
+      <form onSubmit={handleLogin} className="mt-5 space-y-4">
+        <div>
+          <label className="mb-1.5 block text-sm font-semibold text-gray-600">Username</label>
           <input
             type="text"
-            placeholder="username"
-            className="w-full p-3 rounded-xl bg-gray-100 mb-3 focus:outline-none"
+            placeholder="Masukkan username"
+            className="w-full rounded-2xl border border-gray-200 bg-gray-50 px-4 py-3 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
+        </div>
 
-          <label className="text-sm text-gray-600">Kata Sandi</label>
+        <div>
+          <label className="mb-1.5 block text-sm font-semibold text-gray-600">Kata Sandi</label>
           <input
             type="password"
-            placeholder="password"
-            className="w-full p-3 rounded-xl border border-blue-500 bg-blue-50 mb-4 focus:outline-none"
+            placeholder="Masukkan kata sandi"
+            className="w-full rounded-2xl border border-blue-200 bg-blue-50 px-4 py-3 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-
-          {/* BUTTON */}
-          <button className="w-full bg-blue-600 text-white p-3 rounded-xl font-semibold hover:bg-blue-700 transition">
-            Masuk sebagai Guru 👨‍🏫
-          </button>
-        </form>
-
-        {/* LUPA PASSWORD */}
-        <p className="text-center text-sm mt-3 text-blue-600 cursor-pointer">
-          Lupa Kata Sandi?
-        </p>
-
-        {/* ALERT BOX */}
-        <div className="bg-blue-100 text-blue-700 text-sm p-3 rounded-xl mt-4">
-          🏫 Guru baru? Daftar untuk membuat akun host kuis.
         </div>
 
-        {/* REGISTER LINK */}
-        <p className="text-center text-sm mt-3 text-gray-500">
-          Belum punya akun?{" "}
-          <span
-            onClick={() => navigate("/register/guru")}
-            className="text-blue-600 cursor-pointer"
-          >
-            Daftar di sini
-          </span>
-        </p>
+        <button className="w-full rounded-2xl bg-blue-600 p-3 font-bold text-white shadow-lg shadow-blue-600/20 transition hover:-translate-y-0.5 hover:bg-blue-700">
+          Masuk sebagai Guru
+        </button>
+      </form>
 
+      <div className="mt-5 rounded-2xl border border-blue-200 bg-blue-50 p-3 text-sm text-blue-700">
+        Akun guru digunakan untuk membuat room dan memantau jawaban siswa.
       </div>
-    </div>
+
+      <p className="mt-4 text-center text-sm text-gray-500">
+        Belum punya akun?{" "}
+        <button
+          type="button"
+          onClick={() => navigate("/register/guru")}
+          className="font-bold text-blue-600"
+        >
+          Daftar di sini
+        </button>
+      </p>
+    </AuthPageShell>
   );
 }
 

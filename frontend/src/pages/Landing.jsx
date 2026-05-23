@@ -1,152 +1,199 @@
 import { useNavigate } from "react-router-dom";
+import SoraKailiLogo from "../components/SoraKailiLogo";
+
+const features = [
+  {
+    title: "Kamus Interaktif",
+    text: "Temukan kosakata Kaili, arti, kategori, dan dialeknya dengan cepat.",
+    icon: "K",
+    color: "bg-green-100 text-green-700",
+  },
+  {
+    title: "Latihan Bertahap",
+    text: "Belajar dari bab dan level yang tersusun rapi sesuai materi.",
+    icon: "L",
+    color: "bg-blue-100 text-blue-700",
+  },
+  {
+    title: "Kuis & Room",
+    text: "Guru dapat membuat room, siswa menjawab, nilai langsung tercatat.",
+    icon: "Q",
+    color: "bg-yellow-100 text-yellow-700",
+  },
+];
+
+const steps = [
+  "Pilih akun siswa atau guru",
+  "Belajar materi dan latihan",
+  "Kumpulkan XP, streak, dan nilai",
+];
 
 function Landing() {
   const navigate = useNavigate();
 
   return (
-    <div className="bg-gray-100 min-h-screen">
+    <div className="min-h-screen overflow-hidden bg-gray-100 text-left">
+      <section className="relative min-h-[92vh] bg-gradient-to-br from-green-50 via-white to-blue-50 px-4 py-6">
+        <div className="pointer-events-none absolute left-6 top-20 h-24 w-24 rounded-full bg-green-200/50 blur-3xl landing-float"></div>
+        <div className="pointer-events-none absolute bottom-24 right-10 h-32 w-32 rounded-full bg-yellow-200/60 blur-3xl landing-float-slow"></div>
 
-      {/* ================= HERO ================= */}
-      <div className="flex justify-center px-4 py-10">
-        <div className="w-full max-w-md bg-white rounded-3xl shadow-xl p-6 text-center">
+        <div className="mx-auto flex w-full max-w-6xl items-center justify-between">
+          <SoraKailiLogo className="h-24 w-40 overflow-hidden" imgClassName="scale-[1.45]" />
+          <button
+            onClick={() => navigate("/login")}
+            className="rounded-full border border-green-200 bg-white/80 px-5 py-2 text-sm font-semibold text-green-700 shadow-sm backdrop-blur transition hover:-translate-y-0.5 hover:bg-green-50"
+          >
+            Masuk
+          </button>
+        </div>
 
-          <div className="flex justify-center mb-4">
-            <div className="w-20 h-20 bg-green-500 rounded-2xl flex items-center justify-center text-2xl text-white shadow-md">
-              🌿
+        <div className="mx-auto grid w-full max-w-6xl items-center gap-8 pt-8 md:grid-cols-[1.15fr_0.85fr] md:pt-14">
+          <div className="landing-rise">
+            <p className="mb-4 inline-flex rounded-full bg-green-100 px-4 py-2 text-sm font-semibold text-green-700">
+              Platform belajar Bahasa Kaili
+            </p>
+
+            <h1 className="mb-5 max-w-2xl text-4xl font-black leading-tight text-gray-900 md:text-6xl">
+              Sora Kaili
+            </h1>
+
+            <p className="max-w-xl text-base leading-relaxed text-gray-600 md:text-lg">
+              Belajar bahasa daerah dengan materi, latihan, kuis, room kelas,
+              streak, dan gamifikasi yang terasa ringan untuk dipakai setiap hari.
+            </p>
+
+            <div className="mt-8 grid max-w-lg grid-cols-3 gap-3">
+              {[
+                ["2", "Dialek"],
+                ["10+", "Level"],
+                ["XP", "Progress"],
+              ].map(([value, label]) => (
+                <div key={label} className="rounded-2xl border border-white bg-white/80 p-4 text-center shadow-sm backdrop-blur">
+                  <p className="text-2xl font-black text-green-600">{value}</p>
+                  <p className="text-xs font-semibold text-gray-500">{label}</p>
+                </div>
+              ))}
             </div>
           </div>
 
-          <h1 className="text-2xl font-bold text-green-600">
-            Sora Kaili
-          </h1>
-
-          <p className="text-gray-500 mt-2 mb-6 text-sm">
-            Belajar Bahasa Kaili dengan Seru!
-          </p>
-
-          <p className="mb-3 font-medium">Masuk sebagai:</p>
-
-          <div className="flex gap-3 mb-4">
-            <div
-              onClick={() => navigate("/login/siswa")}
-              className="flex-1 p-3 rounded-xl border cursor-pointer hover:bg-green-100 transition"
-            >
-              👨‍🎓 Siswa
+          <div className="landing-rise-delay rounded-[2rem] border border-white bg-white/85 p-5 shadow-2xl backdrop-blur">
+            <div className="flex justify-center">
+              <SoraKailiLogo className="h-36 w-56" />
             </div>
 
-            <div
-              onClick={() => navigate("/login/guru")}
-              className="flex-1 p-3 rounded-xl border cursor-pointer hover:bg-blue-100 transition"
-            >
-              👨‍🏫 Guru
+            <div className="mt-2 rounded-3xl bg-gray-50 p-4">
+              <p className="mb-3 text-center text-sm font-bold text-gray-700">Masuk sebagai</p>
+              <div className="grid grid-cols-2 gap-3">
+                <button
+                  onClick={() => navigate("/login/siswa")}
+                  className="group rounded-2xl border border-green-100 bg-white p-4 text-center shadow-sm transition hover:-translate-y-1 hover:border-green-300 hover:bg-green-50 hover:shadow-md"
+                >
+                  <span className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-green-100 text-lg font-black text-green-700 transition group-hover:scale-110">
+                    S
+                  </span>
+                  <span className="font-bold text-gray-800">Siswa</span>
+                </button>
+
+                <button
+                  onClick={() => navigate("/login/guru")}
+                  className="group rounded-2xl border border-blue-100 bg-white p-4 text-center shadow-sm transition hover:-translate-y-1 hover:border-blue-300 hover:bg-blue-50 hover:shadow-md"
+                >
+                  <span className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-100 text-lg font-black text-blue-700 transition group-hover:scale-110">
+                    G
+                  </span>
+                  <span className="font-bold text-gray-800">Guru</span>
+                </button>
+              </div>
+
+              <p className="mt-5 text-center text-sm text-gray-500">
+                Belum punya akun?{" "}
+                <button
+                  onClick={() => navigate("/register")}
+                  className="font-bold text-green-600 hover:text-green-700"
+                >
+                  Daftar di sini
+                </button>
+              </p>
             </div>
           </div>
+        </div>
+      </section>
 
-          <p className="text-sm">
-            Belum punya akun?{" "}
-            <span
-              onClick={() => navigate("/register")}
-              className="text-green-600 cursor-pointer"
-            >
-              Daftar di sini
-            </span>
+      <section className="bg-white px-4 py-14">
+        <div className="mx-auto max-w-5xl text-center">
+          <p className="mb-3 text-sm font-bold uppercase tracking-[0.18em] text-green-600">Tentang Kami</p>
+          <h2 className="mx-auto mb-4 max-w-2xl text-3xl font-black text-gray-900">
+            Belajar bahasa Kaili dibuat lebih dekat dengan keseharian.
+          </h2>
+          <p className="mx-auto max-w-3xl leading-relaxed text-gray-600">
+            Sora Kaili membantu siswa mengenal kosakata, kalimat, latihan, dan
+            kuis interaktif, sambil memberi guru ruang untuk membuat aktivitas
+            kelas yang mudah dipantau.
           </p>
         </div>
-      </div>
+      </section>
 
-      {/* ================= ABOUT ================= */}
-      <div className="bg-white py-12 px-6 text-center">
-        <h2 className="text-xl font-bold mb-3">
-          Tentang Kami
-        </h2>
-        <p className="text-gray-600 max-w-xl mx-auto">
-          Sora Kaili adalah platform pembelajaran digital untuk melestarikan
-          Bahasa Kaili melalui metode interaktif seperti latihan,
-          permainan, dan kuis. Kami ingin generasi muda tetap mengenal
-          dan menggunakan bahasa daerahnya dengan cara yang menyenangkan.
+      <section className="bg-gray-100 px-4 py-14">
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-8 flex flex-col gap-2 text-center">
+            <p className="text-sm font-bold uppercase tracking-[0.18em] text-green-600">Fitur Unggulan</p>
+            <h2 className="text-3xl font-black text-gray-900">Satu tempat untuk belajar dan mengajar</h2>
+          </div>
+
+          <div className="grid gap-5 md:grid-cols-3">
+            {features.map((feature, index) => (
+              <div
+                key={feature.title}
+                className="landing-card rounded-3xl border border-white bg-white p-6 shadow-sm transition hover:-translate-y-2 hover:shadow-xl"
+                style={{ animationDelay: `${index * 120}ms` }}
+              >
+                <div className={`mb-5 flex h-14 w-14 items-center justify-center rounded-2xl text-xl font-black ${feature.color}`}>
+                  {feature.icon}
+                </div>
+                <h3 className="mb-2 text-lg font-black text-gray-900">{feature.title}</h3>
+                <p className="text-sm leading-relaxed text-gray-500">{feature.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white px-4 py-14">
+        <div className="mx-auto max-w-5xl">
+          <div className="mb-9 text-center">
+            <p className="mb-2 text-sm font-bold uppercase tracking-[0.18em] text-green-600">Cara Kerja</p>
+            <h2 className="text-3xl font-black text-gray-900">Mulai dalam tiga langkah</h2>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-3">
+            {steps.map((step, index) => (
+              <div key={step} className="relative rounded-3xl bg-gray-50 p-5 shadow-sm">
+                <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-full bg-green-600 text-sm font-black text-white">
+                  {index + 1}
+                </div>
+                <p className="font-bold text-gray-800">{step}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-gradient-to-r from-green-600 to-green-500 px-4 py-14 text-center text-white">
+        <h2 className="mb-3 text-3xl font-black text-white">Siap belajar Bahasa Kaili?</h2>
+        <p className="mx-auto mb-6 max-w-xl text-green-50">
+          Buat akun dan mulai jelajahi materi, latihan, kuis, dan room kelas.
         </p>
-      </div>
-
-      {/* ================= FITUR ================= */}
-      <div className="py-12 px-6">
-        <h2 className="text-center text-xl font-bold mb-8">
-          Fitur Unggulan
-        </h2>
-
-        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-
-          <div className="bg-white p-5 rounded-xl shadow text-center">
-            <div className="text-3xl mb-2">📚</div>
-            <h3 className="font-semibold mb-1">Kamus Interaktif</h3>
-            <p className="text-sm text-gray-500">
-              Belajar kosakata Bahasa Kaili dengan mudah
-            </p>
-          </div>
-
-          <div className="bg-white p-5 rounded-xl shadow text-center">
-            <div className="text-3xl mb-2">🎮</div>
-            <h3 className="font-semibold mb-1">Game Edukasi</h3>
-            <p className="text-sm text-gray-500">
-              Belajar sambil bermain dengan mini games seru
-            </p>
-          </div>
-
-          <div className="bg-white p-5 rounded-xl shadow text-center">
-            <div className="text-3xl mb-2">🏆</div>
-            <h3 className="font-semibold mb-1">Gamifikasi</h3>
-            <p className="text-sm text-gray-500">
-              Kumpulkan poin & naik level untuk motivasi belajar
-            </p>
-          </div>
-
-        </div>
-      </div>
-
-      {/* ================= CARA KERJA ================= */}
-      <div className="bg-white py-12 px-6">
-        <h2 className="text-center text-xl font-bold mb-8">
-          Cara Kerja
-        </h2>
-
-        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto text-center">
-
-          <div>
-            <div className="text-3xl mb-2">1️⃣</div>
-            <p>Daftar akun sebagai siswa atau guru</p>
-          </div>
-
-          <div>
-            <div className="text-3xl mb-2">2️⃣</div>
-            <p>Mulai belajar dengan latihan & game</p>
-          </div>
-
-          <div>
-            <div className="text-3xl mb-2">3️⃣</div>
-            <p>Kumpulkan poin & tingkatkan kemampuan</p>
-          </div>
-
-        </div>
-      </div>
-
-      {/* ================= CTA ================= */}
-      <div className="py-12 text-center">
-        <h2 className="text-xl font-bold mb-3">
-          Siap Belajar Bahasa Kaili?
-        </h2>
-
         <button
           onClick={() => navigate("/register")}
-          className="bg-green-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-green-700"
+          className="rounded-2xl bg-white px-7 py-3 font-bold text-green-700 shadow-lg transition hover:-translate-y-1 hover:shadow-xl"
         >
-          Mulai Sekarang 🚀
+          Mulai Sekarang
         </button>
-      </div>
+      </section>
 
-      {/* ================= FOOTER ================= */}
-      <div className="bg-gray-200 text-center py-4 text-sm text-gray-600">
-        © 2026 Sora Kaili — Pelestarian Bahasa Daerah
-      </div>
-
+      <footer className="bg-gray-200 py-5 text-center text-sm text-gray-600">
+        © 2026 Sora Kaili - Pelestarian Bahasa Daerah
+      </footer>
     </div>
   );
 }

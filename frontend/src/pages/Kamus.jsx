@@ -172,7 +172,7 @@ function Kamus() {
 })();
 
   return (
-    <div className="flex min-h-screen bg-gray-100">
+    <div className="student-page-bg flex min-h-screen bg-gray-100">
       <Sidebar role="siswa" />
 
       <div className="flex-1 flex flex-col">
@@ -181,18 +181,24 @@ function Kamus() {
         <main className="flex-1 px-4 py-6 flex justify-center">
           <div className="w-full max-w-md md:max-w-3xl">
 
-            <h1 className="text-2xl font-bold text-green-600 mb-4">
-              📚 Kamus Bahasa Kaili
-            </h1>
+            <div className="student-hero-card mb-5 rounded-3xl p-5 shadow">
+              <p className="text-sm font-semibold text-green-700">Kamus</p>
+              <h1 className="text-2xl font-bold text-gray-900">
+                Kamus Bahasa Kaili
+              </h1>
+              <p className="mt-1 text-sm text-gray-600">
+                Cari arti kata dan simpan kosakata favoritmu.
+              </p>
+            </div>
 
             {/* MODE */}
-            <div className="flex gap-2 mb-3">
+            <div className="student-glass-card flex gap-2 mb-3 rounded-2xl p-2 shadow-sm">
               <button
                 onClick={() => setMode("indo")}
-                className={`px-4 py-2 rounded-xl ${
+                className={`flex-1 px-4 py-2 rounded-xl font-semibold transition ${
                   mode === "indo"
-                    ? "bg-green-500 text-white"
-                    : "bg-white border"
+                    ? "bg-green-500 text-white shadow"
+                    : "bg-white border text-gray-600 hover:border-green-300"
                 }`}
               >
                 Indo → Kaili
@@ -200,10 +206,10 @@ function Kamus() {
 
               <button
                 onClick={() => setMode("kaili")}
-                className={`px-4 py-2 rounded-xl ${
+                className={`flex-1 px-4 py-2 rounded-xl font-semibold transition ${
                   mode === "kaili"
-                    ? "bg-green-500 text-white"
-                    : "bg-white border"
+                    ? "bg-green-500 text-white shadow"
+                    : "bg-white border text-gray-600 hover:border-green-300"
                 }`}
               >
                 Kaili → Indo
@@ -218,7 +224,7 @@ function Kamus() {
                   ? "Cari Indonesia..."
                   : "Cari Kaili..."
               }
-              className="w-full p-3 rounded-xl border mb-3"
+              className="student-input w-full p-3 rounded-xl border mb-3"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
@@ -226,7 +232,7 @@ function Kamus() {
             {/* FILTER */}
             <div className="flex gap-2 mb-4 flex-wrap">
               <select
-                className="p-2 rounded-lg border"
+                className="student-input p-2 rounded-lg border"
                 onChange={(e) => setCategory(e.target.value)}
               >
                 <option value="">Semua Kategori</option>
@@ -243,7 +249,7 @@ function Kamus() {
               </select>
 
               <select
-                className="p-2 rounded-lg border"
+                className="student-input p-2 rounded-lg border"
                 onChange={(e) => setDialect(e.target.value)}
               >
                 <option value="">Semua Dialek</option>
@@ -263,7 +269,7 @@ function Kamus() {
                 {filtered.map((item) => (
                   <div
                     key={item.id}
-                    className="bg-white p-4 rounded-xl shadow"
+                    className="student-list-card bg-white p-4 rounded-xl shadow"
                   >
                     <div className="flex justify-between items-center mb-2">
                       <h3 className="font-bold text-lg">

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" role="img" aria-labelledby="title desc">
+  <title id="title">Sora Kaili Logo</title>
+  <desc id="desc">Logo Sora Kaili dengan huruf S, unsur alam, jembatan, rumah adat, dan matahari.</desc>
+  <defs>
+    <linearGradient id="soraGradient" x1="120" y1="120" x2="520" y2="520" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0f4f45"/>
+      <stop offset="0.55" stop-color="#1d5d4d"/>
+      <stop offset="1" stop-color="#d9ad63"/>
+    </linearGradient>
+    <linearGradient id="goldGradient" x1="400" y1="120" x2="540" y2="240" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f1d09a"/>
+      <stop offset="1" stop-color="#c9903e"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="640" fill="none"/>
+  <path fill="url(#soraGradient)" d="M306 74c72-2 130 28 166 83l-51 36c-24-37-62-57-112-56-46 1-82 21-86 51-5 36 38 55 91 78 79 34 156 72 149 168-7 91-89 146-186 144-89-2-156-44-191-116l58-32c25 49 72 81 132 83 61 2 116-27 120-81 4-45-40-66-104-94-77-34-143-68-134-150 8-70 70-112 148-114Z"/>
+  <path fill="#eef4ec" d="M159 421c64 26 124 29 181 9-52 44-112 63-181 41-34-10-63-28-86-54 29 3 58 4 86 4Z" opacity=".92"/>
+  <path fill="#98ad91" d="M147 464c78 22 147 15 207-20-47 56-124 85-207 55-32-12-58-31-79-58 26 10 52 18 79 23Z"/>
+  <path fill="#d4a95e" d="M238 394h157v14H226l12-14Zm24-21 53-76 54 76h-17l-37-54-38 54h-15Z"/>
+  <path fill="none" stroke="#d4a95e" stroke-linecap="round" stroke-width="7" d="M315 298v109M249 390l66-73m-39 73 39-58m-12 58 12-36m27 36-27-58m55 58-55-73"/>
+  <path fill="#9d9480" d="M134 376h34l18-174 18 174h34L202 96l-18 120-20-120-30 280Z"/>
+  <circle cx="184" cy="310" r="21" fill="#fff"/>
+  <circle cx="184" cy="310" r="13" fill="#9d9480"/>
+  <path fill="url(#goldGradient)" d="M433 113c34-18 78-5 97 29 19 35 7 78-27 98-35 20-79 9-99-26-20-34-7-82 29-101Z"/>
+  <path fill="#fff" d="m509 144 8 19 19 8-19 8-8 19-8-19-19-8 19-8 8-19Z"/>
+  <path fill="none" stroke="#d4a95e" stroke-linecap="round" stroke-width="8" d="M385 212h135M410 230h96"/>
+  <path fill="#eef4ec" d="M393 280c41 8 75-7 102-45 49 12 84 45 105 94-66-25-118-18-156 22-18-31-35-54-51-71Z"/>
+  <path fill="#6b816d" d="M424 318c42 10 80 25 114 47-44-5-79 3-105 25-7-28-10-52-9-72Z"/>
+  <path fill="#1f5b4c" d="M474 389c35 14 57 41 67 80-34-17-57-44-67-80Zm-12 6c10 38 2 72-25 101-8-39 1-72 25-101Zm-13-13c-35 15-66 12-93-10 35-14 66-11 93 10Zm21-6c4-37 23-64 57-81-4 38-24 65-57 81Z"/>
+  <path fill="#fff" d="M322 510h126l-18-109-49-55-42 64-17 100Z"/>
+  <path fill="#123f36" d="M340 509h104l-15-91-47-52-30 52-12 91Zm23-21 4-57 13-22 18 22 7 57h-42Z"/>
+  <path fill="none" stroke="#fff" stroke-width="10" d="M383 387v101"/>
+  <path fill="#fff" d="M245 520h74v-62h-74v62Zm14-49h13v37h-13v-37Zm28 0h13v37h-13v-37Z"/>
+  <path fill="#d4a95e" d="m560 376 36-22-15 40 39 16-42 8 5 43-28-33-35 25 14-40-39-15 42-9-4-43 27 30Z"/>
+</svg>

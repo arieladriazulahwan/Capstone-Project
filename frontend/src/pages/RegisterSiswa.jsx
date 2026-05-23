@@ -1,15 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import AuthPageShell from "../components/AuthPageShell";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
 function RegisterSiswa() {
   const navigate = useNavigate();
-
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("siswa");
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -42,105 +41,91 @@ function RegisterSiswa() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-200 flex items-center justify-center px-4">
-      <div className="w-full max-w-md md:max-w-lg bg-white rounded-3xl shadow-xl p-6 md:p-8">
+    <AuthPageShell
+      title="Mulai perjalanan belajar"
+      subtitle="Daftar sebagai siswa untuk mengakses materi, latihan, kuis, XP, dan streak harian."
+    >
+      <div className="text-center">
+        <h2 className="text-2xl font-black text-green-600">Buat Akun Siswa</h2>
+        <p className="mt-2 text-sm text-gray-500">Daftar gratis, belajar kapan saja.</p>
+      </div>
 
-        {/* Logo */}
-        <div className="flex justify-center mb-4">
-          <div className="w-16 h-16 bg-green-500 rounded-xl flex items-center justify-center text-white text-xl shadow">
-            🌿
-          </div>
-        </div>
+      <div className="mt-5 flex rounded-2xl bg-gray-100 p-1">
+        <button
+          type="button"
+          onClick={() => navigate("/login/siswa")}
+          className="flex-1 rounded-xl py-2 text-sm font-semibold text-gray-500"
+        >
+          Masuk
+        </button>
+        <button className="flex-1 rounded-xl bg-white py-2 text-sm font-bold text-gray-800 shadow">
+          Daftar
+        </button>
+      </div>
 
-        {/* Title */}
-        <h2 className="text-center text-xl md:text-2xl font-bold text-green-600">
-          Buat Akun Siswa
-        </h2>
+      <div className="mt-4 grid grid-cols-2 gap-2">
+        <button className="rounded-2xl border border-green-300 bg-green-50 p-3 text-sm font-bold text-green-700">
+          Siswa
+        </button>
+        <button
+          type="button"
+          onClick={() => navigate("/register/guru")}
+          className="rounded-2xl border border-gray-200 bg-white p-3 text-sm font-semibold text-gray-500 hover:bg-blue-50"
+        >
+          Guru
+        </button>
+      </div>
 
-        <p className="text-center text-gray-500 text-sm mb-4">
-          Daftar gratis, belajar kapan saja!
-        </p>
-
-        {/* TAB */}
-        <div className="flex mb-4 bg-gray-100 rounded-xl p-1">
-          <button
-            onClick={() => navigate("/login/siswa")}
-            className="flex-1 py-2 rounded-xl text-sm"
-          >
-            Masuk
-          </button>
-          <button className="flex-1 py-2 rounded-xl bg-white shadow text-sm font-semibold">
-            Daftar
-          </button>
-        </div>
-
-        {/* ROLE */}
-        <div className="flex gap-2 mb-4">
-          <button
-            onClick={() => setRole("siswa")}
-            className="flex-1 p-3 rounded-xl border bg-green-100 border-green-500"
-          >
-            👨‍🎓 Siswa
-          </button>
-
-          <button
-            onClick={() => navigate("/register/guru")}
-            className="flex-1 p-3 rounded-xl border bg-gray-100"
-          >
-            👨‍🏫 Guru
-          </button>
-        </div>
-
-        {/* FORM */}
-        <form onSubmit={handleRegister}>
-          <label className="text-sm text-gray-600">Nama Lengkap</label>
+      <form onSubmit={handleRegister} className="mt-5 space-y-4">
+        <div>
+          <label className="mb-1.5 block text-sm font-semibold text-gray-600">Nama Lengkap</label>
           <input
             type="text"
-            placeholder="Nama Lengkap"
-            className="w-full p-3 rounded-xl border border-green-500 bg-green-50 mb-3 focus:outline-none"
+            placeholder="Masukkan nama lengkap"
+            className="w-full rounded-2xl border border-green-200 bg-green-50 px-4 py-3 outline-none transition focus:border-green-500 focus:ring-2 focus:ring-green-100"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
+        </div>
 
-          <label className="text-sm text-gray-600">Username</label>
+        <div>
+          <label className="mb-1.5 block text-sm font-semibold text-gray-600">Username</label>
           <input
             type="text"
-            placeholder="Username"
-            className="w-full p-3 rounded-xl bg-gray-100 mb-3 focus:outline-none"
+            placeholder="Masukkan username"
+            className="w-full rounded-2xl border border-gray-200 bg-gray-50 px-4 py-3 outline-none transition focus:border-green-500 focus:ring-2 focus:ring-green-100"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
+        </div>
 
-          <label className="text-sm text-gray-600">
-            Kata Sandi (min. 6 karakter)
-          </label>
+        <div>
+          <label className="mb-1.5 block text-sm font-semibold text-gray-600">Kata Sandi</label>
           <input
             type="password"
-            placeholder="Password"
-            className="w-full p-3 rounded-xl bg-gray-100 mb-4 focus:outline-none"
+            placeholder="Minimal 6 karakter"
+            className="w-full rounded-2xl border border-gray-200 bg-gray-50 px-4 py-3 outline-none transition focus:border-green-500 focus:ring-2 focus:ring-green-100"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+        </div>
 
-          {/* BUTTON */}
-          <button className="w-full bg-green-600 text-white p-3 rounded-xl font-semibold hover:bg-green-700 transition">
-            Buat Akun ✨
-          </button>
-        </form>
+        <button className="w-full rounded-2xl bg-green-600 p-3 font-bold text-white shadow-lg shadow-green-600/20 transition hover:-translate-y-0.5 hover:bg-green-700">
+          Buat Akun
+        </button>
+      </form>
 
-        {/* LOGIN LINK */}
-        <p className="text-center text-sm mt-4 text-gray-500">
-          Sudah punya akun?{" "}
-          <span
-            onClick={() => navigate("/login/siswa")}
-            className="text-green-600 cursor-pointer"
-          >
-            Masuk
-          </span>
-        </p>
-
-      </div>
-    </div>
+      <p className="mt-4 text-center text-sm text-gray-500">
+        Sudah punya akun?{" "}
+        <button
+          type="button"
+          onClick={() => navigate("/login/siswa")}
+          className="font-bold text-green-600"
+        >
+          Masuk
+        </button>
+      </p>
+    </AuthPageShell>
   );
 }
 

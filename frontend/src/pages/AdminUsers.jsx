@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
 import NavbarAdmin from "../components/NavbarAdmin";
 import SidebarAdmin from "../components/SidebarAdmin";
+import BottomNavAdmin from "../components/BottomNavAdmin";
+import { useToast } from "../components/ToastProvider";
+import ConfirmDialog from "../components/ConfirmDialog";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 const API = `${API_BASE_URL}/api/admin`;
 
 function AdminUsers() {
+  const { showToast } = useToast();
   const [user, setUser] = useState(null);
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -28,9 +32,7 @@ function AdminUsers() {
   const [newPassword, setNewPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
-
-  // Toast state
-  const [toast, setToast] = useState(null);
+  const [deleteTarget, setDeleteTarget] = useState(null);
 
   const token = localStorage.getItem("token");
   const headers = {
@@ -45,18 +47,6 @@ function AdminUsers() {
   useEffect(() => {
     fetchUsers();
   }, [filterRole, search]);
-
-  // Auto-hide toast
-  useEffect(() => {
-    if (toast) {
-      const timer = setTimeout(() => setToast(null), 3000);
-      return () => clearTimeout(timer);
-    }
-  }, [toast]);
-
-  const showToast = (message, type = "success") => {
-    setToast({ message, type });
-  };
 
   const fetchUser = async () => {
     const res = await fetch(`${API_BASE_URL}/api/auth/profile`, {
@@ -152,12 +142,7 @@ function AdminUsers() {
   };
 
   const handleDelete = async (userId, name) => {
-    if (
-      !confirm(
-        `Yakin ingin menghapus akun "${name}"? Data akan hilang permanen.`
-      )
-    )
-      return;
+    setDeleteTarget(null);
 
     const res = await fetch(`${API}/users/${userId}`, {
       method: "DELETE",
@@ -224,7 +209,7 @@ function AdminUsers() {
       <SidebarAdmin />
       <div className="flex-1 flex flex-col">
         <NavbarAdmin user={user} />
-        <main className="flex-1 p-4 md:p-6 overflow-y-auto">
+        <main className="flex-1 p-4 pb-24 md:p-6 overflow-y-auto">
           <div className="max-w-6xl mx-auto">
             {/* HEADER */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-5">
@@ -265,7 +250,7 @@ function AdminUsers() {
             </div>
 
             {/* TABLE */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+            <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-x-auto">
               {loading ? (
                 <div className="p-8 text-center text-gray-400">Memuat...</div>
               ) : users.length === 0 ? (
@@ -274,7 +259,7 @@ function AdminUsers() {
                 </div>
               ) : (
                 <div className="overflow-x-auto">
-                  <table className="w-full text-sm">
+                  <table className="w-full min-w-[760px] text-sm">
                     <thead className="bg-gray-50 border-b">
                       <tr>
                         <th className="px-4 py-3 text-left text-gray-600 font-semibold">
@@ -364,7 +349,7 @@ function AdminUsers() {
                                 {u.is_blocked ? "Unblokir" : "Blokir"}
                               </button>
                               <button
-                                onClick={() => handleDelete(u.id, u.name)}
+                                onClick={() => setDeleteTarget(u)}
                                 className="text-xs font-medium px-2 py-1 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition"
                               >
                                 Hapus
@@ -552,28 +537,15 @@ function AdminUsers() {
         </div>
       )}
 
-      {/* ============ TOAST NOTIFICATION ============ */}
-      {toast && (
-        <div
-          className={`fixed bottom-6 right-6 z-50 px-5 py-3 rounded-xl shadow-2xl text-sm font-medium text-white transition-all animate-slide-up ${
-            toast.type === "error"
-              ? "bg-gradient-to-r from-red-500 to-rose-500"
-              : "bg-gradient-to-r from-emerald-500 to-green-500"
-          }`}
-          style={{
-            animation: "slideUp 0.3s ease-out",
-          }}
-        >
-          {toast.type === "error" ? "❌" : "✅"} {toast.message}
-        </div>
-      )}
-
-      <style>{`
-        @keyframes slideUp {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-      `}</style>
+      <BottomNavAdmin />
+      <ConfirmDialog
+        open={Boolean(deleteTarget)}
+        title="Hapus Pengguna?"
+        message={`Akun "${deleteTarget?.name || "ini"}" akan dihapus permanen.`}
+        confirmLabel="Hapus Akun"
+        onConfirm={() => handleDelete(deleteTarget?.id, deleteTarget?.name)}
+        onCancel={() => setDeleteTarget(null)}
+      />
     </div>
   );
 }

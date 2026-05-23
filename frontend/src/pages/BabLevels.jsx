@@ -7,6 +7,13 @@ const colorClass = {
   green: "bg-green-500",
   blue: "bg-blue-500",
   purple: "bg-purple-500",
+  yellow: "bg-yellow-500",
+  pink: "bg-pink-500",
+  teal: "bg-teal-500",
+  orange: "bg-orange-500",
+  indigo: "bg-indigo-500",
+  cyan: "bg-cyan-500",
+  red: "bg-red-500",
 };
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
@@ -109,11 +116,11 @@ function BabLevels() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="student-page-bg min-h-screen bg-gray-100">
       <Navbar showBackButton backTo="/level" />
 
       <main className="p-4 max-w-xl mx-auto">
-        <div className="bg-white rounded-2xl p-5 shadow mb-5">
+        <div className="student-hero-card rounded-3xl p-5 shadow mb-5">
           <p className="text-sm text-gray-500 font-semibold">
             {babInfo?.label || bab?.toUpperCase()}
           </p>
@@ -132,7 +139,7 @@ function BabLevels() {
             return (
               <div
                 key={level.key}
-                className={`rounded-xl border p-4 shadow flex justify-between items-center gap-3 ${
+                className={`student-card rounded-xl border p-4 shadow flex justify-between items-center gap-3 ${
                   unlocked ? "bg-white" : "bg-gray-100 opacity-75"
                 }`}
               >
@@ -148,7 +155,7 @@ function BabLevels() {
                     <div className="flex flex-col items-end">
                       <div className="w-16 sm:w-24 h-2.5 bg-gray-200 rounded-full overflow-hidden">
                         <div
-                          className="h-full bg-green-500 transition-all duration-500"
+                          className="h-full flag-wave transition-all duration-500"
                           style={{ width: `${getLevelScore(level)}%` }}
                         ></div>
                       </div>
@@ -161,7 +168,7 @@ function BabLevels() {
                       onClick={() =>
                         navigate(`/lesson/${dialect}/${bab}/${level.key}`)
                       }
-                      className={`${buttonColor} text-white text-sm px-4 py-2 rounded-lg font-bold whitespace-nowrap`}
+                      className={`${buttonColor} text-white text-sm px-4 py-2 rounded-lg font-bold whitespace-nowrap shadow transition-transform hover:-translate-y-0.5`}
                     >
                       Mulai
                     </button>

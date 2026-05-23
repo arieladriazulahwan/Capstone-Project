@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import NavbarGuru from "../components/NavbarGuru";
 import RoomCard from "../components/RoomCard";
 import { useNavigate } from "react-router-dom";
+import ConfirmDialog from "../components/ConfirmDialog";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
@@ -9,6 +10,7 @@ function DashboardGuru() {
 
   const [user, setUser] = useState(null);
   const [rooms, setRooms] = useState([]);
+  const [deleteTarget, setDeleteTarget] = useState(null);
 
   const navigate = useNavigate();
 
@@ -82,11 +84,10 @@ function DashboardGuru() {
   // 🗑️ DELETE ROOM
   // ========================================
 
-  const handleDeleteRoom = async (roomId) => {
-    if (!window.confirm("Apakah Anda yakin ingin menghapus room ini?")) {
-      return;
-    }
-
+  const confirmDeleteRoom = async () => {
+    const roomId = deleteTarget?.id;
+    if (!roomId) return;
+    setDeleteTarget(null);
     try {
       const token = localStorage.getItem("token");
       const res = await fetch(`${API_BASE_URL}/api/rooms/${roomId}`, {
@@ -98,6 +99,7 @@ function DashboardGuru() {
 
       if (res.ok) {
         setRooms((prevRooms) => prevRooms.filter((room) => room.id !== roomId));
+        alert("Room berhasil dihapus.");
       } else {
         alert("Gagal menghapus room, mungkin ada masalah pada server.");
       }
@@ -165,7 +167,7 @@ function DashboardGuru() {
                       onClick={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
-                        handleDeleteRoom(room.id);
+                        setDeleteTarget(room);
                       }}
                       className="absolute top-4 right-40 bg-red-100 text-red-600 hover:bg-red-500 hover:text-white px-3 py-1 rounded-lg text-sm font-semibold transition shadow-sm z-10"
                     >
@@ -180,7 +182,16 @@ function DashboardGuru() {
 
           </div>
 
-        </main>
+      </main>
+
+      <ConfirmDialog
+        open={Boolean(deleteTarget)}
+        title="Hapus Room?"
+        message={`Room "${deleteTarget?.title || "ini"}" akan dihapus permanen.`}
+        confirmLabel="Hapus Room"
+        onConfirm={confirmDeleteRoom}
+        onCancel={() => setDeleteTarget(null)}
+      />
 
     </div>
   );

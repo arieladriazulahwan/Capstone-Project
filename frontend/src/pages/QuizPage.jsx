@@ -263,8 +263,8 @@ function QuizPage() {
     const percentage = Math.round((correct / total) * 100);
 
     return (
-      <div className="min-h-screen bg-gray-100 p-5 flex items-center justify-center">
-        <div className="bg-white p-8 rounded-3xl shadow-xl max-w-md w-full text-center transform transition-all">
+      <div className="student-page-bg min-h-screen bg-gray-100 p-5 flex items-center justify-center">
+        <div className="student-hero-card p-8 rounded-3xl shadow-xl max-w-md w-full text-center transform transition-all">
           <h1 className="text-4xl font-bold mb-2">🎯 Selesai!</h1>
           <p className="text-gray-500 mb-8">Kuis Room {room.title} telah diselesaikan.</p>
           
@@ -301,12 +301,12 @@ function QuizPage() {
 
   return (
 
-    <div className="min-h-screen bg-gray-100 p-4">
+    <div className="student-page-bg min-h-screen bg-gray-100 p-4">
 
       <div className="max-w-3xl mx-auto">
 
         {/* HEADER */}
-        <div className="bg-white rounded-3xl p-5 shadow mb-5">
+        <div className="student-hero-card rounded-3xl p-5 shadow mb-5">
 
           <div className="flex justify-between items-center">
 
@@ -340,7 +340,7 @@ function QuizPage() {
         </div>
 
         {/* CARD SOAL */}
-        <div className="bg-white rounded-3xl p-6 shadow">
+        <div className="student-card bg-white rounded-3xl p-6 shadow">
 
           {/* PERTANYAAN */}
           <h2 className="text-2xl font-bold mb-6">
@@ -375,7 +375,7 @@ function QuizPage() {
                   className={`w-full text-left p-4 rounded-2xl border transition ${
                     answers[currentQuestion] === opt
                       ? "bg-green-500 text-white border-green-500"
-                      : "bg-white hover:bg-gray-50"
+                      : "student-answer-button bg-white hover:bg-gray-50"
                   }`}
                 >
                   {opt}
@@ -451,7 +451,7 @@ function QuizPage() {
                       className={`px-4 py-3 rounded-2xl border transition ${
                         currentAnswer.includes(block)
                           ? "bg-green-500 text-white"
-                          : "bg-white hover:bg-gray-100"
+                          : "student-answer-button bg-white hover:bg-gray-100"
                       }`}
                     >
                       {block}

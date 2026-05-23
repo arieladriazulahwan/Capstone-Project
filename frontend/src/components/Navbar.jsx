@@ -2,6 +2,7 @@ import ProfileDropdown from "./ProfileDropdown";
 import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import SoraKailiLogo from "./SoraKailiLogo";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
@@ -47,7 +48,7 @@ function Navbar({ user, showBackButton = false, backTo = -1 }) {
     <div className="sticky top-0 z-40 bg-white border-b">
 
       {/* WRAPPER AGAR LEBAR SAMA DENGAN KONTEN */}
-      <div className="w-full max-w-md md:max-w-3xl mx-auto px-4 py-4 flex justify-between items-center">
+      <div className="w-full max-w-md md:max-w-3xl mx-auto px-4 py-2 flex justify-between items-center">
 
         {/* LEFT */}
         <div className="flex items-center gap-2">
@@ -55,16 +56,17 @@ function Navbar({ user, showBackButton = false, backTo = -1 }) {
             <button
               type="button"
               onClick={handleBack}
-              className="w-9 h-9 rounded-xl border bg-white flex items-center justify-center hover:bg-gray-50"
+              className="w-9 h-9 rounded-xl border bg-white flex items-center justify-center hover:bg-gray-50 transition-transform hover:-translate-y-0.5"
               aria-label="Kembali"
             >
               <ArrowLeft size={18} />
             </button>
           )}
 
-          <h1 className="font-bold text-green-600 text-lg">
-            Sora Kaili
-          </h1>
+          <SoraKailiLogo
+            className={`w-30 h-20 overflow-hidden ${showBackButton ? "" : "-ml-1"}`}
+            imgClassName="scale-[1.7] -translate-x-1 translate-y-2"
+          />
         </div>
 
         {/* RIGHT */}

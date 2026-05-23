@@ -17,7 +17,7 @@ function SidebarAdmin() {
       {/* LOGO */}
       <div
         onClick={() => navigate("/dashboard/admin")}
-        className="flex items-center gap-2 p-4 cursor-pointer hover:bg-gray-50 border-b"
+        className="flex items-center gap-2 p-4 cursor-pointer hover:bg-gray-50 border-b transition"
       >
         <div className="w-10 h-10 bg-gradient-to-br from-purple-600 to-indigo-600 rounded-xl flex items-center justify-center text-white text-lg">
           🛡️

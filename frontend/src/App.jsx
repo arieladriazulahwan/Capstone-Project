@@ -9,6 +9,7 @@ import LoginSiswa from "./pages/LoginSiswa";
 import LoginGuru from "./pages/LoginGuru";
 import DashboardGuru from "./pages/DashboardGuru";
 import Kamus from "./pages/Kamus";
+import Favorites from "./pages/Favorites";
 import Level from "./pages/Level";
 import BabLevels from "./pages/BabLevels";
 import Lesson from "./pages/Lesson";
@@ -57,6 +58,14 @@ function App() {
           element={
             <ProtectedRoute allowedRole="siswa">
               <Kamus />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/favorites"
+          element={
+            <ProtectedRoute allowedRole="siswa">
+              <Favorites />
             </ProtectedRoute>
           }
         />

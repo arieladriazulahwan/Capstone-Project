@@ -8,6 +8,7 @@ const roomRoutes = require("./routes/roomRoutes");
 const db = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
 const adminRoutes = require("./routes/adminRoutes");
+const createJsonDataTables = require("./utils/jsonDataTables");
 
 
 const app = express();
@@ -38,8 +39,8 @@ const defaultProgressString = () =>
   });
 
 app.use(cors());
-app.use(express.json({ limit: "50mb" }));
-app.use(express.urlencoded({ limit: "50mb", extended: true }));
+app.use(express.json({ limit: "200mb" }));
+app.use(express.urlencoded({ limit: "200mb", extended: true }));
 
 // Create tables if not exist
 const createTables = async () => {
@@ -136,6 +137,8 @@ const createTables = async () => {
   for (const query of queries) {
     await db.promise().query(query);
   }
+
+  await createJsonDataTables(db);
 
   await ensureColumn("users", "created_at", "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP");
   await ensureColumn("users", "is_blocked", "TINYINT(1) NOT NULL DEFAULT 0");

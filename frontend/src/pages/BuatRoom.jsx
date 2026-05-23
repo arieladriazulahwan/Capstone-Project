@@ -3,6 +3,14 @@ import { useNavigate } from "react-router-dom";
 import NavbarGuru from "../components/NavbarGuru";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+const MAX_UPLOAD_FILE_SIZE = 50 * 1024 * 1024;
+
+const questionTypes = [
+  { type: "multiple", label: "Pilihan Ganda", className: "bg-blue-500 hover:bg-blue-600" },
+  { type: "susun", label: "Susun Kata", className: "bg-green-500 hover:bg-green-600" },
+  { type: "gambar", label: "Soal Gambar", className: "bg-yellow-500 hover:bg-yellow-600" },
+  { type: "sambung", label: "Sambung Kalimat", className: "bg-purple-500 hover:bg-purple-600" },
+];
 
 function BuatRoom() {
   const navigate = useNavigate();
@@ -12,6 +20,8 @@ function BuatRoom() {
   const [user, setUser] = useState(null);
 
   const [questions, setQuestions] = useState([]);
+  const labelClass = "mb-1.5 block text-sm font-semibold text-gray-700";
+  const hintClass = "mt-1 text-xs text-gray-400";
 
   // Fetch user data
   useEffect(() => {
@@ -227,8 +237,8 @@ function BuatRoom() {
 
     if (!file) return;
 
-    if (file.size > 2000000) {
-      alert("Gambar maksimal 2MB");
+    if (file.size > MAX_UPLOAD_FILE_SIZE) {
+      alert("Gambar maksimal 50MB");
       return;
     }
 
@@ -314,7 +324,7 @@ function BuatRoom() {
     <div className="min-h-screen bg-gray-100">
       <NavbarGuru user={user} showBackButton={true} />
 
-      <div className="max-w-5xl mx-auto p-4">
+      <div className="max-w-5xl mx-auto p-4 pb-64">
 
         {/* HEADER */}
         <h1 className="text-2xl font-bold mb-5">
@@ -324,76 +334,45 @@ function BuatRoom() {
       {/* ROOM */}
       <div className="bg-white p-5 rounded-2xl shadow mb-5">
 
-        <input
-          type="text"
-          placeholder="Nama Room"
-          value={title}
-          onChange={(e) =>
-            setTitle(e.target.value)
-          }
-          className="w-full border p-3 rounded-xl mb-3"
-        />
+        <div className="mb-3">
+          <label className={labelClass}>Nama Room</label>
+          <input
+            type="text"
+            placeholder="Contoh: Kuis Bab 1"
+            value={title}
+            onChange={(e) =>
+              setTitle(e.target.value)
+            }
+            className="w-full border p-3 rounded-xl"
+          />
+        </div>
 
-        <input
-          type="text"
-          placeholder="Subjek"
-          value={category}
-          onChange={(e) =>
-            setCategory(e.target.value)
-          }
-          className="w-full border p-3 rounded-xl mb-3"
-        />
+        <div className="mb-3">
+          <label className={labelClass}>Subjek</label>
+          <input
+            type="text"
+            placeholder="Contoh: Bahasa Kaili Ledo"
+            value={category}
+            onChange={(e) =>
+              setCategory(e.target.value)
+            }
+            className="w-full border p-3 rounded-xl"
+          />
+        </div>
 
-        <input
-          type="number"
-          placeholder="Timer"
-          value={timer}
-          onChange={(e) =>
-            setTimer(parseInt(e.target.value) || 0)
-          }
-          className="w-full border p-3 rounded-xl"
-        />
-
-      </div>
-
-      {/* BUTTON */}
-      <div className="flex flex-wrap gap-3 mb-5">
-
-        <button
-          onClick={() =>
-            addQuestion("multiple")
-          }
-          className="bg-blue-500 text-white px-4 py-2 rounded-xl"
-        >
-          + Pilihan Ganda
-        </button>
-
-        <button
-          onClick={() =>
-            addQuestion("susun")
-          }
-          className="bg-green-500 text-white px-4 py-2 rounded-xl"
-        >
-          + Susun Kata
-        </button>
-
-        <button
-          onClick={() =>
-            addQuestion("gambar")
-          }
-          className="bg-yellow-500 text-white px-4 py-2 rounded-xl"
-        >
-          + Soal Gambar
-        </button>
-
-        <button
-          onClick={() =>
-            addQuestion("sambung")
-          }
-          className="bg-purple-500 text-white px-4 py-2 rounded-xl"
-        >
-          + Sambung Kalimat
-        </button>
+        <div>
+          <label className={labelClass}>Timer per Soal</label>
+          <input
+            type="number"
+            placeholder="Contoh: 15"
+            value={timer}
+            onChange={(e) =>
+              setTimer(parseInt(e.target.value) || 0)
+            }
+            className="w-full border p-3 rounded-xl"
+          />
+          <p className={hintClass}>Waktu dihitung dalam detik.</p>
+        </div>
 
       </div>
 
@@ -420,23 +399,27 @@ function BuatRoom() {
             </div>
 
             {/* PERTANYAAN */}
-            <input
-              type="text"
-              placeholder="Masukkan pertanyaan"
-              value={q.question}
-              onChange={(e) =>
-                updateQuestion(
-                  index,
-                  "question",
-                  e.target.value
-                )
-              }
-              className="w-full border p-3 rounded-xl mb-4"
-            />
+            <div className="mb-4">
+              <label className={labelClass}>Pertanyaan</label>
+              <input
+                type="text"
+                placeholder="Masukkan pertanyaan"
+                value={q.question}
+                onChange={(e) =>
+                  updateQuestion(
+                    index,
+                    "question",
+                    e.target.value
+                  )
+                }
+                className="w-full border p-3 rounded-xl"
+              />
+            </div>
 
             {/* GAMBAR */}
             {q.type === "gambar" && (
               <div className="mb-4">
+                <label className={labelClass}>Gambar Soal</label>
 
                 <input
                   type="file"
@@ -449,6 +432,7 @@ function BuatRoom() {
                   }
                   className="mb-3"
                 />
+                <p className={hintClass}>Format gambar, maksimal 50MB.</p>
 
                 {q.image && (
                   <img
@@ -537,6 +521,7 @@ function BuatRoom() {
                           )
                         }
                         className="flex-1 border p-2 rounded-xl"
+                        aria-label={`Opsi jawaban ${oIndex + 1}`}
                       />
 
                       <button
@@ -566,36 +551,39 @@ function BuatRoom() {
                   </button>
                 )}
 
-                <select
-                  value={q.answer}
-                  onChange={(e) =>
-                    updateQuestion(
-                      index,
-                      "answer",
-                      e.target.value
-                    )
-                  }
-                  className="w-full border p-3 rounded-xl"
-                >
-                  <option value="">
-                    Pilih Jawaban Benar
-                  </option>
+                <div className="mt-3">
+                  <label className={labelClass}>Jawaban Benar</label>
+                  <select
+                    value={q.answer}
+                    onChange={(e) =>
+                      updateQuestion(
+                        index,
+                        "answer",
+                        e.target.value
+                      )
+                    }
+                    className="w-full border p-3 rounded-xl"
+                  >
+                    <option value="">
+                      Pilih Jawaban Benar
+                    </option>
 
-                  {q.options.map(
-                    (opt, i) => (
-                      <option
-                        key={i}
-                        value={opt}
-                      >
-                        {opt ||
-                          `Opsi ${
-                            i + 1
-                          }`}
-                      </option>
-                    )
-                  )}
+                    {q.options.map(
+                      (opt, i) => (
+                        <option
+                          key={i}
+                          value={opt}
+                        >
+                          {opt ||
+                            `Opsi ${
+                              i + 1
+                            }`}
+                        </option>
+                      )
+                    )}
 
-                </select>
+                  </select>
+                </div>
 
               </>
             )}
@@ -605,19 +593,22 @@ function BuatRoom() {
               q.type === "sambung") &&
               q.answerType ===
                 "ketik" && (
-                <input
-                  type="text"
-                  placeholder="Jawaban Benar"
-                  value={q.answer}
-                  onChange={(e) =>
-                    updateQuestion(
-                      index,
-                      "answer",
-                      e.target.value
-                    )
-                  }
-                  className="w-full border p-3 rounded-xl"
-                />
+                <div>
+                  <label className={labelClass}>Jawaban Benar</label>
+                  <input
+                    type="text"
+                    placeholder="Masukkan jawaban benar"
+                    value={q.answer}
+                    onChange={(e) =>
+                      updateQuestion(
+                        index,
+                        "answer",
+                        e.target.value
+                      )
+                    }
+                    className="w-full border p-3 rounded-xl"
+                  />
+                </div>
               )}
 
             {/* SUSUN / BLOCK */}
@@ -652,6 +643,7 @@ function BuatRoom() {
                           )
                         }
                         className="flex-1 border p-2 rounded-xl"
+                        aria-label={`Blok kata ${bIndex + 1}`}
                       />
 
                       <button
@@ -742,10 +734,47 @@ function BuatRoom() {
 
       </div>
 
+      <div className="fixed bottom-4 left-4 right-4 z-50 mx-auto max-w-5xl rounded-2xl border border-gray-200 bg-white/95 p-3 shadow-2xl backdrop-blur">
+        <div className="mb-2 flex items-center justify-between gap-3">
+          <p className="text-sm font-bold text-gray-700">Tambah Soal</p>
+          <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-semibold text-gray-500">
+            {questions.length} soal
+          </span>
+        </div>
+        <div className="grid grid-cols-2 gap-2 md:grid-cols-4">
+          {questionTypes.map((item) => (
+            <button
+              key={item.type}
+              type="button"
+              onClick={() => addQuestion(item.type)}
+              className={`${item.className} rounded-xl px-3 py-2 text-sm font-semibold text-white shadow transition`}
+            >
+              + {item.label}
+            </button>
+          ))}
+        </div>
+        <div className="mt-3 grid grid-cols-2 gap-2">
+          <button
+            type="button"
+            onClick={() => navigate("/dashboard/guru")}
+            className="rounded-xl border border-gray-200 bg-white p-3 text-sm font-bold text-gray-600 shadow-sm hover:bg-gray-50"
+          >
+            Batal
+          </button>
+          <button
+            type="button"
+            onClick={submitRoom}
+            className="rounded-xl bg-blue-600 p-3 text-sm font-bold text-white shadow hover:bg-blue-700"
+          >
+            Buat Room
+          </button>
+        </div>
+      </div>
+
       {/* SUBMIT */}
       <button
         onClick={submitRoom}
-        className="w-full bg-blue-600 text-white p-4 rounded-2xl font-bold mt-6"
+        className="hidden"
       >
         🚀 Buat Room
       </button>

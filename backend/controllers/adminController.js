@@ -9,12 +9,34 @@ const db = require("../config/db");
 const vocabPath = path.join(__dirname, "../data/vocab.json");
 const quizPath = path.join(__dirname, "../data/quiz.json");
 const lessonDir = path.join(__dirname, "../data/lesson");
+const practiceDir = path.join(__dirname, "../data/practice");
 
 const readJSON = (filePath) => JSON.parse(fs.readFileSync(filePath, "utf-8"));
 const writeJSON = (filePath, data) =>
   fs.writeFileSync(filePath, JSON.stringify(data, null, 2), "utf-8");
 
 const validDialects = ["ledo", "rai"];
+
+const countJsonItemsInDir = (baseDir) => {
+  let files = 0;
+  let items = 0;
+
+  validDialects.forEach((dialect) => {
+    const dialectDir = path.join(baseDir, dialect);
+    if (!fs.existsSync(dialectDir)) return;
+
+    fs.readdirSync(dialectDir)
+      .filter((file) => file.endsWith(".json"))
+      .forEach((file) => {
+        files += 1;
+        const content = readJSON(path.join(dialectDir, file));
+        if (Array.isArray(content)) items += content.length;
+      });
+  });
+
+  return { files, items };
+};
+
 const defaultProgressString = () =>
   JSON.stringify({
     bab1: true,
@@ -76,9 +98,56 @@ exports.getDashboardStats = async (req, res) => {
     const [rooms] = await db
       .promise()
       .query("SELECT COUNT(*) as count FROM rooms");
+    const [activeToday] = await db
+      .promise()
+      .query("SELECT COUNT(*) as count FROM users WHERE role != 'admin' AND last_login = CURDATE()");
+    const [activeWeek] = await db
+      .promise()
+      .query("SELECT COUNT(*) as count FROM users WHERE role != 'admin' AND last_login >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)");
+    const [attemptStats] = await db.promise().query(`
+      SELECT
+        COUNT(*) AS totalAttempts,
+        COALESCE(ROUND(AVG(score / NULLIF(total, 0)) * 100), 0) AS averageScore
+      FROM room_attempts
+    `);
+    const [xpStats] = await db
+      .promise()
+      .query("SELECT COALESCE(SUM(xp), 0) AS totalXp, COALESCE(ROUND(AVG(level), 1), 0) AS averageLevel FROM student_profiles");
+    const [activeTrendRows] = await db.promise().query(`
+      SELECT DATE_FORMAT(last_login, '%Y-%m-%d') AS date, COUNT(*) AS count
+      FROM users
+      WHERE role != 'admin'
+        AND last_login >= DATE_SUB(CURDATE(), INTERVAL 6 DAY)
+      GROUP BY last_login
+    `);
+    const [attemptTrendRows] = await db.promise().query(`
+      SELECT DATE_FORMAT(created_at, '%Y-%m-%d') AS date, COUNT(*) AS count
+      FROM room_attempts
+      WHERE DATE(created_at) >= DATE_SUB(CURDATE(), INTERVAL 6 DAY)
+      GROUP BY DATE(created_at)
+    `);
 
     const vocab = readJSON(vocabPath);
     const quiz = readJSON(quizPath);
+    const lessons = countJsonItemsInDir(lessonDir);
+    const practices = countJsonItemsInDir(practiceDir);
+    const activeTrendMap = Object.fromEntries(
+      activeTrendRows.map((row) => [row.date, row.count])
+    );
+    const attemptTrendMap = Object.fromEntries(
+      attemptTrendRows.map((row) => [row.date, row.count])
+    );
+    const usageTrend = Array.from({ length: 7 }, (_, index) => {
+      const date = new Date();
+      date.setDate(date.getDate() - (6 - index));
+      const key = date.toISOString().slice(0, 10);
+
+      return {
+        date: key,
+        activeUsers: activeTrendMap[key] || 0,
+        roomAttempts: attemptTrendMap[key] || 0,
+      };
+    });
 
     const stats = {
       totalSiswa: 0,
@@ -86,6 +155,17 @@ exports.getDashboardStats = async (req, res) => {
       totalVocab: vocab.length,
       totalQuiz: quiz.length,
       totalRooms: rooms[0].count,
+      totalLessonFiles: lessons.files,
+      totalLessonItems: lessons.items,
+      totalPracticeFiles: practices.files,
+      totalPracticeItems: practices.items,
+      activeToday: activeToday[0].count,
+      activeWeek: activeWeek[0].count,
+      totalAttempts: attemptStats[0].totalAttempts,
+      averageScore: attemptStats[0].averageScore,
+      totalXp: xpStats[0].totalXp,
+      averageLevel: xpStats[0].averageLevel,
+      usageTrend,
     };
 
     users.forEach((row) => {
@@ -272,6 +352,85 @@ exports.deleteLesson = (req, res) => {
 // ============================================
 // 📝 CRUD KUIS (quiz.json)
 // ============================================
+exports.getPractices = (req, res) => {
+  try {
+    const practices = [];
+
+    validDialects.forEach((dialect) => {
+      const dialectDir = path.join(practiceDir, dialect);
+      if (!fs.existsSync(dialectDir)) return;
+
+      const files = fs.readdirSync(dialectDir).filter((file) => file.endsWith(".json"));
+      files.forEach((file) => {
+        const bab = file.replace(".json", "");
+        const content = readJSON(path.join(dialectDir, file));
+        practices.push({
+          dialect,
+          bab,
+          title: bab,
+          totalItems: Array.isArray(content) ? content.length : 0,
+          hasContent: true,
+        });
+      });
+    });
+
+    res.json(practices);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Gagal membaca daftar latihan" });
+  }
+};
+
+exports.getPractice = (req, res) => {
+  try {
+    const { dialect, bab } = req.params;
+    const filePath = path.join(practiceDir, dialect, `${bab}.json`);
+
+    if (!fs.existsSync(filePath)) {
+      return res.status(404).json({ message: "Latihan tidak ditemukan" });
+    }
+
+    res.json(readJSON(filePath));
+  } catch (err) {
+    res.status(500).json({ message: "Gagal membaca latihan" });
+  }
+};
+
+exports.updatePractice = (req, res) => {
+  try {
+    const { dialect, bab } = req.params;
+    const dialectDir = path.join(practiceDir, dialect);
+    const items = Array.isArray(req.body) ? req.body : [];
+
+    if (!fs.existsSync(dialectDir)) {
+      fs.mkdirSync(dialectDir, { recursive: true });
+    }
+
+    writeJSON(path.join(dialectDir, `${bab}.json`), items);
+    res.json({ message: "Latihan berhasil disimpan" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Gagal menyimpan latihan" });
+  }
+};
+
+exports.deletePractice = (req, res) => {
+  try {
+    const { dialect, bab } = req.params;
+    const filePath = path.join(practiceDir, dialect, `${bab}.json`);
+
+    if (!fs.existsSync(filePath)) {
+      return res.status(404).json({ message: "Latihan tidak ditemukan" });
+    }
+
+    fs.unlinkSync(filePath);
+    res.json({ message: "Latihan berhasil dihapus" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Gagal menghapus latihan" });
+  }
+};
+
 exports.getAllQuiz = (req, res) => {
   try {
     const data = readJSON(quizPath);

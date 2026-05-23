@@ -105,11 +105,11 @@ function Practice() {
 
   if (isCompleted) {
     return (
-      <div className="min-h-screen bg-gray-100">
+      <div className="student-page-bg min-h-screen bg-gray-100">
         <Navbar showBackButton backTo={lessonPath} />
 
         <main className="p-5 max-w-xl mx-auto">
-          <div className="bg-white p-6 rounded-2xl shadow text-center">
+          <div className="student-hero-card p-6 rounded-3xl shadow text-center">
             <p className="text-sm font-semibold text-green-600 mb-2">
               Latihan selesai
             </p>
@@ -123,13 +123,13 @@ function Practice() {
             <div className="grid gap-3 sm:grid-cols-2">
               <button
                 onClick={() => navigate(lessonPath)}
-                className="w-full py-3 rounded-xl border border-gray-300 font-bold text-gray-700 hover:bg-gray-100 transition"
+                className="w-full py-3 rounded-xl border border-gray-300 font-bold text-gray-700 hover:bg-gray-100 transition hover:-translate-y-0.5"
               >
                 Tidak, kembali ke lesson
               </button>
               <button
                 onClick={() => navigate(quizPath)}
-                className="w-full py-3 rounded-xl bg-green-500 text-white font-bold hover:bg-green-600 transition shadow"
+                className="w-full py-3 rounded-xl flag-wave text-white font-bold transition shadow hover:-translate-y-0.5"
               >
                 Ya, lanjut quiz
               </button>
@@ -141,11 +141,11 @@ function Practice() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="student-page-bg min-h-screen bg-gray-100">
       <Navbar showBackButton backTo={lessonPath} />
 
       <main className="p-5 max-w-xl mx-auto">
-        <div className="mb-5">
+        <div className="student-hero-card mb-5 rounded-3xl p-5 shadow">
           <h1 className="text-2xl font-bold">Latihan Bahasa Kaili</h1>
 
           <p className="text-gray-500 mt-1">
@@ -153,7 +153,7 @@ function Practice() {
           </p>
         </div>
 
-        <div className="bg-white p-5 rounded-2xl shadow">
+        <div className="student-card bg-white p-5 rounded-2xl shadow">
           <p className="text-sm text-gray-500 mb-2">
             Soal {index + 1} / {data.length}
           </p>
@@ -173,7 +173,7 @@ function Practice() {
               <button
                 key={i}
                 onClick={() => checkAnswer(option)}
-                className="p-4 bg-blue-100 rounded-xl font-bold text-lg hover:bg-blue-200 transition"
+                className="student-answer-button p-4 bg-blue-100 rounded-xl font-bold text-lg hover:bg-blue-200 transition"
               >
                 {option}
               </button>

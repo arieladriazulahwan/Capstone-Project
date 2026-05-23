@@ -1,66 +1,56 @@
 import { useNavigate } from "react-router-dom";
+import AuthPageShell from "../components/AuthPageShell";
 
 function Login() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-gray-200 flex items-center justify-center px-4">
-      <div className="w-full max-w-md md:max-w-lg lg:max-w-xl bg-white rounded-3xl shadow-xl p-6 md:p-10">
-
-        {/* Logo */}
-        <div className="flex justify-center mb-4">
-          <div className="w-20 h-20 bg-green-500 rounded-2xl flex items-center justify-center text-2xl text-white shadow-md">
-            🌿
-          </div>
-        </div>
-
-        {/* Title */}
-        <h1 className="text-center text-2xl md:text-3xl font-bold text-green-600">
-          Sora Kaili
-        </h1>
-
-        <p className="text-center text-gray-500 mt-2 mb-8 text-sm md:text-base">
-          Belajar Bahasa Ledo dengan Seru!
-        </p>
-
-        {/* ROLE SELECTION */}
-        <p className="text-center mb-4 font-medium">Masuk sebagai:</p>
-
-        <div className="flex flex-col md:flex-row gap-4">
-
-          {/* SISWA CARD */}
-          <div
-            onClick={() => navigate("/login/siswa")}
-            className="flex-1 p-6 rounded-2xl border bg-white text-center cursor-pointer transition-all duration-300 hover:shadow-lg hover:border-green-500 hover:bg-green-50"
-          >
-            <div className="text-3xl mb-2">👨‍🎓</div>
-            <p className="font-semibold text-gray-700">Siswa</p>
-          </div>
-
-          {/* GURU CARD */}
-          <div
-            onClick={() => navigate("/login/guru")}
-            className="flex-1 p-6 rounded-2xl border bg-white text-center cursor-pointer transition-all duration-300 hover:shadow-lg hover:border-blue-500 hover:bg-blue-50"
-          >
-            <div className="text-3xl mb-2">👨‍🏫</div>
-            <p className="font-semibold text-gray-700">Guru / Host</p>
-          </div>
-
-        </div>
-
-        {/* REGISTER */}
-        <p className="text-center text-sm mt-8 text-gray-500">
-          Belum punya akun?{" "}
-          <span
-            onClick={() => navigate("/register")}
-            className="text-green-600 cursor-pointer font-medium"
-          >
-            Daftar di sini
-          </span>
-        </p>
-
+    <AuthPageShell
+      title="Masuk ke Sora Kaili"
+      subtitle="Pilih peranmu untuk melanjutkan belajar, membuat room, atau mengelola kelas."
+    >
+      <div className="text-center">
+        <h2 className="text-2xl font-black text-gray-900">Pilih Akses</h2>
+        <p className="mt-2 text-sm text-gray-500">Masuk sebagai siswa atau guru.</p>
       </div>
-    </div>
+
+      <div className="mt-6 grid gap-4 sm:grid-cols-2">
+        <button
+          type="button"
+          onClick={() => navigate("/login/siswa")}
+          className="group rounded-3xl border border-green-100 bg-green-50 p-5 text-left shadow-sm transition hover:-translate-y-1 hover:border-green-300 hover:shadow-xl"
+        >
+          <span className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-green-600 text-lg font-black text-white transition group-hover:scale-110">
+            S
+          </span>
+          <p className="text-lg font-black text-gray-900">Siswa</p>
+          <p className="mt-1 text-sm text-gray-500">Belajar materi, latihan, kuis, dan kumpulkan XP.</p>
+        </button>
+
+        <button
+          type="button"
+          onClick={() => navigate("/login/guru")}
+          className="group rounded-3xl border border-blue-100 bg-blue-50 p-5 text-left shadow-sm transition hover:-translate-y-1 hover:border-blue-300 hover:shadow-xl"
+        >
+          <span className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-600 text-lg font-black text-white transition group-hover:scale-110">
+            G
+          </span>
+          <p className="text-lg font-black text-gray-900">Guru</p>
+          <p className="mt-1 text-sm text-gray-500">Buat room, kelola soal, dan pantau jawaban siswa.</p>
+        </button>
+      </div>
+
+      <p className="mt-7 text-center text-sm text-gray-500">
+        Belum punya akun?{" "}
+        <button
+          type="button"
+          onClick={() => navigate("/register")}
+          className="font-bold text-green-600 hover:text-green-700"
+        >
+          Daftar di sini
+        </button>
+      </p>
+    </AuthPageShell>
   );
 }
 

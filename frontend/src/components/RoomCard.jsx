@@ -28,7 +28,7 @@ function RoomCard({ room }) {
         onClick={() =>
           navigate(`/guru/room/${room.id}`)
         }
-        className="mt-4 w-full bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-xl"
+        className="mt-4 w-full bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-xl transition-transform hover:-translate-y-0.5"
       >
         Lihat Detail
       </button>

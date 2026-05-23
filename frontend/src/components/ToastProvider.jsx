@@ -1,7 +1,12 @@
-import { createContext, useCallback, useEffect, useMemo, useState } from "react";
-import { AlertCircle, CheckCircle2, Info, X } from "lucide-react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
+import { AlertCircle, CheckCircle2, Info, X, Flame } from "lucide-react";
 
 export const ToastContext = createContext(null);
+
+export const useToast = () => {
+  const context = useContext(ToastContext);
+  return context || { showToast: () => {} };
+};
 
 const getToastType = (message) => {
   const text = String(message).toLowerCase();
@@ -19,10 +24,20 @@ const getToastType = (message) => {
     text.includes("gagal") ||
     text.includes("salah") ||
     text.includes("error") ||
-    text.includes("tidak") ||
     text.includes("invalid")
   ) {
     return "error";
+  }
+
+  if (
+    text.includes("wajib") ||
+    text.includes("minimal") ||
+    text.includes("masukkan") ||
+    text.includes("waktu habis") ||
+    text.includes("tidak") ||
+    text.includes("hapus")
+  ) {
+    return "warning";
   }
 
   return "info";
@@ -31,27 +46,35 @@ const getToastType = (message) => {
 const styles = {
   success: {
     icon: CheckCircle2,
-    bg: "bg-green-50",
+    bg: "bg-white",
     border: "border-green-200",
     text: "text-green-800",
-    iconColor: "text-green-600",
-    bar: "bg-green-500",
+    iconColor: "text-green-600 bg-green-100",
+    bar: "bg-gradient-to-r from-green-400 to-emerald-500",
   },
   error: {
     icon: AlertCircle,
-    bg: "bg-red-50",
+    bg: "bg-white",
     border: "border-red-200",
     text: "text-red-800",
-    iconColor: "text-red-600",
-    bar: "bg-red-500",
+    iconColor: "text-red-600 bg-red-100",
+    bar: "bg-gradient-to-r from-red-400 to-rose-500",
   },
   info: {
     icon: Info,
-    bg: "bg-blue-50",
+    bg: "bg-white",
     border: "border-blue-200",
     text: "text-blue-800",
-    iconColor: "text-blue-600",
-    bar: "bg-blue-500",
+    iconColor: "text-blue-600 bg-blue-100",
+    bar: "bg-gradient-to-r from-blue-400 to-sky-500",
+  },
+  warning: {
+    icon: Flame,
+    bg: "bg-white",
+    border: "border-orange-200",
+    text: "text-orange-800",
+    iconColor: "text-orange-600 bg-orange-100",
+    bar: "bg-gradient-to-r from-orange-400 to-amber-500",
   },
 };
 
@@ -108,11 +131,11 @@ function ToastProvider({ children }) {
           return (
             <div
               key={toast.id}
-              className={`${style.bg} ${style.border} border rounded-2xl shadow-xl overflow-hidden animate-[toast-in_180ms_ease-out]`}
+              className={`${style.bg} ${style.border} border rounded-2xl shadow-2xl overflow-hidden animate-[toast-in_180ms_ease-out]`}
             >
               <div className={`${style.bar} h-1`}></div>
               <div className="p-4 flex items-start gap-3">
-                <div className={`${style.iconColor} mt-0.5`}>
+                <div className={`${style.iconColor} mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl`}>
                   <Icon size={22} />
                 </div>
 

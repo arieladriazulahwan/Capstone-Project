@@ -23,12 +23,12 @@ function BottomNav({ role = "siswa" }) {
   }
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-white border-t shadow md:hidden flex justify-around py-2">
+    <div className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t shadow md:hidden flex justify-around py-2">
       {menu.map((item, i) => (
         <button
           key={i}
           onClick={() => navigate(item.path)}
-          className={`flex flex-col items-center text-sm ${
+          className={`flex flex-col items-center rounded-xl px-3 py-1 text-sm transition-transform hover:-translate-y-0.5 ${
             location.pathname === item.path
               ? "text-green-600"
               : "text-gray-400"

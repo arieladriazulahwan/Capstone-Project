@@ -108,7 +108,7 @@ function Quiz() {
 
   if (questions.length === 0) {
     return (
-      <div className="min-h-screen bg-gray-100">
+      <div className="student-page-bg min-h-screen bg-gray-100">
         <Navbar showBackButton backTo={practicePath} />
         <div className="p-5 text-center">Loading quiz...</div>
       </div>
@@ -222,8 +222,8 @@ function Quiz() {
     const percentage = Math.round((correct / questions.length) * 100);
 
     return (
-      <div className="min-h-screen bg-gray-100 p-5 flex items-center justify-center">
-        <div className="bg-white p-8 rounded-3xl shadow-xl max-w-md w-full text-center transform transition-all">
+      <div className="student-page-bg min-h-screen bg-gray-100 p-5 flex items-center justify-center">
+        <div className="student-hero-card p-8 rounded-3xl shadow-xl max-w-md w-full text-center transform transition-all">
           <h1 className="text-4xl font-bold mb-2">🎉 Selesai!</h1>
           <p className="text-gray-500 mb-8">Kuis Level {level} berhasil diselesaikan.</p>
           
@@ -248,7 +248,7 @@ function Quiz() {
 
           <button
             onClick={() => navigate(level ? `/level/${dialect}/${bab}` : "/level")}
-            className="w-full bg-green-500 text-white py-4 rounded-2xl font-bold text-lg hover:bg-green-600 transition shadow-lg"
+            className="w-full flag-wave text-white py-4 rounded-2xl font-bold text-lg transition shadow-lg hover:scale-[1.01]"
           >
             Kembali
           </button>
@@ -258,11 +258,11 @@ function Quiz() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="student-page-bg min-h-screen bg-gray-100">
       <Navbar showBackButton backTo={practicePath} />
 
       <main className="p-5 max-w-xl mx-auto">
-        <div className="flex justify-between items-center mb-5">
+        <div className="student-hero-card flex justify-between items-center mb-5 rounded-3xl p-5 shadow">
           <div>
             <h1 className="text-2xl font-bold">Quiz Bahasa Kaili</h1>
             <p className="text-gray-500 mt-1">
@@ -274,7 +274,7 @@ function Quiz() {
           </div>
         </div>
 
-        <div className="bg-white p-5 rounded-2xl shadow">
+        <div className="student-card bg-white p-5 rounded-2xl shadow">
           <p className="text-sm text-gray-500 mb-2">
             Soal {index + 1} / {questions.length}
           </p>
@@ -295,7 +295,7 @@ function Quiz() {
                 <button
                   key={i}
                   onClick={() => answerHandler(opt)}
-                  className="p-3 rounded-xl border bg-white hover:bg-green-100 transition"
+                  className="student-answer-button p-3 rounded-xl border bg-white hover:bg-green-100 transition"
                 >
                   {opt}
                 </button>
@@ -314,7 +314,7 @@ function Quiz() {
                   <button
                     key={i}
                     onClick={() => blockHandler(block)}
-                    className="p-4 rounded-xl bg-green-100 font-bold text-lg hover:bg-green-200 transition"
+                  className="student-answer-button p-4 rounded-xl bg-green-100 font-bold text-lg hover:bg-green-200 transition"
                   >
                     {block}
                   </button>

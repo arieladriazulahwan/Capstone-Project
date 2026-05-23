@@ -93,6 +93,10 @@ function Level() {
     { level: 5, title: "Ahli" },
     { level: 10, title: "Master" },
   ];
+  const activeRewardLevel =
+    rewards
+      .filter((reward) => level >= reward.level)
+      .at(-1)?.level || rewards[0].level;
 
   const colorClass = {
     green: {
@@ -159,7 +163,7 @@ function Level() {
   const dialects = ["ledo", "rai"];
 
   return (
-    <div className="flex min-h-screen bg-gray-100">
+    <div className="student-page-bg flex min-h-screen bg-gray-100">
       <Sidebar role="siswa" />
 
       <div className="flex-1 flex flex-col">
@@ -167,7 +171,7 @@ function Level() {
 
         <main className="flex-1 px-4 pt-6 pb-28 md:pb-6 flex justify-center">
           <div className="w-full max-w-md md:max-w-3xl">
-            <div className="bg-white rounded-2xl p-5 shadow mb-5">
+            <div className="level-wave-panel level-wave-green bg-white rounded-2xl p-5 shadow mb-5">
               <h2 className="text-lg font-bold mb-2">Level Kamu</h2>
 
               <div className="flex justify-between text-sm">
@@ -175,9 +179,9 @@ function Level() {
                 <p>Level: {level}</p>
               </div>
 
-              <div className="w-full bg-gray-200 rounded-full h-4 mt-3">
+              <div className="w-full bg-gray-200 rounded-full h-4 mt-3 overflow-hidden">
                 <div
-                  className="bg-green-500 h-4 rounded-full transition-all"
+                  className="flag-wave h-4 rounded-full transition-all"
                   style={{ width: `${progress}%` }}
                 ></div>
               </div>
@@ -189,15 +193,84 @@ function Level() {
               <p className="mt-3 text-green-600 font-semibold">{user.title}</p>
             </div>
 
-            <div className="flex gap-2 mt-4">
+            <div className="level-wave-panel level-wave-soft bg-white rounded-2xl p-5 shadow mb-5">
+              <h3 className="font-semibold mb-4">Reward Level</h3>
+
+              <div className="pb-2">
+                <div className="relative grid grid-cols-5 items-start gap-2 px-1 pt-4">
+                  <div className="absolute left-6 right-6 top-8 h-1 rounded-full bg-gray-200"></div>
+
+                  {rewards.map((r) => {
+                    const unlocked = level >= r.level;
+                    const current = r.level === activeRewardLevel;
+
+                    return (
+                      <div
+                        key={r.level}
+                        className={`relative rounded-xl border px-2 py-3 pt-7 text-center transition ${
+                          current
+                            ? "reward-fire-card border-orange-300 bg-orange-50 shadow-md"
+                            : unlocked
+                            ? "border-green-300 bg-green-50"
+                            : "border-gray-200 bg-gray-50"
+                        }`}
+                      >
+                        <div
+                          className={`absolute left-1/2 top-0 z-10 w-8 h-8 -translate-x-1/2 -translate-y-1/2 rounded-full flex items-center justify-center border-4 border-white shadow ${
+                            current
+                              ? "reward-fire"
+                              : unlocked
+                              ? "bg-green-500"
+                              : "bg-gray-300"
+                          }`}
+                        >
+                          {current && (
+                            <>
+                              <span className="absolute -inset-2 rounded-full bg-orange-400 animate-ping opacity-30"></span>
+                              <span className="absolute -inset-1 rounded-full bg-yellow-300/50 blur-md"></span>
+                            </>
+                          )}
+                          <span className="reward-fire-icon relative text-sm text-white">
+                            {current ? "🔥" : unlocked ? "✓" : r.level}
+                          </span>
+                        </div>
+
+                        <div>
+                          <p className="text-[11px] text-gray-500">Level {r.level}</p>
+                          <p
+                            className={`text-xs font-bold sm:text-sm ${
+                              current
+                                ? "text-orange-700"
+                                : unlocked
+                                ? "text-green-700"
+                                : "text-gray-500"
+                            }`}
+                          >
+                            {r.title}
+                          </p>
+
+                          {current && (
+                            <span className="mt-2 inline-flex rounded-full bg-orange-100 px-3 py-1 text-xs font-semibold text-orange-700">
+                              Aktif
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+
+            <div className="flex gap-2 mb-3">
               {dialects.map((d) => (
                 <button
                   key={d}
                   onClick={() => changeDialect(d)}
-                  className={`px-3 py-1 rounded-full text-sm border transition ${
+                  className={`px-4 py-2 rounded-full text-sm font-semibold border transition ${
                     dialect === d
-                      ? "bg-green-500 text-white border-green-500"
-                      : "bg-white text-gray-600"
+                      ? "bg-green-500 text-white border-green-500 shadow"
+                      : "bg-white text-gray-600 border-gray-200 hover:border-green-300"
                   }`}
                 >
                   {d.toUpperCase()}
@@ -205,27 +278,7 @@ function Level() {
               ))}
             </div>
 
-            <div className="bg-white rounded-2xl p-5 shadow mb-5">
-              <h3 className="font-semibold mb-3">Reward Level</h3>
-
-              <div className="flex flex-col gap-3">
-                {rewards.map((r, i) => (
-                  <div
-                    key={i}
-                    className={`p-3 rounded-xl border flex justify-between ${
-                      level >= r.level
-                        ? "bg-green-100 border-green-400"
-                        : "bg-gray-100"
-                    }`}
-                  >
-                    <span>Level {r.level}</span>
-                    <span>{r.title}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="bg-white rounded-2xl p-5 shadow mb-5">
+            <div className="level-wave-panel level-wave-soft bg-white rounded-2xl p-5 shadow mb-5">
               <h3 className="font-semibold mb-3">
                 Peta Belajar - Dialek {dialect.toUpperCase()}
               </h3>
@@ -238,8 +291,10 @@ function Level() {
                   return (
                     <div
                       key={bab.key}
-                      className={`p-4 rounded-xl border flex justify-between items-center ${
-                        isUnlocked ? classes.unlocked : "bg-gray-100"
+                      className={`level-bab-card p-4 rounded-xl border flex justify-between items-center ${
+                        isUnlocked
+                          ? `${classes.unlocked} level-bab-wave level-bab-wave-${bab.color}`
+                          : "bg-gray-100"
                       }`}
                     >
                       <div>
@@ -263,7 +318,7 @@ function Level() {
               </div>
             </div>
 
-            <div className="bg-yellow-100 border border-yellow-300 rounded-2xl p-4 mb-5">
+            <div className="student-card bg-yellow-100 border border-yellow-300 rounded-2xl p-4 mb-5">
               <p className="text-sm text-yellow-700 mb-2">
                 Target Selanjutnya
               </p>

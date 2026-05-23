@@ -182,7 +182,7 @@ function Dashboard() {
 
   return (
 
-    <div className="flex min-h-screen bg-gray-100">
+    <div className="student-page-bg flex min-h-screen bg-gradient-to-br from-green-50 via-gray-100 to-blue-50">
 
       {/* SIDEBAR */}
       <Sidebar role="siswa" />
@@ -199,26 +199,38 @@ function Dashboard() {
           <div className="w-full max-w-md md:max-w-3xl">
 
             {/* GREETING */}
-            <div className="bg-gradient-to-r from-green-500 to-green-400 text-white rounded-2xl p-5 mb-5 shadow">
+            <div className="flag-wave relative overflow-hidden text-white rounded-3xl p-5 mb-5 shadow-xl">
+              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.28),transparent_28%),radial-gradient(circle_at_80%_10%,rgba(255,255,255,0.18),transparent_24%)]"></div>
 
-              <h2 className="font-bold text-lg">
+              <h2 className="relative font-bold text-lg">
                 Halo, {user?.name || "User"} 👋
               </h2>
 
-              <p className="text-sm">
+              <p className="relative text-sm text-green-50">
                 Ayo belajar Bahasa Kaili hari ini
               </p>
 
             </div>
 
             {/* GAMIFICATION */}
-            <div className="bg-white p-4 rounded-xl shadow mb-5">
+            <div className="student-card bg-white/90 p-4 rounded-2xl shadow mb-5 backdrop-blur border border-white">
 
-              <div className="flex justify-between">
+              <div className="grid grid-cols-3 gap-3 text-center">
 
-                <p>⭐ XP: {user.xp}</p>
+                <div className="bg-green-50 rounded-xl p-3">
+                  <p className="text-xs text-gray-500">XP</p>
+                  <p className="font-bold text-green-700">{user.xp || 0}</p>
+                </div>
 
-                <p>🏆 Level: {user.level}</p>
+                <div className="bg-yellow-50 rounded-xl p-3">
+                  <p className="text-xs text-gray-500">Level</p>
+                  <p className="font-bold text-yellow-700">{user.level || 1}</p>
+                </div>
+
+                <div className="bg-orange-50 rounded-xl p-3">
+                  <p className="text-xs text-gray-500">Streak</p>
+                  <p className="font-bold text-orange-700">{user.streak || 0} hari</p>
+                </div>
 
               </div>
 
@@ -226,7 +238,7 @@ function Dashboard() {
               <div className="w-full bg-gray-200 rounded-full h-3 mt-2">
 
                 <div
-                  className="bg-green-500 h-3 rounded-full"
+                  className="flag-wave h-3 rounded-full"
                   style={{ width: `${user.xp}%` }}
                 ></div>
 
@@ -240,7 +252,7 @@ function Dashboard() {
             </div>
 
             {/* ROOM QUIZ */}
-            <div className="bg-gradient-to-r from-yellow-400 to-yellow-300 rounded-3xl p-5 mb-5 shadow-lg">
+            <div className="flag-wave-warm rounded-3xl p-5 mb-5 shadow-lg">
 
               <div className="flex items-center gap-3 mb-4">
 
@@ -291,7 +303,7 @@ function Dashboard() {
             </div>
 
             {/* STATS */}
-            <div className="bg-white rounded-2xl p-5 shadow mb-5">
+            <div className="student-card bg-white rounded-2xl p-5 shadow mb-5">
 
               <h2 className="text-lg font-bold mb-2">
                 Statistik Belajar Room
@@ -345,7 +357,7 @@ function Dashboard() {
 
                     <div
                       key={item.id}
-                      className="bg-white p-4 rounded-xl shadow flex justify-between hover:bg-gray-50"
+                      className="student-card bg-white p-4 rounded-xl shadow flex justify-between hover:bg-gray-50"
                     >
 
                       <div>

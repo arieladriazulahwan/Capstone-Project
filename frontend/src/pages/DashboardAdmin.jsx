@@ -2,8 +2,109 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import NavbarAdmin from "../components/NavbarAdmin";
 import SidebarAdmin from "../components/SidebarAdmin";
+import BottomNavAdmin from "../components/BottomNavAdmin";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
+function UsageLineChart({ data = [] }) {
+  const width = 720;
+  const height = 260;
+  const padding = { top: 24, right: 24, bottom: 42, left: 44 };
+  const plotWidth = width - padding.left - padding.right;
+  const plotHeight = height - padding.top - padding.bottom;
+  const maxValue = Math.max(
+    1,
+    ...data.flatMap((item) => [item.activeUsers || 0, item.roomAttempts || 0])
+  );
+  const xFor = (index) =>
+    padding.left + (data.length <= 1 ? 0 : (index / (data.length - 1)) * plotWidth);
+  const yFor = (value) =>
+    padding.top + plotHeight - (Number(value || 0) / maxValue) * plotHeight;
+  const lineFor = (key) =>
+    data.map((item, index) => `${xFor(index)},${yFor(item[key])}`).join(" ");
+  const formatDate = (value) =>
+    new Date(value).toLocaleDateString("id-ID", { day: "2-digit", month: "short" });
+  const yTicks = [0, Math.ceil(maxValue / 2), maxValue];
+
+  return (
+    <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-3">
+        <div>
+          <h3 className="font-bold text-lg text-gray-800">Grafik Penggunaan</h3>
+          <p className="text-sm text-gray-500">Aktivitas 7 hari terakhir</p>
+        </div>
+        <div className="flex gap-4 text-xs font-semibold">
+          <span className="flex items-center gap-2 text-purple-700">
+            <span className="w-3 h-3 rounded-full bg-purple-500"></span>
+            Pengguna aktif
+          </span>
+          <span className="flex items-center gap-2 text-green-700">
+            <span className="w-3 h-3 rounded-full bg-green-500"></span>
+            Pengerjaan room
+          </span>
+        </div>
+      </div>
+
+      <div className="w-full overflow-x-auto">
+        <svg viewBox={`0 0 ${width} ${height}`} className="min-w-[640px] w-full h-auto">
+          {yTicks.map((tick) => (
+            <g key={tick}>
+              <line
+                x1={padding.left}
+                x2={width - padding.right}
+                y1={yFor(tick)}
+                y2={yFor(tick)}
+                stroke="#e5e7eb"
+              />
+              <text
+                x={padding.left - 10}
+                y={yFor(tick) + 4}
+                textAnchor="end"
+                fontSize="12"
+                fill="#64748b"
+              >
+                {tick}
+              </text>
+            </g>
+          ))}
+
+          <polyline
+            fill="none"
+            stroke="#8b5cf6"
+            strokeWidth="4"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            points={lineFor("activeUsers")}
+          />
+          <polyline
+            fill="none"
+            stroke="#22c55e"
+            strokeWidth="4"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            points={lineFor("roomAttempts")}
+          />
+
+          {data.map((item, index) => (
+            <g key={item.date}>
+              <circle cx={xFor(index)} cy={yFor(item.activeUsers)} r="5" fill="#8b5cf6" />
+              <circle cx={xFor(index)} cy={yFor(item.roomAttempts)} r="5" fill="#22c55e" />
+              <text
+                x={xFor(index)}
+                y={height - 14}
+                textAnchor="middle"
+                fontSize="12"
+                fill="#64748b"
+              >
+                {formatDate(item.date)}
+              </text>
+            </g>
+          ))}
+        </svg>
+      </div>
+    </div>
+  );
+}
 
 function DashboardAdmin() {
   const [user, setUser] = useState(null);
@@ -122,7 +223,7 @@ function DashboardAdmin() {
       <div className="flex-1 flex flex-col">
         <NavbarAdmin user={user} />
 
-        <main className="flex-1 p-4 md:p-6 overflow-y-auto">
+        <main className="flex-1 p-4 pb-24 md:p-6 overflow-y-auto">
           <div className="max-w-6xl mx-auto">
             {/* GREETING */}
             <div className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-2xl p-6 mb-6 shadow-lg shadow-purple-500/20">
@@ -159,6 +260,8 @@ function DashboardAdmin() {
               ))}
             </div>
 
+            <UsageLineChart data={stats?.usageTrend || []} />
+
             {/* QUICK ACTIONS */}
             <h3 className="font-bold text-lg text-gray-800 mb-3">
               ⚡ Aksi Cepat
@@ -190,6 +293,7 @@ function DashboardAdmin() {
           </div>
         </main>
       </div>
+      <BottomNavAdmin />
     </div>
   );
 }

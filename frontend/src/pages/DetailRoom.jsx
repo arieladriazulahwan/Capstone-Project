@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 import NavbarGuru from "../components/NavbarGuru";
+import ConfirmDialog from "../components/ConfirmDialog";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
@@ -15,6 +16,9 @@ function DetailRoom() {
   const [editingIndex, setEditingIndex] = useState(null);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [deleteQuestionTarget, setDeleteQuestionTarget] = useState(null);
+  const [questionView, setQuestionView] = useState("soal");
   
   useEffect(() => {
     const fetchRoom = async () => {
@@ -212,10 +216,7 @@ function DetailRoom() {
   };
 
   const handleDeleteRoom = async () => {
-    if (!window.confirm("Apakah Anda yakin ingin menghapus room ini? Tindakan ini tidak dapat dibatalkan.")) {
-      return;
-    }
-
+    setShowDeleteConfirm(false);
     try {
       const token = localStorage.getItem("token");
       const res = await fetch(`${API_BASE_URL}/api/rooms/${id}`, {
@@ -234,6 +235,42 @@ function DetailRoom() {
       }
     } catch (err) {
       alert("Terjadi kesalahan saat menghapus room.");
+    }
+  };
+
+  const handleDeleteQuestion = async () => {
+    const target = deleteQuestionTarget;
+    if (!target) return;
+    setDeleteQuestionTarget(null);
+
+    try {
+      const token = localStorage.getItem("token");
+      const res = await fetch(`${API_BASE_URL}/api/rooms/questions/${target.id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok) {
+        alert(data.message || "Gagal menghapus soal.");
+        return;
+      }
+
+      setDraftQuestions((prev) => prev.filter((q) => q.id !== target.id));
+      setRoom((prev) => ({
+        ...prev,
+        questions: (prev.questions || []).filter((q) => q.id !== target.id),
+      }));
+      if (editingIndex === target.originalIndex) {
+        setEditingIndex(null);
+      }
+      alert(data.message || "Soal berhasil dihapus.");
+    } catch (err) {
+      console.error(err);
+      alert("Terjadi kesalahan saat menghapus soal.");
     }
   };
 
@@ -276,6 +313,12 @@ function DetailRoom() {
       timer: room.timer,
     });
   };
+
+  const filteredQuestions = draftQuestions.map((question, originalIndex) => ({
+    ...question,
+    originalIndex,
+  }));
+
 
   if (loading) {
     return (
@@ -350,7 +393,20 @@ function DetailRoom() {
               <div className="bg-white/10 px-4 py-2 rounded-xl">📚 {room.questions?.length || 0} soal</div>
               <div className="ml-auto">
                 {isEditingRoom ? (
-                  <button onClick={handleSaveRoomDetails} className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-xl">Simpan Detail</button>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={handleCancelEdit}
+                      className="bg-white/20 hover:bg-white/30 text-white font-bold py-2 px-4 rounded-xl"
+                    >
+                      Batal
+                    </button>
+                    <button
+                      onClick={handleSaveRoomDetails}
+                      className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-xl"
+                    >
+                      Simpan Detail
+                    </button>
+                  </div>
                 ) : (
                   <button onClick={() => setIsEditingRoom(true)} className="bg-white/20 hover:bg-white/30 text-white font-bold py-2 px-4 rounded-xl">Edit Detail</button>
                 )}
@@ -358,8 +414,39 @@ function DetailRoom() {
             </div>
           </div>
 
+          <div className="mb-5 rounded-3xl border border-gray-100 bg-white p-5 shadow-sm">
+            <div className="mb-4 flex flex-col gap-1">
+              <h2 className="text-xl font-bold text-gray-800">Daftar Soal</h2>
+              <p className="text-sm text-gray-500">
+                Pilih tampilan daftar soal atau jawaban dan nilai siswa.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-2 gap-2 rounded-2xl bg-gray-100 p-1">
+              {[
+                { key: "soal", label: "Soal" },
+                { key: "jawaban", label: "Jawaban & Nilai" },
+              ].map((item) => (
+                <button
+                  key={item.key}
+                  type="button"
+                  onClick={() => setQuestionView(item.key)}
+                  className={`rounded-xl px-4 py-2.5 text-sm font-semibold transition ${
+                    questionView === item.key
+                      ? "bg-blue-600 text-white shadow"
+                      : "text-gray-500 hover:bg-white"
+                  }`}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {questionView === "soal" ? (
           <div className="space-y-5">
-            {draftQuestions.map((q, index) => {
+            {filteredQuestions.map((q) => {
+              const index = q.originalIndex;
               const isEditing = editingIndex === index;
               const currentQuestion = q;
               const answerType = getAnswerType(currentQuestion);
@@ -386,6 +473,13 @@ function DetailRoom() {
                           Simpan
                         </button>
                       )}
+                      <button
+                        type="button"
+                        onClick={() => setDeleteQuestionTarget(q)}
+                        className="bg-red-500 text-white px-4 py-2 rounded-2xl"
+                      >
+                        Hapus Soal
+                      </button>
                     </div>
                   </div>
 
@@ -542,19 +636,21 @@ function DetailRoom() {
                             </div>
                           </div>
                         )}
-
-                        <div className="mt-4 bg-yellow-50 border border-yellow-200 rounded-2xl px-4 py-3">
-                          <p className="text-sm text-gray-500 mb-1">Jawaban Benar</p>
-                          <p className="font-bold text-yellow-700 text-lg">{formatAnswer(q.answer)}</p>
-                        </div>
                       </>
                     )}
                   </div>
                 </div>
               );
             })}
+            {filteredQuestions.length === 0 && (
+              <div className="rounded-3xl border border-dashed border-gray-200 bg-white p-8 text-center text-gray-500">
+                Tidak ada soal yang cocok dengan filter.
+              </div>
+            )}
           </div>
+          ) : null}
 
+          {questionView === "jawaban" && (
           <div className="bg-white rounded-3xl shadow p-6 mt-6">
             <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between mb-5">
               <div>
@@ -616,8 +712,25 @@ function DetailRoom() {
               <div className="text-gray-500">Belum ada siswa yang mengerjakan room ini.</div>
             )}
           </div>
+          )}
         </div>
       </main>
+      <ConfirmDialog
+        open={showDeleteConfirm}
+        title="Hapus Room?"
+        message={`Room "${room?.title || "ini"}" akan dihapus permanen dan tidak bisa dikembalikan.`}
+        confirmLabel="Hapus Room"
+        onConfirm={handleDeleteRoom}
+        onCancel={() => setShowDeleteConfirm(false)}
+      />
+      <ConfirmDialog
+        open={Boolean(deleteQuestionTarget)}
+        title="Hapus Soal?"
+        message={`Soal ${deleteQuestionTarget?.originalIndex + 1 || ""} akan dihapus permanen beserta jawaban siswa yang terkait.`}
+        confirmLabel="Hapus Soal"
+        onConfirm={handleDeleteQuestion}
+        onCancel={() => setDeleteQuestionTarget(null)}
+      />
     </div>
   );
 }

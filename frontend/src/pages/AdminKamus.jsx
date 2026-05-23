@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import NavbarAdmin from "../components/NavbarAdmin";
 import SidebarAdmin from "../components/SidebarAdmin";
+import BottomNavAdmin from "../components/BottomNavAdmin";
+import ConfirmDialog from "../components/ConfirmDialog";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 const API = `${API_BASE_URL}/api/admin`;
@@ -31,6 +33,7 @@ function AdminKamus() {
   });
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
+  const [deleteTarget, setDeleteTarget] = useState(null);
   const perPage = 20;
 
   const token = localStorage.getItem("token");
@@ -151,14 +154,19 @@ function AdminKamus() {
   };
 
   const handleDelete = async (id) => {
-    if (!confirm("Yakin ingin menghapus kosakata ini?")) return;
+    setDeleteTarget(null);
 
     const res = await fetch(`${API}/vocab/${id}`, {
       method: "DELETE",
       headers,
     });
 
-    if (res.ok) fetchVocab();
+    if (res.ok) {
+      fetchVocab();
+      alert("Kosakata berhasil dihapus.");
+    } else {
+      alert("Gagal menghapus kosakata.");
+    }
   };
 
   const addTranslation = () => {
@@ -200,7 +208,7 @@ function AdminKamus() {
       <SidebarAdmin />
       <div className="flex-1 flex flex-col">
         <NavbarAdmin user={user} />
-        <main className="flex-1 p-4 md:p-6 overflow-y-auto">
+        <main className="flex-1 p-4 pb-24 md:p-6 overflow-y-auto">
           <div className="max-w-6xl mx-auto">
             {/* HEADER */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-5">
@@ -251,7 +259,7 @@ function AdminKamus() {
             </div>
 
             {/* TABLE */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+            <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-x-auto">
               {loading ? (
                 <div className="p-8 text-center text-gray-400">Memuat data...</div>
               ) : paged.length === 0 ? (
@@ -260,7 +268,7 @@ function AdminKamus() {
                 </div>
               ) : (
                 <div className="overflow-x-auto">
-                  <table className="w-full text-sm">
+                  <table className="w-full min-w-[760px] text-sm">
                     <thead className="bg-gray-50 border-b">
                       <tr>
                         <th className="px-4 py-3 text-left text-gray-600 font-semibold">
@@ -315,7 +323,7 @@ function AdminKamus() {
                               ✏️ Edit
                             </button>
                             <button
-                              onClick={() => handleDelete(v.id)}
+                              onClick={() => setDeleteTarget(v)}
                               className="text-red-500 hover:text-red-700 text-xs font-medium"
                             >
                               🗑️ Hapus
@@ -464,6 +472,15 @@ function AdminKamus() {
           </div>
         </div>
       )}
+      <BottomNavAdmin />
+      <ConfirmDialog
+        open={Boolean(deleteTarget)}
+        title="Hapus Kosakata?"
+        message={`Kosakata "${deleteTarget?.indonesia || "ini"}" akan dihapus permanen.`}
+        confirmLabel="Hapus"
+        onConfirm={() => handleDelete(deleteTarget?.id)}
+        onCancel={() => setDeleteTarget(null)}
+      />
     </div>
   );
 }
