@@ -89,3 +89,5 @@ CREATE TABLE IF NOT EXISTS favorites (
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
+
+

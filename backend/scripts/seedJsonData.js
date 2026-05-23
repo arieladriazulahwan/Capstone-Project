@@ -195,7 +195,7 @@ const seedQuiz = async (connection) => {
   return { items: quiz.length, options, blocks };
 };
 
-const main = async () => {
+const seedJsonData = async () => {
   const connection = await db.promise().getConnection();
 
   try {
@@ -210,23 +210,47 @@ const main = async () => {
 
     await connection.query("COMMIT");
 
-    console.log("Seed data JSON berhasil.");
-    console.log(`- vocab_entries: ${vocab.entries}`);
-    console.log(`- vocab_translations: ${vocab.translations}`);
-    console.log(`- lesson_items: ${lessons}`);
-    console.log(`- practice_items: ${practices.items}`);
-    console.log(`- practice_options: ${practices.options}`);
-    console.log(`- quiz_items: ${quiz.items}`);
-    console.log(`- quiz_options: ${quiz.options}`);
-    console.log(`- quiz_blocks: ${quiz.blocks}`);
+    return {
+      vocab,
+      lessons,
+      practices,
+      quiz,
+    };
   } catch (err) {
     await connection.query("ROLLBACK");
-    console.error("Gagal seed data JSON:", err);
-    process.exitCode = 1;
+    throw err;
   } finally {
     connection.release();
-    db.end();
   }
 };
 
-main();
+const logSeedSummary = ({ vocab, lessons, practices, quiz }) => {
+  console.log("Seed data JSON berhasil.");
+  console.log(`- vocab_entries: ${vocab.entries}`);
+  console.log(`- vocab_translations: ${vocab.translations}`);
+  console.log(`- lesson_items: ${lessons}`);
+  console.log(`- practice_items: ${practices.items}`);
+  console.log(`- practice_options: ${practices.options}`);
+  console.log(`- quiz_items: ${quiz.items}`);
+  console.log(`- quiz_options: ${quiz.options}`);
+  console.log(`- quiz_blocks: ${quiz.blocks}`);
+};
+
+if (require.main === module) {
+  seedJsonData()
+    .then((summary) => {
+      logSeedSummary(summary);
+    })
+    .catch((err) => {
+      console.error("Gagal seed data JSON:", err);
+      process.exitCode = 1;
+    })
+    .finally(() => {
+      db.end();
+    });
+}
+
+module.exports = {
+  seedJsonData,
+  logSeedSummary,
+};

@@ -9,6 +9,7 @@ const db = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 const createJsonDataTables = require("./utils/jsonDataTables");
+const { seedJsonData, logSeedSummary } = require("./scripts/seedJsonData");
 
 
 const app = express();
@@ -245,6 +246,8 @@ const ensureExistingStudentData = async () => {
 const startServer = async () => {
   try {
     await createTables();
+    const seedSummary = await seedJsonData();
+    logSeedSummary(seedSummary);
     await seedAdmin();
     const port = process.env.PORT || 3000;
     app.listen(port, () => {
