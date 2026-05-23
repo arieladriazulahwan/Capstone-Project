@@ -19,6 +19,7 @@ function DetailRoom() {
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [deleteQuestionTarget, setDeleteQuestionTarget] = useState(null);
   const [questionView, setQuestionView] = useState("soal");
+  const [expandedAttempt, setExpandedAttempt] = useState(null);
   
   useEffect(() => {
     const fetchRoom = async () => {
@@ -655,58 +656,99 @@ function DetailRoom() {
             <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between mb-5">
               <div>
                 <h2 className="text-2xl font-bold">Nilai Siswa</h2>
-                <p className="text-gray-500">Daftar murid yang sudah mengerjakan room</p>
+                <p className="text-gray-500">Klik nama siswa untuk melihat detail jawaban</p>
               </div>
             </div>
 
             {room.attempts?.length > 0 ? (
-              <div className="space-y-4">
-                {room.attempts.map((attempt) => (
-                  <div key={attempt.id} className="border border-gray-200 rounded-3xl p-4">
-                    <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
-                      <div>
-                        <p className="text-sm text-gray-500">Nama Siswa</p>
-                        <p className="font-semibold text-gray-800">{attempt.student_name}</p>
-                      </div>
-                      <div className="text-right">
-                        <p className="text-sm text-gray-500">Nilai</p>
-                        <p className="font-bold text-green-700">{attempt.score}/{attempt.total}</p>
-                      </div>
-                      <div className="text-right text-sm text-gray-400">
-                        {new Date(attempt.created_at).toLocaleString()}
-                      </div>
-                    </div>
+              <div className="space-y-3">
+                {room.attempts.map((attempt, idx) => {
+                  const correctCount = attempt.answers.filter((a) => a.is_correct).length;
+                  const wrongCount = attempt.answers.length - correctCount;
+                  const isExpanded = expandedAttempt === attempt.id;
+                  const percentage = attempt.total > 0 ? Math.round((attempt.score / attempt.total) * 100) : 0;
 
-                    <div className="mt-4 space-y-3">
-                      {attempt.answers.map((answer, idx) => {
-                        const question = room.questions?.find((item) => item.id === answer.question_id);
-                        return (
-                          <div
-                            key={`${attempt.id}-${idx}`}
-                            className="rounded-2xl border border-gray-200 p-4 bg-gray-50"
-                          >
-                            <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-                              <p className="font-semibold text-gray-700">
-                                {question ? question.question : `Soal ${idx + 1}`}
-                              </p>
-                              <span
-                                className={`text-sm font-semibold px-3 py-1 rounded-full ${
-                                  answer.is_correct ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
-                                }`}
+                  return (
+                    <div key={attempt.id} className="border border-gray-200 rounded-3xl overflow-hidden transition-all">
+                      {/* Summary Row - Clickable */}
+                      <button
+                        type="button"
+                        onClick={() => setExpandedAttempt(isExpanded ? null : attempt.id)}
+                        className="w-full text-left px-5 py-4 flex items-center gap-4 hover:bg-gray-50 transition-colors"
+                      >
+                        {/* Rank Number */}
+                        <div className="flex-shrink-0 w-9 h-9 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-sm">
+                          {idx + 1}
+                        </div>
+
+                        {/* Name */}
+                        <div className="flex-1 min-w-0">
+                          <p className="font-semibold text-gray-800 truncate">{attempt.student_name}</p>
+                          <p className="text-xs text-gray-400">{new Date(attempt.created_at).toLocaleString()}</p>
+                        </div>
+
+                        {/* Correct / Wrong Badges */}
+                        <div className="flex items-center gap-2 flex-shrink-0">
+                          <span className="inline-flex items-center gap-1 bg-green-100 text-green-700 text-xs font-semibold px-2.5 py-1 rounded-full">
+                            ✓ {correctCount}
+                          </span>
+                          <span className="inline-flex items-center gap-1 bg-red-100 text-red-700 text-xs font-semibold px-2.5 py-1 rounded-full">
+                            ✗ {wrongCount}
+                          </span>
+                        </div>
+
+                        {/* Score */}
+                        <div className="flex-shrink-0 text-right min-w-[70px]">
+                          <p className={`font-bold text-lg ${percentage >= 70 ? "text-green-600" : percentage >= 40 ? "text-yellow-600" : "text-red-600"}`}>
+                            {attempt.score}/{attempt.total}
+                          </p>
+                          <p className="text-xs text-gray-400">{percentage}%</p>
+                        </div>
+
+                        {/* Chevron */}
+                        <svg
+                          className={`w-5 h-5 text-gray-400 flex-shrink-0 transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`}
+                          fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </button>
+
+                      {/* Expandable Detail */}
+                      {isExpanded && (
+                        <div className="border-t border-gray-100 bg-gray-50 px-5 py-4 space-y-3">
+                          <p className="text-sm font-semibold text-gray-600 mb-2">Detail Jawaban</p>
+                          {attempt.answers.map((answer, aIdx) => {
+                            const question = room.questions?.find((item) => item.id === answer.question_id);
+                            return (
+                              <div
+                                key={`${attempt.id}-${aIdx}`}
+                                className="rounded-2xl border border-gray-200 p-4 bg-white"
                               >
-                                {answer.is_correct ? "Benar" : "Salah"}
-                              </span>
-                            </div>
-                            <div className="mt-3">
-                              <p className="text-sm text-gray-500 mb-1">Jawaban Siswa</p>
-                              <p className="font-medium text-gray-800">{formatAnswer(answer.answer)}</p>
-                            </div>
-                          </div>
-                        );
-                      })}
+                                <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                                  <p className="font-semibold text-gray-700">
+                                    {question ? question.question : `Soal ${aIdx + 1}`}
+                                  </p>
+                                  <span
+                                    className={`text-sm font-semibold px-3 py-1 rounded-full ${
+                                      answer.is_correct ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
+                                    }`}
+                                  >
+                                    {answer.is_correct ? "Benar" : "Salah"}
+                                  </span>
+                                </div>
+                                <div className="mt-3">
+                                  <p className="text-sm text-gray-500 mb-1">Jawaban Siswa</p>
+                                  <p className="font-medium text-gray-800">{formatAnswer(answer.answer)}</p>
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      )}
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             ) : (
               <div className="text-gray-500">Belum ada siswa yang mengerjakan room ini.</div>

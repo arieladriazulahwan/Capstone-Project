@@ -33,9 +33,9 @@ function Level() {
 
         setUser(userData);
 
-        if (userData?.dialect && !localStorage.getItem("dialect_initialized")) {
-          setDialect(userData.dialect);
-          localStorage.setItem("dialect_initialized", "true");
+        const savedDialect = localStorage.getItem("selected_dialect") || userData?.dialect;
+        if (savedDialect) {
+          setDialect(savedDialect);
         }
       } catch {
         alert("Gagal ambil data");
@@ -155,6 +155,7 @@ function Level() {
       });
 
       setDialect(d);
+      localStorage.setItem("selected_dialect", d);
     } catch {
       console.log("Gagal ubah dialek");
     }

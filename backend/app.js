@@ -145,6 +145,7 @@ const createTables = async () => {
   await ensureColumn("users", "is_blocked", "TINYINT(1) NOT NULL DEFAULT 0");
   await ensureColumn("room_questions", "answer_type", "VARCHAR(50)");
   await ensureColumn("favorites", "vocab_id", "INT NULL");
+  await ensureColumn("rooms", "teacher_id", "INT NULL");
   await migrateFavoriteColumn();
   await removeDuplicateFavorites();
   await ensureUniqueIndex("favorites", "user_vocab_unique", "user_id, vocab_id");

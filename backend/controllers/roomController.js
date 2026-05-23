@@ -46,9 +46,9 @@ exports.createRoom = async (req, res) => {
     for (let attempt = 0; attempt < 5; attempt += 1) {
       try {
         [roomResult] = await connection.query(
-          `INSERT INTO rooms (title, category, timer, code)
-           VALUES (?, ?, ?, ?)`,
-          [title.trim(), category || null, Number(timer) || 0, code]
+          `INSERT INTO rooms (title, category, timer, code, teacher_id)
+           VALUES (?, ?, ?, ?, ?)`,
+          [title.trim(), category || null, Number(timer) || 0, code, req.user.id]
         );
         break;
       } catch (err) {
@@ -118,8 +118,10 @@ exports.createRoom = async (req, res) => {
 };
 
 exports.getRooms = (req, res) => {
+  const teacherId = req.user.id;
   db.query(
-    "SELECT * FROM rooms ORDER BY id DESC",
+    "SELECT * FROM rooms WHERE teacher_id = ? OR teacher_id IS NULL ORDER BY id DESC",
+    [teacherId],
     (err, result) => {
       if (err) {
         console.log(err);

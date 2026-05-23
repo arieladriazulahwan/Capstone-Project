@@ -443,7 +443,7 @@ exports.getAllQuiz = (req, res) => {
 exports.addQuiz = (req, res) => {
   try {
     const data = readJSON(quizPath);
-    const { question, options, answer, dialect, bab } = req.body;
+    const { question, options, answer, dialect, bab, category } = req.body;
 
     if (!question || !options || answer === undefined || !dialect || !bab) {
       return res.status(400).json({ message: "Semua field kuis wajib diisi" });
@@ -456,6 +456,7 @@ exports.addQuiz = (req, res) => {
       answer,
       dialect,
       bab,
+      category: category || "",
     };
 
     data.push(newQuiz);
@@ -478,13 +479,14 @@ exports.updateQuiz = (req, res) => {
       return res.status(404).json({ message: "Soal kuis tidak ditemukan" });
     }
 
-    const { question, options, answer, dialect, bab } = req.body;
+    const { question, options, answer, dialect, bab, category } = req.body;
 
     if (question !== undefined) data[index].question = question;
     if (options !== undefined) data[index].options = options;
     if (answer !== undefined) data[index].answer = answer;
     if (dialect !== undefined) data[index].dialect = dialect;
     if (bab !== undefined) data[index].bab = bab;
+    if (category !== undefined) data[index].category = category;
 
     writeJSON(quizPath, data);
 

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import logoSoraKaili from "../assets/LOGO_SORA_KAILI.png";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
@@ -50,8 +51,8 @@ function LoginAdmin() {
       <div className="relative w-full max-w-md">
         {/* Logo */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-2xl mb-4 shadow-lg shadow-purple-500/30">
-            <span className="text-3xl">🛡️</span>
+          <div className="inline-flex items-center justify-center w-24 h-24 bg-white rounded-3xl mb-4 shadow-xl shadow-purple-500/20 overflow-hidden">
+            <img src={logoSoraKaili} alt="Sora Kaili Logo" className="w-full h-full object-contain scale-[1.5]" />
           </div>
           <h1 className="text-2xl font-bold text-white">Sora Kaili</h1>
           <p className="text-purple-300 text-sm mt-1">Admin Panel</p>
@@ -78,7 +79,7 @@ function LoginAdmin() {
                 type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-purple-300/50 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition"
+                className="w-full px-4 py-3 text-[16px] bg-white/10 border border-white/20 rounded-xl text-white placeholder-purple-300/50 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition"
                 placeholder="Masukkan username"
                 required
               />
@@ -92,7 +93,7 @@ function LoginAdmin() {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-purple-300/50 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition"
+                className="w-full px-4 py-3 text-[16px] bg-white/10 border border-white/20 rounded-xl text-white placeholder-purple-300/50 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition"
                 placeholder="Masukkan password"
                 required
               />
