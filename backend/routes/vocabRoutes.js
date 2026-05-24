@@ -2,6 +2,9 @@ const express = require("express");
 const router = express.Router();
 const vocab = require("../controllers/vocabController");
 
+// 🔥 TRANSLATE SENTENCE
+router.post("/translate", vocab.translateSentence);
+
 // 🔥 SEARCH (taruh di atas supaya tidak ketabrak /:id)
 router.get("/search", vocab.searchVocab);
 
