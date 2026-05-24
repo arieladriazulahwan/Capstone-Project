@@ -261,31 +261,49 @@ function QuizPage() {
     const total = quizResult.total;
     const wrong = total - correct;
     const percentage = Math.round((correct / total) * 100);
+    const resultTitle =
+      percentage >= 80 ? "Kerja bagus, hasilmu kuat" :
+      percentage >= 50 ? "Bagus, tinggal dipoles lagi" :
+      "Tetap semangat, coba lagi nanti";
 
     return (
-      <div className="student-page-bg min-h-screen bg-gray-100 p-5 flex items-center justify-center">
-        <div className="student-hero-card p-8 rounded-3xl shadow-xl max-w-md w-full text-center transform transition-all">
-          <h1 className="text-4xl font-bold mb-2">🎯 Selesai!</h1>
-          <p className="text-gray-500 mb-8">Kuis Room {room.title} telah diselesaikan.</p>
+      <div className="quiz-result-bg student-page-bg min-h-screen bg-gray-100 p-5 flex items-center justify-center">
+        <div className="quiz-result-card student-hero-card p-6 sm:p-8 rounded-3xl shadow-xl max-w-md w-full text-center">
+          <div className="quiz-result-spark spark-one"></div>
+          <div className="quiz-result-spark spark-two"></div>
+          <div className="quiz-result-spark spark-three"></div>
+          <p className="inline-flex items-center rounded-full bg-green-100 px-4 py-1 text-xs font-bold text-green-700 mb-4">
+            Quiz room selesai
+          </p>
+          <h2 className="text-3xl font-bold mb-2">{resultTitle}</h2>
+          <p className="text-gray-500 mb-6">
+            Kuis Room {room.title} telah diselesaikan.
+          </p>
+
+          <div
+            className="quiz-score-ring mx-auto mb-6"
+            style={{ "--score": `${percentage * 3.6}deg` }}
+          >
+            <div className="quiz-score-ring-inner">
+              <span className="text-5xl font-black text-green-700">{percentage}</span>
+              <span className="text-sm font-bold text-gray-500">Nilai</span>
+            </div>
+          </div>
           
-          <div className="grid grid-cols-2 gap-4 mb-8">
-            <div className="bg-green-100 p-4 rounded-2xl shadow-sm">
-              <p className="text-sm text-green-600 font-bold">Benar</p>
+          <div className="grid grid-cols-2 gap-3 mb-6">
+            <div className="quiz-result-stat bg-green-100 p-4 rounded-2xl shadow-sm">
+              <p className="text-xs text-green-700 font-bold uppercase tracking-wide">Benar</p>
               <p className="text-3xl font-black text-green-700">{correct}</p>
             </div>
-            <div className="bg-red-100 p-4 rounded-2xl shadow-sm">
-              <p className="text-sm text-red-600 font-bold">Salah</p>
+            <div className="quiz-result-stat bg-red-100 p-4 rounded-2xl shadow-sm">
+              <p className="text-xs text-red-700 font-bold uppercase tracking-wide">Salah</p>
               <p className="text-3xl font-black text-red-700">{wrong}</p>
-            </div>
-            <div className="bg-blue-100 p-5 rounded-2xl col-span-2 shadow-sm">
-              <p className="text-sm text-blue-600 font-bold">Total Nilai</p>
-              <p className="text-5xl font-black text-blue-700">{percentage}</p>
             </div>
           </div>
 
           <button
             onClick={() => navigate("/dashboard")}
-            className="w-full bg-blue-600 text-white py-4 rounded-2xl font-bold text-lg hover:bg-blue-700 transition shadow-lg"
+            className="w-full flag-wave text-white py-4 rounded-2xl font-bold text-lg transition shadow-lg hover:scale-[1.01]"
           >
             Kembali ke Dashboard
           </button>

@@ -384,6 +384,311 @@ body {
   box-shadow: 0 10px 20px rgba(15, 23, 42, 0.1);
 }
 
+@keyframes quiz-result-pop {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes quiz-ring-spin {
+  from {
+    transform: rotate(-16deg) scale(0.92);
+    opacity: 0.45;
+  }
+
+  to {
+    transform: rotate(0deg) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes quiz-spark-float {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.62;
+  }
+
+  50% {
+    transform: translateY(-10px) scale(1.08);
+    opacity: 1;
+  }
+}
+
+.quiz-result-card {
+  animation: quiz-result-pop 520ms cubic-bezier(0.2, 0.9, 0.2, 1) both;
+}
+
+.quiz-result-card h1,
+.quiz-result-card h2 {
+  font-size: clamp(1.75rem, 8vw, 2.5rem);
+}
+
+.quiz-score-ring {
+  width: 172px;
+  height: 172px;
+  border-radius: 999px;
+  padding: 12px;
+  background:
+    conic-gradient(#22c55e var(--score), #e5e7eb 0),
+    linear-gradient(135deg, #dcfce7, #fef9c3);
+  box-shadow: 0 18px 32px rgba(34, 197, 94, 0.18);
+  animation: quiz-ring-spin 720ms ease-out both;
+}
+
+.quiz-score-ring-inner {
+  height: 100%;
+  border-radius: inherit;
+  background: rgba(255, 255, 255, 0.94);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 0 0 1px rgba(34, 197, 94, 0.08);
+}
+
+.quiz-result-stat {
+  animation: student-card-in 520ms ease-out both;
+}
+
+.quiz-result-stat:nth-child(2) {
+  animation-delay: 90ms;
+}
+
+.quiz-result-stat:nth-child(3) {
+  animation-delay: 160ms;
+}
+
+.quiz-result-spark {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #facc15 0 24%, rgba(250, 204, 21, 0.22) 25% 58%, transparent 59%);
+  pointer-events: none;
+  animation: quiz-spark-float 2.8s ease-in-out infinite;
+}
+
+.spark-one {
+  top: 18px;
+  left: 22px;
+}
+
+.spark-two {
+  top: 74px;
+  right: 24px;
+  animation-delay: 420ms;
+}
+
+.spark-three {
+  bottom: 106px;
+  left: 34px;
+  width: 14px;
+  height: 14px;
+  animation-delay: 820ms;
+}
+
+@keyframes teacher-bg-drift {
+  0% {
+    background-position: 0% 40%;
+  }
+
+  50% {
+    background-position: 100% 58%;
+  }
+
+  100% {
+    background-position: 0% 40%;
+  }
+}
+
+@keyframes teacher-card-rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes teacher-hero-wave {
+  0% {
+    background-position: 0% 50%, 0 0;
+  }
+
+  50% {
+    background-position: 100% 50%, 18px 12px;
+  }
+
+  100% {
+    background-position: 0% 50%, 0 0;
+  }
+}
+
+@keyframes teacher-shimmer {
+  0% {
+    transform: translateX(-70%) skewX(-18deg);
+  }
+
+  55% {
+    transform: translateX(82%) skewX(-18deg);
+  }
+
+  100% {
+    transform: translateX(82%) skewX(-18deg);
+  }
+}
+
+.teacher-page-bg {
+  background-image:
+    radial-gradient(circle at 15% 12%, rgba(59, 130, 246, 0.16), transparent 28%),
+    radial-gradient(circle at 84% 16%, rgba(14, 165, 233, 0.14), transparent 24%),
+    linear-gradient(135deg, #eff6ff 0%, #f8fafc 48%, #ecfeff 100%);
+  background-size: 160% 160%;
+  animation: teacher-bg-drift 15s ease-in-out infinite;
+}
+
+.teacher-navbar {
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.06);
+}
+
+.teacher-hero-card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background-image:
+    linear-gradient(120deg, #2563eb, #0ea5e9, #22c55e, #2563eb),
+    repeating-linear-gradient(105deg, rgba(255,255,255,0.16) 0 10px, transparent 10px 22px);
+  background-size: 230% 230%, 42px 42px;
+  animation: teacher-card-rise 460ms ease-out both, teacher-hero-wave 8s ease-in-out infinite;
+}
+
+.teacher-hero-card::before {
+  content: "";
+  position: absolute;
+  inset: -45% -20%;
+  z-index: -1;
+  background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.28) 48%, transparent 66%);
+  animation: teacher-shimmer 5.4s ease-in-out infinite;
+}
+
+.teacher-primary-button,
+.teacher-create-strip,
+.teacher-room-action {
+  will-change: transform;
+}
+
+.teacher-stat-card,
+.teacher-room-row,
+.teacher-empty-state,
+.teacher-loading-card {
+  animation: teacher-card-rise 460ms ease-out both;
+}
+
+.teacher-stat-card {
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+
+.teacher-stat-card:hover,
+.teacher-room-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 34px rgba(37, 99, 235, 0.14);
+}
+
+.teacher-create-strip {
+  position: relative;
+  overflow: hidden;
+  background-image:
+    linear-gradient(120deg, #1d4ed8, #0284c7, #0891b2, #1d4ed8),
+    repeating-linear-gradient(105deg, rgba(255,255,255,0.16) 0 10px, transparent 10px 22px);
+  background-size: 220% 220%, 38px 38px;
+  animation: teacher-hero-wave 7s ease-in-out infinite;
+}
+
+.teacher-room-card {
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+
+.teacher-form-card,
+.teacher-question-card,
+.teacher-floating-actions,
+.teacher-attempt-card {
+  animation: teacher-card-rise 460ms ease-out both;
+}
+
+.teacher-form-card,
+.teacher-question-card {
+  backdrop-filter: blur(10px);
+}
+
+.teacher-question-card {
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+
+.teacher-question-card:hover,
+.teacher-attempt-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 30px rgba(37, 99, 235, 0.12);
+}
+
+.teacher-input {
+  background: rgba(255, 255, 255, 0.94);
+  transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+.teacher-input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.12);
+  outline: none;
+  transform: translateY(-1px);
+}
+
+.teacher-field {
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(239, 246, 255, 0.78), rgba(255, 255, 255, 0.9));
+  border: 1px solid rgba(191, 219, 254, 0.55);
+  padding: 14px;
+}
+
+.teacher-field label {
+  text-align: left;
+}
+
+.teacher-input-shell {
+  position: relative;
+}
+
+.teacher-input-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  z-index: 1;
+  transform: translateY(-50%);
+  color: #3b82f6;
+  pointer-events: none;
+}
+
+.teacher-input-with-icon {
+  padding-left: 44px;
+}
+
+.teacher-floating-actions {
+  animation: teacher-card-rise 520ms ease-out both;
+}
+
+.teacher-attempt-card {
+  background: rgba(255, 255, 255, 0.92);
+}
+
 @keyframes fire-flicker {
   0%,
   100% {

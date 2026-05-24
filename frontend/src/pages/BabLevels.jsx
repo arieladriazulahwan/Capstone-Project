@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
-import { getBab, getLevels } from "../data/levelMap";
+import { babList, getBab, getLevels } from "../data/levelMap";
 
 const colorClass = {
   green: "bg-green-500",
@@ -63,6 +63,8 @@ function BabLevels() {
   const babInfo = getBab(bab);
   const levels = getLevels(bab);
   const buttonColor = colorClass[babInfo?.color] || "bg-green-500";
+  const babOrderIndex = babList.findIndex((item) => item.key === bab);
+  const babLabel = babOrderIndex >= 0 ? `BAB ${babOrderIndex + 1}` : bab?.toUpperCase();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -122,7 +124,7 @@ function BabLevels() {
       <main className="p-4 max-w-xl mx-auto">
         <div className="student-hero-card rounded-3xl p-5 shadow mb-5">
           <p className="text-sm text-gray-500 font-semibold">
-            {babInfo?.label || bab?.toUpperCase()}
+            {babLabel}
           </p>
           <h1 className="text-2xl font-bold">
             {babInfo?.title || "Level Bab"}

@@ -3,7 +3,7 @@ import NavbarAdmin from "../components/NavbarAdmin";
 import SidebarAdmin from "../components/SidebarAdmin";
 import BottomNavAdmin from "../components/BottomNavAdmin";
 import ConfirmDialog from "../components/ConfirmDialog";
-import { babList, getLevels, filterByLevel } from "../data/levelMap";
+import { babList as initialBabList, getLevels as getInitialLevels, filterByLevel } from "../data/levelMap";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 const API = `${API_BASE_URL}/api/admin`;
@@ -11,6 +11,21 @@ const MAX_LESSON_IMAGE_SIZE = 50 * 1024 * 1024;
 
 const emptyLessonItem = { indo: "", kaili: "", tipe: "kosakata", category: "", image: "" };
 const emptyPracticeItem = { category: "", question: "", options: ["", "", "", ""], answer: "", image: "" };
+const emptyQuizItem = {
+  type: "multiple",
+  answerType: "pilihan",
+  question: "",
+  options: ["", "", "", ""],
+  blocks: ["", "", "", ""],
+  answerBlocks: [],
+  answer: "",
+  image: "",
+};
+const buildEditableBabs = () =>
+  initialBabList.map((bab) => ({
+    ...bab,
+    levels: getInitialLevels(bab.key),
+  }));
 
 function AdminMateri() {
   const [user, setUser] = useState(null);
@@ -35,10 +50,11 @@ function AdminMateri() {
   const [editPracticeIndex, setEditPracticeIndex] = useState(null);
 
   const [showQuizModal, setShowQuizModal] = useState(false);
-  const [quizForm, setQuizForm] = useState({ question: "", options: ["", "", "", ""], answer: 0 });
+  const [quizForm, setQuizForm] = useState({ ...emptyQuizItem });
   const [editQuiz, setEditQuiz] = useState(null);
 
   const [deleteTarget, setDeleteTarget] = useState(null);
+  const [editableBabs, setEditableBabs] = useState(buildEditableBabs);
 
   // const { babList, getLevels, refreshBabs } = useBabContext();
   const [showBabModal, setShowBabModal] = useState(false);
@@ -47,6 +63,22 @@ function AdminMateri() {
   const [levelForm, setLevelForm] = useState({ key: "", title: "", description: "", isEdit: false });
   const token = localStorage.getItem("token");
   const headers = { Authorization: "Bearer " + token, "Content-Type": "application/json" };
+  const getLevels = (babKey) =>
+    editableBabs.find((bab) => bab.key === babKey)?.levels || [];
+  const getBabTitle = (babKey) =>
+    editableBabs.find((bab) => bab.key === babKey)?.title || babKey?.toUpperCase();
+  const moveArrayItem = (items, fromIndex, direction) => {
+    const toIndex = fromIndex + direction;
+    if (toIndex < 0 || toIndex >= items.length) return items;
+    const nextItems = [...items];
+    [nextItems[fromIndex], nextItems[toIndex]] = [nextItems[toIndex], nextItems[fromIndex]];
+    return nextItems;
+  };
+  const normalizeBabLabels = (babs) =>
+    babs.map((bab, index) => ({
+      ...bab,
+      label: `BAB ${index + 1}`,
+    }));
 
   useEffect(() => {
     fetchUser();
@@ -222,30 +254,77 @@ function AdminMateri() {
   // ================= KUIS ================= //
   const openAddQuiz = () => {
     setEditQuiz(null);
-    setQuizForm({ question: "", options: ["", "", "", ""], answer: 0 });
+    setQuizForm({ ...emptyQuizItem });
     setShowQuizModal(true);
   };
 
   const openEditQuiz = (q) => {
+    const options = Array.isArray(q.options) ? [...q.options, "", "", "", ""].slice(0, 4) : ["", "", "", ""];
+    const answer = typeof q.answer === "number" ? options[q.answer] || "" : q.answer || "";
+
     setEditQuiz(q);
     setQuizForm({
+      type: q.type || (Array.isArray(q.blocks) && q.blocks.length > 0 ? "susun" : "multiple"),
+      answerType: q.answerType || q.answer_type || (Array.isArray(q.blocks) && q.blocks.length > 0 ? "blok" : "pilihan"),
       question: q.question || "",
-      options: q.options || ["", "", "", ""],
-      answer: q.answer ?? 0,
+      options,
+      blocks: Array.isArray(q.blocks) ? [...q.blocks, "", "", "", ""].slice(0, 8) : ["", "", "", ""],
+      answerBlocks: [],
+      answer,
+      image: q.image || "",
     });
     setShowQuizModal(true);
   };
 
+  const syncQuizAnswerBlocks = (answerBlocks) => {
+    setQuizForm(prev => ({
+      ...prev,
+      answerBlocks,
+      answer: answerBlocks.join(" "),
+    }));
+  };
+
+  const selectQuizAnswerBlock = (block) => {
+    if (!block.trim()) return;
+    syncQuizAnswerBlocks([...(quizForm.answerBlocks || []), block]);
+  };
+
+  const removeQuizAnswerBlock = (index) => {
+    const nextBlocks = [...(quizForm.answerBlocks || [])];
+    nextBlocks.splice(index, 1);
+    syncQuizAnswerBlocks(nextBlocks);
+  };
+
+  const clearQuizBlockAnswer = () => {
+    setQuizForm(prev => ({
+      ...prev,
+      answerBlocks: [],
+      answer: "",
+    }));
+  };
+
   const saveQuiz = async () => {
     if (!quizForm.question.trim()) return alert("Pertanyaan wajib diisi!");
+    const usesOptions = quizForm.type === "multiple" || (quizForm.type === "gambar" && quizForm.answerType === "pilihan");
+    const usesBlocks = quizForm.type === "susun" || (quizForm.type === "sambung" && quizForm.answerType === "blok") || (quizForm.type === "gambar" && quizForm.answerType === "blok");
+
     const body = {
-      question: quizForm.question,
-      options: quizForm.options.filter(o => o.trim()),
-      answer: quizForm.answer,
+      type: quizForm.type,
+      answerType: quizForm.answerType,
+      question: quizForm.question.trim(),
+      options: usesOptions ? quizForm.options.map(o => o.trim()).filter(Boolean) : [],
+      blocks: usesBlocks ? quizForm.blocks.map(b => b.trim()).filter(Boolean) : [],
+      answer: quizForm.answer.trim(),
+      image: quizForm.type === "gambar" ? (quizForm.image || "").trim() : "",
       dialect: selectedDialect,
       bab: selectedBab,
       category: selectedLevel.title.toLowerCase(),
     };
+
+    if (!body.answer) return alert("Jawaban benar wajib diisi!");
+    if (usesOptions && body.options.length < 2) return alert("Minimal 2 pilihan jawaban.");
+    if (usesBlocks && body.blocks.length < 2) return alert("Minimal 2 blok kata.");
+    if (quizForm.type === "gambar" && !body.image) return alert("Gambar wajib diisi untuk tipe gambar.");
 
     let res;
     if (editQuiz) {
@@ -260,6 +339,15 @@ function AdminMateri() {
     } else alert("Gagal menyimpan kuis");
   };
 
+  const handleQuizImage = (file) => {
+    if (!file) return;
+    if (!file.type.startsWith("image/")) return alert("Harus gambar.");
+    if (file.size > MAX_LESSON_IMAGE_SIZE) return alert("Maks 50MB.");
+    const reader = new FileReader();
+    reader.onloadend = () => setQuizForm(prev => ({ ...prev, image: reader.result }));
+    reader.readAsDataURL(file);
+  };
+
   const deleteQuiz = async (id) => {
     const res = await fetch(`${API}/quiz/${id}`, { method: "DELETE", headers });
     if (res.ok) {
@@ -268,29 +356,150 @@ function AdminMateri() {
     } else alert("Gagal menghapus kuis");
   };
 
+  const getQuizTypeLabel = (quiz) => {
+    const hasImage = Boolean(quiz.image);
+    const hasBlocks = Array.isArray(quiz.blocks) && quiz.blocks.filter(Boolean).length > 0;
+    const hasOptions = Array.isArray(quiz.options) && quiz.options.filter(Boolean).length > 0;
+    const answerType = quiz.answerType || quiz.answer_type;
+
+    if (quiz.type === "gambar" || hasImage) {
+      if (answerType === "blok" || hasBlocks) return "Gambar - Susun Kata";
+      if (answerType === "ketik") return "Gambar - Ketik";
+      return "Gambar - Pilihan Ganda";
+    }
+
+    if (quiz.type === "sambung") {
+      return answerType === "ketik" ? "Sambung - Ketik" : "Sambung - Blok Kata";
+    }
+
+    if (quiz.type === "susun" || (hasBlocks && !hasOptions)) {
+      return "Susun Kata";
+    }
+
+    return "Pilihan Ganda";
+  };
+
+  const saveBabsOrder = async (newBabs) => {
+    const orderedBabs = normalizeBabLabels(newBabs);
+    const res = await fetch(`${API_BASE_URL}/api/admin/babs`, {
+      method: "PUT",
+      headers,
+      body: JSON.stringify({ babs: orderedBabs }),
+    });
+
+    if (res.ok) {
+      setEditableBabs(orderedBabs);
+    } else {
+      alert("Gagal menyimpan urutan");
+    }
+  };
+
+  const moveBab = (index, direction) => {
+    const newBabs = moveArrayItem(editableBabs, index, direction);
+    if (newBabs !== editableBabs) saveBabsOrder(newBabs);
+  };
+
+  const moveLevel = (index, direction) => {
+    const newBabs = JSON.parse(JSON.stringify(editableBabs));
+    const bab = newBabs.find((item) => item.key === selectedBab);
+    if (!bab) return;
+    bab.levels = moveArrayItem(bab.levels || [], index, direction);
+    saveBabsOrder(newBabs);
+  };
+
+  const moveLesson = async (originalIndex, direction) => {
+    const newFullArray = moveArrayItem(fullBabLessons, originalIndex, direction);
+    if (newFullArray === fullBabLessons) return;
+
+    const res = await fetch(`${API}/lessons/${selectedDialect}/${selectedBab}`, {
+      method: "PUT",
+      headers,
+      body: JSON.stringify(newFullArray),
+    });
+
+    if (res.ok) setFullBabLessons(newFullArray);
+    else alert("Gagal menyimpan urutan materi");
+  };
+
+  const movePractice = async (originalIndex, direction) => {
+    const newFullArray = moveArrayItem(fullBabPractices, originalIndex, direction);
+    if (newFullArray === fullBabPractices) return;
+
+    const res = await fetch(`${API}/practices/${selectedDialect}/${selectedBab}`, {
+      method: "PUT",
+      headers,
+      body: JSON.stringify(newFullArray),
+    });
+
+    if (res.ok) setFullBabPractices(newFullArray);
+    else alert("Gagal menyimpan urutan latihan");
+  };
+
+  const moveQuiz = async (quizId, direction) => {
+    const currentIndex = allQuizzes.findIndex((quiz) => quiz.id === quizId);
+    if (currentIndex === -1) return;
+
+    const currentQuiz = allQuizzes[currentIndex];
+    const sameLevelIndexes = allQuizzes
+      .map((quiz, index) => ({ quiz, index }))
+      .filter(({ quiz }) =>
+        quiz.dialect === currentQuiz.dialect &&
+        quiz.bab === currentQuiz.bab &&
+        quiz.category?.toLowerCase() === currentQuiz.category?.toLowerCase()
+      )
+      .map(({ index }) => index);
+    const position = sameLevelIndexes.indexOf(currentIndex);
+    const targetIndex = sameLevelIndexes[position + direction];
+    if (targetIndex === undefined) return;
+
+    const newQuizzes = [...allQuizzes];
+    [newQuizzes[currentIndex], newQuizzes[targetIndex]] = [newQuizzes[targetIndex], newQuizzes[currentIndex]];
+
+    const res = await fetch(`${API}/quiz/reorder`, {
+      method: "PUT",
+      headers,
+      body: JSON.stringify({ quiz: newQuizzes }),
+    });
+
+    if (res.ok) setAllQuizzes(newQuizzes);
+    else alert("Gagal menyimpan urutan kuis");
+  };
+
 
   const saveBab = async () => {
     if (!babForm.key || !babForm.title) return alert("Key dan Title wajib diisi!");
-    let newBabs = JSON.parse(JSON.stringify(babList));
+    let newBabs = JSON.parse(JSON.stringify(editableBabs));
     if (babForm.isEdit) {
       newBabs = newBabs.map(b => b.key === babForm.key ? { ...b, label: babForm.label, title: babForm.title, description: babForm.description, color: babForm.color } : b);
     } else {
       if(newBabs.find(b => b.key === babForm.key)) return alert("Key bab sudah ada!");
       newBabs.push({ key: babForm.key, label: babForm.label, title: babForm.title, description: babForm.description, color: babForm.color, levels: [] });
     }
+    newBabs = normalizeBabLabels(newBabs);
     const res = await fetch(`${API_BASE_URL}/api/admin/babs`, { method: "PUT", headers, body: JSON.stringify({ babs: newBabs }) });
-    if (res.ok) { setShowBabModal(false); window.location.reload(); } else alert("Gagal menyimpan Bab (Belum didukung backend)");
+    if (res.ok) {
+      setEditableBabs(newBabs);
+      setShowBabModal(false);
+      if (!babForm.isEdit) setSelectedBab(babForm.key);
+    } else alert("Gagal menyimpan Bab");
   };
 
   const deleteBab = async (key) => {
-    const newBabs = babList.filter(b => b.key !== key);
+    const newBabs = normalizeBabLabels(editableBabs.filter(b => b.key !== key));
     const res = await fetch(`${API_BASE_URL}/api/admin/babs`, { method: "PUT", headers, body: JSON.stringify({ babs: newBabs }) });
-    if (res.ok) { window.location.reload(); setDeleteTarget(null); } else alert("Gagal menghapus Bab (Belum didukung backend)");
+    if (res.ok) {
+      setEditableBabs(newBabs);
+      setDeleteTarget(null);
+      if (selectedBab === key) {
+        setSelectedBab(null);
+        setSelectedLevel(null);
+      }
+    } else alert("Gagal menghapus Bab");
   };
 
   const saveLevel = async () => {
     if (!levelForm.key || !levelForm.title) return alert("Key dan Title wajib diisi!");
-    let newBabs = JSON.parse(JSON.stringify(babList));
+    let newBabs = JSON.parse(JSON.stringify(editableBabs));
     let bab = newBabs.find(b => b.key === selectedBab);
     if (!bab) return;
     if (!bab.levels) bab.levels = [];
@@ -302,15 +511,25 @@ function AdminMateri() {
       bab.levels.push({ key: levelForm.key, title: levelForm.title, description: levelForm.description });
     }
     const res = await fetch(`${API_BASE_URL}/api/admin/babs`, { method: "PUT", headers, body: JSON.stringify({ babs: newBabs }) });
-    if (res.ok) { setShowLevelModal(false); window.location.reload(); } else alert("Gagal menyimpan Level (Belum didukung backend)");
+    if (res.ok) {
+      setEditableBabs(newBabs);
+      setShowLevelModal(false);
+      if (selectedLevel?.key === levelForm.key) {
+        setSelectedLevel(bab.levels.find((level) => level.key === levelForm.key) || null);
+      }
+    } else alert("Gagal menyimpan Level");
   };
 
   const deleteLevel = async (key) => {
-    let newBabs = JSON.parse(JSON.stringify(babList));
+    let newBabs = JSON.parse(JSON.stringify(editableBabs));
     let bab = newBabs.find(b => b.key === selectedBab);
     bab.levels = bab.levels.filter(l => l.key !== key);
     const res = await fetch(`${API_BASE_URL}/api/admin/babs`, { method: "PUT", headers, body: JSON.stringify({ babs: newBabs }) });
-    if (res.ok) { window.location.reload(); setDeleteTarget(null); } else alert("Gagal menghapus Level (Belum didukung backend)");
+    if (res.ok) {
+      setEditableBabs(newBabs);
+      setDeleteTarget(null);
+      if (selectedLevel?.key === key) setSelectedLevel(null);
+    } else alert("Gagal menghapus Level");
   };
 
   // Filtering for display
@@ -348,7 +567,7 @@ function AdminMateri() {
                   {selectedBab && (
                     <>
                       <span>/</span>
-                      <span className="cursor-pointer hover:text-purple-600" onClick={() => setSelectedLevel(null)}>{babList.find(b => b.key === selectedBab)?.title}</span>
+                      <span className="cursor-pointer hover:text-purple-600" onClick={() => setSelectedLevel(null)}>{getBabTitle(selectedBab)}</span>
                     </>
                   )}
                   {selectedLevel && (
@@ -384,7 +603,7 @@ function AdminMateri() {
                   <button onClick={() => { setBabForm({ key: "", label: "", title: "", description: "", color: "blue", isEdit: false }); setShowBabModal(true); }} className="px-5 py-2.5 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-xl text-sm font-bold shadow-md hover:shadow-lg transition">＋ Tambah Bab</button>
                 </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {babList.map((bab) => (
+                {editableBabs.map((bab, index) => (
                   <div key={bab.key} className="bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-md hover:border-purple-300 transition group overflow-hidden">
                     <div onClick={() => setSelectedBab(bab.key)} className="p-6 cursor-pointer">
                       <div className="flex justify-between items-start mb-4">
@@ -398,7 +617,9 @@ function AdminMateri() {
                       <h3 className="text-xl font-bold text-gray-800 mb-1">{bab.title}</h3>
                       <p className="text-sm text-gray-500">{bab.description}</p>
                     </div>
-                    <div className="bg-gray-50 px-6 py-3 border-t border-gray-100 flex gap-4">
+                    <div className="bg-gray-50 px-6 py-3 border-t border-gray-100 flex flex-wrap gap-3">
+                      <button disabled={index === 0} onClick={(e) => { e.stopPropagation(); moveBab(index, -1); }} className="text-sm font-semibold text-gray-600 hover:text-purple-700 disabled:opacity-30">Naik</button>
+                      <button disabled={index === editableBabs.length - 1} onClick={(e) => { e.stopPropagation(); moveBab(index, 1); }} className="text-sm font-semibold text-gray-600 hover:text-purple-700 disabled:opacity-30">Turun</button>
                       <button onClick={(e) => { e.stopPropagation(); setBabForm({ ...bab, isEdit: true }); setShowBabModal(true); }} className="text-sm font-semibold text-blue-600 hover:text-blue-800">Edit</button>
                       <button onClick={(e) => { e.stopPropagation(); setDeleteTarget({ type: "bab", id: bab.key, title: bab.title }); }} className="text-sm font-semibold text-red-600 hover:text-red-800">Hapus</button>
                     </div>
@@ -415,13 +636,18 @@ function AdminMateri() {
                   <button onClick={() => { setLevelForm({ key: "", title: "", description: "", isEdit: false }); setShowLevelModal(true); }} className="px-5 py-2.5 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-xl text-sm font-bold shadow-md hover:shadow-lg transition">＋ Tambah Level</button>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                  {getLevels(selectedBab).map((level) => (
+                  {getLevels(selectedBab).map((level, index) => (
                     <div key={level.key} className="bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-md hover:border-purple-300 transition overflow-hidden">
                       <div onClick={() => setSelectedLevel(level)} className="p-5 cursor-pointer">
+                        <span className="inline-flex mb-3 rounded-full bg-purple-50 px-3 py-1 text-xs font-bold text-purple-700">
+                          Level {index + 1}
+                        </span>
                         <h4 className="font-bold text-gray-800 mb-1">{level.title}</h4>
                         <p className="text-xs text-gray-500 line-clamp-2">{level.description}</p>
                       </div>
-                      <div className="bg-gray-50 px-5 py-3 border-t border-gray-100 flex gap-4">
+                      <div className="bg-gray-50 px-5 py-3 border-t border-gray-100 flex flex-wrap gap-3">
+                        <button onClick={(e) => { e.stopPropagation(); moveLevel(index, -1); }} disabled={index === 0} className="text-sm font-semibold text-gray-600 hover:text-purple-700 disabled:opacity-30">Naik</button>
+                        <button onClick={(e) => { e.stopPropagation(); moveLevel(index, 1); }} disabled={index === getLevels(selectedBab).length - 1} className="text-sm font-semibold text-gray-600 hover:text-purple-700 disabled:opacity-30">Turun</button>
                         <button onClick={(e) => { e.stopPropagation(); setLevelForm({ ...level, isEdit: true }); setShowLevelModal(true); }} className="text-sm font-semibold text-blue-600 hover:text-blue-800">Edit</button>
                         <button onClick={(e) => { e.stopPropagation(); setDeleteTarget({ type: "level", id: level.key, title: level.title }); }} className="text-sm font-semibold text-red-600 hover:text-red-800">Hapus</button>
                       </div>
@@ -462,6 +688,7 @@ function AdminMateri() {
                             <table className="w-full text-sm">
                               <thead className="bg-gray-50 text-gray-600 border-b">
                                 <tr>
+                                  <th className="px-4 py-3 text-center w-24">Urutan</th>
                                   <th className="px-4 py-3 text-left">Indonesia</th>
                                   <th className="px-4 py-3 text-left">Kaili ({selectedDialect})</th>
                                   <th className="px-4 py-3 text-center w-32">Aksi</th>
@@ -470,6 +697,13 @@ function AdminMateri() {
                               <tbody className="divide-y">
                                 {filteredMateri.map((m) => (
                                   <tr key={m._originalIndex} className="hover:bg-gray-50">
+                                    <td className="px-4 py-3 text-center whitespace-nowrap">
+                                      <span className="mr-3 inline-flex min-w-6 justify-center rounded-full bg-gray-100 px-2 py-1 text-xs font-bold text-gray-600">
+                                        {m._originalIndex + 1}
+                                      </span>
+                                      <button onClick={() => moveLesson(m._originalIndex, -1)} disabled={m._originalIndex === 0} className="mr-2 font-bold text-gray-500 hover:text-purple-700 disabled:opacity-30">↑</button>
+                                      <button onClick={() => moveLesson(m._originalIndex, 1)} disabled={m._originalIndex === fullBabLessons.length - 1} className="font-bold text-gray-500 hover:text-purple-700 disabled:opacity-30">↓</button>
+                                    </td>
                                     <td className="px-4 py-3 font-medium text-gray-800">{m.indo}</td>
                                     <td className="px-4 py-3 text-gray-600">{m.kaili}</td>
                                     <td className="px-4 py-3 text-center whitespace-nowrap">
@@ -496,6 +730,7 @@ function AdminMateri() {
                             <table className="w-full text-sm">
                               <thead className="bg-gray-50 text-gray-600 border-b">
                                 <tr>
+                                  <th className="px-4 py-3 text-center w-24">Urutan</th>
                                   <th className="px-4 py-3 text-left">Pertanyaan</th>
                                   <th className="px-4 py-3 text-left">Jawaban</th>
                                   <th className="px-4 py-3 text-center w-32">Aksi</th>
@@ -504,6 +739,13 @@ function AdminMateri() {
                               <tbody className="divide-y">
                                 {filteredPractices.map((p) => (
                                   <tr key={p._originalIndex} className="hover:bg-gray-50">
+                                    <td className="px-4 py-3 text-center whitespace-nowrap">
+                                      <span className="mr-3 inline-flex min-w-6 justify-center rounded-full bg-gray-100 px-2 py-1 text-xs font-bold text-gray-600">
+                                        {p._originalIndex + 1}
+                                      </span>
+                                      <button onClick={() => movePractice(p._originalIndex, -1)} disabled={p._originalIndex === 0} className="mr-2 font-bold text-gray-500 hover:text-purple-700 disabled:opacity-30">↑</button>
+                                      <button onClick={() => movePractice(p._originalIndex, 1)} disabled={p._originalIndex === fullBabPractices.length - 1} className="font-bold text-gray-500 hover:text-purple-700 disabled:opacity-30">↓</button>
+                                    </td>
                                     <td className="px-4 py-3 font-medium text-gray-800">{p.question}</td>
                                     <td className="px-4 py-3 text-green-600 font-bold">{p.answer}</td>
                                     <td className="px-4 py-3 text-center whitespace-nowrap">
@@ -530,16 +772,32 @@ function AdminMateri() {
                             <table className="w-full text-sm">
                               <thead className="bg-gray-50 text-gray-600 border-b">
                                 <tr>
+                                  <th className="px-4 py-3 text-center w-24">Urutan</th>
+                                  <th className="px-4 py-3 text-left">Tipe Soal</th>
                                   <th className="px-4 py-3 text-left">Pertanyaan</th>
                                   <th className="px-4 py-3 text-left">Jawaban Benar</th>
                                   <th className="px-4 py-3 text-center w-32">Aksi</th>
                                 </tr>
                               </thead>
                               <tbody className="divide-y">
-                                {filteredQuizzes.map((q) => (
+                                {filteredQuizzes.map((q, index) => (
                                   <tr key={q.id} className="hover:bg-gray-50">
-                                    <td className="px-4 py-3 font-medium text-gray-800">{q.question}</td>
-                                    <td className="px-4 py-3 text-green-600 font-bold">{q.options ? q.options[q.answer] : q.answer}</td>
+                                    <td className="px-4 py-3 text-center whitespace-nowrap">
+                                      <span className="mr-3 inline-flex min-w-6 justify-center rounded-full bg-gray-100 px-2 py-1 text-xs font-bold text-gray-600">
+                                        {index + 1}
+                                      </span>
+                                      <button onClick={() => moveQuiz(q.id, -1)} disabled={index === 0} className="mr-2 font-bold text-gray-500 hover:text-purple-700 disabled:opacity-30">↑</button>
+                                      <button onClick={() => moveQuiz(q.id, 1)} disabled={index === filteredQuizzes.length - 1} className="font-bold text-gray-500 hover:text-purple-700 disabled:opacity-30">↓</button>
+                                    </td>
+                                    <td className="px-4 py-3">
+                                      <span className="inline-flex rounded-full bg-purple-50 px-3 py-1 text-xs font-bold text-purple-700">
+                                        {getQuizTypeLabel(q)}
+                                      </span>
+                                    </td>
+                                    <td className="px-4 py-3 font-medium text-gray-800">
+                                      {q.question}
+                                    </td>
+                                    <td className="px-4 py-3 text-green-600 font-bold">{typeof q.answer === "number" ? q.options?.[q.answer] : q.answer}</td>
                                     <td className="px-4 py-3 text-center whitespace-nowrap">
                                       <button onClick={() => openEditQuiz(q)} className="text-blue-600 font-medium mr-3">Edit</button>
                                       <button onClick={() => setDeleteTarget({ type: "quiz", id: q.id, title: "Kuis ini" })} className="text-red-500 font-medium">Hapus</button>
@@ -587,16 +845,34 @@ function AdminMateri() {
             <h3 className="font-bold text-lg mb-4">{editPracticeIndex !== null ? "Edit Latihan" : "Tambah Latihan"}</h3>
             <div className="space-y-4">
               <div><label className="text-sm font-medium mb-1 block text-gray-700">Pertanyaan</label><input type="text" value={practiceForm.question} onChange={e => setPracticeForm({...practiceForm, question: e.target.value})} className="w-full border rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-purple-500/50" /></div>
-              <div><label className="text-sm font-medium mb-1 block text-gray-700">Jawaban Benar</label><input type="text" value={practiceForm.answer} onChange={e => setPracticeForm({...practiceForm, answer: e.target.value})} className="w-full border rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-green-500/50 text-green-700 font-bold bg-green-50/50" /></div>
               <div>
                 <label className="text-sm font-medium mb-1 block text-gray-700">Pilihan (Termasuk jawaban benar)</label>
                 {practiceForm.options.map((opt, idx) => (
                   <input key={idx} type="text" value={opt} onChange={e => {
                     const newOpts = [...practiceForm.options];
                     newOpts[idx] = e.target.value;
-                    setPracticeForm({...practiceForm, options: newOpts});
+                    setPracticeForm(prev => ({
+                      ...prev,
+                      options: newOpts,
+                      answer: prev.answer === opt ? e.target.value : prev.answer,
+                    }));
                   }} className="w-full border rounded-xl px-4 py-2 text-sm mb-2 outline-none focus:ring-2 focus:ring-purple-500/50" placeholder={`Pilihan ${idx+1}`} />
                 ))}
+              </div>
+              <div>
+                <label className="text-sm font-medium mb-1 block text-gray-700">Jawaban Benar</label>
+                <select
+                  value={practiceForm.answer}
+                  onChange={e => setPracticeForm({...practiceForm, answer: e.target.value})}
+                  className="w-full border rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-green-500/50 font-bold bg-green-50/50 text-green-700"
+                >
+                  <option value="">Pilih jawaban dari opsi</option>
+                  {practiceForm.options.map((opt, idx) => (
+                    <option key={idx} value={opt}>
+                      {idx + 1}. {opt || "Kosong"}
+                    </option>
+                  ))}
+                </select>
               </div>
             </div>
             <div className="flex gap-3 mt-8">
@@ -610,11 +886,68 @@ function AdminMateri() {
       {/* KUIS MODAL */}
       {showQuizModal && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/50 p-4">
-          <div className="bg-white rounded-2xl w-full max-w-md p-6 max-h-[90vh] overflow-y-auto shadow-2xl">
+          <div className="bg-white rounded-2xl w-full max-w-2xl p-6 max-h-[90vh] overflow-y-auto shadow-2xl">
             <h3 className="font-bold text-lg mb-4">{editQuiz ? "Edit Kuis" : "Tambah Kuis"}</h3>
             <div className="space-y-4">
-              <div><label className="text-sm font-medium mb-1 block text-gray-700">Pertanyaan</label><input type="text" value={quizForm.question} onChange={e => setQuizForm({...quizForm, question: e.target.value})} className="w-full border rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-purple-500/50" /></div>
               <div>
+                <label className="text-sm font-medium mb-1 block text-gray-700">Tipe Soal</label>
+                <select
+                  value={quizForm.type}
+                  onChange={e => {
+                    const nextType = e.target.value;
+                    setQuizForm({
+                      ...quizForm,
+                      type: nextType,
+                      answerType:
+                        nextType === "multiple"
+                          ? "pilihan"
+                          : nextType === "gambar"
+                          ? quizForm.answerType
+                          : nextType === "sambung"
+                          ? "blok"
+                          : "blok",
+                    });
+                  }}
+                  className="w-full border rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-purple-500/50"
+                >
+                  <option value="multiple">Pilihan Ganda</option>
+                  <option value="susun">Susun Kata</option>
+                  <option value="gambar">Soal Gambar</option>
+                  <option value="sambung">Sambung Kalimat</option>
+                </select>
+              </div>
+
+              <div><label className="text-sm font-medium mb-1 block text-gray-700">Pertanyaan</label><input type="text" value={quizForm.question} onChange={e => setQuizForm({...quizForm, question: e.target.value})} className="w-full border rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-purple-500/50" /></div>
+
+              {quizForm.type === "gambar" && (
+                <>
+                  <div>
+                    <label className="text-sm font-medium mb-1 block text-gray-700">Gambar</label>
+                    <input type="file" accept="image/*" onChange={e => handleQuizImage(e.target.files[0])} className="text-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100" />
+                    {quizForm.image && <img src={quizForm.image} alt="Preview" className="h-32 mt-3 rounded-lg object-contain bg-gray-50 border" />}
+                  </div>
+                  <div>
+                    <label className="text-sm font-medium mb-1 block text-gray-700">Tipe Jawaban Gambar</label>
+                    <select value={quizForm.answerType} onChange={e => setQuizForm({...quizForm, answerType: e.target.value})} className="w-full border rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-purple-500/50">
+                      <option value="pilihan">Pilihan Ganda</option>
+                      <option value="blok">Susun Kata</option>
+                    </select>
+                  </div>
+                </>
+              )}
+
+              {quizForm.type === "sambung" && (
+                <div>
+                  <label className="text-sm font-medium mb-1 block text-gray-700">Tipe Jawaban Sambung Kalimat</label>
+                  <select value={quizForm.answerType} onChange={e => setQuizForm({...quizForm, answerType: e.target.value})} className="w-full border rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-purple-500/50">
+                    <option value="ketik">Ketik Jawaban</option>
+                    <option value="blok">Blok Kata</option>
+                  </select>
+                </div>
+              )}
+
+              {(quizForm.type === "multiple" || (quizForm.type === "gambar" && quizForm.answerType === "pilihan")) && (
+                <div>
                 <label className="text-sm font-medium mb-1 block text-gray-700">Pilihan Ganda</label>
                 {quizForm.options.map((opt, idx) => (
                   <input key={idx} type="text" value={opt} onChange={e => {
@@ -624,14 +957,82 @@ function AdminMateri() {
                   }} className="w-full border rounded-xl px-4 py-2 text-sm mb-2 outline-none focus:ring-2 focus:ring-purple-500/50" placeholder={`Pilihan ${idx+1}`} />
                 ))}
               </div>
-              <div>
-                <label className="text-sm font-medium mb-1 block text-gray-700">Jawaban Benar (Pilih salah satu)</label>
-                <select value={quizForm.answer} onChange={e => setQuizForm({...quizForm, answer: Number(e.target.value)})} className="w-full border rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-green-500/50 font-bold bg-green-50/50 text-green-700">
+              )}
+
+              {(quizForm.type === "susun" || (quizForm.type === "sambung" && quizForm.answerType === "blok") || (quizForm.type === "gambar" && quizForm.answerType === "blok")) && (
+                <div>
+                  <label className="text-sm font-medium mb-1 block text-gray-700">Blok Kata</label>
+                  {quizForm.blocks.map((block, idx) => (
+                    <input key={idx} type="text" value={block} onChange={e => {
+                      const newBlocks = [...quizForm.blocks];
+                      newBlocks[idx] = e.target.value;
+                      setQuizForm({...quizForm, blocks: newBlocks});
+                    }} className="w-full border rounded-xl px-4 py-2 text-sm mb-2 outline-none focus:ring-2 focus:ring-purple-500/50" placeholder={`Blok ${idx+1}`} />
+                  ))}
+                  <button type="button" onClick={() => setQuizForm({...quizForm, blocks: [...quizForm.blocks, ""]})} className="text-sm font-bold text-purple-600 hover:text-purple-800">+ Tambah Blok</button>
+
+                  <div className="mt-4 rounded-2xl bg-gray-50 p-3">
+                    <p className="mb-2 text-sm font-semibold text-gray-700">Pilih Jawaban dari Blok</p>
+                    <div className="mb-3 flex flex-wrap gap-2">
+                      {quizForm.blocks.map((block, idx) => (
+                        <button
+                          key={idx}
+                          type="button"
+                          onClick={() => selectQuizAnswerBlock(block)}
+                          className="rounded-xl border bg-white px-3 py-2 text-sm font-semibold text-gray-700 hover:border-purple-300 hover:bg-purple-50"
+                        >
+                          {block || "Kosong"}
+                        </button>
+                      ))}
+                    </div>
+
+                    <p className="mb-2 text-sm font-semibold text-gray-700">Jawaban Tersusun</p>
+                    <div className="flex min-h-[44px] flex-wrap gap-2 rounded-xl border bg-white p-2">
+                      {(quizForm.answerBlocks || []).length > 0 ? (
+                        quizForm.answerBlocks.map((block, idx) => (
+                          <button
+                            key={`${block}-${idx}`}
+                            type="button"
+                            onClick={() => removeQuizAnswerBlock(idx)}
+                            className="rounded-xl bg-green-500 px-3 py-2 text-sm font-semibold text-white"
+                          >
+                            {block} x
+                          </button>
+                        ))
+                      ) : (
+                        <span className="px-2 py-1 text-sm text-gray-400">Belum ada blok yang dipilih</span>
+                      )}
+                    </div>
+
+                    {(quizForm.answerBlocks || []).length > 0 && (
+                      <button type="button" onClick={clearQuizBlockAnswer} className="mt-3 rounded-xl bg-red-500 px-3 py-2 text-sm font-bold text-white hover:bg-red-600">
+                        Hapus Jawaban
+                      </button>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {(quizForm.type === "multiple" || (quizForm.type === "gambar" && quizForm.answerType === "pilihan")) ? (
+                <div>
+                  <label className="text-sm font-medium mb-1 block text-gray-700">Jawaban Benar</label>
+                  <select value={quizForm.answer} onChange={e => setQuizForm({...quizForm, answer: e.target.value})} className="w-full border rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-green-500/50 font-bold bg-green-50/50 text-green-700">
+                    <option value="">Pilih jawaban benar</option>
                   {quizForm.options.map((opt, idx) => (
-                    <option key={idx} value={idx}>{idx+1}. {opt || "Kosong"}</option>
+                      <option key={idx} value={opt}>{idx+1}. {opt || "Kosong"}</option>
                   ))}
                 </select>
               </div>
+              ) : (quizForm.type === "sambung" && quizForm.answerType === "ketik") ? (
+                <div><label className="text-sm font-medium mb-1 block text-gray-700">Jawaban Benar</label><input type="text" value={quizForm.answer} onChange={e => setQuizForm({...quizForm, answer: e.target.value})} className="w-full border rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-green-500/50 text-green-700 font-bold bg-green-50/50" placeholder="Contoh: Kata benda" /></div>
+              ) : (
+                <div>
+                  <label className="text-sm font-medium mb-1 block text-gray-700">Jawaban Benar</label>
+                  <div className="w-full rounded-xl border bg-green-50/50 px-4 py-2.5 text-sm font-bold text-green-700">
+                    {quizForm.answer || "Pilih blok jawaban di atas"}
+                  </div>
+                </div>
+              )}
             </div>
             <div className="flex gap-3 mt-8">
               <button onClick={() => setShowQuizModal(false)} className="flex-1 py-2.5 border border-gray-300 rounded-xl font-bold text-gray-700 hover:bg-gray-50 transition">Batal</button>

@@ -30,12 +30,14 @@ router.get("/practices", authMiddleware, onlyAdmin, adminController.getPractices
 router.get("/practices/:dialect/:bab", authMiddleware, onlyAdmin, adminController.getPractice);
 router.put("/practices/:dialect/:bab", authMiddleware, onlyAdmin, adminController.updatePractice);
 router.delete("/practices/:dialect/:bab", authMiddleware, onlyAdmin, adminController.deletePractice);
+router.put("/babs", authMiddleware, onlyAdmin, adminController.updateBabs);
 
 // ======================================
 // 📝 CRUD KUIS
 // ======================================
 router.get("/quiz", authMiddleware, onlyAdmin, adminController.getAllQuiz);
 router.post("/quiz", authMiddleware, onlyAdmin, adminController.addQuiz);
+router.put("/quiz/reorder", authMiddleware, onlyAdmin, adminController.reorderQuiz);
 router.put("/quiz/:id", authMiddleware, onlyAdmin, adminController.updateQuiz);
 router.delete("/quiz/:id", authMiddleware, onlyAdmin, adminController.deleteQuiz);
 

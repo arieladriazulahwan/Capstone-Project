@@ -323,27 +323,32 @@ function DetailRoom() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-100">
-        <div className="text-gray-500 text-lg font-semibold">Loading...</div>
+      <div className="teacher-page-bg min-h-screen flex items-center justify-center">
+        <div className="teacher-loading-card rounded-3xl bg-white/90 px-6 py-5 text-center shadow">
+          <div className="mx-auto mb-3 h-10 w-10 rounded-full border-4 border-blue-100 border-t-blue-500 animate-spin"></div>
+          <p className="text-gray-700 text-lg font-semibold">Memuat detail room...</p>
+        </div>
       </div>
     );
   }
 
   if (!room) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-100">
-        <div className="text-gray-500 text-lg font-semibold">Room tidak ditemukan</div>
+      <div className="teacher-page-bg min-h-screen flex items-center justify-center">
+        <div className="teacher-empty-state rounded-3xl bg-white/90 p-8 text-center text-gray-500 shadow">
+          Room tidak ditemukan
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="teacher-page-bg min-h-screen">
       <NavbarGuru user={user} showBackButton />
 
       <main className="p-4 md:p-6 flex justify-center">
         <div className="w-full max-w-5xl">
-          <div className="bg-gradient-to-r from-blue-500 to-blue-400 rounded-3xl p-6 text-white shadow-lg mb-6">
+          <div className="teacher-hero-card rounded-3xl p-6 text-white shadow-xl mb-6">
             <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
               {isEditingRoom ? (
                 <div className="flex-1 space-y-3">
@@ -351,13 +356,13 @@ function DetailRoom() {
                     type="text"
                     value={draftRoomDetails.title}
                     onChange={(e) => handleDetailChange("title", e.target.value)}
-                    className="w-full bg-white/20 text-white placeholder-blue-200 text-3xl font-bold rounded-xl p-2"
+                    className="teacher-input w-full bg-white/20 text-white placeholder-blue-200 text-3xl font-bold rounded-xl p-2"
                   />
                   <input
                     type="text"
                     value={draftRoomDetails.category}
                     onChange={(e) => handleDetailChange("category", e.target.value)}
-                    className="w-full bg-white/20 text-white placeholder-blue-200 rounded-xl p-2"
+                    className="teacher-input w-full bg-white/20 text-white placeholder-blue-200 rounded-xl p-2"
                   />
                 </div>
               ) : (
@@ -415,7 +420,7 @@ function DetailRoom() {
             </div>
           </div>
 
-          <div className="mb-5 rounded-3xl border border-gray-100 bg-white p-5 shadow-sm">
+          <div className="teacher-form-card mb-5 rounded-3xl border border-white/80 bg-white/90 p-5 shadow">
             <div className="mb-4 flex flex-col gap-1">
               <h2 className="text-xl font-bold text-gray-800">Daftar Soal</h2>
               <p className="text-sm text-gray-500">
@@ -453,7 +458,7 @@ function DetailRoom() {
               const answerType = getAnswerType(currentQuestion);
               const canChangeAnswerType = q.type === "gambar" || q.type === "sambung";
               return (
-                <div key={q.id} className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+                <div key={q.id} className="teacher-question-card bg-white/90 rounded-3xl shadow-sm border border-white/80 overflow-hidden">
                   <div className="flex flex-col gap-3 px-5 py-4 border-b bg-gray-50 md:flex-row md:items-center md:justify-between">
                     <div>
                       <h2 className="font-bold text-gray-800 text-lg">Soal {index + 1}</h2>
@@ -493,7 +498,7 @@ function DetailRoom() {
                             type="text"
                             value={currentQuestion.question}
                             onChange={(e) => updateDraftField(index, "question", e.target.value)}
-                            className="w-full border p-3 rounded-xl"
+                            className="teacher-input w-full border p-3 rounded-xl"
                           />
                         </div>
 
@@ -504,7 +509,7 @@ function DetailRoom() {
                               <select
                                 value={answerType}
                                 onChange={(e) => updateDraftField(index, "answerType", e.target.value)}
-                                className="w-full border p-3 rounded-xl"
+                                className="teacher-input w-full border p-3 rounded-xl"
                               >
                                 <option value="pilihan">Pilihan Ganda</option>
                                 <option value="ketik">Ketik Jawaban</option>
@@ -522,7 +527,7 @@ function DetailRoom() {
                                 <input
                                   value={option}
                                   onChange={(e) => updateDraftOption(index, oIndex, e.target.value)}
-                                  className="flex-1 border p-3 rounded-xl"
+                                  className="teacher-input flex-1 border p-3 rounded-xl"
                                 />
                                 <button
                                   type="button"
@@ -550,7 +555,7 @@ function DetailRoom() {
                               type="text"
                               value={currentQuestion.answer || ""}
                               onChange={(e) => updateDraftField(index, "answer", e.target.value)}
-                              className="w-full border p-3 rounded-xl"
+                              className="teacher-input w-full border p-3 rounded-xl"
                             />
                           </div>
                         )}
@@ -564,7 +569,7 @@ function DetailRoom() {
                                 type="text"
                                 value={block}
                                 onChange={(e) => updateDraftBlock(index, bIndex, e.target.value)}
-                                className="w-full border p-3 rounded-xl"
+                                className="teacher-input w-full border p-3 rounded-xl"
                               />
                             ))}
                             <button
@@ -593,7 +598,7 @@ function DetailRoom() {
                               type="text"
                               value={currentQuestion.answer || ""}
                               onChange={(e) => updateDraftField(index, "answer", e.target.value)}
-                              className="w-full border p-3 rounded-xl"
+                              className="teacher-input w-full border p-3 rounded-xl"
                             />
                           </div>
                         )}
@@ -652,7 +657,7 @@ function DetailRoom() {
           ) : null}
 
           {questionView === "jawaban" && (
-          <div className="bg-white rounded-3xl shadow p-6 mt-6">
+          <div className="teacher-form-card bg-white/90 rounded-3xl shadow p-6 mt-6">
             <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between mb-5">
               <div>
                 <h2 className="text-2xl font-bold">Nilai Siswa</h2>
@@ -669,7 +674,7 @@ function DetailRoom() {
                   const percentage = attempt.total > 0 ? Math.round((attempt.score / attempt.total) * 100) : 0;
 
                   return (
-                    <div key={attempt.id} className="border border-gray-200 rounded-3xl overflow-hidden transition-all">
+                    <div key={attempt.id} className="teacher-attempt-card border border-gray-200 rounded-3xl overflow-hidden transition-all">
                       {/* Summary Row - Clickable */}
                       <button
                         type="button"

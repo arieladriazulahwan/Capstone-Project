@@ -10,6 +10,7 @@ const vocabPath = path.join(__dirname, "../data/vocab.json");
 const quizPath = path.join(__dirname, "../data/quiz.json");
 const lessonDir = path.join(__dirname, "../data/lesson");
 const practiceDir = path.join(__dirname, "../data/practice");
+const levelMapPath = path.join(__dirname, "../../frontend/src/data/levelMap.js");
 
 const readJSON = (filePath) => JSON.parse(fs.readFileSync(filePath, "utf-8"));
 const writeJSON = (filePath, data) =>
@@ -35,6 +36,40 @@ const countJsonItemsInDir = (baseDir) => {
   });
 
   return { files, items };
+};
+
+const cleanupRemovedBabData = (activeBabKeys) => {
+  const activeKeySet = new Set(activeBabKeys.map((key) => key.toLowerCase()));
+
+  [lessonDir, practiceDir].forEach((baseDir) => {
+    validDialects.forEach((dialect) => {
+      const dialectDir = path.join(baseDir, dialect);
+      if (!fs.existsSync(dialectDir)) return;
+
+      fs.readdirSync(dialectDir)
+        .filter((file) => file.toLowerCase().endsWith(".json"))
+        .forEach((file) => {
+          const babKey = path.basename(file, ".json").toLowerCase();
+          if (!activeKeySet.has(babKey)) {
+            fs.unlinkSync(path.join(dialectDir, file));
+          }
+        });
+    });
+  });
+
+  if (fs.existsSync(quizPath)) {
+    const quizItems = readJSON(quizPath);
+    if (Array.isArray(quizItems)) {
+      const activeQuizItems = quizItems.filter((item) => {
+        if (!item?.bab) return true;
+        return activeKeySet.has(String(item.bab).toLowerCase());
+      });
+
+      if (activeQuizItems.length !== quizItems.length) {
+        writeJSON(quizPath, activeQuizItems);
+      }
+    }
+  }
 };
 
 const defaultProgressString = () =>
@@ -349,6 +384,114 @@ exports.deleteLesson = (req, res) => {
   }
 };
 
+exports.updateBabs = (req, res) => {
+  try {
+    const { babs } = req.body;
+
+    if (!Array.isArray(babs)) {
+      return res.status(400).json({ message: "Data bab tidak valid" });
+    }
+
+    const normalizedBabs = babs.map((bab) => {
+      if (!bab?.key || !bab?.title) {
+        throw new Error("Setiap bab wajib memiliki key dan title");
+      }
+
+      return {
+        key: String(bab.key),
+        label: String(bab.label || bab.key.toUpperCase()),
+        title: String(bab.title),
+        description: String(bab.description || ""),
+        color: String(bab.color || "green"),
+        levels: Array.isArray(bab.levels) ? bab.levels : [],
+      };
+    });
+
+    const babList = normalizedBabs.map(({ levels, ...bab }) => bab);
+    const levelMap = normalizedBabs.reduce((result, bab) => {
+      result[bab.key] = bab.levels
+        .map((level) => ({
+          key: String(level.key || ""),
+          title: String(level.title || ""),
+          description: String(level.description || ""),
+          keywords: Array.isArray(level.keywords) ? level.keywords : [],
+        }))
+        .filter((level) => level.key && level.title);
+
+      return result;
+    }, {});
+
+    const content = `export const babList = ${JSON.stringify(babList, null, 2)};
+
+export const levelMap = ${JSON.stringify(levelMap, null, 2)};
+
+export const getBab = (babKey) => babList.find((bab) => bab.key === babKey);
+
+export const getLevels = (babKey) => levelMap[babKey] || [];
+
+export const getLevel = (babKey, levelKey) =>
+  getLevels(babKey).find((level) => level.key === levelKey);
+
+export const filterByLevel = (items, babKey, levelKey) => {
+  const level = getLevel(babKey, levelKey);
+
+  if (!level || !Array.isArray(items)) return items;
+
+  if (["bab1", "bab2", "bab3"].includes(babKey)) {
+    const targetCategory = level.title.toLowerCase();
+    return items.filter(
+      (item) => item.category && item.category.toLowerCase() === targetCategory
+    );
+  }
+
+  const keywords = (level.keywords || []).map((keyword) => keyword.toLowerCase());
+  const matched = items.filter((item) => {
+    const searchable = [
+      item.indo,
+      item.indonesia,
+      item.kaili,
+      item.tipe,
+      item.category,
+      item.question,
+      item.answer,
+      ...(item.options || []),
+      ...(item.blocks || []),
+    ]
+      .filter(Boolean)
+      .join(" ")
+      .toLowerCase();
+
+    return keywords.some((keyword) => searchable.includes(keyword));
+  });
+
+  return matched.length > 0 ? matched : items;
+};
+`;
+
+    fs.writeFileSync(levelMapPath, content, "utf-8");
+    cleanupRemovedBabData(babList.map((bab) => bab.key));
+
+    normalizedBabs.forEach((bab) => {
+      validDialects.forEach((dialect) => {
+        const lessonDialectDir = path.join(lessonDir, dialect);
+        const practiceDialectDir = path.join(practiceDir, dialect);
+        if (!fs.existsSync(lessonDialectDir)) fs.mkdirSync(lessonDialectDir, { recursive: true });
+        if (!fs.existsSync(practiceDialectDir)) fs.mkdirSync(practiceDialectDir, { recursive: true });
+
+        const lessonFile = path.join(lessonDialectDir, `${bab.key}.json`);
+        const practiceFile = path.join(practiceDialectDir, `${bab.key}.json`);
+        if (!fs.existsSync(lessonFile)) writeJSON(lessonFile, []);
+        if (!fs.existsSync(practiceFile)) writeJSON(practiceFile, []);
+      });
+    });
+
+    res.json({ message: "Daftar bab berhasil disimpan", babs: babList });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: err.message || "Gagal menyimpan daftar bab" });
+  }
+};
+
 // ============================================
 // 📝 CRUD KUIS (quiz.json)
 // ============================================
@@ -443,17 +586,21 @@ exports.getAllQuiz = (req, res) => {
 exports.addQuiz = (req, res) => {
   try {
     const data = readJSON(quizPath);
-    const { question, options, answer, dialect, bab, category } = req.body;
+    const { type, answerType, question, options, blocks, answer, image, dialect, bab, category } = req.body;
 
-    if (!question || !options || answer === undefined || !dialect || !bab) {
+    if (!question || answer === undefined || !dialect || !bab) {
       return res.status(400).json({ message: "Semua field kuis wajib diisi" });
     }
 
     const newQuiz = {
       id: Date.now(),
+      type: type || "multiple",
+      answerType: answerType || "pilihan",
       question,
-      options,
+      options: Array.isArray(options) ? options : [],
+      blocks: Array.isArray(blocks) ? blocks : [],
       answer,
+      image: image || "",
       dialect,
       bab,
       category: category || "",
@@ -479,11 +626,15 @@ exports.updateQuiz = (req, res) => {
       return res.status(404).json({ message: "Soal kuis tidak ditemukan" });
     }
 
-    const { question, options, answer, dialect, bab, category } = req.body;
+    const { type, answerType, question, options, blocks, answer, image, dialect, bab, category } = req.body;
 
+    if (type !== undefined) data[index].type = type;
+    if (answerType !== undefined) data[index].answerType = answerType;
     if (question !== undefined) data[index].question = question;
-    if (options !== undefined) data[index].options = options;
+    if (options !== undefined) data[index].options = Array.isArray(options) ? options : [];
+    if (blocks !== undefined) data[index].blocks = Array.isArray(blocks) ? blocks : [];
     if (answer !== undefined) data[index].answer = answer;
+    if (image !== undefined) data[index].image = image;
     if (dialect !== undefined) data[index].dialect = dialect;
     if (bab !== undefined) data[index].bab = bab;
     if (category !== undefined) data[index].category = category;
@@ -514,6 +665,22 @@ exports.deleteQuiz = (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Gagal menghapus soal kuis" });
+  }
+};
+
+exports.reorderQuiz = (req, res) => {
+  try {
+    const { quiz } = req.body;
+
+    if (!Array.isArray(quiz)) {
+      return res.status(400).json({ message: "Data urutan kuis tidak valid" });
+    }
+
+    writeJSON(quizPath, quiz);
+    res.json({ message: "Urutan kuis berhasil disimpan", total: quiz.length });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Gagal menyimpan urutan kuis" });
   }
 };
 

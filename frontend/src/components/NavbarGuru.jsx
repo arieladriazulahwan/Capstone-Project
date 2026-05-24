@@ -5,7 +5,7 @@ import SoraKailiLogo from "./SoraKailiLogo";
 function NavbarGuru({ user, showBackButton = false }) {
   const navigate = useNavigate();
   return (
-    <div className="sticky top-0 z-40 bg-white border-b">
+    <div className="teacher-navbar sticky top-0 z-40 border-b border-white/70 bg-white/90 backdrop-blur-xl">
 
       {/* WRAPPER */}
       <div className="w-full max-w-md md:max-w-4xl mx-auto px-4 py-2 flex justify-between items-center">

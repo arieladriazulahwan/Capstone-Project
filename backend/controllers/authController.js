@@ -1,6 +1,8 @@
 const db = require("../config/db");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const fs = require("fs");
+const path = require("path");
 const JWT_SECRET = process.env.JWT_SECRET || "SECRET_KEY";
 
 // 🔥 helper tanggal (ANTI BUG TIMEZONE)
@@ -18,8 +20,8 @@ const formatLocalDate = (date) => {
 };
 
 const totalBab = 10;
-const validBab = Array.from({ length: totalBab }, (_, index) => `bab${index + 1}`);
-const validLevelsByBab = {
+const fallbackValidBab = Array.from({ length: totalBab }, (_, index) => `bab${index + 1}`);
+const fallbackValidLevelsByBab = {
   bab1: [
     "kata-benda",
     "kata-kerja",
@@ -67,8 +69,62 @@ const validLevelsByBab = {
   ],
 };
 
-const defaultProgressObject = () =>
-  validBab.reduce((progress, bab, index) => {
+const levelMapPath = path.join(__dirname, "../../frontend/src/data/levelMap.js");
+
+const readLevelMapFile = () => {
+  if (!fs.existsSync(levelMapPath)) return null;
+  return fs.readFileSync(levelMapPath, "utf-8");
+};
+
+const parseExportedJson = (content, exportName, nextExportName) => {
+  const pattern = new RegExp(
+    `export const ${exportName} = ([\\s\\S]*?);\\s*export const ${nextExportName}`
+  );
+  const match = content.match(pattern);
+  if (!match) return null;
+  return JSON.parse(match[1]);
+};
+
+const getValidBab = () => {
+  try {
+    const content = readLevelMapFile();
+    if (!content) return fallbackValidBab;
+
+    const babs = parseExportedJson(content, "babList", "levelMap");
+    if (!Array.isArray(babs)) return fallbackValidBab;
+
+    const keys = babs.map((bab) => bab.key).filter(Boolean);
+    return keys.length > 0 ? keys : fallbackValidBab;
+  } catch (error) {
+    console.error("Gagal membaca babList:", error.message);
+    return fallbackValidBab;
+  }
+};
+
+const getValidLevelsByBab = () => {
+  try {
+    const content = readLevelMapFile();
+    if (!content) return fallbackValidLevelsByBab;
+
+    const levelMap = parseExportedJson(content, "levelMap", "getBab");
+    if (!levelMap) return fallbackValidLevelsByBab;
+    return Object.entries(levelMap).reduce((result, [babKey, levels]) => {
+      result[babKey] = Array.isArray(levels)
+        ? levels.map((level) => level.key).filter(Boolean)
+        : [];
+      return result;
+    }, {});
+  } catch (error) {
+    console.error("Gagal membaca levelMap:", error.message);
+    return fallbackValidLevelsByBab;
+  }
+};
+
+const defaultProgressObject = () => {
+  const validLevelsByBab = getValidLevelsByBab();
+  const validBab = getValidBab();
+
+  return validBab.reduce((progress, bab, index) => {
     progress[bab] = index === 0;
     progress.levels = progress.levels || {};
     progress.levels[bab] = {};
@@ -83,11 +139,14 @@ const defaultProgressObject = () =>
 
     return progress;
   }, {});
+};
 
 const defaultProgressString = () => JSON.stringify(defaultProgressObject());
 const validDialects = ["ledo", "rai"];
 
 const parseProgress = (raw) => {
+  const validLevelsByBab = getValidLevelsByBab();
+  const validBab = getValidBab();
   const defaults = defaultProgressObject();
   if (!raw) return defaults;
   try {
@@ -164,6 +223,8 @@ const saveStudentProgress = (userId, dialect, progress, callback) => {
 };
 
 const updateProgressByBab = (progress, bab, level, score, total) => {
+  const validLevelsByBab = getValidLevelsByBab();
+  const validBab = getValidBab();
   const updatedProgress = { ...progress };
   const babIndex = validBab.indexOf(bab);
   if (babIndex === -1) {
@@ -174,7 +235,10 @@ const updateProgressByBab = (progress, bab, level, score, total) => {
   updatedProgress.levels = updatedProgress.levels || {};
   updatedProgress.levels[bab] = updatedProgress.levels[bab] || {};
 
-  const levels = validLevelsByBab[bab] || [];
+  const levels = [...(validLevelsByBab[bab] || [])];
+  if (level && !levels.includes(level)) {
+    levels.push(level);
+  }
 
   if (level && levels.includes(level)) {
     const percentage = Math.round((score / total) * 100);
@@ -583,6 +647,8 @@ exports.completeBab1 = (req, res) => {
 };
 
 exports.completeBab = (req, res) => {
+  const validLevelsByBab = getValidLevelsByBab();
+  const validBab = getValidBab();
   const { bab, dialect, level, score, total } = req.body;
   if (!bab || !validBab.includes(bab)) {
     return res.status(400).json({ message: "Bab tidak valid" });
@@ -590,10 +656,6 @@ exports.completeBab = (req, res) => {
 
   if (dialect && !validDialects.includes(dialect.toLowerCase())) {
     return res.status(400).json({ message: "Dialek tidak tersedia" });
-  }
-
-  if (level && !validLevelsByBab[bab]?.includes(level)) {
-    return res.status(400).json({ message: "Level tidak valid" });
   }
 
   updateStudentProgress(

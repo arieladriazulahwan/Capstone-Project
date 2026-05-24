@@ -19,6 +19,10 @@ const shuffleOptions = (items) => {
 
 const prepareQuizItem = (item) => ({
   ...item,
+  answer:
+    typeof item.answer === "number" && Array.isArray(item.options)
+      ? item.options[item.answer]
+      : item.answer,
   options: Array.isArray(item.options)
     ? shuffleOptions(item.options)
     : item.options,
@@ -118,6 +122,7 @@ function Quiz() {
   const current = questions[index];
   const hasBlocks = Array.isArray(current.blocks) && current.blocks.length > 0;
   const hasOptions = !hasBlocks && Array.isArray(current.options) && current.options.length > 0;
+  const hasTextAnswer = !hasOptions && !hasBlocks;
 
   const nextQuestion = async (updatedScore) => {
     if (index + 1 < questions.length) {
@@ -199,7 +204,7 @@ function Quiz() {
 
   const submitBlockAnswer = () => {
     if (!selected.trim()) {
-      alert("Susun jawaban dulu");
+      alert(hasTextAnswer ? "Ketik jawaban dulu" : "Susun jawaban dulu");
       return;
     }
 
@@ -220,28 +225,46 @@ function Quiz() {
     const correct = score;
     const wrong = questions.length - score;
     const percentage = Math.round((correct / questions.length) * 100);
+    const resultTitle =
+      percentage >= 80 ? "Hebat, level ini makin terbuka" :
+      percentage >= 50 ? "Bagus, terus latih lagi" :
+      "Tetap semangat, coba lagi pelan-pelan";
 
     return (
-      <div className="student-page-bg min-h-screen bg-gray-100 p-5 flex items-center justify-center">
-        <div className="student-hero-card p-8 rounded-3xl shadow-xl max-w-md w-full text-center transform transition-all">
-          <h1 className="text-4xl font-bold mb-2">🎉 Selesai!</h1>
-          <p className="text-gray-500 mb-8">Kuis Level {level} berhasil diselesaikan.</p>
+      <div className="quiz-result-bg student-page-bg min-h-screen bg-gray-100 p-5 flex items-center justify-center">
+        <div className="quiz-result-card student-hero-card p-6 sm:p-8 rounded-3xl shadow-xl max-w-md w-full text-center">
+          <div className="quiz-result-spark spark-one"></div>
+          <div className="quiz-result-spark spark-two"></div>
+          <div className="quiz-result-spark spark-three"></div>
+          <p className="inline-flex items-center rounded-full bg-green-100 px-4 py-1 text-xs font-bold text-green-700 mb-4">
+            Quiz selesai
+          </p>
+          <h2 className="text-3xl font-bold mb-2">{resultTitle}</h2>
+          <p className="text-gray-500 mb-6">
+            Kuis {levelInfo?.title || `Level ${level || "-"}`} berhasil diselesaikan.
+          </p>
+
+          <div
+            className="quiz-score-ring mx-auto mb-6"
+            style={{ "--score": `${percentage * 3.6}deg` }}
+          >
+            <div className="quiz-score-ring-inner">
+              <span className="text-5xl font-black text-green-700">{percentage}</span>
+              <span className="text-sm font-bold text-gray-500">Nilai</span>
+            </div>
+          </div>
           
-          <div className="grid grid-cols-2 gap-4 mb-8">
-            <div className="bg-green-100 p-4 rounded-2xl shadow-sm">
-              <p className="text-sm text-green-600 font-bold">Benar</p>
+          <div className="grid grid-cols-2 gap-3 mb-6">
+            <div className="quiz-result-stat bg-green-100 p-4 rounded-2xl shadow-sm">
+              <p className="text-xs text-green-700 font-bold uppercase tracking-wide">Benar</p>
               <p className="text-3xl font-black text-green-700">{correct}</p>
             </div>
-            <div className="bg-red-100 p-4 rounded-2xl shadow-sm">
-              <p className="text-sm text-red-600 font-bold">Salah</p>
+            <div className="quiz-result-stat bg-red-100 p-4 rounded-2xl shadow-sm">
+              <p className="text-xs text-red-700 font-bold uppercase tracking-wide">Salah</p>
               <p className="text-3xl font-black text-red-700">{wrong}</p>
             </div>
-            <div className="bg-blue-100 p-5 rounded-2xl col-span-2 shadow-sm">
-              <p className="text-sm text-blue-600 font-bold">Total Nilai</p>
-              <p className="text-5xl font-black text-blue-700">{percentage}</p>
-            </div>
-            <div className="bg-yellow-100 p-4 rounded-2xl col-span-2 shadow-sm">
-              <p className="text-sm text-yellow-600 font-bold">XP Didapat</p>
+            <div className="quiz-result-stat bg-yellow-100 p-4 rounded-2xl col-span-2 shadow-sm">
+              <p className="text-xs text-yellow-700 font-bold uppercase tracking-wide">XP Didapat</p>
               <p className="text-2xl font-black text-yellow-700">+{finalXP} XP</p>
             </div>
           </div>
@@ -335,6 +358,25 @@ function Quiz() {
                   Jawab
                 </button>
               </div>
+            </>
+          )}
+
+          {hasTextAnswer && (
+            <>
+              <input
+                type="text"
+                value={selected}
+                onChange={(e) => setSelected(e.target.value)}
+                placeholder="Ketik jawaban..."
+                className="w-full border p-4 rounded-2xl outline-none focus:ring-2 focus:ring-green-500/40"
+              />
+
+              <button
+                onClick={submitBlockAnswer}
+                className="mt-4 w-full bg-green-500 text-white py-3 rounded-xl font-bold hover:bg-green-600 transition"
+              >
+                Jawab
+              </button>
             </>
           )}
 

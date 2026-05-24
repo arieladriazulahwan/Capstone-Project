@@ -285,7 +285,7 @@ function Level() {
               </h3>
 
               <div className="flex flex-col gap-3">
-                {babList.map((bab) => {
+                {babList.map((bab, index) => {
                   const isUnlocked = Boolean(user.progress?.[bab.key]);
                   const classes = colorClass[bab.color];
 
@@ -299,7 +299,7 @@ function Level() {
                       }`}
                     >
                       <div>
-                        <p className="font-semibold">{bab.label}</p>
+                        <p className="font-semibold">BAB {index + 1}</p>
                         <p className="text-sm text-gray-500">{bab.title}</p>
                       </div>
 

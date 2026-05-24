@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { BookOpen, Clock3, Type } from "lucide-react";
 import NavbarGuru from "../components/NavbarGuru";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
@@ -53,10 +54,10 @@ function BuatRoom() {
   // Loading state
   if (!user) {
     return (
-      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-        <div className="text-center">
+      <div className="teacher-page-bg min-h-screen flex items-center justify-center">
+        <div className="teacher-loading-card rounded-3xl bg-white/90 px-6 py-5 text-center shadow">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p>Loading...</p>
+          <p className="font-semibold text-gray-700">Memuat halaman buat room...</p>
         </div>
       </div>
     );
@@ -321,57 +322,88 @@ function BuatRoom() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="teacher-page-bg min-h-screen">
       <NavbarGuru user={user} showBackButton={true} />
 
       <div className="max-w-5xl mx-auto p-4 pb-64">
 
         {/* HEADER */}
-        <h1 className="text-2xl font-bold mb-5">
+        <div className="teacher-hero-card mb-5 rounded-3xl p-5 text-white shadow-xl">
+          <p className="mb-2 inline-flex rounded-full bg-white/20 px-3 py-1 text-xs font-bold">
+            Buat aktivitas guru
+          </p>
+          <h1 className="text-2xl font-black">Buat Room</h1>
+          <p className="mt-1 text-sm text-blue-50">
+            Buat Room Untuk Siswa.
+          </p>
+        </div>
+        <h1 className="sr-only">
           🎯 Buat Room
         </h1>
 
       {/* ROOM */}
-      <div className="bg-white p-5 rounded-2xl shadow mb-5">
-
-        <div className="mb-3">
-          <label className={labelClass}>Nama Room</label>
-          <input
-            type="text"
-            placeholder="Contoh: Kuis Bab 1"
-            value={title}
-            onChange={(e) =>
-              setTitle(e.target.value)
-            }
-            className="w-full border p-3 rounded-xl"
-          />
+      <div className="teacher-form-card bg-white/90 p-5 rounded-3xl shadow mb-5">
+        <div className="mb-5 flex items-center justify-between gap-3">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-wide text-blue-500">
+              Room
+            </p>
+            <h2 className="text-lg font-black text-gray-900">Masukkan Detail Room</h2>
+          </div>
+          <div className="hidden h-12 w-12 items-center justify-center rounded-2xl bg-blue-100 text-blue-600 sm:flex">
+            <BookOpen size={24} />
+          </div>
         </div>
 
-        <div className="mb-3">
-          <label className={labelClass}>Subjek</label>
-          <input
-            type="text"
-            placeholder="Contoh: Bahasa Kaili Ledo"
-            value={category}
-            onChange={(e) =>
-              setCategory(e.target.value)
-            }
-            className="w-full border p-3 rounded-xl"
-          />
-        </div>
+        <div className="grid gap-4 md:grid-cols-2">
+          <div className="teacher-field">
+            <label className={labelClass}>Nama Room</label>
+            <div className="teacher-input-shell">
+              <Type className="teacher-input-icon" size={19} />
+              <input
+                type="text"
+                placeholder="Contoh: Kuis Bab 1"
+                value={title}
+                onChange={(e) =>
+                  setTitle(e.target.value)
+                }
+                className="teacher-input teacher-input-with-icon w-full border p-3 rounded-xl"
+              />
+            </div>
+          </div>
 
-        <div>
-          <label className={labelClass}>Timer per Soal</label>
-          <input
-            type="number"
-            placeholder="Contoh: 15"
-            value={timer}
-            onChange={(e) =>
-              setTimer(parseInt(e.target.value) || 0)
-            }
-            className="w-full border p-3 rounded-xl"
-          />
-          <p className={hintClass}>Waktu dihitung dalam detik.</p>
+          <div className="teacher-field">
+            <label className={labelClass}>Subjek</label>
+            <div className="teacher-input-shell">
+              <BookOpen className="teacher-input-icon" size={19} />
+              <input
+                type="text"
+                placeholder="Contoh: Bahasa Kaili Ledo"
+                value={category}
+                onChange={(e) =>
+                  setCategory(e.target.value)
+                }
+                className="teacher-input teacher-input-with-icon w-full border p-3 rounded-xl"
+              />
+            </div>
+          </div>
+
+          <div className="teacher-field md:col-span-2">
+            <label className={labelClass}>Timer per Soal</label>
+            <div className="teacher-input-shell">
+              <Clock3 className="teacher-input-icon" size={19} />
+              <input
+                type="number"
+                placeholder="Contoh: 15"
+                value={timer}
+                onChange={(e) =>
+                  setTimer(parseInt(e.target.value) || 0)
+                }
+                className="teacher-input teacher-input-with-icon w-full border p-3 rounded-xl"
+              />
+            </div>
+            <p className={`${hintClass} text-left`}>Waktu dihitung dalam detik.</p>
+          </div>
         </div>
 
       </div>
@@ -382,7 +414,7 @@ function BuatRoom() {
         {questions.map((q, index) => (
           <div
             key={index}
-            className="bg-white p-5 rounded-2xl shadow"
+            className="teacher-question-card bg-white/90 p-5 rounded-3xl shadow"
           >
 
             <div className="flex items-center justify-between mb-4">
@@ -392,7 +424,7 @@ function BuatRoom() {
 
               <button
                 onClick={() => removeQuestion(index)}
-                className="text-red-500 font-semibold"
+                className="text-red-500 font-semibold transition hover:text-red-700"
               >
                 Hapus Soal
               </button>
@@ -412,7 +444,7 @@ function BuatRoom() {
                     e.target.value
                   )
                 }
-                className="w-full border p-3 rounded-xl"
+                className="teacher-input w-full border p-3 rounded-xl"
               />
             </div>
 
@@ -467,7 +499,7 @@ function BuatRoom() {
                       e.target.value
                     )
                   }
-                  className="w-full border p-3 rounded-xl"
+                  className="teacher-input w-full border p-3 rounded-xl"
                 >
                   {q.type === "gambar" && (
                     <option value="pilihan">
@@ -520,7 +552,7 @@ function BuatRoom() {
                             e.target.value
                           )
                         }
-                        className="flex-1 border p-2 rounded-xl"
+                        className="teacher-input flex-1 border p-2 rounded-xl"
                         aria-label={`Opsi jawaban ${oIndex + 1}`}
                       />
 
@@ -562,7 +594,7 @@ function BuatRoom() {
                         e.target.value
                       )
                     }
-                    className="w-full border p-3 rounded-xl"
+                    className="teacher-input w-full border p-3 rounded-xl"
                   >
                     <option value="">
                       Pilih Jawaban Benar
@@ -606,7 +638,7 @@ function BuatRoom() {
                         e.target.value
                       )
                     }
-                    className="w-full border p-3 rounded-xl"
+                    className="teacher-input w-full border p-3 rounded-xl"
                   />
                 </div>
               )}
@@ -642,7 +674,7 @@ function BuatRoom() {
                             e.target.value
                           )
                         }
-                        className="flex-1 border p-2 rounded-xl"
+                        className="teacher-input flex-1 border p-2 rounded-xl"
                         aria-label={`Blok kata ${bIndex + 1}`}
                       />
 
@@ -734,7 +766,7 @@ function BuatRoom() {
 
       </div>
 
-      <div className="fixed bottom-4 left-4 right-4 z-50 mx-auto max-w-5xl rounded-2xl border border-gray-200 bg-white/95 p-3 shadow-2xl backdrop-blur">
+      <div className="teacher-floating-actions fixed bottom-4 left-4 right-4 z-50 mx-auto max-w-5xl rounded-3xl border border-blue-100 bg-white/95 p-3 shadow-2xl backdrop-blur">
         <div className="mb-2 flex items-center justify-between gap-3">
           <p className="text-sm font-bold text-gray-700">Tambah Soal</p>
           <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-semibold text-gray-500">
@@ -747,7 +779,7 @@ function BuatRoom() {
               key={item.type}
               type="button"
               onClick={() => addQuestion(item.type)}
-              className={`${item.className} rounded-xl px-3 py-2 text-sm font-semibold text-white shadow transition`}
+              className={`${item.className} rounded-xl px-3 py-2 text-sm font-semibold text-white shadow transition hover:-translate-y-0.5`}
             >
               + {item.label}
             </button>
@@ -764,7 +796,7 @@ function BuatRoom() {
           <button
             type="button"
             onClick={submitRoom}
-            className="rounded-xl bg-blue-600 p-3 text-sm font-bold text-white shadow hover:bg-blue-700"
+            className="teacher-room-action rounded-xl bg-blue-600 p-3 text-sm font-bold text-white shadow hover:bg-blue-700"
           >
             Buat Room
           </button>
