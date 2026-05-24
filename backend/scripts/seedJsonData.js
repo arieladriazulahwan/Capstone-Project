@@ -199,16 +199,25 @@ const seedJsonData = async () => {
   const connection = await db.promise().getConnection();
 
   try {
+    console.log("Menyiapkan tabel JSON...");
     await createJsonDataTables(db);
-    await connection.query("START TRANSACTION");
+
+    console.log("Reset tabel...");
     await resetTables(connection);
 
+    console.log("Seed vocab...");
     const vocab = await seedVocab(connection);
+
+    console.log("Seed lessons...");
     const lessons = await seedLessons(connection);
+
+    console.log("Seed practices...");
     const practices = await seedPractices(connection);
+
+    console.log("Seed quiz...");
     const quiz = await seedQuiz(connection);
 
-    await connection.query("COMMIT");
+    console.log("Semua data berhasil di-seed.");
 
     return {
       vocab,
@@ -217,7 +226,14 @@ const seedJsonData = async () => {
       quiz,
     };
   } catch (err) {
-    await connection.query("ROLLBACK");
+    console.error("Error saat seed data:", err);
+
+    try {
+      await connection.query("ROLLBACK");
+    } catch (rollbackErr) {
+      console.error("Rollback gagal:", rollbackErr.message);
+    }
+
     throw err;
   } finally {
     connection.release();

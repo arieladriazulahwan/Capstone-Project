@@ -4,6 +4,7 @@ import BottomNav from "../components/BottomNav";
 import Navbar from "../components/Navbar";
 import { useNavigate } from "react-router-dom";
 import Leaderboard from "./Leaderboard";
+import handwave from "../assets/handwave.svg";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
@@ -203,7 +204,7 @@ function Dashboard() {
               <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.28),transparent_28%),radial-gradient(circle_at_80%_10%,rgba(255,255,255,0.18),transparent_24%)]"></div>
 
               <h2 className="relative font-bold text-lg">
-                Halo, {user?.name || "User"} 👋
+                Halo, {user?.name || "User"} <img src={handwave} alt="Handwave" className="inline w-6 h-6" />
               </h2>
 
               <p className="relative text-sm text-green-50">

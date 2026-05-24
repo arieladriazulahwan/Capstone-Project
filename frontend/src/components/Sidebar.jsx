@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import hideSidebarIcon from "../assets/hide-sidebar.svg";
+import iconhome from "../assets/homelogo.svg";
+import icongame from "../assets/gamelogo.svg";
+import icontranslate from "../assets/translatelogo.svg";
 
 function Sidebar({ role = "siswa" }) {
   // Baca state awal dari localStorage, atau default ke `false` (terbuka)
@@ -32,17 +35,28 @@ function Sidebar({ role = "siswa" }) {
       : [
           {
             name: "Dashboard",
-            icon: "🏠",
+            icon:  <img
+            src={iconhome}
+            alt="Dashboard"
+            className="w-6 h-6"
+            />,
             path: "/dashboard",
           },
           {
             name: "Level",
-            icon: "⭐",
+            icon: <img
+            src={icongame}
+            alt="Level"
+            className="w-6 h-6"
+            />,
             path: "/level",
           },
           {
             name: "Kamus",
-            icon: "📚",
+            icon: <img
+            src={icontranslate}
+            alt="Kamus"
+            className="w-6 h-6"/>,
             path: "/kamus",
           },
         ];

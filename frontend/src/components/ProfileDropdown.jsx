@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import studentlogo from "../assets/student.svg";
 
 function ProfileDropdown({ user }) {
   const [open, setOpen] = useState(false);
@@ -27,9 +28,8 @@ function ProfileDropdown({ user }) {
       {/* AVATAR */}
       <div
         onClick={() => setOpen(!open)}
-        className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center cursor-pointer"
-      >
-        👨‍🎓
+        className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center cursor-pointer">
+        <img w-6 h-6 src={studentlogo} alt="Student Logo" />
       </div>
 
       {/* DROPDOWN */}
