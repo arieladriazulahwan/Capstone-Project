@@ -3,6 +3,7 @@ const path = require("path");
 
 const filePath = path.join(__dirname, "../data/vocab.json");
 const validDialects = ["ledo", "rai"];
+const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 // 🔥 GET ALL
 exports.getAllVocab = (req, res) => {
@@ -135,4 +136,42 @@ exports.addVocab = (req, res) => {
   fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
 
   res.json({ message: "Berhasil tambah vocab", data: newVocab });
+};
+
+// 🔥 TRANSLATE SENTENCE DENGAN GEMINI AI
+exports.translateSentence = async (req, res) => {
+  try {
+    const { text, sourceLang, targetLang, dialect } = req.body;
+    
+    if (!text) {
+      return res.status(400).json({ message: "Teks tidak boleh kosong" });
+    }
+
+    if (!process.env.GEMINI_API_KEY) {
+      return res.status(500).json({ message: "API Key Gemini belum dikonfigurasi di server." });
+    }
+
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+    const model = genAI.getGenerativeModel({ model: "gemini-3.5-flash" });
+    
+    let prompt = "";
+    const selectedDialect = dialect || "Ledo";
+    
+    if (sourceLang === "indo" && targetLang === "kaili") {
+      prompt = `Anda adalah ahli bahasa daerah Kaili (dialek ${selectedDialect}). Terjemahkan kalimat bahasa Indonesia berikut ke dalam bahasa Kaili dialek ${selectedDialect}. HANYA berikan teks hasil terjemahannya saja tanpa penjelasan apapun, tanpa tanda kutip.\n\nTeks: ${text}`;
+    } else if (sourceLang === "kaili" && targetLang === "indo") {
+      prompt = `Anda adalah ahli bahasa daerah Kaili (dialek ${selectedDialect}). Terjemahkan kalimat bahasa Kaili dialek ${selectedDialect} berikut ke dalam bahasa Indonesia. HANYA berikan teks hasil terjemahannya saja tanpa penjelasan apapun, tanpa tanda kutip.\n\nTeks: ${text}`;
+    } else {
+      return res.status(400).json({ message: "Kombinasi bahasa tidak didukung" });
+    }
+
+    const result = await model.generateContent(prompt);
+    const response = await result.response;
+    const translatedText = response.text().trim();
+
+    res.json({ translation: translatedText });
+  } catch (error) {
+    console.error("Error Gemini translation:", error);
+    res.status(500).json({ message: "Gagal menerjemahkan kalimat. Pastikan API Key valid atau coba lagi nanti." });
+  }
 };

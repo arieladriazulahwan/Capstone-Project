@@ -5,6 +5,8 @@ import Navbar from "../components/Navbar";
 import { useNavigate } from "react-router-dom";
 import Leaderboard from "./Leaderboard";
 import handwave from "../assets/handwave.svg";
+import kelas from "../assets/classroom.svg";
+import roket from "../assets/rocket.svg";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
@@ -258,7 +260,7 @@ function Dashboard() {
               <div className="flex items-center gap-3 mb-4">
 
                 <div className="bg-white w-14 h-14 rounded-2xl flex items-center justify-center text-3xl shadow">
-                  🎯
+                  <img src={kelas} alt="Kelas" className="w-8 h-8 object-contain" />
                 </div>
 
                 <div>
@@ -297,7 +299,15 @@ function Dashboard() {
 
                 {joinLoading
                   ? "Memproses..."
-                  : "🚀 Masuk ke Kuis"}
+                  : <span className="flex items-center justify-center gap-2">
+                    <img
+                      src={roket}
+                      alt="Rocket"
+                      className="w-7 h-7"
+                    />
+
+                    Masuk ke Kuis
+                  </span>}
 
               </button>
 

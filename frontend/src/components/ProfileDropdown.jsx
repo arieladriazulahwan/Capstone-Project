@@ -29,7 +29,7 @@ function ProfileDropdown({ user }) {
       <div
         onClick={() => setOpen(!open)}
         className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center cursor-pointer">
-        <img w-6 h-6 src={studentlogo} alt="Student Logo" />
+        <img className="w-8 h-8" src={studentlogo} alt="Student Logo" />
       </div>
 
       {/* DROPDOWN */}
