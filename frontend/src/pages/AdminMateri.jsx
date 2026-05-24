@@ -546,10 +546,10 @@ function AdminMateri() {
     q.category?.toLowerCase() === selectedLevel?.title.toLowerCase()
   );
 
-  if (!user) return <div className="min-h-screen flex items-center justify-center bg-gray-50">Loading...</div>;
+  if (!user) return <div className="admin-page-bg min-h-screen flex items-center justify-center">Loading...</div>;
 
   return (
-    <div className="min-h-screen bg-gray-50 flex overflow-hidden">
+    <div className="admin-page-bg min-h-screen flex overflow-hidden">
       <SidebarAdmin />
       <div className="flex-1 flex flex-col min-w-0">
         <NavbarAdmin user={user} />
@@ -557,30 +557,30 @@ function AdminMateri() {
           <div className="max-w-6xl mx-auto w-full">
 
             {/* HEADER & BREADCRUMBS */}
-            <div className="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div className="admin-hero-card mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4 rounded-3xl p-5 text-white shadow-lg shadow-purple-500/20">
               <div>
-                <h1 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
-                  📖 Kelola Materi
+                <h1 className="text-2xl font-bold flex items-center gap-2">
+                  Kelola Materi
                 </h1>
-                <div className="flex items-center gap-2 mt-2 text-sm text-gray-500">
-                  <span className="cursor-pointer hover:text-purple-600" onClick={() => { setSelectedBab(null); setSelectedLevel(null); }}>Semua Bab</span>
+                <div className="flex items-center gap-2 mt-2 text-sm text-purple-100">
+                  <span className="cursor-pointer hover:text-white" onClick={() => { setSelectedBab(null); setSelectedLevel(null); }}>Semua Bab</span>
                   {selectedBab && (
                     <>
                       <span>/</span>
-                      <span className="cursor-pointer hover:text-purple-600" onClick={() => setSelectedLevel(null)}>{getBabTitle(selectedBab)}</span>
+                      <span className="cursor-pointer hover:text-white" onClick={() => setSelectedLevel(null)}>{getBabTitle(selectedBab)}</span>
                     </>
                   )}
                   {selectedLevel && (
                     <>
                       <span>/</span>
-                      <span className="font-semibold text-purple-700">{selectedLevel.title}</span>
+                      <span className="font-semibold text-white">{selectedLevel.title}</span>
                     </>
                   )}
                 </div>
               </div>
 
               {/* Dialect Selector */}
-              <div className="flex gap-2 bg-white p-1 rounded-xl shadow-sm border border-gray-100">
+              <div className="flex gap-2 bg-white/15 p-1 rounded-xl shadow-sm border border-white/20 backdrop-blur">
                 <button
                   onClick={() => { setSelectedDialect("ledo"); setSelectedLevel(null); }}
                   className={`px-4 py-2 rounded-lg text-sm font-bold transition ${selectedDialect === "ledo" ? "bg-purple-100 text-purple-700" : "text-gray-500 hover:bg-gray-50"}`}
@@ -604,7 +604,7 @@ function AdminMateri() {
                 </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {editableBabs.map((bab, index) => (
-                  <div key={bab.key} className="bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-md hover:border-purple-300 transition group overflow-hidden">
+                  <div key={bab.key} className="admin-glass-card rounded-3xl shadow-sm hover:shadow-md hover:border-purple-300 transition group overflow-hidden">
                     <div onClick={() => setSelectedBab(bab.key)} className="p-6 cursor-pointer">
                       <div className="flex justify-between items-start mb-4">
                         <div className={`w-12 h-12 rounded-xl flex items-center justify-center bg-${bab.color}-100 text-${bab.color}-600`}>
@@ -637,7 +637,7 @@ function AdminMateri() {
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                   {getLevels(selectedBab).map((level, index) => (
-                    <div key={level.key} className="bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-md hover:border-purple-300 transition overflow-hidden">
+                    <div key={level.key} className="admin-glass-card rounded-3xl shadow-sm hover:shadow-md hover:border-purple-300 transition overflow-hidden">
                       <div onClick={() => setSelectedLevel(level)} className="p-5 cursor-pointer">
                         <span className="inline-flex mb-3 rounded-full bg-purple-50 px-3 py-1 text-xs font-bold text-purple-700">
                           Level {index + 1}
@@ -675,7 +675,7 @@ function AdminMateri() {
                 {loading ? (
                   <div className="text-center p-10 text-gray-400">Memuat data...</div>
                 ) : (
-                  <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                  <div className="admin-glass-card rounded-3xl shadow-sm overflow-hidden">
                     
                     {/* TAB MATERI */}
                     {tab === "materi" && (
@@ -823,7 +823,7 @@ function AdminMateri() {
       {/* MATERI MODAL */}
       {showLessonModal && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/50 p-4">
-          <div className="bg-white rounded-2xl w-full max-w-md p-6 shadow-2xl">
+          <div className="admin-glass-card rounded-3xl w-full max-w-md p-6 shadow-2xl">
             <h3 className="font-bold text-lg mb-4">{editLessonIndex !== null ? "Edit Materi" : "Tambah Materi"}</h3>
             <div className="space-y-4">
               <div><label className="text-sm font-medium mb-1 block text-gray-700">Indonesia</label><input type="text" value={lessonForm.indo} onChange={e => setLessonForm({...lessonForm, indo: e.target.value})} className="w-full border rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-purple-500/50" /></div>
@@ -841,7 +841,7 @@ function AdminMateri() {
       {/* LATIHAN MODAL */}
       {showPracticeModal && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/50 p-4">
-          <div className="bg-white rounded-2xl w-full max-w-md p-6 max-h-[90vh] overflow-y-auto shadow-2xl">
+          <div className="admin-glass-card rounded-3xl w-full max-w-md p-6 max-h-[90vh] overflow-y-auto shadow-2xl">
             <h3 className="font-bold text-lg mb-4">{editPracticeIndex !== null ? "Edit Latihan" : "Tambah Latihan"}</h3>
             <div className="space-y-4">
               <div><label className="text-sm font-medium mb-1 block text-gray-700">Pertanyaan</label><input type="text" value={practiceForm.question} onChange={e => setPracticeForm({...practiceForm, question: e.target.value})} className="w-full border rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-purple-500/50" /></div>
@@ -886,7 +886,7 @@ function AdminMateri() {
       {/* KUIS MODAL */}
       {showQuizModal && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/50 p-4">
-          <div className="bg-white rounded-2xl w-full max-w-2xl p-6 max-h-[90vh] overflow-y-auto shadow-2xl">
+          <div className="admin-glass-card rounded-3xl w-full max-w-2xl p-6 max-h-[90vh] overflow-y-auto shadow-2xl">
             <h3 className="font-bold text-lg mb-4">{editQuiz ? "Edit Kuis" : "Tambah Kuis"}</h3>
             <div className="space-y-4">
               <div>
@@ -1046,7 +1046,7 @@ function AdminMateri() {
       {/* BAB MODAL */}
       {showBabModal && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/50 p-4">
-          <div className="bg-white rounded-2xl w-full max-w-md p-6 shadow-2xl">
+          <div className="admin-glass-card rounded-3xl w-full max-w-md p-6 shadow-2xl">
             <h3 className="font-bold text-lg mb-4">{babForm.isEdit ? "Edit Bab" : "Tambah Bab"}</h3>
             <div className="space-y-4">
               <div><label className="text-sm font-medium mb-1 block text-gray-700">Key (Contoh: bab4)</label><input type="text" value={babForm.key} disabled={babForm.isEdit} onChange={e => setBabForm({...babForm, key: e.target.value})} className="w-full border rounded-xl px-4 py-2 text-sm outline-none focus:ring-2 focus:ring-purple-500/50 disabled:bg-gray-100" /></div>
@@ -1065,7 +1065,7 @@ function AdminMateri() {
       {/* LEVEL MODAL */}
       {showLevelModal && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/50 p-4">
-          <div className="bg-white rounded-2xl w-full max-w-md p-6 shadow-2xl">
+          <div className="admin-glass-card rounded-3xl w-full max-w-md p-6 shadow-2xl">
             <h3 className="font-bold text-lg mb-4">{levelForm.isEdit ? "Edit Level" : "Tambah Level"}</h3>
             <div className="space-y-4">
               <div><label className="text-sm font-medium mb-1 block text-gray-700">Key (Contoh: kata-sifat)</label><input type="text" value={levelForm.key} disabled={levelForm.isEdit} onChange={e => setLevelForm({...levelForm, key: e.target.value})} className="w-full border rounded-xl px-4 py-2 text-sm outline-none focus:ring-2 focus:ring-purple-500/50 disabled:bg-gray-100" /></div>
@@ -1098,3 +1098,4 @@ function AdminMateri() {
 }
 
 export default AdminMateri;
+

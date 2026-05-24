@@ -27,7 +27,7 @@ function UsageLineChart({ data = [] }) {
   const yTicks = [0, Math.ceil(maxValue / 2), maxValue];
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 mb-6">
+    <div className="admin-table-card rounded-2xl shadow-sm p-4 mb-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-3">
         <div>
           <h3 className="font-bold text-lg text-gray-800">Grafik Penggunaan</h3>
@@ -133,7 +133,7 @@ function DashboardAdmin() {
 
   if (!user) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="admin-page-bg min-h-screen flex items-center justify-center">
         <div className="flex items-center gap-2 text-gray-500">
           <div className="w-5 h-5 border-2 border-purple-500 border-t-transparent rounded-full animate-spin"></div>
           Loading...
@@ -217,7 +217,7 @@ function DashboardAdmin() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 flex overflow-hidden">
+    <div className="admin-page-bg min-h-screen flex overflow-hidden">
       <SidebarAdmin />
 
       <div className="flex-1 flex flex-col min-w-0">
@@ -226,7 +226,7 @@ function DashboardAdmin() {
         <main className="flex-1 p-4 pb-24 md:p-6 overflow-y-auto overflow-x-hidden">
           <div className="max-w-6xl mx-auto w-full">
             {/* GREETING */}
-            <div className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-2xl p-6 mb-6 shadow-lg shadow-purple-500/20">
+            <div className="admin-hero-card text-white rounded-3xl p-6 mb-6 shadow-lg shadow-purple-500/20">
               <h2 className="font-bold text-xl mb-1">
                 Selamat datang, {user.name} 👋
               </h2>
@@ -241,7 +241,7 @@ function DashboardAdmin() {
                 <div
                   key={i}
                   onClick={() => navigate(card.path)}
-                  className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 cursor-pointer hover:shadow-md transition-all duration-200 group"
+                  className="admin-stat-card rounded-2xl p-4 shadow-sm cursor-pointer transition-all duration-200 group"
                 >
                   <div className="flex items-center gap-2 mb-2">
                     <div
@@ -271,7 +271,7 @@ function DashboardAdmin() {
                 <div
                   key={i}
                   onClick={() => navigate(action.path)}
-                  className={`bg-white rounded-xl p-5 border-2 cursor-pointer transition-all duration-200 hover:shadow-lg ${action.color}`}
+                  className={`admin-action-card rounded-2xl p-5 border-2 cursor-pointer transition-all duration-200 hover:shadow-lg ${action.color}`}
                 >
                   <div className="flex items-center gap-3">
                     <span className="text-3xl">{action.icon}</span>

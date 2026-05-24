@@ -71,7 +71,7 @@ function AdminRooms() {
 
   if (!user) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="admin-page-bg min-h-screen flex items-center justify-center">
         <div className="flex items-center gap-2 text-gray-500">
           <div className="w-5 h-5 border-2 border-purple-500 border-t-transparent rounded-full animate-spin"></div>
           Loading...
@@ -81,24 +81,24 @@ function AdminRooms() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex overflow-hidden">
+    <div className="admin-page-bg min-h-screen flex overflow-hidden">
       <SidebarAdmin />
       <div className="flex-1 flex flex-col min-w-0">
         <NavbarAdmin user={user} />
         <main className="flex-1 p-4 pb-24 md:p-6 overflow-y-auto overflow-x-hidden">
           <div className="max-w-6xl mx-auto w-full">
             {/* HEADER */}
-            <div className="mb-5">
-              <h1 className="text-xl font-bold text-gray-800">
-                🏠 Moderasi Room Kelas
+            <div className="admin-hero-card mb-5 rounded-3xl p-5 text-white shadow-lg shadow-purple-500/20">
+              <h1 className="text-xl font-bold">
+                Moderasi Room Kelas
               </h1>
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-purple-100">
                 {rooms.length} room terdaftar dari semua guru
               </p>
             </div>
 
             {/* TABLE */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-x-auto">
+            <div className="admin-table-card rounded-2xl shadow-sm overflow-x-auto">
               {loading ? (
                 <div className="p-8 text-center text-gray-400">Memuat...</div>
               ) : rooms.length === 0 ? (
@@ -182,7 +182,7 @@ function AdminRooms() {
       {/* DETAIL MODAL */}
       {showDetail && selectedRoom && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
-          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+          <div className="admin-glass-card rounded-3xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
             <div className="p-6">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-lg font-bold text-gray-800">
@@ -307,3 +307,4 @@ function AdminRooms() {
 }
 
 export default AdminRooms;
+

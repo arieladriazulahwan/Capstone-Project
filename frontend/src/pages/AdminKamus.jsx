@@ -194,7 +194,7 @@ function AdminKamus() {
 
   if (!user) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="admin-page-bg min-h-screen flex items-center justify-center">
         <div className="flex items-center gap-2 text-gray-500">
           <div className="w-5 h-5 border-2 border-purple-500 border-t-transparent rounded-full animate-spin"></div>
           Loading...
@@ -204,41 +204,41 @@ function AdminKamus() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex overflow-hidden">
+    <div className="admin-page-bg min-h-screen flex overflow-hidden">
       <SidebarAdmin />
       <div className="flex-1 flex flex-col min-w-0">
         <NavbarAdmin user={user} />
         <main className="flex-1 p-4 pb-24 md:p-6 overflow-y-auto overflow-x-hidden">
           <div className="max-w-6xl mx-auto w-full">
             {/* HEADER */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-5">
+            <div className="admin-hero-card flex flex-col md:flex-row md:items-center justify-between gap-3 mb-5 rounded-3xl p-5 text-white shadow-lg shadow-purple-500/20">
               <div>
-                <h1 className="text-xl font-bold text-gray-800">📚 Kelola Kamus</h1>
-                <p className="text-sm text-gray-500">
+                <h1 className="text-xl font-bold">Kelola Kamus</h1>
+                <p className="text-sm text-purple-100">
                   {vocabList.length} kosakata terdaftar
                 </p>
               </div>
               <button
                 onClick={openAdd}
-                className="px-5 py-2.5 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-xl font-semibold shadow-lg shadow-purple-500/20 hover:shadow-xl transition-all text-sm"
+                className="px-5 py-2.5 bg-white text-purple-700 rounded-xl font-semibold shadow-lg hover:-translate-y-0.5 hover:shadow-xl transition-all text-sm"
               >
-                ＋ Tambah Kosakata
+                Tambah Kosakata
               </button>
             </div>
 
             {/* FILTERS */}
-            <div className="flex flex-col md:flex-row gap-3 mb-4">
+            <div className="admin-filter-card flex flex-col md:flex-row gap-3 mb-4 rounded-2xl p-3 shadow-sm">
               <input
                 type="text"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Cari kosakata..."
-                className="flex-1 px-4 py-2.5 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 text-sm"
+                className="flex-1 px-4 py-2.5 border border-gray-200 rounded-xl focus:outline-none admin-input focus:ring-2 focus:ring-purple-400 text-sm"
               />
               <select
                 value={filterDialect}
                 onChange={(e) => setFilterDialect(e.target.value)}
-                className="px-4 py-2.5 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 text-sm"
+                className="px-4 py-2.5 border border-gray-200 rounded-xl focus:outline-none admin-input focus:ring-2 focus:ring-purple-400 text-sm"
               >
                 <option value="">Semua Dialek</option>
                 <option value="ledo">Ledo</option>
@@ -247,7 +247,7 @@ function AdminKamus() {
               <select
                 value={filterCategory}
                 onChange={(e) => setFilterCategory(e.target.value)}
-                className="px-4 py-2.5 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 text-sm"
+                className="px-4 py-2.5 border border-gray-200 rounded-xl focus:outline-none admin-input focus:ring-2 focus:ring-purple-400 text-sm"
               >
                 <option value="">Semua Kategori</option>
                 {CATEGORIES.map((cat) => (
@@ -259,7 +259,7 @@ function AdminKamus() {
             </div>
 
             {/* TABLE */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-x-auto">
+            <div className="admin-table-card rounded-2xl shadow-sm overflow-x-auto">
               {loading ? (
                 <div className="p-8 text-center text-gray-400">Memuat data...</div>
               ) : paged.length === 0 ? (
@@ -368,7 +368,7 @@ function AdminKamus() {
       {/* MODAL */}
       {showModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
-          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
+          <div className="admin-glass-card rounded-3xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
             <div className="p-6">
               <h3 className="text-lg font-bold text-gray-800 mb-4">
                 {editItem ? "✏️ Edit Kosakata" : "＋ Tambah Kosakata"}
@@ -385,7 +385,7 @@ function AdminKamus() {
                     onChange={(e) =>
                       setForm({ ...form, indonesia: e.target.value })
                     }
-                    className="w-full px-4 py-2.5 border rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 text-sm"
+                    className="w-full px-4 py-2.5 border rounded-xl focus:outline-none admin-input focus:ring-2 focus:ring-purple-400 text-sm"
                     placeholder="Contoh: rumah"
                   />
                 </div>
@@ -399,7 +399,7 @@ function AdminKamus() {
                     onChange={(e) =>
                       setForm({ ...form, category: e.target.value })
                     }
-                    className="w-full px-4 py-2.5 border rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 text-sm"
+                    className="w-full px-4 py-2.5 border rounded-xl focus:outline-none admin-input focus:ring-2 focus:ring-purple-400 text-sm"
                   >
                     <option value="">— Pilih Kategori —</option>
                     {CATEGORIES.map((cat) => (
@@ -421,7 +421,7 @@ function AdminKamus() {
                         onChange={(e) =>
                           updateTranslation(i, "dialect", e.target.value)
                         }
-                        className="px-3 py-2 border rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
+                        className="px-3 py-2 border rounded-xl text-sm focus:outline-none admin-input focus:ring-2 focus:ring-purple-400"
                       >
                         <option value="ledo">Ledo</option>
                         <option value="rai">Rai</option>
@@ -432,7 +432,7 @@ function AdminKamus() {
                         onChange={(e) =>
                           updateTranslation(i, "word", e.target.value)
                         }
-                        className="flex-1 px-3 py-2 border rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
+                        className="flex-1 px-3 py-2 border rounded-xl text-sm focus:outline-none admin-input focus:ring-2 focus:ring-purple-400"
                         placeholder="Kata dalam Kaili"
                       />
                       {form.translations.length > 1 && (
@@ -486,3 +486,4 @@ function AdminKamus() {
 }
 
 export default AdminKamus;
+

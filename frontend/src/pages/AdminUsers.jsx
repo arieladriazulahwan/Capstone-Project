@@ -195,7 +195,7 @@ function AdminUsers() {
 
   if (!user) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="admin-page-bg min-h-screen flex items-center justify-center">
         <div className="flex items-center gap-2 text-gray-500">
           <div className="w-5 h-5 border-2 border-purple-500 border-t-transparent rounded-full animate-spin"></div>
           Loading...
@@ -205,43 +205,43 @@ function AdminUsers() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex overflow-hidden">
+    <div className="admin-page-bg min-h-screen flex overflow-hidden">
       <SidebarAdmin />
       <div className="flex-1 flex flex-col min-w-0">
         <NavbarAdmin user={user} />
         <main className="flex-1 p-4 pb-24 md:p-6 overflow-y-auto overflow-x-hidden">
           <div className="max-w-6xl mx-auto w-full">
             {/* HEADER */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-5">
+            <div className="admin-hero-card flex flex-col md:flex-row md:items-center justify-between gap-3 mb-5 rounded-3xl p-5 text-white shadow-lg shadow-purple-500/20">
               <div>
-                <h1 className="text-xl font-bold text-gray-800">
-                  👥 Kelola Pengguna
+                <h1 className="text-xl font-bold">
+                  Kelola Pengguna
                 </h1>
-                <p className="text-sm text-gray-500">
+                <p className="text-sm text-purple-100">
                   {users.length} pengguna terdaftar
                 </p>
               </div>
               <button
                 onClick={openAdd}
-                className="px-5 py-2.5 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-xl font-semibold shadow-lg shadow-purple-500/20 hover:shadow-xl transition-all text-sm"
+                className="px-5 py-2.5 bg-white text-purple-700 rounded-xl font-semibold shadow-lg hover:-translate-y-0.5 hover:shadow-xl transition-all text-sm"
               >
-                ＋ Tambah Pengguna
+                Tambah Pengguna
               </button>
             </div>
 
             {/* FILTERS */}
-            <div className="flex flex-col md:flex-row gap-3 mb-4">
+            <div className="admin-filter-card flex flex-col md:flex-row gap-3 mb-4 rounded-2xl p-3 shadow-sm">
               <input
                 type="text"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Cari nama atau username..."
-                className="flex-1 px-4 py-2.5 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 text-sm"
+                className="flex-1 px-4 py-2.5 border border-gray-200 rounded-xl focus:outline-none admin-input focus:ring-2 focus:ring-purple-400 text-sm"
               />
               <select
                 value={filterRole}
                 onChange={(e) => setFilterRole(e.target.value)}
-                className="px-4 py-2.5 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 text-sm"
+                className="px-4 py-2.5 border border-gray-200 rounded-xl focus:outline-none admin-input focus:ring-2 focus:ring-purple-400 text-sm"
               >
                 <option value="">Semua Role</option>
                 <option value="siswa">Siswa</option>
@@ -250,7 +250,7 @@ function AdminUsers() {
             </div>
 
             {/* TABLE */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-x-auto">
+            <div className="admin-table-card rounded-2xl shadow-sm overflow-x-auto">
               {loading ? (
                 <div className="p-8 text-center text-gray-400">Memuat...</div>
               ) : users.length === 0 ? (
@@ -370,7 +370,7 @@ function AdminUsers() {
       {/* ============ MODAL TAMBAH / EDIT ============ */}
       {showModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
-          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md">
+          <div className="admin-glass-card rounded-3xl shadow-2xl w-full max-w-md">
             <div className="p-6">
               <h3 className="text-lg font-bold text-gray-800 mb-4">
                 {editItem ? "✏️ Edit Pengguna" : "＋ Tambah Pengguna"}
@@ -388,7 +388,7 @@ function AdminUsers() {
                     onChange={(e) =>
                       setForm({ ...form, name: e.target.value })
                     }
-                    className="w-full px-4 py-2.5 border rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 text-sm"
+                    className="w-full px-4 py-2.5 border rounded-xl focus:outline-none admin-input focus:ring-2 focus:ring-purple-400 text-sm"
                     placeholder="Masukkan nama lengkap"
                   />
                 </div>
@@ -404,7 +404,7 @@ function AdminUsers() {
                     onChange={(e) =>
                       setForm({ ...form, username: e.target.value })
                     }
-                    className="w-full px-4 py-2.5 border rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 text-sm"
+                    className="w-full px-4 py-2.5 border rounded-xl focus:outline-none admin-input focus:ring-2 focus:ring-purple-400 text-sm"
                     placeholder="Masukkan username"
                   />
                 </div>
@@ -419,7 +419,7 @@ function AdminUsers() {
                     onChange={(e) =>
                       setForm({ ...form, role: e.target.value })
                     }
-                    className="w-full px-4 py-2.5 border rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 text-sm"
+                    className="w-full px-4 py-2.5 border rounded-xl focus:outline-none admin-input focus:ring-2 focus:ring-purple-400 text-sm"
                   >
                     <option value="siswa">🎓 Siswa</option>
                     <option value="guru">👨‍🏫 Guru</option>
@@ -439,7 +439,7 @@ function AdminUsers() {
                         onChange={(e) =>
                           setForm({ ...form, password: e.target.value })
                         }
-                        className="w-full px-4 py-2.5 border rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 text-sm pr-12"
+                        className="w-full px-4 py-2.5 border rounded-xl focus:outline-none admin-input focus:ring-2 focus:ring-purple-400 text-sm pr-12"
                         placeholder="Masukkan password"
                       />
                       <button
@@ -479,7 +479,7 @@ function AdminUsers() {
       {/* ============ MODAL RESET PASSWORD ============ */}
       {showResetModal && resetTarget && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
-          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-sm">
+          <div className="admin-glass-card rounded-3xl shadow-2xl w-full max-w-sm">
             <div className="p-6">
               <h3 className="text-lg font-bold text-gray-800 mb-1">
                 🔑 Reset Password
@@ -501,7 +501,7 @@ function AdminUsers() {
                     type={showNewPassword ? "text" : "password"}
                     value={newPassword}
                     onChange={(e) => setNewPassword(e.target.value)}
-                    className="w-full px-4 py-2.5 border rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 text-sm pr-12"
+                    className="w-full px-4 py-2.5 border rounded-xl focus:outline-none admin-input focus:ring-2 focus:ring-purple-400 text-sm pr-12"
                     placeholder="Masukkan password baru"
                     autoFocus
                   />
@@ -551,3 +551,4 @@ function AdminUsers() {
 }
 
 export default AdminUsers;
+

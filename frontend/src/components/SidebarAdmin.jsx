@@ -13,11 +13,11 @@ function SidebarAdmin() {
   const location = useLocation();
 
   return (
-    <div className="hidden md:flex flex-col bg-white shadow-lg w-60 min-h-screen">
+    <div className="admin-sidebar hidden md:flex flex-col shadow-lg w-60 min-h-screen">
       {/* LOGO */}
       <div
         onClick={() => navigate("/dashboard/admin")}
-        className="flex items-center gap-2 p-4 cursor-pointer hover:bg-gray-50 border-b transition"
+        className="flex items-center gap-2 p-4 cursor-pointer hover:bg-purple-50/80 border-b border-purple-100/70 transition"
       >
         <div className="w-10 h-10 bg-gradient-to-br from-purple-600 to-indigo-600 rounded-xl flex items-center justify-center text-white text-lg">
           🛡️
@@ -43,9 +43,9 @@ function SidebarAdmin() {
               onClick={() => navigate(item.path)}
               className={`flex items-center gap-3 px-3 py-2.5 rounded-xl cursor-pointer transition-all duration-200
                 ${
-                  isActive
+                isActive
                     ? "bg-purple-100 text-purple-700 font-semibold shadow-sm"
-                    : "hover:bg-gray-100 text-gray-600"
+                    : "hover:bg-purple-50/80 text-gray-600"
                 }
               `}
             >
@@ -57,7 +57,7 @@ function SidebarAdmin() {
       </nav>
 
       {/* BOTTOM */}
-      <div className="mt-auto p-3 border-t">
+      <div className="mt-auto p-3 border-t border-purple-100/70">
         <div className="text-[10px] text-gray-400 text-center">
           Sora Kaili Admin v1.0
         </div>

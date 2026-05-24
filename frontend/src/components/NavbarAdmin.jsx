@@ -5,7 +5,7 @@ function NavbarAdmin({ user }) {
   const navigate = useNavigate();
 
   return (
-    <div className="sticky top-0 z-40 bg-white border-b shadow-sm">
+    <div className="admin-navbar sticky top-0 z-40">
       <div className="w-full px-4 md:px-6 py-3 flex justify-between items-center">
         {/* LEFT — Mobile Logo */}
         <div className="flex items-center gap-3 md:hidden">

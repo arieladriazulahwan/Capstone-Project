@@ -13,7 +13,7 @@ function BottomNavAdmin() {
   const location = useLocation();
 
   return (
-    <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-200 shadow-[0_-8px_24px_rgba(15,23,42,0.08)]">
+    <nav className="admin-bottom-nav md:hidden fixed bottom-0 left-0 right-0 z-50 shadow-[0_-8px_24px_rgba(15,23,42,0.08)]">
       <div className="grid grid-cols-5 px-2 py-2">
         {menu.map((item) => {
           const isActive = location.pathname === item.path;
