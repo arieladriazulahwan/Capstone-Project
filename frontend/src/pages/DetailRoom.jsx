@@ -153,6 +153,57 @@ function DetailRoom() {
     const options = usesOptions(question) ? question.options || [] : [];
     const blocks = usesBlocks(question) ? question.blocks || [] : [];
 
+    // 1. Validasi teks pertanyaan
+    if (!question.question?.trim()) {
+      alert("Pertanyaan tidak boleh kosong");
+      return;
+    }
+
+    // 2. Validasi pilihan ganda / opsi
+    if (usesOptions(question)) {
+      if (options.length < 2) {
+        alert("Pilihan ganda minimal harus memiliki 2 opsi");
+        return;
+      }
+      if (options.some(opt => !opt.trim())) {
+        alert("Semua opsi jawaban harus diisi");
+        return;
+      }
+      const uniqueOptions = new Set(options.map(opt => opt.trim().toLowerCase()));
+      if (uniqueOptions.size < options.length) {
+        alert("Opsi jawaban tidak boleh ada yang sama (duplikat)");
+        return;
+      }
+      if (!question.answer) {
+        alert("Silakan pilih jawaban benar");
+        return;
+      }
+    }
+
+    // 3. Validasi blok kata
+    if (usesBlocks(question)) {
+      if (blocks.length === 0) {
+        alert("Silakan tambahkan minimal 1 blok kata");
+        return;
+      }
+      if (blocks.some(block => !block.trim())) {
+        alert("Semua blok kata harus diisi");
+        return;
+      }
+      if (!question.answer?.trim()) {
+        alert("Silakan masukkan susunan jawaban benar");
+        return;
+      }
+    }
+
+    // 4. Validasi ketik jawaban
+    if (usesTextAnswer(question)) {
+      if (!question.answer?.trim()) {
+        alert("Silakan ketik jawaban benar");
+        return;
+      }
+    }
+
     try {
       const res = await fetch(
         `${API_BASE_URL}/api/rooms/questions/${question.id}`,
@@ -371,11 +422,19 @@ function DetailRoom() {
                   <p className="text-blue-100">{room.category}</p>
                 </div>
               )}
-              <div className="bg-white/20 px-5 py-3 rounded-2xl backdrop-blur-sm">
+              <div
+                onClick={() => {
+                  const code = room.code || room.room_code;
+                  navigator.clipboard.writeText(code);
+                  alert(`Kode room "${code}" berhasil disalin!`);
+                }}
+                className="bg-white/20 hover:bg-white/30 cursor-pointer px-5 py-3 rounded-2xl backdrop-blur-sm transition"
+                title="Klik untuk salin kode"
+              >
                 <p className="text-xs text-blue-100 font-semibold mb-1">
                   Kode Room
                 </p>
-                <p className="text-2xl font-bold tracking-widest">
+                <p className="text-2xl font-bold tracking-widest text-center">
                   {room.code || room.room_code}
                 </p>
               </div>
@@ -594,12 +653,18 @@ function DetailRoom() {
                         {usesOptions(currentQuestion) && (
                           <div>
                             <label className="block text-sm font-semibold mb-2">Jawaban Benar</label>
-                            <input
-                              type="text"
+                            <select
                               value={currentQuestion.answer || ""}
                               onChange={(e) => updateDraftField(index, "answer", e.target.value)}
                               className="teacher-input w-full border p-3 rounded-xl"
-                            />
+                            >
+                              <option value="">Pilih Jawaban Benar</option>
+                              {currentQuestion.options?.map((opt, i) => (
+                                <option key={i} value={opt}>
+                                  {opt || `Opsi ${i + 1}`}
+                                </option>
+                              ))}
+                            </select>
                           </div>
                         )}
                       </div>
@@ -679,72 +744,78 @@ function DetailRoom() {
                       <button
                         type="button"
                         onClick={() => setExpandedAttempt(isExpanded ? null : attempt.id)}
-                        className="w-full text-left px-5 py-4 flex items-center gap-4 hover:bg-gray-50 transition-colors"
+                        className="w-full text-left px-4 py-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4 hover:bg-gray-50 transition-colors"
                       >
-                        {/* Rank Number */}
-                        <div className="flex-shrink-0 w-9 h-9 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-sm">
-                          {idx + 1}
+                        {/* LEFT GROUP: Rank & Student Info */}
+                        <div className="flex items-center gap-3 min-w-0">
+                          {/* Rank Number */}
+                          <div className="flex-shrink-0 w-8 h-8 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-sm">
+                            {idx + 1}
+                          </div>
+
+                          {/* Student Name & Date */}
+                          <div className="min-w-0 flex-1">
+                            <p className="font-semibold text-gray-800 truncate text-sm sm:text-base">{attempt.student_name}</p>
+                            <p className="text-[10px] sm:text-xs text-gray-400">{new Date(attempt.created_at).toLocaleString()}</p>
+                          </div>
                         </div>
 
-                        {/* Name */}
-                        <div className="flex-1 min-w-0">
-                          <p className="font-semibold text-gray-800 truncate">{attempt.student_name}</p>
-                          <p className="text-xs text-gray-400">{new Date(attempt.created_at).toLocaleString()}</p>
-                        </div>
+                        {/* RIGHT GROUP: Stats, Score & Chevron */}
+                        <div className="flex items-center justify-between sm:justify-end gap-3 border-t pt-2.5 sm:border-0 sm:pt-0 sm:gap-4">
+                          {/* Correct / Wrong Badges */}
+                          <div className="flex items-center gap-1.5 flex-shrink-0">
+                            <span className="inline-flex items-center gap-1 bg-green-100 text-green-700 text-xs font-semibold px-2.5 py-1 rounded-full">
+                              ✓ {correctCount}
+                            </span>
+                            <span className="inline-flex items-center gap-1 bg-red-100 text-red-700 text-xs font-semibold px-2.5 py-1 rounded-full">
+                              ✗ {wrongCount}
+                            </span>
+                          </div>
 
-                        {/* Correct / Wrong Badges */}
-                        <div className="flex items-center gap-2 flex-shrink-0">
-                          <span className="inline-flex items-center gap-1 bg-green-100 text-green-700 text-xs font-semibold px-2.5 py-1 rounded-full">
-                            ✓ {correctCount}
-                          </span>
-                          <span className="inline-flex items-center gap-1 bg-red-100 text-red-700 text-xs font-semibold px-2.5 py-1 rounded-full">
-                            ✗ {wrongCount}
-                          </span>
-                        </div>
+                          {/* Score */}
+                          <div className="flex-shrink-0 text-right min-w-[60px] sm:min-w-[70px]">
+                            <p className={`font-bold text-base sm:text-lg ${percentage >= 70 ? "text-green-600" : percentage >= 40 ? "text-yellow-600" : "text-red-600"}`}>
+                              {attempt.score}/{attempt.total}
+                            </p>
+                            <p className="text-[10px] sm:text-xs text-gray-400">{percentage}%</p>
+                          </div>
 
-                        {/* Score */}
-                        <div className="flex-shrink-0 text-right min-w-[70px]">
-                          <p className={`font-bold text-lg ${percentage >= 70 ? "text-green-600" : percentage >= 40 ? "text-yellow-600" : "text-red-600"}`}>
-                            {attempt.score}/{attempt.total}
-                          </p>
-                          <p className="text-xs text-gray-400">{percentage}%</p>
+                          {/* Chevron */}
+                          <svg
+                            className={`w-5 h-5 text-gray-400 flex-shrink-0 transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`}
+                            fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
+                          >
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                          </svg>
                         </div>
-
-                        {/* Chevron */}
-                        <svg
-                          className={`w-5 h-5 text-gray-400 flex-shrink-0 transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`}
-                          fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
-                        >
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                        </svg>
                       </button>
 
                       {/* Expandable Detail */}
                       {isExpanded && (
-                        <div className="border-t border-gray-100 bg-gray-50 px-5 py-4 space-y-3">
+                        <div className="border-t border-gray-100 bg-gray-50 px-4 py-4 space-y-3">
                           <p className="text-sm font-semibold text-gray-600 mb-2">Detail Jawaban</p>
                           {attempt.answers.map((answer, aIdx) => {
                             const question = room.questions?.find((item) => item.id === answer.question_id);
                             return (
                               <div
                                 key={`${attempt.id}-${aIdx}`}
-                                className="rounded-2xl border border-gray-200 p-4 bg-white"
+                                className="relative rounded-2xl border border-gray-200 p-4 bg-white"
                               >
-                                <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-                                  <p className="font-semibold text-gray-700">
+                                <div className="text-center px-12">
+                                  <p className="font-semibold text-gray-700 break-words">
                                     {question ? question.question : `Soal ${aIdx + 1}`}
                                   </p>
-                                  <span
-                                    className={`text-sm font-semibold px-3 py-1 rounded-full ${
-                                      answer.is_correct ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
-                                    }`}
-                                  >
-                                    {answer.is_correct ? "Benar" : "Salah"}
-                                  </span>
                                 </div>
-                                <div className="mt-3">
+                                <span
+                                  className={`absolute top-1/2 -translate-y-1/2 right-4 text-sm font-semibold px-3 py-1 rounded-full ${
+                                    answer.is_correct ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
+                                  }`}
+                                >
+                                  {answer.is_correct ? "Benar" : "Salah"}
+                                </span>
+                                <div className="mt-3 text-center px-12">
                                   <p className="text-sm text-gray-500 mb-1">Jawaban Siswa</p>
-                                  <p className="font-medium text-gray-800">{formatAnswer(answer.answer)}</p>
+                                  <p className="font-medium text-gray-800 break-words">{formatAnswer(answer.answer)}</p>
                                 </div>
                               </div>
                             );

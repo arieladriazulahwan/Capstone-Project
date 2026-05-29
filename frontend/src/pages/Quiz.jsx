@@ -270,7 +270,7 @@ function Quiz() {
           </div>
 
           <button
-            onClick={() => navigate(level ? `/level/${dialect}/${bab}` : "/level")}
+            onClick={() => navigate(level ? `/level/${dialect}/${bab}` : "/level", { replace: true })}
             className="w-full flag-wave text-white py-4 rounded-2xl font-bold text-lg transition shadow-lg hover:scale-[1.01]"
           >
             Kembali

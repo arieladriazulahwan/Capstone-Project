@@ -25,7 +25,16 @@ function RoomCard({ room }) {
           </div>
 
           <div className="flex flex-wrap gap-2">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-blue-50 px-3 py-1 text-xs font-bold text-blue-700">
+            <span
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                navigator.clipboard.writeText(roomCode);
+                alert(`Kode room "${roomCode}" berhasil disalin!`);
+              }}
+              className="inline-flex items-center gap-1.5 rounded-full bg-blue-50 hover:bg-blue-100 cursor-pointer px-3 py-1 text-xs font-bold text-blue-700 transition"
+              title="Klik untuk salin kode"
+            >
               <KeyRound size={14} />
               {roomCode}
             </span>

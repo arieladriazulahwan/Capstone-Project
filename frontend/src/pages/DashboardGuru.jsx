@@ -136,44 +136,32 @@ function DashboardGuru() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 gap-3 mb-5 sm:grid-cols-3">
-            <div className="teacher-stat-card rounded-2xl bg-white/90 p-4 shadow">
-              <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-100 text-blue-600">
-                <Presentation size={22} />
+          <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-5">
+            <div className="teacher-stat-card rounded-xl sm:rounded-2xl bg-white/90 p-2.5 sm:p-4 shadow flex flex-col items-center text-center">
+              <div className="mb-1.5 sm:mb-3 flex h-8 w-8 sm:h-11 sm:w-11 items-center justify-center rounded-xl sm:rounded-2xl bg-blue-100 text-blue-600">
+                <Presentation className="w-4 h-4 sm:w-[22px] sm:h-[22px]" />
               </div>
-              <p className="text-sm font-semibold text-gray-500">Total Room</p>
-              <p className="text-3xl font-black text-gray-900">{activeRooms}</p>
+              <p className="text-[10px] sm:text-sm font-semibold text-gray-500 truncate w-full">Total Room</p>
+              <p className="text-lg sm:text-3xl font-black text-gray-900">{activeRooms}</p>
             </div>
 
-            <div className="teacher-stat-card rounded-2xl bg-white/90 p-4 shadow">
-              <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-2xl bg-cyan-100 text-cyan-600">
-                <Clock3 size={22} />
+            <div className="teacher-stat-card rounded-xl sm:rounded-2xl bg-white/90 p-2.5 sm:p-4 shadow flex flex-col items-center text-center">
+              <div className="mb-1.5 sm:mb-3 flex h-8 w-8 sm:h-11 sm:w-11 items-center justify-center rounded-xl sm:rounded-2xl bg-cyan-100 text-cyan-600">
+                <Clock3 className="w-4 h-4 sm:w-[22px] sm:h-[22px]" />
               </div>
-              <p className="text-sm font-semibold text-gray-500">Rata-rata Timer</p>
-              <p className="text-3xl font-black text-gray-900">{averageTimer}s</p>
+              <p className="text-[10px] sm:text-sm font-semibold text-gray-500 truncate w-full">Rata Timer</p>
+              <p className="text-lg sm:text-3xl font-black text-gray-900">{averageTimer}s</p>
             </div>
 
-            <div className="teacher-stat-card rounded-2xl bg-white/90 p-4 shadow">
-              <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-2xl bg-indigo-100 text-indigo-600">
-                <BookOpenCheck size={22} />
+            <div className="teacher-stat-card rounded-xl sm:rounded-2xl bg-white/90 p-2.5 sm:p-4 shadow flex flex-col items-center text-center">
+              <div className="mb-1.5 sm:mb-3 flex h-8 w-8 sm:h-11 sm:w-11 items-center justify-center rounded-xl sm:rounded-2xl bg-indigo-100 text-indigo-600">
+                <BookOpenCheck className="w-4 h-4 sm:w-[22px] sm:h-[22px]" />
               </div>
-              <p className="text-sm font-semibold text-gray-500">Room Terbaru</p>
-              <p className="truncate text-lg font-black text-gray-900">{latestRoom}</p>
+              <p className="text-[10px] sm:text-sm font-semibold text-gray-500 truncate w-full">Room Baru</p>
+              <p className="truncate text-xs sm:text-lg font-black text-gray-900 w-full">{latestRoom}</p>
             </div>
           </div>
 
-          <button
-            onClick={() => navigate("/guru/buat-room")}
-            className="teacher-create-strip mb-5 flex w-full items-center justify-between rounded-3xl p-4 text-left text-white shadow-lg transition hover:-translate-y-1 hover:shadow-xl"
-          >
-            <span>
-              <span className="block text-sm font-semibold text-blue-50">Aktivitas baru</span>
-              <span className="block text-lg font-black">Buat Room Kuis Baru</span>
-            </span>
-            <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/20 backdrop-blur">
-              <Plus size={24} />
-            </span>
-          </button>
 
           <div>
             <div className="flex justify-between items-center mb-3">
@@ -200,7 +188,7 @@ function DashboardGuru() {
                       e.stopPropagation();
                       setDeleteTarget(room);
                     }}
-                    className="absolute top-4 right-4 md:right-40 bg-red-100 text-red-600 hover:bg-red-500 hover:text-white px-3 py-1 rounded-lg text-sm font-semibold transition shadow-sm z-10"
+                    className="absolute top-4 right-4 bg-red-100 text-red-600 hover:bg-red-500 hover:text-white px-3 py-1 rounded-lg text-sm font-semibold transition shadow-sm z-10"
                   >
                     Hapus
                   </button>

@@ -195,8 +195,25 @@ const seedQuiz = async (connection) => {
   return { items: quiz.length, options, blocks };
 };
 
+const mysql2 = require("mysql2/promise");
+
 const seedJsonData = async () => {
-  const connection = await db.promise().getConnection();
+  // Set global limit so the new connection gets it
+  try {
+    const tempConn = await db.promise().getConnection();
+    await tempConn.query("SET GLOBAL max_allowed_packet = 134217728");
+    tempConn.release();
+  } catch (err) {
+    console.warn("Gagal setting GLOBAL max_allowed_packet:", err.message);
+  }
+
+  // Create a brand new connection to inherit the new max_allowed_packet
+  const connection = await mysql2.createConnection({
+    host: process.env.DB_HOST || "localhost",
+    user: process.env.DB_USER || "root",
+    password: process.env.DB_PASSWORD || "",
+    database: process.env.DB_NAME || "bahasa_kaili",
+  });
 
   try {
     await createJsonDataTables(db);
@@ -217,10 +234,15 @@ const seedJsonData = async () => {
       quiz,
     };
   } catch (err) {
-    await connection.query("ROLLBACK");
+    console.error("SEED ERROR DETECTED:", err);
+    try {
+      await connection.query("ROLLBACK");
+    } catch (rollbackErr) {
+      console.error("ROLLBACK FAILED:", rollbackErr);
+    }
     throw err;
   } finally {
-    connection.release();
+    await connection.end();
   }
 };
 

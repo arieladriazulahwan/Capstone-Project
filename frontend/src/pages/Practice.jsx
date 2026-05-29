@@ -122,13 +122,13 @@ function Practice() {
 
             <div className="grid gap-3 sm:grid-cols-2">
               <button
-                onClick={() => navigate(lessonPath)}
+                onClick={() => navigate(lessonPath, { replace: true })}
                 className="w-full py-3 rounded-xl border border-gray-300 font-bold text-gray-700 hover:bg-gray-100 transition hover:-translate-y-0.5"
               >
                 Tidak, kembali ke lesson
               </button>
               <button
-                onClick={() => navigate(quizPath)}
+                onClick={() => navigate(quizPath, { replace: true })}
                 className="w-full py-3 rounded-xl flag-wave text-white font-bold transition shadow hover:-translate-y-0.5"
               >
                 Ya, lanjut quiz

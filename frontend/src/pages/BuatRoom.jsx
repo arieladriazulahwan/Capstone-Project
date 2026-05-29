@@ -260,6 +260,76 @@ function BuatRoom() {
   // SUBMIT
   // =========================
   const submitRoom = async () => {
+    // 1. Validasi Detail Room
+    if (!title.trim()) {
+      alert("Nama Room tidak boleh kosong");
+      return;
+    }
+    if (!category.trim()) {
+      alert("Subjek tidak boleh kosong");
+      return;
+    }
+    if (Number(timer) <= 0) {
+      alert("Timer per soal harus lebih besar dari 0 detik");
+      return;
+    }
+    if (questions.length === 0) {
+      alert("Silakan tambah minimal 1 soal terlebih dahulu");
+      return;
+    }
+
+    // 2. Validasi Setiap Soal
+    for (let i = 0; i < questions.length; i++) {
+      const q = questions[i];
+      const indexDisplay = i + 1;
+
+      if (!q.question.trim()) {
+        alert(`Pertanyaan pada Soal #${indexDisplay} tidak boleh kosong`);
+        return;
+      }
+
+      if (q.type === "gambar" && !q.image) {
+        alert(`Silakan pilih atau unggah gambar untuk Soal #${indexDisplay}`);
+        return;
+      }
+
+      const answerType = q.answerType;
+
+      if (answerType === "pilihan" || q.type === "multiple") {
+        if (q.options.some(opt => !opt.trim())) {
+          alert(`Semua opsi jawaban pada Soal #${indexDisplay} harus diisi`);
+          return;
+        }
+        const uniqueOptions = new Set(q.options.map(opt => opt.trim().toLowerCase()));
+        if (uniqueOptions.size < q.options.length) {
+          alert(`Opsi jawaban pada Soal #${indexDisplay} tidak boleh ada yang sama (duplikat)`);
+          return;
+        }
+        if (!q.answer) {
+          alert(`Silakan pilih jawaban benar untuk Soal #${indexDisplay}`);
+          return;
+        }
+      } else if (answerType === "ketik") {
+        if (!q.answer.trim()) {
+          alert(`Silakan ketik jawaban benar untuk Soal #${indexDisplay}`);
+          return;
+        }
+      } else if (answerType === "blok" || q.type === "susun") {
+        if (q.blocks.length === 0) {
+          alert(`Silakan tambahkan minimal 1 blok kata untuk Soal #${indexDisplay}`);
+          return;
+        }
+        if (q.blocks.some(block => !block.trim())) {
+          alert(`Semua blok kata pada Soal #${indexDisplay} harus diisi`);
+          return;
+        }
+        if (q.answerBlocks.length === 0) {
+          alert(`Silakan susun jawaban benar untuk Soal #${indexDisplay}`);
+          return;
+        }
+      }
+    }
+
     try {
       const payload = {
         title,

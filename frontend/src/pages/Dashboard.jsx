@@ -302,32 +302,7 @@ function Dashboard() {
 
             </div>
 
-            {/* STATS */}
-            <div className="student-card bg-white rounded-2xl p-5 shadow mb-5">
 
-              <h2 className="text-lg font-bold mb-2">
-                Statistik Belajar Room
-              </h2>
-              <div className="flex gap-4">
-
-                <div className="flex-1 bg-green-100 p-4 rounded-xl text-center">
-                  <p className="text-sm text-gray-600">
-                    Total Kuis
-                  </p>
-                  <p className="font-bold text-2xl">
-                    {user.total_quizzes || 0}
-                  </p>
-                </div>
-                <div className="flex-1 bg-yellow-100 p-4 rounded-xl text-center">
-                  <p className="text-sm text-gray-600">
-                    Total Poin
-                  </p>
-                  <p className="font-bold text-2xl">
-                    {user.total_points || 0}
-                  </p>
-                </div>
-              </div>
-            </div>
 
             {/* LEADERBOARD WIDGET */}
             <Leaderboard />

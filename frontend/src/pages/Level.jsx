@@ -198,8 +198,8 @@ function Level() {
               <h3 className="font-semibold mb-4">Reward Level</h3>
 
               <div className="pb-2">
-                <div className="relative grid grid-cols-5 items-start gap-2 px-1 pt-4">
-                  <div className="absolute left-6 right-6 top-8 h-1 rounded-full bg-gray-200"></div>
+                <div className="relative grid grid-cols-5 items-start gap-1 sm:gap-2 px-1 pt-4">
+                  <div className="absolute left-6 right-6 top-7 sm:top-8 h-1 rounded-full bg-gray-200"></div>
 
                   {rewards.map((r) => {
                     const unlocked = level >= r.level;
@@ -208,7 +208,7 @@ function Level() {
                     return (
                       <div
                         key={r.level}
-                        className={`relative rounded-xl border px-2 py-3 pt-7 text-center transition ${
+                        className={`relative rounded-xl border px-0.5 py-2 pt-5 sm:px-2 sm:py-3 sm:pt-7 text-center transition ${
                           current
                             ? "reward-fire-card border-orange-300 bg-orange-50 shadow-md"
                             : unlocked
@@ -217,7 +217,7 @@ function Level() {
                         }`}
                       >
                         <div
-                          className={`absolute left-1/2 top-0 z-10 w-8 h-8 -translate-x-1/2 -translate-y-1/2 rounded-full flex items-center justify-center border-4 border-white shadow ${
+                          className={`absolute left-1/2 top-0 z-10 w-6 h-6 sm:w-8 sm:h-8 -translate-x-1/2 -translate-y-1/2 rounded-full flex items-center justify-center border-2 sm:border-4 border-white shadow ${
                             current
                               ? "reward-fire"
                               : unlocked
@@ -231,15 +231,15 @@ function Level() {
                               <span className="absolute -inset-1 rounded-full bg-yellow-300/50 blur-md"></span>
                             </>
                           )}
-                          <span className="reward-fire-icon relative text-sm text-white">
+                          <span className="reward-fire-icon relative text-[10px] sm:text-sm text-white">
                             {current ? "🔥" : unlocked ? "✓" : r.level}
                           </span>
                         </div>
 
                         <div>
-                          <p className="text-[11px] text-gray-500">Level {r.level}</p>
+                          <p className="text-[9px] sm:text-[11px] text-gray-500">Level {r.level}</p>
                           <p
-                            className={`text-xs font-bold sm:text-sm ${
+                            className={`text-[10px] sm:text-xs md:text-sm font-bold leading-tight ${
                               current
                                 ? "text-orange-700"
                                 : unlocked
@@ -251,7 +251,7 @@ function Level() {
                           </p>
 
                           {current && (
-                            <span className="mt-2 inline-flex rounded-full bg-orange-100 px-3 py-1 text-xs font-semibold text-orange-700">
+                            <span className="mt-1 sm:mt-2 inline-flex rounded-full bg-orange-100 px-1 py-0.5 sm:px-3 sm:py-1 text-[9px] sm:text-xs font-semibold text-orange-700">
                               Aktif
                             </span>
                           )}
