@@ -1,0 +1,35 @@
+name: Auto Deploy to Oracle VPS
+
+# Kapan aksi ini dijalankan? Saat ada push ke branch 'main'
+on:
+  push:
+    branches:
+      - main  # Ubah menjadi 'master' jika default branch kamu bernama master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Eksekusi Perintah Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST_IP }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          # Ini adalah perintah yang akan dijalankan otomatis di terminal VPS kamu
+          script: |
+            cd /var/www/capstone-ariel
+            git pull origin main
+            
+            echo "Memperbarui Backend..."
+            cd backend
+            npm install
+            pm2 restart backend-sora
+            
+            echo "Memperbarui Frontend..."
+            cd ../frontend
+            npm install
+            npm run build
+            
+            echo "Deploy Selesai! 🎉"
