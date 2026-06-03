@@ -208,7 +208,7 @@ function Kamus() {
         setTranslateResult(`Error: ${resultData.message}`);
       }
     } catch (err) {
-      setTranslateResult("Terjadi kesalahan saat memanggil API. Pastikan API key sudah dikonfigurasi.");
+      setTranslateResult("Terjadi kesalahan saat menerjemahkan. Pastikan backend sedang berjalan.");
     } finally {
       setIsTranslating(false);
     }
@@ -338,7 +338,7 @@ function Kamus() {
                   <div className="mt-5 p-5 bg-green-50 border border-green-200 rounded-2xl">
                     <div className="flex items-center gap-2 mb-2">
                       <div className="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center text-white text-xs">✨</div>
-                      <p className="text-sm text-green-700 font-bold">Hasil Terjemahan Gemini AI:</p>
+                      <p className="text-sm text-green-700 font-bold">Hasil Terjemahan Kamus Lokal:</p>
                     </div>
                     <p className="text-gray-800 text-lg whitespace-pre-wrap ml-10 leading-relaxed font-medium">{translateResult}</p>
                   </div>
