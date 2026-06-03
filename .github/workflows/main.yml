@@ -4,7 +4,7 @@ name: Auto Deploy to Oracle VPS
 on:
   push:
     branches:
-      - main  # Ubah menjadi 'master' jika default branch kamu bernama master
+      - master  # Ubah menjadi 'master' jika default branch kamu bernama master
 
 jobs:
   deploy:
