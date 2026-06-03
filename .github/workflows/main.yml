@@ -20,7 +20,7 @@ jobs:
           # Ini adalah perintah yang akan dijalankan otomatis di terminal VPS kamu
           script: |
             cd /var/www/capstone-ariel
-            git pull origin main
+            git pull origin master
             
             echo "Memperbarui Backend..."
             cd backend
