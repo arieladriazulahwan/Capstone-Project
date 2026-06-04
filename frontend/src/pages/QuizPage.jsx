@@ -176,22 +176,6 @@ function QuizPage() {
   };
 
   // =====================================
-  // PREV
-  // =====================================
-  const prevQuestion = () => {
-
-    if (currentQuestion > 0) {
-
-      setCurrentQuestion(
-        currentQuestion - 1
-      );
-      setTimeLeft(room.timer || 0);
-
-    }
-
-  };
-
-  // =====================================
   // SUBMIT
   // =====================================
   const submitQuiz = async () => {
@@ -502,15 +486,7 @@ function QuizPage() {
           )}
 
           {/* NAVIGATION */}
-          <div className="flex justify-between mt-8">
-
-            <button
-              onClick={prevQuestion}
-              disabled={currentQuestion === 0}
-              className="bg-gray-200 px-5 py-3 rounded-2xl disabled:opacity-50"
-            >
-              ← Sebelumnya
-            </button>
+          <div className="flex justify-end mt-8">
 
             {currentQuestion ===
             room.questions.length - 1 ? (

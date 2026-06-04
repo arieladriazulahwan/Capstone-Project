@@ -4,7 +4,7 @@ name: Auto Deploy to Oracle VPS
 on:
   push:
     branches:
-      - main  # Ubah menjadi 'master' jika default branch kamu bernama master
+      - master  # Ubah menjadi 'master' jika default branch kamu bernama master
 
 jobs:
   deploy:
@@ -20,7 +20,8 @@ jobs:
           # Ini adalah perintah yang akan dijalankan otomatis di terminal VPS kamu
           script: |
             cd /var/www/capstone-ariel
-            git pull origin main
+            git fetch origin master
+            git reset --hard origin/master
             
             echo "Memperbarui Backend..."
             cd backend
