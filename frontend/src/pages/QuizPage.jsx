@@ -485,32 +485,6 @@ function QuizPage() {
 
           )}
 
-          {/* NAVIGATION */}
-          <div className="flex justify-end mt-8">
-
-            {currentQuestion ===
-            room.questions.length - 1 ? (
-
-              <button
-                onClick={submitQuiz}
-                className="bg-green-600 text-white px-6 py-3 rounded-2xl font-bold"
-              >
-                🚀 Submit Quiz
-              </button>
-
-            ) : (
-
-              <button
-                onClick={nextQuestion}
-                className="bg-blue-600 text-white px-6 py-3 rounded-2xl font-bold"
-              >
-                Selanjutnya →
-              </button>
-
-            )}
-
-          </div>
-
         </div>
 
       </div>
