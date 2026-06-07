@@ -1,10 +1,40 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   useParams,
   useNavigate,
 } from "react-router-dom";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
+function normalizeQuestion(q) {
+  const normalized = { ...q };
+
+  if (q.type === "multiple") {
+    normalized.renderType = "pilihan_ganda";
+    return normalized;
+  }
+
+  if (q.type === "susun") {
+    normalized.renderType = "susun_kata";
+    return normalized;
+  }
+
+  if (q.type === "gambar" || q.type === "sambung") {
+    const answerType = String(q.answerType || "").toLowerCase();
+
+    if (answerType === "ketik" || answerType === "text") {
+      normalized.renderType = "ketik";
+    } else if (answerType === "blok" || answerType === "block") {
+      normalized.renderType = "susun_kata";
+    } else {
+      normalized.renderType = "pilihan_ganda";
+    }
+    return normalized;
+  }
+
+  normalized.renderType = "pilihan_ganda";
+  return normalized;
+}
 
 function QuizPage() {
 
@@ -20,6 +50,59 @@ function QuizPage() {
   const [answers, setAnswers] = useState({});
   const [timeLeft, setTimeLeft] = useState(0);
   const [quizResult, setQuizResult] = useState(null);
+  const transitionInProgress = useRef(false);
+  const submitInProgress = useRef(false);
+  const timerRef = useRef(null);
+
+  async function submitQuiz(latestAnswers = answers) {
+    if (submitInProgress.current) return;
+
+    submitInProgress.current = true;
+
+    try {
+      const token = localStorage.getItem("token");
+      const res = await fetch(
+        `${API_BASE_URL}/api/rooms/submit/${code}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+          body: JSON.stringify({ answers: latestAnswers }),
+        }
+      );
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        alert(data.message || "Gagal submit quiz");
+        return;
+      }
+
+      setQuizResult(data);
+    } catch (err) {
+      console.log(err);
+      alert("Gagal submit quiz");
+    } finally {
+      submitInProgress.current = false;
+      transitionInProgress.current = false;
+    }
+  }
+
+  function continueQuiz(latestAnswers = answers) {
+    if (transitionInProgress.current || submitInProgress.current) return;
+
+    transitionInProgress.current = true;
+    clearTimeout(timerRef.current);
+
+    if (currentQuestion < room.questions.length - 1) {
+      setCurrentQuestion((questionIndex) => questionIndex + 1);
+      setTimeLeft(room.timer || 0);
+    } else {
+      submitQuiz(latestAnswers);
+    }
+  }
 
   // =====================================
   // FETCH ROOM
@@ -83,128 +166,48 @@ function QuizPage() {
 
   }, [code]);
 
-  const normalizeQuestion = (q) => {
-    const normalized = { ...q };
-
-    if (q.type === "multiple") {
-      normalized.renderType = "pilihan_ganda";
-      return normalized;
-    }
-
-    if (q.type === "susun") {
-      normalized.renderType = "susun_kata";
-      return normalized;
-    }
-
-    if (q.type === "gambar" || q.type === "sambung") {
-      const answerType = String(q.answerType || "").toLowerCase();
-
-      if (answerType === "ketik" || answerType === "text") {
-        normalized.renderType = "ketik";
-      } else if (answerType === "blok" || answerType === "block") {
-        normalized.renderType = "susun_kata";
-      } else {
-        normalized.renderType = "pilihan_ganda";
-      }
-      return normalized;
-    }
-
-    normalized.renderType = "pilihan_ganda";
-    return normalized;
-  };
-
   // =====================================
   // TIMER
   // =====================================
   useEffect(() => {
     if (!room || room.questions.length === 0 || quizResult) return;
 
-    const timer = setInterval(() => {
-      setTimeLeft((prev) => {
-        if (prev <= 1) {
-          clearInterval(timer);
-          return 0;
-        }
-        return prev - 1;
-      });
+    timerRef.current = setTimeout(() => {
+      if (timeLeft <= 1) {
+        alert("Waktu Habis!");
+        continueQuiz();
+        return;
+      }
+
+      setTimeLeft((prev) => prev - 1);
     }, 1000);
 
-    return () => clearInterval(timer);
-  }, [currentQuestion, room, quizResult]);
+    return () => clearTimeout(timerRef.current);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentQuestion, room, quizResult, timeLeft]);
 
   useEffect(() => {
-    if (timeLeft === 0 && room && room.questions.length > 0 && !quizResult) {
-      alert("Waktu Habis!");
-      if (currentQuestion < room.questions.length - 1) {
-        nextQuestion();
-      } else {
-        submitQuiz();
-      }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [timeLeft, quizResult]);
+    transitionInProgress.current = false;
+  }, [currentQuestion]);
 
   // =====================================
   // SIMPAN JAWABAN
   // =====================================
   const saveAnswer = (value) => {
+    setAnswers((currentAnswers) => ({
+      ...currentAnswers,
+      [currentQuestion]: value,
+    }));
+  }
 
-    setAnswers({
+  const answerAndContinue = (value) => {
+    const latestAnswers = {
       ...answers,
       [currentQuestion]: value,
-    });
+    };
 
-  };
-
-  // =====================================
-  // NEXT
-  // =====================================
-  const nextQuestion = () => {
-
-    if (
-      currentQuestion <
-      room.questions.length - 1
-    ) {
-
-      setCurrentQuestion(
-        currentQuestion + 1
-      );
-      setTimeLeft(room.timer || 0);
-
-    }
-
-  };
-
-  // =====================================
-  // SUBMIT
-  // =====================================
-  const submitQuiz = async () => {
-    try {
-      const token = localStorage.getItem("token");
-      const res = await fetch(
-        `${API_BASE_URL}/api/rooms/submit/${code}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + token,
-          },
-          body: JSON.stringify({ answers }),
-        }
-      );
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        alert(data.message || "Gagal submit quiz");
-        return;
-      }
-
-      setQuizResult(data);
-    } catch (err) {
-      console.log(err);
-      alert("Gagal submit quiz");
-    }
+    setAnswers(latestAnswers);
+    continueQuiz(latestAnswers);
   };
 
   // =====================================
@@ -373,7 +376,7 @@ function QuizPage() {
 
                 <button
                   key={index}
-                  onClick={() => saveAnswer(opt)}
+                  onClick={() => answerAndContinue(opt)}
                   className={`w-full text-left p-4 rounded-2xl border transition ${
                     answers[currentQuestion] === opt
                       ? "bg-green-500 text-white border-green-500"
@@ -394,15 +397,34 @@ function QuizPage() {
           {/* ================================= */}
           {renderType === "ketik" && (
 
-            <input
-              type="text"
-              placeholder="Ketik jawaban..."
-              value={answers[currentQuestion] || ""}
-              onChange={(e) =>
-                saveAnswer(e.target.value)
-              }
-              className="w-full border p-4 rounded-2xl"
-            />
+            <div className="space-y-4">
+              <input
+                type="text"
+                placeholder="Ketik jawaban..."
+                value={answers[currentQuestion] || ""}
+                onChange={(e) =>
+                  saveAnswer(e.target.value)
+                }
+                onKeyDown={(e) => {
+                  if (
+                    e.key === "Enter" &&
+                    String(answers[currentQuestion] || "").trim()
+                  ) {
+                    answerAndContinue(answers[currentQuestion]);
+                  }
+                }}
+                className="w-full border p-4 rounded-2xl"
+              />
+
+              <button
+                type="button"
+                onClick={() => answerAndContinue(answers[currentQuestion])}
+                disabled={!String(answers[currentQuestion] || "").trim()}
+                className="w-full bg-green-600 text-white px-6 py-3 rounded-2xl font-bold transition hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                Jawab
+              </button>
+            </div>
 
           )}
 
@@ -480,6 +502,18 @@ function QuizPage() {
                 </p>
 
               </div>
+
+              <button
+                type="button"
+                onClick={() => answerAndContinue(answers[currentQuestion])}
+                disabled={
+                  !Array.isArray(answers[currentQuestion]) ||
+                  answers[currentQuestion].length === 0
+                }
+                className="w-full bg-green-600 text-white px-6 py-3 rounded-2xl font-bold transition hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                Jawab
+              </button>
 
             </div>
 
