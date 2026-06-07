@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { BookOpen, Clock3, Type } from "lucide-react";
-import NavbarGuru from "../components/NavbarGuru";
+import { FiBookOpen, FiClock, FiType } from "react-icons/fi";
+import Navbar from "../components/Navbar";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 const MAX_UPLOAD_FILE_SIZE = 50 * 1024 * 1024;
@@ -54,7 +54,7 @@ function BuatRoom() {
   // Loading state
   if (!user) {
     return (
-      <div className="teacher-page-bg min-h-screen flex items-center justify-center">
+      <div className="flex h-screen overflow-hidden genz-bg text-sora items-center justify-center">
         <div className="teacher-loading-card rounded-3xl bg-white/90 px-6 py-5 text-center shadow">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
           <p className="font-semibold text-gray-700">Memuat halaman buat room...</p>
@@ -392,8 +392,10 @@ function BuatRoom() {
   };
 
   return (
-    <div className="teacher-page-bg min-h-screen">
-      <NavbarGuru user={user} showBackButton={true} />
+    <div className="teacher-page-bg h-screen overflow-hidden">
+      <Sidebar role="guru" />
+      <div className="flex-1 h-screen overflow-y-auto custom-scrollbar relative">
+        <Navbar role="guru" user={user} showBackButton={true} />
 
       <div className="max-w-5xl mx-auto p-4 pb-64">
 
@@ -421,7 +423,7 @@ function BuatRoom() {
             <h2 className="text-lg font-black text-gray-900">Masukkan Detail Room</h2>
           </div>
           <div className="hidden h-12 w-12 items-center justify-center rounded-2xl bg-blue-100 text-blue-600 sm:flex">
-            <BookOpen size={24} />
+            <FiBookOpen size={24} />
           </div>
         </div>
 
@@ -429,7 +431,7 @@ function BuatRoom() {
           <div className="teacher-field">
             <label className={labelClass}>Nama Room</label>
             <div className="teacher-input-shell">
-              <Type className="teacher-input-icon" size={19} />
+              <FiType className="teacher-input-icon" size={19} />
               <input
                 type="text"
                 placeholder="Contoh: Kuis Bab 1"
@@ -445,7 +447,7 @@ function BuatRoom() {
           <div className="teacher-field">
             <label className={labelClass}>Subjek</label>
             <div className="teacher-input-shell">
-              <BookOpen className="teacher-input-icon" size={19} />
+              <FiBookOpen className="teacher-input-icon" size={19} />
               <input
                 type="text"
                 placeholder="Contoh: Bahasa Kaili Ledo"
@@ -461,7 +463,7 @@ function BuatRoom() {
           <div className="teacher-field md:col-span-2">
             <label className={labelClass}>Timer per Soal</label>
             <div className="teacher-input-shell">
-              <Clock3 className="teacher-input-icon" size={19} />
+              <FiClock className="teacher-input-icon" size={19} />
               <input
                 type="number"
                 placeholder="Contoh: 15"
@@ -882,6 +884,8 @@ function BuatRoom() {
       </button>
 
       </div>
+      </div>
+      <BottomNav role="guru" />
     </div>
   );
 }

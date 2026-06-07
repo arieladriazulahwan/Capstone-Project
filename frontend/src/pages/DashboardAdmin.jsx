@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import NavbarAdmin from "../components/NavbarAdmin";
-import SidebarAdmin from "../components/SidebarAdmin";
-import BottomNavAdmin from "../components/BottomNavAdmin";
+import { FiBookOpen, FiChevronRight, FiFileText, FiHome, FiUsers, FiZap } from "react-icons/fi";
+import { FaGraduationCap, FaUserCog } from "react-icons/fa";
+
+import Navbar from "../components/Navbar";
+import Sidebar from "../components/Sidebar";
+import BottomNav from "../components/BottomNav";
+import { Skeleton, SkeletonStatGrid } from "../components/Skeleton";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
@@ -27,11 +31,11 @@ function UsageLineChart({ data = [] }) {
   const yTicks = [0, Math.ceil(maxValue / 2), maxValue];
 
   return (
-    <div className="admin-table-card rounded-2xl shadow-sm p-4 mb-6">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-3">
+    <div className="bg-white/80 backdrop-blur-md border border-sora/10 shadow-soft-sora rounded-3xl p-5 sm:p-6 mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
         <div>
-          <h3 className="font-bold text-lg text-gray-800">Grafik Penggunaan</h3>
-          <p className="text-sm text-gray-500">Aktivitas 7 hari terakhir</p>
+          <h3 className="font-black text-lg text-sora">Grafik Penggunaan</h3>
+          <p className="text-sm font-bold text-sora/60">Aktivitas 7 hari terakhir</p>
         </div>
         <div className="flex gap-4 text-xs font-semibold">
           <span className="flex items-center gap-2 text-purple-700">
@@ -45,8 +49,8 @@ function UsageLineChart({ data = [] }) {
         </div>
       </div>
 
-      <div className="w-full overflow-x-auto">
-        <svg viewBox={`0 0 ${width} ${height}`} className="min-w-[640px] w-full h-auto">
+      <div className="w-full overflow-x-auto -mx-2 px-2">
+        <svg viewBox={`0 0 ${width} ${height}`} className="min-w-[480px] w-full h-auto">
           {yTicks.map((tick) => (
             <g key={tick}>
               <line
@@ -131,13 +135,29 @@ function DashboardAdmin() {
     fetchData();
   }, []);
 
+  // Skeleton loading state
   if (!user) {
     return (
-      <div className="admin-page-bg min-h-screen flex items-center justify-center">
-        <div className="flex items-center gap-2 text-gray-500">
-          <div className="w-5 h-5 border-2 border-purple-500 border-t-transparent rounded-full animate-spin"></div>
-          Loading...
+      <div className="genz-bg h-screen overflow-hidden flex overflow-hidden text-sora">
+        <Sidebar role="admin" />
+        <div className="flex-1 flex flex-col min-w-0">
+          <Navbar role="admin" user={null} />
+          <main className="flex-1 p-4 pb-24 md:p-6">
+            <div className="max-w-6xl mx-auto w-full space-y-6">
+              <Skeleton className="h-28 w-full rounded-3xl" />
+              <SkeletonStatGrid count={5} className="grid-cols-2 sm:grid-cols-3 lg:grid-cols-5" />
+              <Skeleton className="h-64 w-full rounded-2xl" />
+              <Skeleton className="h-6 w-40" />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <Skeleton className="h-24 rounded-2xl" />
+                <Skeleton className="h-24 rounded-2xl" />
+                <Skeleton className="h-24 rounded-2xl" />
+                <Skeleton className="h-24 rounded-2xl" />
+              </div>
+            </div>
+          </main>
         </div>
+        <BottomNav role="admin" />
       </div>
     );
   }
@@ -146,7 +166,7 @@ function DashboardAdmin() {
     {
       label: "Total Siswa",
       value: stats?.totalSiswa || 0,
-      icon: "🎓",
+      icon: FaGraduationCap,
       color: "from-green-500 to-emerald-600",
       bgLight: "bg-green-50",
       path: "/admin/users",
@@ -154,7 +174,7 @@ function DashboardAdmin() {
     {
       label: "Total Guru",
       value: stats?.totalGuru || 0,
-      icon: "👨‍🏫",
+      icon: FaUserCog,
       color: "from-blue-500 to-cyan-600",
       bgLight: "bg-blue-50",
       path: "/admin/users",
@@ -162,7 +182,7 @@ function DashboardAdmin() {
     {
       label: "Kosakata",
       value: stats?.totalVocab || 0,
-      icon: "📚",
+      icon: FiBookOpen,
       color: "from-purple-500 to-violet-600",
       bgLight: "bg-purple-50",
       path: "/admin/kamus",
@@ -170,7 +190,7 @@ function DashboardAdmin() {
     {
       label: "Soal Kuis",
       value: stats?.totalQuiz || 0,
-      icon: "📝",
+      icon: FiFileText,
       color: "from-amber-500 to-orange-600",
       bgLight: "bg-amber-50",
       path: "/admin/materi",
@@ -178,7 +198,7 @@ function DashboardAdmin() {
     {
       label: "Room Kelas",
       value: stats?.totalRooms || 0,
-      icon: "🏠",
+      icon: FiHome,
       color: "from-rose-500 to-pink-600",
       bgLight: "bg-rose-50",
       path: "/admin/rooms",
@@ -189,111 +209,115 @@ function DashboardAdmin() {
     {
       title: "Kelola Kamus",
       desc: "Tambah, edit, hapus kosakata",
-      icon: "📚",
+      icon: FiBookOpen,
       path: "/admin/kamus",
       color: "border-purple-200 hover:border-purple-400 hover:shadow-purple-100",
     },
     {
       title: "Kelola Materi & Kuis",
       desc: "Input materi pelajaran & soal",
-      icon: "📖",
+      icon: FiFileText,
       path: "/admin/materi",
       color: "border-amber-200 hover:border-amber-400 hover:shadow-amber-100",
     },
     {
       title: "Kelola Pengguna",
       desc: "Blokir atau hapus akun",
-      icon: "👥",
+      icon: FiUsers,
       path: "/admin/users",
       color: "border-blue-200 hover:border-blue-400 hover:shadow-blue-100",
     },
     {
       title: "Moderasi Room",
       desc: "Lihat & hapus room kelas",
-      icon: "🏠",
+      icon: FiHome,
       path: "/admin/rooms",
       color: "border-rose-200 hover:border-rose-400 hover:shadow-rose-100",
     },
   ];
 
   return (
-    <div className="admin-page-bg min-h-screen flex overflow-hidden">
-      <SidebarAdmin />
+    <div className="genz-bg h-screen overflow-hidden flex overflow-hidden text-sora">
+      <Sidebar role="admin" />
 
       <div className="flex-1 flex flex-col min-w-0">
-        <NavbarAdmin user={user} />
+        <Navbar role="admin" user={user} />
 
         <main className="flex-1 p-4 pb-24 md:p-6 overflow-y-auto overflow-x-hidden">
           <div className="max-w-6xl mx-auto w-full">
             {/* GREETING */}
-            <div className="admin-hero-card text-white rounded-3xl p-6 mb-6 shadow-lg shadow-purple-500/20">
-              <h2 className="font-bold text-xl mb-1">
-                Selamat datang, {user.name} 👋
+            <div className="bg-white/80 backdrop-blur-md border border-sora/10 shadow-soft-sora p-6 sm:p-8 rounded-3xl mb-6">
+              <h2 className="font-black text-2xl sm:text-3xl mb-1 text-sora">
+                Selamat datang, {user.name}
               </h2>
-              <p className="text-purple-200 text-sm">
+              <p className="text-sm font-bold text-sora/60 mt-1">
                 Kelola platform Sora Kaili dari satu tempat
               </p>
             </div>
 
             {/* STATS CARDS */}
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-6">
-              {statCards.map((card, i) => (
-                <div
-                  key={i}
-                  onClick={() => navigate(card.path)}
-                  className="admin-stat-card rounded-2xl p-4 shadow-sm cursor-pointer transition-all duration-200 group"
-                >
-                  <div className="flex items-center gap-2 mb-2">
-                    <div
-                      className={`w-8 h-8 rounded-lg ${card.bgLight} flex items-center justify-center text-base group-hover:scale-110 transition-transform`}
-                    >
-                      {card.icon}
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 mb-6">
+              {statCards.map((card, i) => {
+                const Icon = card.icon;
+                return (
+                  <div
+                    key={i}
+                    onClick={() => navigate(card.path)}
+                    className="bg-white/80 backdrop-blur-md border border-sora/10 shadow-soft-sora rounded-3xl p-5 cursor-pointer transition-all hover:shadow-md hover:-translate-y-1 group"
+                  >
+                    <div className="flex items-center gap-2 mb-3">
+                      <div
+                        className={`w-10 h-10 rounded-xl ${card.bgLight} flex items-center justify-center group-hover:scale-110 transition-transform`}
+                      >
+                        <Icon size={20} />
+                      </div>
+                    </div>
+                    <div className="text-2xl sm:text-3xl font-black text-sora">
+                      {card.value.toLocaleString()}
+                    </div>
+                    <div className="text-xs font-black text-sora/60 uppercase tracking-wider mt-1 truncate">
+                      {card.label}
                     </div>
                   </div>
-                  <div className="text-2xl font-bold text-gray-800">
-                    {card.value.toLocaleString()}
-                  </div>
-                  <div className="text-xs text-gray-500 mt-0.5">
-                    {card.label}
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
             <UsageLineChart data={stats?.usageTrend || []} />
 
             {/* QUICK ACTIONS */}
-            <h3 className="font-bold text-lg text-gray-800 mb-3">
-              ⚡ Aksi Cepat
+            <h3 className="font-black text-lg text-sora mb-3 flex items-center gap-2">
+              <FiZap size={20} className="text-kaili" /> Aksi Cepat
             </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-              {quickActions.map((action, i) => (
-                <div
-                  key={i}
-                  onClick={() => navigate(action.path)}
-                  className={`admin-action-card rounded-2xl p-5 border-2 cursor-pointer transition-all duration-200 hover:shadow-lg ${action.color}`}
-                >
-                  <div className="flex items-center gap-3">
-                    <span className="text-3xl">{action.icon}</span>
-                    <div>
-                      <h4 className="font-semibold text-gray-800">
-                        {action.title}
-                      </h4>
-                      <p className="text-sm text-gray-500">{action.desc}</p>
-                    </div>
-                    <div className="ml-auto text-gray-400">
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {quickActions.map((action, i) => {
+                const Icon = action.icon;
+                return (
+                  <div
+                    key={i}
+                    onClick={() => navigate(action.path)}
+                    className="bg-white/80 backdrop-blur-md border border-sora/10 shadow-soft-sora rounded-3xl p-5 cursor-pointer transition-all hover:border-kaili hover:shadow-md hover:-translate-y-1 group"
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 rounded-2xl bg-sora/5 flex items-center justify-center flex-shrink-0 transition-colors group-hover:bg-kaili/10">
+                        <Icon size={24} className="text-sora group-hover:text-kaili transition-colors" />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <h4 className="font-black text-sora text-base sm:text-lg">
+                          {action.title}
+                        </h4>
+                        <p className="text-sm font-bold text-sora/60 truncate mt-0.5">{action.desc}</p>
+                      </div>
+                      <FiChevronRight size={20} className="text-sora/40 flex-shrink-0 hidden sm:block group-hover:text-kaili transition-colors" />
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </main>
       </div>
-      <BottomNavAdmin />
+      <BottomNav role="admin" />
     </div>
   );
 }

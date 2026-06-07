@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import BottomNav from "../components/BottomNav";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
+import { Skeleton } from "../components/Skeleton";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
@@ -24,34 +25,36 @@ function Favorites() {
   }, []);
 
   return (
-    <div className="student-page-bg flex min-h-screen bg-gray-100">
+    <div className="genz-bg flex h-screen overflow-hidden text-sora">
       <Sidebar role="siswa" />
 
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 h-screen overflow-y-auto custom-scrollbar relative">
         <Navbar />
 
         <main className="flex-1 px-4 py-6 flex justify-center">
           <div className="w-full max-w-md md:max-w-3xl">
-            <div className="student-hero-card mb-5 rounded-3xl p-5 shadow">
-              <p className="text-sm font-semibold text-green-700">Favorit</p>
-              <h1 className="text-2xl font-bold text-gray-900">
+            <div className="bg-white/80 backdrop-blur-md border border-sora/10 shadow-soft-sora mb-5 rounded-3xl p-6">
+              <p className="text-xs font-black text-kaili uppercase tracking-wider">Favorit</p>
+              <h1 className="text-2xl sm:text-3xl font-black text-sora mb-1">
                 Kosakata Favorit
               </h1>
-              <p className="mt-1 text-sm text-gray-600">
+              <p className="mt-1 text-sm font-bold text-sora/60">
                 Kumpulan kata yang kamu simpan dari kamus.
               </p>
             </div>
 
             {loading ? (
-              <div className="student-glass-card rounded-2xl p-5 text-center text-gray-500">
-                Memuat favorit...
+              <div className="space-y-3">
+                <Skeleton className="h-24 w-full rounded-3xl" />
+                <Skeleton className="h-24 w-full rounded-3xl" />
+                <Skeleton className="h-24 w-full rounded-3xl" />
               </div>
             ) : data.length === 0 ? (
-              <div className="student-glass-card rounded-2xl p-6 text-center">
-                <p className="font-semibold text-gray-700">
+              <div className="bg-white/80 backdrop-blur-md border border-sora/10 shadow-soft-sora rounded-3xl p-8 text-center">
+                <p className="font-black text-sora text-lg">
                   Belum ada favorit
                 </p>
-                <p className="mt-1 text-sm text-gray-500">
+                <p className="mt-1 text-sm font-bold text-sora/60">
                   Simpan kata dari Kamus agar muncul di sini.
                 </p>
               </div>
@@ -60,19 +63,19 @@ function Favorites() {
                 {data.map((item) => (
                   <div
                     key={item.id}
-                    className="student-list-card bg-white p-4 rounded-xl shadow"
+                    className="bg-white/80 backdrop-blur-md border border-sora/10 shadow-soft-sora p-5 rounded-3xl transition-all hover:shadow-md hover:-translate-y-1"
                   >
                     <div className="flex items-start justify-between gap-3">
                       <div>
-                        <p className="font-semibold text-gray-900">
+                        <p className="font-black text-sora text-lg">
                           {item.indonesia}
                         </p>
 
-                        <div className="mt-2 flex flex-wrap gap-2">
+                        <div className="mt-3 flex flex-wrap gap-2">
                           {item.translations?.map((t, i) => (
                             <span
                               key={i}
-                              className="px-3 py-1 rounded-full text-sm bg-green-100 text-green-700"
+                              className="px-3 py-1 rounded-xl text-sm font-bold bg-kaili/10 text-kaili border border-kaili/20"
                             >
                               {t.word} ({t.dialect})
                             </span>
@@ -80,7 +83,7 @@ function Favorites() {
                         </div>
                       </div>
 
-                      <span className="rounded-full bg-rose-50 px-3 py-1 text-sm text-rose-500">
+                      <span className="rounded-xl bg-red-500/10 px-3 py-1.5 text-xs font-black text-red-500 uppercase tracking-wider border border-red-500/20">
                         Favorit
                       </span>
                     </div>
@@ -91,8 +94,7 @@ function Favorites() {
           </div>
         </main>
       </div>
-
-      <BottomNav role="siswa" />
+      <BottomNav />
     </div>
   );
 }

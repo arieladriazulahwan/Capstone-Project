@@ -1,12 +1,13 @@
 import ProfileDropdown from "./ProfileDropdown";
-import { ArrowLeft } from "lucide-react";
+import { FiArrowLeft } from "react-icons/fi";
+
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import SoraKailiLogo from "./SoraKailiLogo";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
-function Navbar({ user, showBackButton = false, backTo = -1 }) {
+function Navbar({ user, showBackButton = false, backTo = -1, role = "siswa" }) {
   const navigate = useNavigate();
   const [profile, setProfile] = useState(user || null);
 
@@ -45,39 +46,49 @@ function Navbar({ user, showBackButton = false, backTo = -1 }) {
   };
 
   return (
-    <div className="sticky top-0 z-40 bg-white border-b">
+    <div className="sticky top-4 md:top-6 z-40 mx-4 md:mx-8 bg-white/70 backdrop-blur-xl border border-white/60 shadow-soft-sora rounded-full px-4 py-2 mb-8 flex justify-between items-center transition-all duration-300">
 
-      {/* WRAPPER AGAR LEBAR SAMA DENGAN KONTEN */}
-      <div className="w-full max-w-md md:max-w-3xl mx-auto px-4 py-2 flex justify-between items-center">
+      {/* LEFT */}
+      <div className="flex items-center gap-2">
+        {showBackButton && (
+          <button
+            type="button"
+            onClick={handleBack}
+            className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-sora shadow-soft-sora btn-bouncy"
+            aria-label="Kembali"
+          >
+            <FiArrowLeft size={20} strokeWidth={2.5} />
+          </button>
+        )}
 
-        {/* LEFT */}
-        <div className="flex items-center gap-2">
-          {showBackButton && (
-            <button
-              type="button"
-              onClick={handleBack}
-              className="w-9 h-9 rounded-xl border bg-white flex items-center justify-center hover:bg-gray-50 transition-transform hover:-translate-y-0.5"
-              aria-label="Kembali"
-            >
-              <ArrowLeft size={18} />
-            </button>
-          )}
-
+        <div className="md:hidden">
+          {/* On mobile, Sidebar is hidden, so we show the logo here */}
           <SoraKailiLogo
-            className={`w-30 h-20 overflow-hidden ${showBackButton ? "" : "-ml-1"}`}
-            imgClassName="scale-[1.7] -translate-x-1 translate-y-2"
+            className={`w-28 h-10 overflow-hidden ${showBackButton ? "" : "-ml-1"}`}
+            imgClassName="scale-[2] origin-center -translate-x-2"
           />
         </div>
+        <div className="hidden md:flex items-center gap-2 pl-2">
+           {/* On desktop, Sidebar already has the logo, so we can just show a page indicator or leave it clean */}
+           <span className="font-bold text-sora/40 text-sm uppercase tracking-widest">
+             {role === "admin" ? "Admin Panel" : role === "guru" ? "Panel Guru" : "Sora Kaili"}
+           </span>
+        </div>
+      </div>
 
-        {/* RIGHT */}
-        <div className="flex items-center gap-3">
-          <span className="hidden md:block text-sm">
+      {/* RIGHT */}
+      <div className="flex items-center gap-3">
+        <div className="hidden md:flex flex-col items-end mr-1">
+          <span className="text-sm font-black text-sora leading-tight">
             {profile?.name}
           </span>
-          <ProfileDropdown user={profile} />
+          <span className={`text-[10px] font-bold uppercase tracking-widest ${role === 'admin' ? 'text-red-500' : role === 'guru' ? 'text-blue-500' : 'text-kaili'}`}>
+            {role}
+          </span>
         </div>
-
+        <ProfileDropdown user={profile} />
       </div>
+
     </div>
   );
 }

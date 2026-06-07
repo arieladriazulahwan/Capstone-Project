@@ -10,5 +10,8 @@
     "preview": "npm --prefix frontend run preview",
     "backend": "node backend/app.js",
     "seed:json": "npm --prefix backend run seed:json"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2"
   }
 }

@@ -1,3 +1,4 @@
+import { FaRocket, FaFrown } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
@@ -33,50 +34,51 @@ function Lesson() {
   }, [bab, dialect, level, levelInfo?.title]);
 
   return (
-    <div className="student-page-bg min-h-screen bg-gray-100">
+    <div className="h-screen overflow-hidden genz-bg text-sora">
       <Navbar
         showBackButton
         backTo={level ? `/level/${dialect}/${bab}` : "/level"}
       />
 
       <main className="p-4 max-w-xl mx-auto">
-        <div className="student-hero-card mb-5 rounded-3xl p-5 shadow">
-          <p className="text-sm font-semibold text-green-700">
+        <div className="bg-sora text-cream rounded-3xl p-6 mb-5 shadow-soft-sora relative overflow-hidden">
+          <div className="absolute top-[-20%] right-[-10%] w-32 h-32 bg-kaili/20 rounded-full blur-2xl"></div>
+          <p className="text-sm font-black text-cream/80">
             Materi {dialect.toUpperCase()}
           </p>
-          <h1 className="text-2xl font-bold text-gray-900">
+          <h1 className="text-2xl font-black text-cream mt-1">
             {levelInfo?.title || babInfo?.title || bab.toUpperCase()}
           </h1>
-          <p className="mt-1 text-sm text-gray-600">
+          <p className="mt-2 text-sm text-cream/60 font-medium">
             Pelajari kata dan arti sebelum masuk latihan.
           </p>
         </div>
 
         {data.length === 0 && (
-          <div className="bg-red-100 text-red-600 p-4 rounded-xl">
-            Materi belum tersedia
+          <div className="bg-red-50 text-red-600 p-4 rounded-2xl border border-red-200 font-bold text-center">
+            <span className="inline-flex items-center gap-2">Materi belum tersedia <FaFrown className="text-red-400" /></span>
           </div>
         )}
 
         {data.map((item, i) => (
-          <div key={i} className="student-card bg-white p-4 rounded-xl shadow mb-3">
+          <div key={i} className="bg-white/60 backdrop-blur-xl p-5 rounded-3xl shadow-soft-sora mb-4 border border-white/60 hover:shadow-md transition-all">
             {item.image && (
               <img
                 src={item.image}
                 alt={item.indo}
-                className="w-full h-48 object-contain rounded-xl bg-gray-50 border border-gray-100 mb-3"
+                className="w-full h-48 object-contain rounded-2xl bg-cream mb-4"
               />
             )}
 
-            <div className="flex justify-between items-center">
-              <p className="font-semibold text-gray-700">{item.indo}</p>
+            <div className="flex justify-between items-center mb-1">
+              <p className="font-bold text-sora/60">{item.indo}</p>
 
-              <span className="student-chip text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">
+              <span className="text-[10px] bg-kaili/10 text-kaili px-3 py-1 rounded-full font-bold uppercase tracking-wider">
                 {item.tipe}
               </span>
             </div>
 
-            <p className="text-2xl font-bold text-green-600 mt-2">
+            <p className="text-2xl font-black text-sora">
               {item.kaili}
             </p>
           </div>
@@ -86,21 +88,19 @@ function Lesson() {
       </main>
 
       {data.length > 0 && (
-        <div className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur border-t border-gray-200 px-4 py-3 md:left-0">
-          <div className="max-w-xl mx-auto">
-            <button
-              onClick={() =>
-                navigate(
-                  level
-                    ? `/practice/${dialect}/${bab}/${level}`
-                    : `/practice/${dialect}/${bab}`
-                )
-              }
-              className="w-full flag-wave text-white p-3 rounded-xl font-bold shadow-lg transition hover:scale-[1.01]"
-            >
-              Lanjut ke Latihan
-            </button>
-          </div>
+        <div className="fixed bottom-4 left-4 right-4 md:left-1/2 md:w-full md:max-w-xl md:-translate-x-1/2 z-40 bg-white/60 backdrop-blur-xl border border-white/60 shadow-soft-sora px-3 py-3 rounded-full flex justify-center">
+          <button
+            onClick={() =>
+              navigate(
+                level
+                  ? `/practice/${dialect}/${bab}/${level}`
+                  : `/practice/${dialect}/${bab}`
+              )
+            }
+            className="w-full bg-sora text-cream px-6 py-4 rounded-full font-black text-lg shadow-soft-sora btn-bouncy"
+          >
+            <span className="inline-flex items-center justify-center gap-2">Mulai Latihan <FaRocket /></span>
+          </button>
         </div>
       )}
     </div>

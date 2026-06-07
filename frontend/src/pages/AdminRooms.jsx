@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
-import NavbarAdmin from "../components/NavbarAdmin";
-import SidebarAdmin from "../components/SidebarAdmin";
-import BottomNavAdmin from "../components/BottomNavAdmin";
+import { FiBarChart2, FiClipboard, FiFileText, FiTrash2, FiX } from "react-icons/fi";
+
+import Navbar from "../components/Navbar";
+import { Skeleton } from "../components/Skeleton";
+import Sidebar from "../components/Sidebar";
+import BottomNav from "../components/BottomNav";
 import ConfirmDialog from "../components/ConfirmDialog";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
@@ -71,102 +74,111 @@ function AdminRooms() {
 
   if (!user) {
     return (
-      <div className="admin-page-bg min-h-screen flex items-center justify-center">
-        <div className="flex items-center gap-2 text-gray-500">
-          <div className="w-5 h-5 border-2 border-purple-500 border-t-transparent rounded-full animate-spin"></div>
-          Loading...
+      <div className="genz-bg h-screen overflow-hidden flex overflow-hidden text-sora">
+        <Sidebar role="admin" />
+        <div className="flex-1 flex flex-col min-w-0">
+          <Navbar role="admin" user={null} />
+          <main className="flex-1 p-4 pb-24 md:p-6">
+            <div className="max-w-6xl mx-auto w-full space-y-6">
+              <Skeleton className="h-28 w-full rounded-3xl" />
+              <Skeleton className="h-96 w-full rounded-3xl" />
+            </div>
+          </main>
         </div>
+        <BottomNav role="admin" />
       </div>
     );
   }
 
   return (
-    <div className="admin-page-bg min-h-screen flex overflow-hidden">
-      <SidebarAdmin />
+    <div className="genz-bg h-screen overflow-hidden flex overflow-hidden text-sora">
+      <Sidebar role="admin" />
       <div className="flex-1 flex flex-col min-w-0">
-        <NavbarAdmin user={user} />
+        <Navbar role="admin" user={user} />
         <main className="flex-1 p-4 pb-24 md:p-6 overflow-y-auto overflow-x-hidden">
           <div className="max-w-6xl mx-auto w-full">
             {/* HEADER */}
-            <div className="admin-hero-card mb-5 rounded-3xl p-5 text-white shadow-lg shadow-purple-500/20">
-              <h1 className="text-xl font-bold">
+            <div className="bg-white/80 backdrop-blur-md border border-sora/10 shadow-soft-sora p-6 sm:p-8 rounded-3xl mb-6">
+              <h1 className="text-2xl sm:text-3xl font-black text-sora mb-1">
                 Moderasi Room Kelas
               </h1>
-              <p className="text-sm text-purple-100">
+              <p className="text-sm font-bold text-sora/60 mt-1">
                 {rooms.length} room terdaftar dari semua guru
               </p>
             </div>
 
             {/* TABLE */}
-            <div className="admin-table-card rounded-2xl shadow-sm overflow-x-auto">
+            <div className="bg-white/80 backdrop-blur-md border border-sora/10 shadow-soft-sora rounded-3xl overflow-hidden">
               {loading ? (
-                <div className="p-8 text-center text-gray-400">Memuat...</div>
+                <div className="p-8 text-center font-bold text-sora/50">Memuat...</div>
               ) : rooms.length === 0 ? (
-                <div className="p-8 text-center text-gray-400">
+                <div className="p-8 text-center font-bold text-sora/50">
                   Belum ada room kelas
                 </div>
               ) : (
                 <div className="overflow-x-auto">
-                  <table className="w-full min-w-[760px] text-sm">
-                    <thead className="bg-gray-50 border-b">
+                  <table className="w-full min-w-[760px] text-sm text-sora">
+                    <thead className="bg-sora/5 border-b border-sora/10">
                       <tr>
-                        <th className="px-4 py-3 text-left text-gray-600 font-semibold">
+                        <th className="px-5 py-4 text-left font-black text-sora/60 uppercase tracking-wider text-xs">
                           Judul Room
                         </th>
-                        <th className="px-4 py-3 text-center text-gray-600 font-semibold">
+                        <th className="px-5 py-4 text-center font-black text-sora/60 uppercase tracking-wider text-xs">
                           Kode
                         </th>
-                        <th className="px-4 py-3 text-center text-gray-600 font-semibold">
+                        <th className="px-5 py-4 text-center font-black text-sora/60 uppercase tracking-wider text-xs">
                           Kategori
                         </th>
-                        <th className="px-4 py-3 text-center text-gray-600 font-semibold">
+                        <th className="px-5 py-4 text-center font-black text-sora/60 uppercase tracking-wider text-xs">
                           Soal
                         </th>
-                        <th className="px-4 py-3 text-center text-gray-600 font-semibold">
+                        <th className="px-5 py-4 text-center font-black text-sora/60 uppercase tracking-wider text-xs">
                           Percobaan
                         </th>
-                        <th className="px-4 py-3 text-center text-gray-600 font-semibold w-40">
+                        <th className="px-5 py-4 text-center font-black text-sora/60 uppercase tracking-wider text-xs w-40">
                           Aksi
                         </th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y">
+                    <tbody className="divide-y divide-sora/10">
                       {rooms.map((room) => (
-                        <tr key={room.id} className="hover:bg-gray-50 transition">
-                          <td className="px-4 py-3 font-medium text-gray-800">
+                        <tr key={room.id} className="hover:bg-sora/5 transition-colors">
+                          <td className="px-5 py-4 font-black text-sora">
                             {room.title}
                           </td>
-                          <td className="px-4 py-3 text-center">
-                            <span className="bg-purple-50 text-purple-700 px-3 py-1 rounded-lg text-xs font-mono font-bold">
+                          <td className="px-5 py-4 text-center">
+                            <span className="bg-kaili/10 border border-kaili/20 text-kaili px-3 py-1.5 rounded-xl text-xs font-mono font-black uppercase tracking-wider">
                               {room.code}
                             </span>
                           </td>
-                          <td className="px-4 py-3 text-center text-gray-500">
+                          <td className="px-5 py-4 text-center font-bold text-sora/60">
                             {room.category || "-"}
                           </td>
-                          <td className="px-4 py-3 text-center">
-                            <span className="bg-blue-50 text-blue-700 px-2 py-1 rounded-full text-xs font-medium">
+                          <td className="px-5 py-4 text-center">
+                            <span className="bg-sora/10 border border-sora/20 text-sora px-3 py-1.5 rounded-xl text-xs font-black">
                               {room.total_questions || 0}
                             </span>
                           </td>
-                          <td className="px-4 py-3 text-center">
-                            <span className="bg-amber-50 text-amber-700 px-2 py-1 rounded-full text-xs font-medium">
+                          <td className="px-5 py-4 text-center">
+                            <span className="bg-yellow-500/10 border border-yellow-500/20 text-yellow-600 px-3 py-1.5 rounded-xl text-xs font-black">
                               {room.total_attempts || 0}
                             </span>
                           </td>
-                          <td className="px-4 py-3 text-center">
-                            <button
-                              onClick={() => viewDetail(room.id)}
-                              className="text-xs font-medium mr-2 px-2.5 py-1 rounded-lg bg-indigo-50 text-indigo-600 hover:bg-indigo-100 transition"
-                            >
-                              Detail
-                            </button>
-                            <button
-                              onClick={() => setDeleteTarget(room)}
-                              className="text-xs font-medium px-2.5 py-1 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition"
-                            >
-                              Hapus
-                            </button>
+                          <td className="px-5 py-4 text-center">
+                            <div className="flex justify-center gap-2">
+                              <button
+                                onClick={() => viewDetail(room.id)}
+                                className="text-xs font-bold px-3 py-1.5 rounded-xl bg-white border-2 border-sora/10 text-sora hover:border-kaili hover:text-kaili shadow-sm transition-all"
+                              >
+                                Detail
+                              </button>
+                              <button
+                                onClick={() => setDeleteTarget(room)}
+                                className="text-xs font-bold px-3 py-1.5 rounded-xl bg-red-50 text-red-500 border-2 border-red-100 hover:bg-red-500 hover:text-white shadow-sm transition-all"
+                              >
+                                Hapus
+                              </button>
+                            </div>
                           </td>
                         </tr>
                       ))}
@@ -181,45 +193,45 @@ function AdminRooms() {
 
       {/* DETAIL MODAL */}
       {showDetail && selectedRoom && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
-          <div className="admin-glass-card rounded-3xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-            <div className="p-6">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-bold text-gray-800">
-                  📋 Detail Room
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-sora/80 backdrop-blur-sm p-4">
+          <div className="bg-white/90 backdrop-blur-xl border border-sora/10 shadow-soft-sora rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+            <div className="p-6 sm:p-8">
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-xl font-black text-sora flex items-center">
+                  <FiClipboard size={24} className="inline mr-2 text-kaili" /> Detail Room
                 </h3>
                 <button
                   onClick={() => setShowDetail(false)}
-                  className="p-1 hover:bg-gray-100 rounded-lg text-gray-400"
+                  className="p-2 hover:bg-sora/5 rounded-xl text-sora/60 transition-colors"
                 >
-                  ✕
+                  <FiX size={24} />
                 </button>
               </div>
 
               {/* Room Info */}
-              <div className="bg-gray-50 rounded-xl p-4 mb-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+              <div className="bg-sora/5 border border-sora/10 rounded-2xl p-5 mb-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
                   <div>
-                    <span className="text-gray-500">Judul:</span>
-                    <p className="font-semibold text-gray-800">
+                    <span className="text-xs font-black text-sora/50 uppercase tracking-wider">Judul</span>
+                    <p className="font-black text-sora text-base">
                       {selectedRoom.title}
                     </p>
                   </div>
                   <div>
-                    <span className="text-gray-500">Kode:</span>
-                    <p className="font-mono font-bold text-purple-700">
+                    <span className="text-xs font-black text-sora/50 uppercase tracking-wider">Kode</span>
+                    <p className="font-mono font-black text-kaili text-base">
                       {selectedRoom.code}
                     </p>
                   </div>
                   <div>
-                    <span className="text-gray-500">Kategori:</span>
-                    <p className="text-gray-800">
+                    <span className="text-xs font-black text-sora/50 uppercase tracking-wider">Kategori</span>
+                    <p className="font-bold text-sora text-base">
                       {selectedRoom.category || "-"}
                     </p>
                   </div>
                   <div>
-                    <span className="text-gray-500">Timer:</span>
-                    <p className="text-gray-800">
+                    <span className="text-xs font-black text-sora/50 uppercase tracking-wider">Timer</span>
+                    <p className="font-bold text-sora text-base">
                       {selectedRoom.timer
                         ? `${selectedRoom.timer} detik`
                         : "Tidak ada"}
@@ -229,54 +241,54 @@ function AdminRooms() {
               </div>
 
               {/* Questions */}
-              <h4 className="font-semibold text-gray-800 mb-2 text-sm">
-                📝 Soal ({selectedRoom.questions?.length || 0})
+              <h4 className="font-black text-sora mb-3 text-sm flex items-center gap-2 uppercase tracking-wider">
+                <FiFileText size={18} className="text-kaili" /> Soal ({selectedRoom.questions?.length || 0})
               </h4>
-              <div className="space-y-2 mb-4 max-h-40 overflow-y-auto">
+              <div className="space-y-2 mb-6 max-h-40 overflow-y-auto pr-2">
                 {selectedRoom.questions?.map((q, i) => (
                   <div
                     key={i}
-                    className="bg-gray-50 px-3 py-2 rounded-lg text-sm text-gray-700"
+                    className="bg-sora/5 border border-sora/5 px-4 py-3 rounded-xl text-sm font-bold text-sora"
                   >
-                    <span className="font-medium text-gray-500 mr-2">
+                    <span className="font-black text-kaili mr-2">
                       {i + 1}.
                     </span>
                     {q.question || "(Tidak ada teks)"}
                   </div>
                 )) || (
-                  <p className="text-gray-400 text-sm">Tidak ada soal</p>
+                  <p className="text-sora/50 text-sm font-bold">Tidak ada soal</p>
                 )}
               </div>
 
               {/* Attempts */}
-              <h4 className="font-semibold text-gray-800 mb-2 text-sm">
-                📊 Riwayat Percobaan ({selectedRoom.attempts?.length || 0})
+              <h4 className="font-black text-sora mb-3 text-sm flex items-center gap-2 uppercase tracking-wider">
+                <FiBarChart2 size={18} className="text-kaili" /> Riwayat Percobaan ({selectedRoom.attempts?.length || 0})
               </h4>
               {selectedRoom.attempts?.length > 0 ? (
-                <div className="space-y-1 max-h-40 overflow-y-auto">
+                <div className="space-y-2 max-h-40 overflow-y-auto pr-2">
                   {selectedRoom.attempts.map((a, i) => (
                     <div
                       key={i}
-                      className="flex justify-between items-center bg-gray-50 px-3 py-2 rounded-lg text-sm"
+                      className="flex justify-between items-center bg-sora/5 border border-sora/5 px-4 py-3 rounded-xl text-sm"
                     >
-                      <span className="text-gray-700">{a.student_name}</span>
-                      <span className="font-semibold text-purple-700">
+                      <span className="font-black text-sora">{a.student_name}</span>
+                      <span className="font-black text-kaili bg-kaili/10 px-3 py-1 rounded-lg">
                         {a.score}/{a.total}
                       </span>
                     </div>
                   ))}
                 </div>
               ) : (
-                <p className="text-gray-400 text-sm">
+                <p className="text-sora/50 text-sm font-bold">
                   Belum ada percobaan
                 </p>
               )}
 
               {/* Delete */}
-              <div className="mt-6 flex gap-3">
+              <div className="mt-8 flex gap-3">
                 <button
                   onClick={() => setShowDetail(false)}
-                  className="flex-1 py-2.5 border rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-50"
+                  className="flex-1 py-3.5 bg-white border-2 border-sora/10 text-sora rounded-xl text-sm font-bold hover:border-kaili hover:text-kaili transition-all shadow-sm"
                 >
                   Tutup
                 </button>
@@ -284,16 +296,15 @@ function AdminRooms() {
                   onClick={() =>
                     setDeleteTarget(selectedRoom)
                   }
-                  className="flex-1 py-2.5 bg-red-500 text-white rounded-xl text-sm font-semibold hover:bg-red-600 transition"
+                  className="flex-1 py-3.5 bg-red-50 text-red-500 border-2 border-red-100 rounded-xl text-sm font-bold hover:bg-red-500 hover:text-white transition-all shadow-sm"
                 >
-                  🗑️ Hapus Room
+                  <FiTrash2 size={18} className="inline mr-2" /> Hapus Room
                 </button>
               </div>
             </div>
           </div>
         </div>
       )}
-      <BottomNavAdmin />
       <ConfirmDialog
         open={Boolean(deleteTarget)}
         title="Hapus Room?"

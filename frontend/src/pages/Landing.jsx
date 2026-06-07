@@ -1,199 +1,204 @@
+import { HiSparkles } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
+import KailiTransparentImg from "../assets/kaili_transparent.png";
 import SoraKailiLogo from "../components/SoraKailiLogo";
+import { FiBookOpen, FiChevronRight, FiGlobe, FiLayers, FiStar, FiTarget, FiUsers, FiZap } from "react-icons/fi";
+import { FaRocket } from "react-icons/fa";
+
 
 const features = [
   {
     title: "Kamus Interaktif",
-    text: "Temukan kosakata Kaili, arti, kategori, dan dialeknya dengan cepat.",
-    icon: "K",
-    color: "bg-green-100 text-green-700",
+    text: "Temukan kosakata Kaili, arti, kategori, dan dialeknya dengan cepat dan menyenangkan.",
+    icon: FiBookOpen,
+    color: "text-kaili",
+    bg: "bg-kaili/10",
   },
   {
     title: "Latihan Bertahap",
-    text: "Belajar dari bab dan level yang tersusun rapi sesuai materi.",
-    icon: "L",
-    color: "bg-blue-100 text-blue-700",
+    text: "Belajar dari bab dan level yang tersusun rapi sesuai materi secara progresif.",
+    icon: FiLayers,
+    color: "text-sora",
+    bg: "bg-sora/10",
   },
   {
-    title: "Kuis & Room",
-    text: "Guru dapat membuat room, siswa menjawab, nilai langsung tercatat.",
-    icon: "Q",
-    color: "bg-yellow-100 text-yellow-700",
+    title: "Kuis & Gamifikasi",
+    text: "Jawab kuis di room kelas, kumpulkan XP, dan pertahankan streak belajarmu!",
+    icon: FaRocket,
+    color: "text-purple-600",
+    bg: "bg-purple-100",
   },
 ];
 
 const steps = [
-  "Pilih akun siswa atau guru",
-  "Belajar materi dan latihan",
-  "Kumpulkan XP, streak, dan nilai",
+  { title: "Daftar Akun", desc: "Buat akun dengan mudah sebagai siswa atau guru.", icon: FiUsers },
+  { title: "Pilih Materi", desc: "Mulai belajar dari level dasar hingga tingkat mahir.", icon: FiTarget },
+  { title: "Kumpulkan XP", desc: "Kerjakan kuis dan bersaing di papan peringkat lokal.", icon: FiStar },
 ];
 
 function Landing() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen overflow-hidden bg-gray-100 text-left">
-      <section className="relative min-h-[92vh] bg-gradient-to-br from-green-50 via-white to-blue-50 px-4 py-6">
-        <div className="pointer-events-none absolute left-6 top-20 h-24 w-24 rounded-full bg-green-200/50 blur-3xl landing-float"></div>
-        <div className="pointer-events-none absolute bottom-24 right-10 h-32 w-32 rounded-full bg-yellow-200/60 blur-3xl landing-float-slow"></div>
+    <div className="min-h-screen genz-bg text-sora font-sans selection:bg-kaili/30 overflow-x-hidden relative">
 
-        <div className="mx-auto flex w-full max-w-6xl items-center justify-between">
-          <SoraKailiLogo className="h-24 w-40 overflow-hidden" imgClassName="scale-[1.45]" />
-          <button
-            onClick={() => navigate("/login")}
-            className="rounded-full border border-green-200 bg-white/80 px-5 py-2 text-sm font-semibold text-green-700 shadow-sm backdrop-blur transition hover:-translate-y-0.5 hover:bg-green-50"
-          >
-            Masuk
-          </button>
-        </div>
 
-        <div className="mx-auto grid w-full max-w-6xl items-center gap-8 pt-8 md:grid-cols-[1.15fr_0.85fr] md:pt-14">
-          <div className="landing-rise">
-            <p className="mb-4 inline-flex rounded-full bg-green-100 px-4 py-2 text-sm font-semibold text-green-700">
-              Platform belajar Bahasa Kaili
-            </p>
+      {/* HERO SECTION */}
+      <section className="relative z-10 pt-16 md:pt-26 pb-24 px-4 flex justify-center">
+        <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
 
-            <h1 className="mb-5 max-w-2xl text-4xl font-black leading-tight text-gray-900 md:text-6xl">
-              Sora Kaili
+          {/* LEFT SIDE: Text & Stats */}
+          <div className="flex flex-col items-center lg:items-start text-center lg:text-left landing-rise">
+
+            <div className="inline-flex items-center gap-3 md:gap-4 px-5 py-2 md:py-2.5 rounded-full bg-white/60 backdrop-blur-md border border-white/60 shadow-sm mb-6 btn-bouncy cursor-default">
+              <SoraKailiLogo className="h-5 md:h-12 w-auto drop-shadow-sm" />
+              <div className="w-px h-4 md:h-5 bg-sora/20"></div>
+              <span className="text-xs md:text-sm font-bold text-sora/80 tracking-wide uppercase mt-0.5">Cara Baru Belajar Bahasa Daerah</span>
+            </div>
+
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-black leading-[1.15] tracking-tight mb-6 text-sora drop-shadow-sm">
+              Lestarikan <br className="hidden lg:block" /><span className="text-transparent bg-clip-text bg-gradient-to-br from-kaili to-green-600">Bahasa Kaili</span> <br className="hidden md:block lg:hidden" />
+              Untuk Generasi Kita.
             </h1>
 
-            <p className="max-w-xl text-base leading-relaxed text-gray-600 md:text-lg">
-              Belajar bahasa daerah dengan materi, latihan, kuis, room kelas,
-              streak, dan gamifikasi yang terasa ringan untuk dipakai setiap hari.
+            <p className="text-lg md:text-xl text-sora/70 mb-10 max-w-xl leading-relaxed font-medium">
+              Platform interaktif dengan materi, latihan bertahap, dan kuis gamifikasi.
+              Mulai perjalananmu menguasai bahasa daerah dengan cara yang seru, ringan, dan modern!
             </p>
 
-            <div className="mt-8 grid max-w-lg grid-cols-3 gap-3">
+            <button
+              onClick={() => navigate("/login")}
+              className="w-full sm:w-auto bg-sora text-cream px-10 py-4 rounded-full font-black text-xl shadow-xl shadow-sora/20 hover:bg-sora/90 transition-all btn-bouncy flex items-center justify-center gap-2 group mb-14"
+            >
+              Mulai Petualangan <FiChevronRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+            </button>
+
+            {/* QUICK STATS */}
+            <div className="flex items-center justify-center lg:justify-start gap-6 md:gap-12 border-t border-sora/10 pt-8 w-full">
               {[
-                ["2", "Dialek"],
-                ["10+", "Level"],
-                ["XP", "Progress"],
-              ].map(([value, label]) => (
-                <div key={label} className="rounded-2xl border border-white bg-white/80 p-4 text-center shadow-sm backdrop-blur">
-                  <p className="text-2xl font-black text-green-600">{value}</p>
-                  <p className="text-xs font-semibold text-gray-500">{label}</p>
+                { label: "Level Interaktif", value: "10+" },
+                { label: "Kosakata", value: "500+" },
+                { label: "Sistem Reward", value: "XP" },
+              ].map((stat, i) => (
+                <div key={i}>
+                  <p className="text-3xl md:text-4xl font-black text-sora mb-1">{stat.value}</p>
+                  <p className="text-xs font-bold text-sora/50 uppercase tracking-wider">{stat.label}</p>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="landing-rise-delay rounded-[2rem] border border-white bg-white/85 p-5 shadow-2xl backdrop-blur">
-            <div className="flex justify-center">
-              <SoraKailiLogo className="h-36 w-56" />
-            </div>
+          {/* RIGHT SIDE: Transparent Character & Cool Elements */}
+          <div className="relative flex justify-center lg:justify-end mt-16 lg:mt-0 w-full max-w-lg mx-auto landing-rise-delay">
 
-            <div className="mt-2 rounded-3xl bg-gray-50 p-4">
-              <p className="mb-3 text-center text-sm font-bold text-gray-700">Masuk sebagai</p>
-              <div className="grid grid-cols-2 gap-3">
-                <button
-                  onClick={() => navigate("/login/siswa")}
-                  className="group rounded-2xl border border-green-100 bg-white p-4 text-center shadow-sm transition hover:-translate-y-1 hover:border-green-300 hover:bg-green-50 hover:shadow-md"
-                >
-                  <span className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-green-100 text-lg font-black text-green-700 transition group-hover:scale-110">
-                    S
-                  </span>
-                  <span className="font-bold text-gray-800">Siswa</span>
-                </button>
+            {/* Main Composition Container */}
+            <div className="relative w-full aspect-square flex items-center justify-center">
 
-                <button
-                  onClick={() => navigate("/login/guru")}
-                  className="group rounded-2xl border border-blue-100 bg-white p-4 text-center shadow-sm transition hover:-translate-y-1 hover:border-blue-300 hover:bg-blue-50 hover:shadow-md"
-                >
-                  <span className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-100 text-lg font-black text-blue-700 transition group-hover:scale-110">
-                    G
-                  </span>
-                  <span className="font-bold text-gray-800">Guru</span>
-                </button>
+              {/* Decorative Element 1: Subtle Grid / Dots (Static cool element) */}
+              <div className="absolute top-0 right-0 w-32 h-32 opacity-20 pointer-events-none"
+                style={{ backgroundImage: 'radial-gradient(circle, #163A2A 2px, transparent 2px)', backgroundSize: '16px 16px' }}>
               </div>
 
-              <p className="mt-5 text-center text-sm text-gray-500">
-                Belum punya akun?{" "}
-                <button
-                  onClick={() => navigate("/register")}
-                  className="font-bold text-green-600 hover:text-green-700"
-                >
-                  Daftar di sini
-                </button>
-              </p>
+              {/* Decorative Element 2: Floating Circle (Static) */}
+              <div className="absolute -bottom-8 -left-8 w-24 h-24 rounded-full border-4 border-kaili/20 z-0"></div>
+
+              {/* Decorative Element 3: Star Shape */}
+              <div className="absolute top-12 left-0 text-kaili/40 z-0">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" />
+                </svg>
+              </div>
+
+              {/* Character Illustration (Transparent via multiply over page bg) */}
+              {/* By removing the dark/colored gradient bubble, mix-blend-multiply creates a perfect transparent effect over the light page background. */}
+              <div className="relative z-10 w-full h-[110%] flex items-end justify-center pointer-events-none">
+                <img
+                  src={KailiTransparentImg}
+                  alt="Anak-anak belajar bahasa Kaili"
+                  className="h-full w-auto object-contain object-bottom drop-shadow-sm"
+                />
+              </div>
+
+
             </div>
           </div>
         </div>
       </section>
 
-      <section className="bg-white px-4 py-14">
-        <div className="mx-auto max-w-5xl text-center">
-          <p className="mb-3 text-sm font-bold uppercase tracking-[0.18em] text-green-600">Tentang Kami</p>
-          <h2 className="mx-auto mb-4 max-w-2xl text-3xl font-black text-gray-900">
-            Belajar bahasa Kaili dibuat lebih dekat dengan keseharian.
-          </h2>
-          <p className="mx-auto max-w-3xl leading-relaxed text-gray-600">
-            Sora Kaili membantu siswa mengenal kosakata, kalimat, latihan, dan
-            kuis interaktif, sambil memberi guru ruang untuk membuat aktivitas
-            kelas yang mudah dipantau.
-          </p>
-        </div>
-      </section>
-
-      <section className="bg-gray-100 px-4 py-14">
-        <div className="mx-auto max-w-6xl">
-          <div className="mb-8 flex flex-col gap-2 text-center">
-            <p className="text-sm font-bold uppercase tracking-[0.18em] text-green-600">Fitur Unggulan</p>
-            <h2 className="text-3xl font-black text-gray-900">Satu tempat untuk belajar dan mengajar</h2>
+      {/* FEATURES SECTION */}
+      <section className="relative z-10 py-24 px-4 bg-white/40 backdrop-blur-xl border-y border-white/60">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16 landing-rise">
+            <span className="text-kaili font-black tracking-widest uppercase text-sm mb-2 block">Fitur Unggulan</span>
+            <h2 className="text-4xl md:text-5xl font-black">Satu Platform, <br className="hidden md:block" />Banyak Keseruan.</h2>
           </div>
 
-          <div className="grid gap-5 md:grid-cols-3">
-            {features.map((feature, index) => (
-              <div
-                key={feature.title}
-                className="landing-card rounded-3xl border border-white bg-white p-6 shadow-sm transition hover:-translate-y-2 hover:shadow-xl"
-                style={{ animationDelay: `${index * 120}ms` }}
-              >
-                <div className={`mb-5 flex h-14 w-14 items-center justify-center rounded-2xl text-xl font-black ${feature.color}`}>
-                  {feature.icon}
+          <div className="grid md:grid-cols-3 gap-6">
+            {features.map((feat, i) => {
+              const Icon = feat.icon;
+              return (
+                <div
+                  key={i}
+                  className="bg-white/80 backdrop-blur-xl border border-white/60 p-8 rounded-[2rem] shadow-soft-sora hover:-translate-y-3 transition-all duration-300 group"
+                  style={{ animationDelay: `${i * 150}ms` }}
+                >
+                  <div className={`w-16 h-16 rounded-[1.5rem] ${feat.bg} flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-inner`}>
+                    <Icon className={feat.color} strokeWidth={2.5} size={32} />
+                  </div>
+                  <h3 className="text-xl font-black mb-3">{feat.title}</h3>
+                  <p className="text-sora/70 leading-relaxed font-medium text-sm">
+                    {feat.text}
+                  </p>
                 </div>
-                <h3 className="mb-2 text-lg font-black text-gray-900">{feature.title}</h3>
-                <p className="text-sm leading-relaxed text-gray-500">{feature.text}</p>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
 
-      <section className="bg-white px-4 py-14">
-        <div className="mx-auto max-w-5xl">
-          <div className="mb-9 text-center">
-            <p className="mb-2 text-sm font-bold uppercase tracking-[0.18em] text-green-600">Cara Kerja</p>
-            <h2 className="text-3xl font-black text-gray-900">Mulai dalam tiga langkah</h2>
-          </div>
+      {/* HOW IT WORKS SECTION */}
+      <section className="relative z-10 py-24 px-4">
+        <div className="max-w-5xl mx-auto">
+          <div className="bg-sora text-cream rounded-[3rem] p-8 md:p-16 relative overflow-hidden shadow-2xl">
+            {/* Background Pattern */}
+            <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.8)_1px,transparent_1px)] bg-[size:24px_24px]"></div>
 
-          <div className="grid gap-4 md:grid-cols-3">
-            {steps.map((step, index) => (
-              <div key={step} className="relative rounded-3xl bg-gray-50 p-5 shadow-sm">
-                <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-full bg-green-600 text-sm font-black text-white">
-                  {index + 1}
-                </div>
-                <p className="font-bold text-gray-800">{step}</p>
-              </div>
-            ))}
+            {/* Decorative Glow */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-kaili/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+
+            <div className="relative z-10 text-center mb-16">
+              <h2 className="text-3xl md:text-5xl font-black mb-4">Cara Kerja Sora Kaili</h2>
+              <p className="text-cream/70 max-w-xl mx-auto font-medium">Mulai perjalanan belajarmu hanya dalam 3 langkah mudah.</p>
+            </div>
+
+            <div className="relative z-10 grid md:grid-cols-3 gap-8">
+              {steps.map((step, i) => {
+                const Icon = step.icon;
+                return (
+                  <div key={i} className="text-center relative group">
+                    {/* Connecting line for md+ */}
+                    {i !== 2 && <div className="hidden md:block absolute top-10 left-[60%] w-[80%] h-[2px] bg-gradient-to-r from-kaili/50 to-transparent"></div>}
+
+                    <div className="w-20 h-20 mx-auto bg-white/10 backdrop-blur-md rounded-full border border-white/20 flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                      <Icon className="w-8 h-8 text-kaili" />
+                    </div>
+                    <h3 className="text-xl font-black mb-2 text-white">{step.title}</h3>
+                    <p className="text-cream/60 text-sm font-medium px-4">{step.desc}</p>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="bg-gradient-to-r from-green-600 to-green-500 px-4 py-14 text-center text-white">
-        <h2 className="mb-3 text-3xl font-black text-white">Siap belajar Bahasa Kaili?</h2>
-        <p className="mx-auto mb-6 max-w-xl text-green-50">
-          Buat akun dan mulai jelajahi materi, latihan, kuis, dan room kelas.
+      {/* FOOTER */}
+      <footer className="relative z-10 py-8 text-center border-t border-white/40">
+        <p className="text-sora/50 font-bold text-sm">
+          © {new Date().getFullYear()} Sora Kaili. Melestarikan Budaya Melalui Teknologi.
         </p>
-        <button
-          onClick={() => navigate("/register")}
-          className="rounded-2xl bg-white px-7 py-3 font-bold text-green-700 shadow-lg transition hover:-translate-y-1 hover:shadow-xl"
-        >
-          Mulai Sekarang
-        </button>
-      </section>
-
-      <footer className="bg-gray-200 py-5 text-center text-sm text-gray-600">
-        © 2026 Sora Kaili - Pelestarian Bahasa Daerah
       </footer>
+
     </div>
   );
 }

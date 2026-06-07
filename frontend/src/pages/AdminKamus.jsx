@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
-import NavbarAdmin from "../components/NavbarAdmin";
-import SidebarAdmin from "../components/SidebarAdmin";
-import BottomNavAdmin from "../components/BottomNavAdmin";
+import { FiEdit3, FiPlus, FiTrash2, FiX } from "react-icons/fi";
+
+import Navbar from "../components/Navbar";
+import { Skeleton } from "../components/Skeleton";
+import Sidebar from "../components/Sidebar";
+import BottomNav from "../components/BottomNav";
 import ConfirmDialog from "../components/ConfirmDialog";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
@@ -194,51 +197,59 @@ function AdminKamus() {
 
   if (!user) {
     return (
-      <div className="admin-page-bg min-h-screen flex items-center justify-center">
-        <div className="flex items-center gap-2 text-gray-500">
-          <div className="w-5 h-5 border-2 border-purple-500 border-t-transparent rounded-full animate-spin"></div>
-          Loading...
+      <div className="genz-bg h-screen overflow-hidden flex overflow-hidden text-sora">
+        <Sidebar role="admin" />
+        <div className="flex-1 flex flex-col min-w-0">
+          <Navbar role="admin" user={null} />
+          <main className="flex-1 p-4 pb-24 md:p-6">
+            <div className="max-w-6xl mx-auto w-full space-y-6">
+              <Skeleton className="h-24 w-full rounded-3xl" />
+              <Skeleton className="h-16 w-full rounded-3xl" />
+              <Skeleton className="h-96 w-full rounded-3xl" />
+            </div>
+          </main>
         </div>
+        <BottomNav role="admin" />
       </div>
     );
   }
 
   return (
-    <div className="admin-page-bg min-h-screen flex overflow-hidden">
-      <SidebarAdmin />
+    <div className="genz-bg h-screen overflow-hidden flex overflow-hidden text-sora">
+      <Sidebar role="admin" />
       <div className="flex-1 flex flex-col min-w-0">
-        <NavbarAdmin user={user} />
+        <Navbar role="admin" user={user} />
         <main className="flex-1 p-4 pb-24 md:p-6 overflow-y-auto overflow-x-hidden">
           <div className="max-w-6xl mx-auto w-full">
             {/* HEADER */}
-            <div className="admin-hero-card flex flex-col md:flex-row md:items-center justify-between gap-3 mb-5 rounded-3xl p-5 text-white shadow-lg shadow-purple-500/20">
+            <div className="bg-white/80 backdrop-blur-md border border-sora/10 shadow-soft-sora p-6 sm:p-8 rounded-3xl mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div>
-                <h1 className="text-xl font-bold">Kelola Kamus</h1>
-                <p className="text-sm text-purple-100">
+                <h1 className="text-2xl sm:text-3xl font-black text-sora mb-1">Kelola Kamus</h1>
+                <p className="text-sm font-bold text-sora/60 mt-1">
                   {vocabList.length} kosakata terdaftar
                 </p>
               </div>
               <button
                 onClick={openAdd}
-                className="px-5 py-2.5 bg-white text-purple-700 rounded-xl font-semibold shadow-lg hover:-translate-y-0.5 hover:shadow-xl transition-all text-sm"
+                className="bg-kaili text-white px-5 py-3 rounded-xl font-bold shadow-glow-kaili transition-all hover:-translate-y-1 text-sm flex items-center gap-2"
               >
-                Tambah Kosakata
+                <FiPlus size={18} /> Tambah Kosakata
               </button>
             </div>
 
             {/* FILTERS */}
-            <div className="admin-filter-card flex flex-col md:flex-row gap-3 mb-4 rounded-2xl p-3 shadow-sm">
+            <div className="bg-white/80 backdrop-blur-md border border-sora/10 shadow-soft-sora rounded-3xl p-4 sm:p-5 mb-6 flex flex-col md:flex-row gap-3">
               <input
                 type="text"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Cari kosakata..."
-                className="flex-1 px-4 py-2.5 border border-gray-200 rounded-xl focus:outline-none admin-input focus:ring-2 focus:ring-purple-400 text-sm"
+                className="flex-1 px-4 py-3 border-2 border-sora/10 rounded-xl focus:outline-none focus:border-kaili text-sora font-bold text-sm bg-white/50 focus:bg-white transition-all"
               />
               <select
                 value={filterDialect}
                 onChange={(e) => setFilterDialect(e.target.value)}
-                className="px-4 py-2.5 border border-gray-200 rounded-xl focus:outline-none admin-input focus:ring-2 focus:ring-purple-400 text-sm"
+                className="px-4 py-3 border-2 border-sora/10 rounded-xl focus:outline-none focus:border-kaili text-sora font-bold text-sm bg-white/50 focus:bg-white transition-all"
               >
                 <option value="">Semua Dialek</option>
                 <option value="ledo">Ledo</option>
@@ -247,7 +258,7 @@ function AdminKamus() {
               <select
                 value={filterCategory}
                 onChange={(e) => setFilterCategory(e.target.value)}
-                className="px-4 py-2.5 border border-gray-200 rounded-xl focus:outline-none admin-input focus:ring-2 focus:ring-purple-400 text-sm"
+                className="px-4 py-3 border-2 border-sora/10 rounded-xl focus:outline-none focus:border-kaili text-sora font-bold text-sm bg-white/50 focus:bg-white transition-all"
               >
                 <option value="">Semua Kategori</option>
                 {CATEGORIES.map((cat) => (
@@ -259,75 +270,77 @@ function AdminKamus() {
             </div>
 
             {/* TABLE */}
-            <div className="admin-table-card rounded-2xl shadow-sm overflow-x-auto">
+            <div className="bg-white/80 backdrop-blur-md border border-sora/10 shadow-soft-sora rounded-3xl overflow-hidden">
               {loading ? (
-                <div className="p-8 text-center text-gray-400">Memuat data...</div>
+                <div className="p-8 text-center font-bold text-sora/50">Memuat data...</div>
               ) : paged.length === 0 ? (
-                <div className="p-8 text-center text-gray-400">
+                <div className="p-8 text-center font-bold text-sora/50">
                   Tidak ada kosakata ditemukan
                 </div>
               ) : (
                 <div className="overflow-x-auto">
-                  <table className="w-full min-w-[760px] text-sm">
-                    <thead className="bg-gray-50 border-b">
+                  <table className="w-full min-w-[760px] text-sm text-sora">
+                    <thead className="bg-sora/5 border-b border-sora/10">
                       <tr>
-                        <th className="px-4 py-3 text-left text-gray-600 font-semibold">
+                        <th className="px-5 py-4 text-left font-black text-sora/60 uppercase tracking-wider text-xs">
                           Indonesia
                         </th>
-                        <th className="px-4 py-3 text-left text-gray-600 font-semibold">
+                        <th className="px-5 py-4 text-left font-black text-sora/60 uppercase tracking-wider text-xs">
                           Terjemahan
                         </th>
-                        <th className="px-4 py-3 text-left text-gray-600 font-semibold">
+                        <th className="px-5 py-4 text-left font-black text-sora/60 uppercase tracking-wider text-xs">
                           Kategori
                         </th>
-                        <th className="px-4 py-3 text-center text-gray-600 font-semibold w-32">
+                        <th className="px-5 py-4 text-center font-black text-sora/60 uppercase tracking-wider text-xs w-32">
                           Aksi
                         </th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y">
+                    <tbody className="divide-y divide-sora/10">
                       {paged.map((v) => (
-                        <tr key={v.id} className="hover:bg-gray-50 transition">
-                          <td className="px-4 py-3 font-medium text-gray-800">
+                        <tr key={v.id} className="hover:bg-sora/5 transition-colors">
+                          <td className="px-5 py-4 font-black text-sora text-base">
                             {v.indonesia}
                           </td>
-                          <td className="px-4 py-3 text-gray-600">
+                          <td className="px-5 py-4">
                             {v.translations?.map((t, i) => (
                               <span
                                 key={i}
-                                className="inline-block bg-purple-50 text-purple-700 text-xs px-2 py-1 rounded-lg mr-1 mb-1"
+                                className="inline-block bg-kaili/10 border border-kaili/20 text-kaili text-xs px-2.5 py-1 rounded-xl font-black uppercase tracking-wider mr-1.5 mb-1.5"
                               >
                                 {t.dialect}: {t.word}
                               </span>
                             ))}
                           </td>
-                          <td className="px-4 py-3">
+                          <td className="px-5 py-4">
                             {v.category ? (
                               <span
-                                className={`inline-block px-2.5 py-1 rounded-full text-xs font-medium ${
-                                  CATEGORIES.find((c) => c.value === v.category)?.color ||
-                                  "bg-gray-50 text-gray-600"
+                                className={`inline-block px-3 py-1.5 rounded-xl text-xs font-black border ${
+                                  CATEGORIES.find((c) => c.value === v.category)?.color.replace('bg-', 'bg-opacity-10 border-').replace('text-', 'text-opacity-100 text-') ||
+                                  "bg-sora/10 border-sora/20 text-sora"
                                 }`}
                               >
                                 {v.category}
                               </span>
                             ) : (
-                              <span className="text-gray-400">-</span>
+                              <span className="text-sora/40 font-bold">-</span>
                             )}
                           </td>
-                          <td className="px-4 py-3 text-center">
-                            <button
-                              onClick={() => openEdit(v)}
-                              className="text-blue-600 hover:text-blue-800 text-xs font-medium mr-3"
-                            >
-                              ✏️ Edit
-                            </button>
-                            <button
-                              onClick={() => setDeleteTarget(v)}
-                              className="text-red-500 hover:text-red-700 text-xs font-medium"
-                            >
-                              🗑️ Hapus
-                            </button>
+                          <td className="px-5 py-4 text-center">
+                            <div className="flex justify-center gap-2">
+                              <button
+                                onClick={() => openEdit(v)}
+                                className="text-xs font-bold px-3 py-1.5 rounded-xl bg-white border-2 border-sora/10 text-sora hover:border-kaili hover:text-kaili shadow-sm transition-all"
+                              >
+                                Edit
+                              </button>
+                              <button
+                                onClick={() => setDeleteTarget(v)}
+                                className="text-xs font-bold px-3 py-1.5 rounded-xl bg-red-50 text-red-500 border-2 border-red-100 hover:bg-red-500 hover:text-white shadow-sm transition-all"
+                              >
+                                Hapus
+                              </button>
+                            </div>
                           </td>
                         </tr>
                       ))}
@@ -338,22 +351,22 @@ function AdminKamus() {
 
               {/* PAGINATION */}
               {totalPages > 1 && (
-                <div className="flex items-center justify-between px-4 py-3 border-t bg-gray-50">
-                  <span className="text-xs text-gray-500">
+                <div className="flex items-center justify-between px-5 py-4 border-t border-sora/10 bg-sora/5">
+                  <span className="text-xs font-bold text-sora/60 uppercase tracking-wider">
                     Halaman {page} dari {totalPages} ({filtered.length} data)
                   </span>
-                  <div className="flex gap-1">
+                  <div className="flex gap-2">
                     <button
                       onClick={() => setPage(Math.max(1, page - 1))}
                       disabled={page === 1}
-                      className="px-3 py-1 text-xs bg-white border rounded-lg disabled:opacity-40 hover:bg-gray-100"
+                      className="px-4 py-2 text-xs font-bold bg-white border-2 border-sora/10 text-sora rounded-xl disabled:opacity-40 hover:border-kaili hover:text-kaili transition-all shadow-sm"
                     >
                       ‹ Prev
                     </button>
                     <button
                       onClick={() => setPage(Math.min(totalPages, page + 1))}
                       disabled={page === totalPages}
-                      className="px-3 py-1 text-xs bg-white border rounded-lg disabled:opacity-40 hover:bg-gray-100"
+                      className="px-4 py-2 text-xs font-bold bg-white border-2 border-sora/10 text-sora rounded-xl disabled:opacity-40 hover:border-kaili hover:text-kaili transition-all shadow-sm"
                     >
                       Next ›
                     </button>
@@ -367,16 +380,16 @@ function AdminKamus() {
 
       {/* MODAL */}
       {showModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
-          <div className="admin-glass-card rounded-3xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
-            <div className="p-6">
-              <h3 className="text-lg font-bold text-gray-800 mb-4">
-                {editItem ? "✏️ Edit Kosakata" : "＋ Tambah Kosakata"}
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-sora/80 backdrop-blur-sm p-4">
+          <div className="bg-white/90 backdrop-blur-xl border border-sora/10 shadow-soft-sora rounded-3xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
+            <div className="p-6 sm:p-8">
+              <h3 className="text-xl font-black text-sora mb-6">
+                <div className="flex items-center gap-2">{editItem ? <><FiEdit3 size={24} className="text-kaili" /> Edit Kosakata</> : <><FiPlus size={24} className="text-kaili" /> Tambah Kosakata</>}</div>
               </h3>
 
-              <div className="space-y-4">
+              <div className="space-y-5">
                 <div>
-                  <label className="text-sm font-medium text-gray-700 mb-1 block">
+                  <label className="text-xs font-black text-sora/60 uppercase tracking-wider mb-2 block">
                     Bahasa Indonesia
                   </label>
                   <input
@@ -385,13 +398,13 @@ function AdminKamus() {
                     onChange={(e) =>
                       setForm({ ...form, indonesia: e.target.value })
                     }
-                    className="w-full px-4 py-2.5 border rounded-xl focus:outline-none admin-input focus:ring-2 focus:ring-purple-400 text-sm"
+                    className="w-full px-4 py-3 border-2 border-sora/10 rounded-xl focus:outline-none focus:border-kaili bg-white/50 focus:bg-white text-sora font-bold transition-all text-sm"
                     placeholder="Contoh: rumah"
                   />
                 </div>
 
                 <div>
-                  <label className="text-sm font-medium text-gray-700 mb-1 block">
+                  <label className="text-xs font-black text-sora/60 uppercase tracking-wider mb-2 block">
                     Kategori
                   </label>
                   <select
@@ -399,7 +412,7 @@ function AdminKamus() {
                     onChange={(e) =>
                       setForm({ ...form, category: e.target.value })
                     }
-                    className="w-full px-4 py-2.5 border rounded-xl focus:outline-none admin-input focus:ring-2 focus:ring-purple-400 text-sm"
+                    className="w-full px-4 py-3 border-2 border-sora/10 rounded-xl focus:outline-none focus:border-kaili bg-white/50 focus:bg-white text-sora font-bold transition-all text-sm"
                   >
                     <option value="">— Pilih Kategori —</option>
                     {CATEGORIES.map((cat) => (
@@ -411,17 +424,17 @@ function AdminKamus() {
                 </div>
 
                 <div>
-                  <label className="text-sm font-medium text-gray-700 mb-2 block">
+                  <label className="text-xs font-black text-sora/60 uppercase tracking-wider mb-2 block">
                     Terjemahan
                   </label>
                   {form.translations.map((t, i) => (
-                    <div key={i} className="flex gap-2 mb-2">
+                    <div key={i} className="flex gap-2 mb-3">
                       <select
                         value={t.dialect}
                         onChange={(e) =>
                           updateTranslation(i, "dialect", e.target.value)
                         }
-                        className="px-3 py-2 border rounded-xl text-sm focus:outline-none admin-input focus:ring-2 focus:ring-purple-400"
+                        className="px-4 py-3 border-2 border-sora/10 rounded-xl focus:outline-none focus:border-kaili bg-white/50 focus:bg-white text-sora font-bold transition-all text-sm w-32"
                       >
                         <option value="ledo">Ledo</option>
                         <option value="rai">Rai</option>
@@ -432,38 +445,38 @@ function AdminKamus() {
                         onChange={(e) =>
                           updateTranslation(i, "word", e.target.value)
                         }
-                        className="flex-1 px-3 py-2 border rounded-xl text-sm focus:outline-none admin-input focus:ring-2 focus:ring-purple-400"
+                        className="flex-1 px-4 py-3 border-2 border-sora/10 rounded-xl focus:outline-none focus:border-kaili bg-white/50 focus:bg-white text-sora font-bold transition-all text-sm"
                         placeholder="Kata dalam Kaili"
                       />
                       {form.translations.length > 1 && (
                         <button
                           onClick={() => removeTranslation(i)}
-                          className="px-2 text-red-400 hover:text-red-600"
+                          className="px-3 text-red-400 hover:text-red-500 hover:bg-red-50 rounded-xl transition-colors"
                         >
-                          ✕
+                          <FiX size={20} />
                         </button>
                       )}
                     </div>
                   ))}
                   <button
                     onClick={addTranslation}
-                    className="text-sm text-purple-600 hover:text-purple-800 font-medium"
+                    className="text-sm text-kaili hover:text-kaili/80 font-black flex items-center gap-1 mt-2 uppercase tracking-wider"
                   >
-                    ＋ Tambah Terjemahan
+                    <FiPlus size={16} /> Tambah Terjemahan
                   </button>
                 </div>
               </div>
 
-              <div className="flex gap-3 mt-6">
+              <div className="flex gap-3 mt-8">
                 <button
                   onClick={() => setShowModal(false)}
-                  className="flex-1 py-2.5 border border-gray-300 rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-50"
+                  className="flex-1 py-3.5 bg-white border-2 border-sora/10 text-sora rounded-xl text-sm font-bold hover:border-kaili hover:text-kaili transition-all shadow-sm"
                 >
                   Batal
                 </button>
                 <button
                   onClick={handleSave}
-                  className="flex-1 py-2.5 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-xl text-sm font-semibold hover:shadow-lg transition-all"
+                  className="flex-1 py-3.5 bg-kaili text-white rounded-xl text-sm font-bold shadow-glow-kaili transition-all hover:-translate-y-1"
                 >
                   {editItem ? "Simpan Perubahan" : "Tambah"}
                 </button>
@@ -472,7 +485,6 @@ function AdminKamus() {
           </div>
         </div>
       )}
-      <BottomNavAdmin />
       <ConfirmDialog
         open={Boolean(deleteTarget)}
         title="Hapus Kosakata?"

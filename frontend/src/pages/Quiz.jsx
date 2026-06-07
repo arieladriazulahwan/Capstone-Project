@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { FiClock } from "react-icons/fi";
+
 import Navbar from "../components/Navbar";
+import { Skeleton } from "../components/Skeleton";
 import { filterByLevel, getBab, getLevel } from "../data/levelMap";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
@@ -112,9 +115,12 @@ function Quiz() {
 
   if (questions.length === 0) {
     return (
-      <div className="student-page-bg min-h-screen bg-gray-100">
+      <div className="h-screen overflow-hidden genz-bg text-sora">
         <Navbar showBackButton backTo={practicePath} />
-        <div className="p-5 text-center">Loading quiz...</div>
+        <div className="p-5 max-w-xl mx-auto space-y-4">
+          <Skeleton className="h-24 w-full rounded-3xl" />
+          <Skeleton className="h-64 w-full rounded-2xl" />
+        </div>
       </div>
     );
   }
@@ -231,16 +237,16 @@ function Quiz() {
       "Tetap semangat, coba lagi pelan-pelan";
 
     return (
-      <div className="quiz-result-bg student-page-bg min-h-screen bg-gray-100 p-5 flex items-center justify-center">
-        <div className="quiz-result-card student-hero-card p-6 sm:p-8 rounded-3xl shadow-xl max-w-md w-full text-center">
+      <div className="h-screen overflow-hidden genz-bg p-5 flex items-center justify-center">
+        <div className="bg-white/60 backdrop-blur-xl border border-white/60 p-6 sm:p-8 rounded-3xl shadow-soft-sora max-w-md w-full text-center text-sora relative overflow-hidden">
           <div className="quiz-result-spark spark-one"></div>
           <div className="quiz-result-spark spark-two"></div>
           <div className="quiz-result-spark spark-three"></div>
-          <p className="inline-flex items-center rounded-full bg-green-100 px-4 py-1 text-xs font-bold text-green-700 mb-4">
+          <p className="inline-flex items-center rounded-full bg-cream px-4 py-1 text-xs font-bold text-kaili mb-4">
             Quiz selesai
           </p>
-          <h2 className="text-3xl font-bold mb-2">{resultTitle}</h2>
-          <p className="text-gray-500 mb-6">
+          <h2 className="text-3xl font-bold mb-2 text-sora">{resultTitle}</h2>
+          <p className="text-sora/60 mb-6">
             Kuis {levelInfo?.title || `Level ${level || "-"}`} berhasil diselesaikan.
           </p>
 
@@ -249,29 +255,29 @@ function Quiz() {
             style={{ "--score": `${percentage * 3.6}deg` }}
           >
             <div className="quiz-score-ring-inner">
-              <span className="text-5xl font-black text-green-700">{percentage}</span>
-              <span className="text-sm font-bold text-gray-500">Nilai</span>
+              <span className="text-5xl font-black text-sora">{percentage}</span>
+              <span className="text-sm font-bold text-sora/60">Nilai</span>
             </div>
           </div>
           
           <div className="grid grid-cols-2 gap-3 mb-6">
-            <div className="quiz-result-stat bg-green-100 p-4 rounded-2xl shadow-sm">
-              <p className="text-xs text-green-700 font-bold uppercase tracking-wide">Benar</p>
-              <p className="text-3xl font-black text-green-700">{correct}</p>
+            <div className="bg-cream p-4 rounded-3xl shadow-soft-sora">
+              <p className="text-xs text-kaili font-bold uppercase tracking-wide">Benar</p>
+              <p className="text-3xl font-black text-sora">{correct}</p>
             </div>
-            <div className="quiz-result-stat bg-red-100 p-4 rounded-2xl shadow-sm">
-              <p className="text-xs text-red-700 font-bold uppercase tracking-wide">Salah</p>
-              <p className="text-3xl font-black text-red-700">{wrong}</p>
+            <div className="bg-red-50 p-4 rounded-3xl shadow-soft-sora">
+              <p className="text-xs text-red-500 font-bold uppercase tracking-wide">Salah</p>
+              <p className="text-3xl font-black text-red-600">{wrong}</p>
             </div>
-            <div className="quiz-result-stat bg-yellow-100 p-4 rounded-2xl col-span-2 shadow-sm">
-              <p className="text-xs text-yellow-700 font-bold uppercase tracking-wide">XP Didapat</p>
-              <p className="text-2xl font-black text-yellow-700">+{finalXP} XP</p>
+            <div className="bg-cream p-4 rounded-3xl col-span-2 shadow-soft-sora">
+              <p className="text-xs text-kaili font-bold uppercase tracking-wide">XP Didapat</p>
+              <p className="text-2xl font-black text-kaili">+{finalXP} XP</p>
             </div>
           </div>
 
           <button
             onClick={() => navigate(level ? `/level/${dialect}/${bab}` : "/level", { replace: true })}
-            className="w-full flag-wave text-white py-4 rounded-2xl font-bold text-lg transition shadow-lg hover:scale-[1.01]"
+            className="w-full bg-sora text-white py-4 rounded-full font-black text-lg shadow-soft-sora transition-all hover:scale-105 btn-bouncy"
           >
             Kembali
           </button>
@@ -281,34 +287,35 @@ function Quiz() {
   }
 
   return (
-    <div className="student-page-bg min-h-screen bg-gray-100">
+    <div className="h-screen overflow-hidden genz-bg text-sora">
       <Navbar showBackButton backTo={practicePath} />
 
       <main className="p-5 max-w-xl mx-auto">
-        <div className="student-hero-card flex justify-between items-center mb-5 rounded-3xl p-5 shadow">
-          <div>
-            <h1 className="text-2xl font-bold">Quiz Bahasa Kaili</h1>
-            <p className="text-gray-500 mt-1">
+        <div className="bg-sora text-cream flex justify-between items-center mb-5 rounded-3xl p-6 shadow-soft-sora relative overflow-hidden">
+          <div className="absolute top-[-20%] left-[-10%] w-32 h-32 bg-kaili/20 rounded-full blur-2xl"></div>
+          <div className="relative z-10">
+            <h1 className="text-2xl font-black">Kuis Bahasa Kaili</h1>
+            <p className="text-cream/80 font-medium mt-1">
               {dialect.toUpperCase()} - {levelInfo?.title || babInfo?.title || bab.toUpperCase()}
             </p>
           </div>
-          <div className={`text-xl font-bold ${timeLeft <= 5 ? "text-red-500" : "text-green-600"}`}>
-            ⏱️ {timeLeft}s
+          <div className={`text-xl font-black flex items-center gap-1 z-10 ${timeLeft <= 5 ? "text-red-400 animate-pulse" : "text-kaili drop-shadow-md"}`}>
+            <FiClock size={20} /> {timeLeft}s
           </div>
         </div>
 
-        <div className="student-card bg-white p-5 rounded-2xl shadow">
-          <p className="text-sm text-gray-500 mb-2">
+        <div className="bg-white/60 backdrop-blur-xl p-6 rounded-3xl shadow-soft-sora border border-white/60">
+          <p className="text-sm text-sora/60 font-black tracking-widest uppercase mb-2">
             Soal {index + 1} / {questions.length}
           </p>
 
-          <h2 className="text-lg font-semibold mb-5">{current.question}</h2>
+          <h2 className="text-xl font-black text-sora mb-5">{current.question}</h2>
 
           {current.image && (
             <img
               src={current.image}
               alt={current.question}
-              className="w-full h-48 object-contain rounded-xl bg-gray-50 border border-gray-100 mb-5"
+              className="w-full h-48 object-contain rounded-2xl bg-cream border-none mb-5"
             />
           )}
 
@@ -318,7 +325,7 @@ function Quiz() {
                 <button
                   key={i}
                   onClick={() => answerHandler(opt)}
-                  className="student-answer-button p-3 rounded-xl border bg-white hover:bg-green-100 transition"
+                  className="student-answer-button p-4 rounded-full border-2 border-sora/10 shadow-sm bg-white text-sora font-black hover:bg-white hover:border-kaili transition-all btn-bouncy"
                 >
                   {opt}
                 </button>
@@ -328,7 +335,7 @@ function Quiz() {
 
           {hasBlocks && (
             <>
-              <div className="mb-5 p-4 bg-gray-100 rounded-xl text-center text-2xl font-bold min-h-[70px] flex items-center justify-center">
+              <div className="mb-5 p-4 bg-cream rounded-3xl text-center text-3xl font-black text-sora min-h-[80px] flex items-center justify-center">
                 {selected || "..."}
               </div>
 
@@ -337,7 +344,7 @@ function Quiz() {
                   <button
                     key={i}
                     onClick={() => blockHandler(block)}
-                  className="student-answer-button p-4 rounded-xl bg-green-100 font-bold text-lg hover:bg-green-200 transition"
+                    className="student-answer-button p-4 rounded-3xl bg-white border-2 border-sora/10 shadow-sm font-black text-lg text-sora hover:border-kaili transition-all btn-bouncy"
                   >
                     {block}
                   </button>
@@ -347,13 +354,13 @@ function Quiz() {
               <div className="grid grid-cols-2 gap-3 mt-4">
                 <button
                   onClick={() => setSelected("")}
-                  className="w-full bg-red-500 text-white py-3 rounded-xl font-bold hover:bg-red-600 transition"
+                  className="w-full bg-red-50 text-red-500 py-4 rounded-full border-2 border-red-500 font-bold hover:bg-red-500 hover:text-white transition-all btn-bouncy"
                 >
                   Reset
                 </button>
                 <button
                   onClick={submitBlockAnswer}
-                  className="w-full bg-green-500 text-white py-3 rounded-xl font-bold hover:bg-green-600 transition"
+                  className="w-full bg-sora text-white py-4 rounded-full font-black shadow-soft-sora btn-bouncy"
                 >
                   Jawab
                 </button>
@@ -368,19 +375,19 @@ function Quiz() {
                 value={selected}
                 onChange={(e) => setSelected(e.target.value)}
                 placeholder="Ketik jawaban..."
-                className="w-full border p-4 rounded-2xl outline-none focus:ring-2 focus:ring-green-500/40"
+                className="w-full border-2 border-white/60 p-4 rounded-full bg-white/50 backdrop-blur-md outline-none focus:bg-white focus:border-kaili font-black text-center text-xl text-sora transition-all"
               />
 
               <button
                 onClick={submitBlockAnswer}
-                className="mt-4 w-full bg-green-500 text-white py-3 rounded-xl font-bold hover:bg-green-600 transition"
+                className="mt-4 w-full bg-sora text-white py-4 rounded-full font-black shadow-soft-sora btn-bouncy transition-all hover:scale-105"
               >
                 Jawab
               </button>
             </>
           )}
 
-          <p className="mt-5 text-sm text-gray-500">
+          <p className="mt-5 text-sm text-sora/60 font-bold text-center">
             Score sementara: {score}
           </p>
         </div>

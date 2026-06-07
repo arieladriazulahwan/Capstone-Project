@@ -1,44 +1,65 @@
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { FiBarChart2, FiBookOpen, FiFileText, FiHome, FiStar, FiUsers } from "react-icons/fi";
 
 function BottomNav({ role = "siswa" }) {
   const navigate = useNavigate();
   const location = useLocation();
 
   const menuSiswa = [
-    { label: "Home", path: "/dashboard", icon: "🏠" },
-    { label: "Level", path: "/level", icon: "⭐" },
-    { label: "Kamus", path: "/kamus", icon: "📚" },
+    { name: "Dashboard", icon: FiHome, path: "/dashboard" },
+    { name: "Level", icon: FiStar, path: "/level" },
+    { name: "Kamus", icon: FiBookOpen, path: "/kamus" },
   ];
 
   const menuGuru = [
-    { label: "Home", path: "/dashboard/guru", icon: "🏠" },
-    { label: "Buat Room", path: "/guru/buat-room", icon: "🎯" },
+    { name: "Dashboard", icon: FiHome, path: "/dashboard/guru" },
   ];
 
-  const menu = role === "guru" ? menuGuru : menuSiswa;
+  const menuAdmin = [
+    { name: "Dashboard", icon: FiBarChart2, path: "/dashboard/admin" },
+    { name: "Kamus", icon: FiBookOpen, path: "/admin/kamus" },
+    { name: "Materi", icon: FiFileText, path: "/admin/materi" },
+    { name: "User", icon: FiUsers, path: "/admin/users" },
+    { name: "Room", icon: FiHome, path: "/admin/rooms" },
+  ];
 
-  // Don't render BottomNav for guru role
-  if (role === "guru") {
-    return null;
-  }
+  const menu = role === "admin" ? menuAdmin : role === "guru" ? menuGuru : menuSiswa;
 
+  // On Guru, maybe we don't even need a BottomNav if it's only 1 item, but let's keep it consistent.
+  // Actually, if it's only 1 item, it looks weird. We'll render it anyway to keep consistency,
+  // or maybe just a floating FAB. Let's just render it centered.
+  
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t shadow md:hidden flex justify-around py-2">
-      {menu.map((item, i) => (
-        <button
-          key={i}
-          onClick={() => navigate(item.path)}
-          className={`flex flex-col items-center rounded-xl px-3 py-1 text-sm transition-transform hover:-translate-y-0.5 ${
-            location.pathname === item.path
-              ? "text-green-600"
-              : "text-gray-400"
-          }`}
-        >
-          <span className="text-lg">{item.icon}</span>
-          {item.label}
-        </button>
-      ))}
-    </div>
+    <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-t border-sora/10 shadow-[0_-8px_24px_rgba(15,23,42,0.08)] pb-safe">
+      <div className={`flex items-center justify-center gap-1 px-2 py-2 ${menu.length > 3 ? 'justify-between' : 'justify-around'}`}>
+        {menu.map((item) => {
+          const isActive = location.pathname === item.path || (location.pathname.startsWith(item.path) && item.path !== "/dashboard" && item.path !== "/dashboard/admin" && item.path !== "/dashboard/guru");
+          const Icon = item.icon;
+
+          return (
+            <button
+              key={item.path}
+              type="button"
+              onClick={() => navigate(item.path)}
+              className={`flex flex-col items-center justify-center gap-1 rounded-xl px-3 py-2 text-[10px] font-bold transition-all duration-300 ${
+                isActive
+                  ? "text-kaili scale-110"
+                  : "text-sora/40 hover:text-sora/80 hover:bg-cream/50"
+              }`}
+            >
+              <span
+                className={`flex h-8 w-8 items-center justify-center rounded-xl transition-all duration-300 ${
+                  isActive ? "bg-kaili text-white shadow-glow-kaili" : "bg-transparent"
+                }`}
+              >
+                <Icon size={18} strokeWidth={isActive ? 2.5 : 2} />
+              </span>
+              <span className="leading-none">{item.name}</span>
+            </button>
+          );
+        })}
+      </div>
+    </nav>
   );
 }
 

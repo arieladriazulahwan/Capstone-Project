@@ -1,5 +1,8 @@
+import BottomNav from "../components/BottomNav";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { FiLock } from "react-icons/fi";
+
 import Navbar from "../components/Navbar";
 import { babList, getBab, getLevels } from "../data/levelMap";
 
@@ -118,18 +121,18 @@ function BabLevels() {
   };
 
   return (
-    <div className="student-page-bg min-h-screen bg-gray-100">
+    <div className="genz-bg h-screen overflow-hidden text-sora">
       <Navbar showBackButton backTo="/level" />
 
-      <main className="p-4 max-w-xl mx-auto">
-        <div className="student-hero-card rounded-3xl p-5 shadow mb-5">
-          <p className="text-sm text-gray-500 font-semibold">
+      <main className="p-4 max-w-xl mx-auto pb-20">
+        <div className="bg-white/80 backdrop-blur-md border border-sora/10 shadow-soft-sora rounded-3xl p-6 mb-6">
+          <p className="text-xs font-black text-kaili uppercase tracking-wider mb-1">
             {babLabel}
           </p>
-          <h1 className="text-2xl font-bold">
+          <h1 className="text-2xl sm:text-3xl font-black text-sora mb-1">
             {babInfo?.title || "Level Bab"}
           </h1>
-          <p className="text-sm text-gray-500 mt-1">
+          <p className="text-sm font-bold text-sora/60 mt-1">
             Pilih level untuk membuka materi, latihan, dan quiz.
           </p>
         </div>
@@ -141,27 +144,27 @@ function BabLevels() {
             return (
               <div
                 key={level.key}
-                className={`student-card rounded-xl border p-4 shadow flex justify-between items-center gap-3 ${
-                  unlocked ? "bg-white" : "bg-gray-100 opacity-75"
+                className={`rounded-3xl border-2 p-5 flex justify-between items-center gap-3 transition-all ${
+                  unlocked ? "bg-white/80 backdrop-blur-md border-sora/10 shadow-soft-sora hover:shadow-md hover:-translate-y-1" : "bg-sora/5 border-sora/5 opacity-70"
                 }`}
               >
                 <div className="flex-1 pr-2">
-                  <p className="font-semibold">
-                    Level {index + 1} - {level.title}
+                  <p className="font-black text-sora text-lg">
+                    Level {index + 1} <span className="text-sm font-bold text-sora/50">- {level.title}</span>
                   </p>
-                  <p className="text-sm text-gray-500">{level.description}</p>
+                  <p className="text-sm font-semibold text-sora/60 mt-1">{level.description}</p>
                 </div>
 
                 {unlocked ? (
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-4">
                     <div className="flex flex-col items-end">
-                      <div className="w-16 sm:w-24 h-2.5 bg-gray-200 rounded-full overflow-hidden">
+                      <div className="w-16 sm:w-24 h-2.5 bg-sora/10 rounded-full overflow-hidden border border-sora/5">
                         <div
                           className="h-full flag-wave transition-all duration-500"
                           style={{ width: `${getLevelScore(level)}%` }}
                         ></div>
                       </div>
-                      <span className="text-xs text-gray-500 font-bold mt-1">
+                      <span className="text-xs text-sora/50 font-bold mt-1.5 uppercase tracking-wider">
                         {getLevelScore(level)}% Benar
                       </span>
                     </div>
@@ -170,20 +173,20 @@ function BabLevels() {
                       onClick={() =>
                         navigate(`/lesson/${dialect}/${bab}/${level.key}`)
                       }
-                      className={`${buttonColor} text-white text-sm px-4 py-2 rounded-lg font-bold whitespace-nowrap shadow transition-transform hover:-translate-y-0.5`}
+                      className={`${buttonColor} text-white text-sm px-5 py-2.5 rounded-xl font-bold whitespace-nowrap shadow-sm transition-all hover:-translate-y-0.5`}
                     >
                       Mulai
                     </button>
                   </div>
                 ) : (
-                  <span className="text-sm text-gray-400 font-semibold px-2">Terkunci 🔒</span>
+                  <span className="text-sm text-sora/40 font-bold px-2 flex items-center gap-1 uppercase tracking-wider">Terkunci <FiLock size={14} /></span>
                 )}
               </div>
             );
           })}
 
           {levels.length === 0 && (
-            <div className="bg-white rounded-xl p-4 text-center text-gray-500">
+            <div className="bg-white/80 backdrop-blur-md border-2 border-dashed border-sora/20 rounded-3xl p-10 text-center font-bold text-sora/50">
               Level belum tersedia.
             </div>
           )}

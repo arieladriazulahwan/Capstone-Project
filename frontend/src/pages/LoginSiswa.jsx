@@ -1,3 +1,4 @@
+import { FaRocket } from "react-icons/fa";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthPageShell from "../components/AuthPageShell";
@@ -45,78 +46,55 @@ function LoginSiswa() {
       subtitle="Masuk sebagai siswa untuk melanjutkan level, menjaga streak, dan mengerjakan kuis."
     >
       <div className="text-center">
-        <h2 className="text-2xl font-black text-green-600">Login Siswa</h2>
-        <p className="mt-2 text-sm text-gray-500">Masukkan info akunmu.</p>
+        <h2 className="text-2xl font-black text-sora">Login Siswa</h2>
+        <p className="mt-2 text-sm text-sora/60 font-medium">Masukkan info akunmu.</p>
       </div>
 
-      <div className="mt-5 flex rounded-2xl bg-gray-100 p-1">
-        <button className="flex-1 rounded-xl bg-white py-2 text-sm font-bold text-gray-800 shadow">
+      <div className="mt-5 flex rounded-2xl bg-cream/80 p-1 border border-sora/5 shadow-inner">
+        <button className="flex-1 rounded-xl bg-white py-2 text-sm font-bold text-sora shadow-soft-sora">
           Masuk
         </button>
         <button
           type="button"
           onClick={() => navigate("/register/siswa")}
-          className="flex-1 rounded-xl py-2 text-sm font-semibold text-gray-500"
+          className="flex-1 rounded-xl py-2 text-sm font-bold text-sora/50 hover:text-sora transition-colors"
         >
           Daftar
         </button>
       </div>
 
-      <div className="mt-4 grid grid-cols-2 gap-2">
-        <button className="rounded-2xl border border-green-300 bg-green-50 p-3 text-sm font-bold text-green-700">
-          Siswa
-        </button>
-        <button
-          type="button"
-          onClick={() => navigate("/login/guru")}
-          className="rounded-2xl border border-gray-200 bg-white p-3 text-sm font-semibold text-gray-500 hover:bg-blue-50"
-        >
-          Guru
-        </button>
-      </div>
-
-      <form onSubmit={handleLogin} className="mt-5 space-y-4">
+      <form onSubmit={handleLogin} className="mt-6 space-y-4">
         <div>
-          <label className="mb-1.5 block text-sm font-semibold text-gray-600">Username</label>
+          <label className="mb-1.5 block text-sm font-bold text-sora">Username</label>
           <input
             type="text"
             placeholder="Masukkan username"
-            className="w-full rounded-2xl border border-green-200 bg-green-50 px-4 py-3 outline-none transition focus:border-green-500 focus:ring-2 focus:ring-green-100"
+            className="w-full rounded-2xl border-2 border-sora/10 bg-white px-4 py-3 outline-none transition-all focus:border-kaili focus:ring-4 focus:ring-kaili/20 font-medium placeholder:text-sora/30"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
         </div>
 
         <div>
-          <label className="mb-1.5 block text-sm font-semibold text-gray-600">Kata Sandi</label>
+          <label className="mb-1.5 block text-sm font-bold text-sora">Kata Sandi</label>
           <input
             type="password"
             placeholder="Masukkan kata sandi"
-            className="w-full rounded-2xl border border-gray-200 bg-gray-50 px-4 py-3 outline-none transition focus:border-green-500 focus:ring-2 focus:ring-green-100"
+            className="w-full rounded-2xl border-2 border-sora/10 bg-white px-4 py-3 outline-none transition-all focus:border-kaili focus:ring-4 focus:ring-kaili/20 font-medium placeholder:text-sora/30"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
 
-        <button className="w-full rounded-2xl bg-green-600 p-3 font-bold text-white shadow-lg shadow-green-600/20 transition hover:-translate-y-0.5 hover:bg-green-700">
-          Masuk Sekarang
+        <button className="w-full rounded-2xl bg-sora p-4 font-black text-white shadow-soft-sora transition-all hover:-translate-y-1 hover:shadow-lg btn-bouncy text-lg mt-4">
+          <span className="inline-flex items-center justify-center gap-2">Masuk Sekarang <FaRocket /></span>
         </button>
       </form>
 
-      <div className="mt-5 rounded-2xl border border-yellow-200 bg-yellow-50 p-3 text-sm text-yellow-700">
-        Belum punya akun? Daftar dulu untuk mulai belajar.
+      <div className="mt-6 rounded-2xl border border-kaili/30 bg-kaili/10 p-4 text-sm font-medium text-sora text-center">
+        Belum punya akun? <span className="font-bold">Daftar dulu</span> untuk mulai belajar.
       </div>
 
-      <p className="mt-4 text-center text-sm text-gray-500">
-        Belum punya akun?{" "}
-        <button
-          type="button"
-          onClick={() => navigate("/register/siswa")}
-          className="font-bold text-green-600"
-        >
-          Daftar di sini
-        </button>
-      </p>
     </AuthPageShell>
   );
 }

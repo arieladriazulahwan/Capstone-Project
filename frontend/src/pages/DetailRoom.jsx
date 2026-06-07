@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
-import NavbarGuru from "../components/NavbarGuru";
+import Navbar from "../components/Navbar";
 import ConfirmDialog from "../components/ConfirmDialog";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
@@ -374,7 +374,7 @@ function DetailRoom() {
 
   if (loading) {
     return (
-      <div className="teacher-page-bg min-h-screen flex items-center justify-center">
+      <div className="flex h-screen overflow-hidden genz-bg text-sora items-center justify-center">
         <div className="teacher-loading-card rounded-3xl bg-white/90 px-6 py-5 text-center shadow">
           <div className="mx-auto mb-3 h-10 w-10 rounded-full border-4 border-blue-100 border-t-blue-500 animate-spin"></div>
           <p className="text-gray-700 text-lg font-semibold">Memuat detail room...</p>
@@ -385,7 +385,7 @@ function DetailRoom() {
 
   if (!room) {
     return (
-      <div className="teacher-page-bg min-h-screen flex items-center justify-center">
+      <div className="flex h-screen overflow-hidden genz-bg text-sora items-center justify-center">
         <div className="teacher-empty-state rounded-3xl bg-white/90 p-8 text-center text-gray-500 shadow">
           Room tidak ditemukan
         </div>
@@ -394,8 +394,10 @@ function DetailRoom() {
   }
 
   return (
-    <div className="teacher-page-bg min-h-screen">
-      <NavbarGuru user={user} showBackButton />
+    <div className="teacher-page-bg h-screen overflow-hidden">
+      <Sidebar role="guru" />
+      <div className="flex-1 h-screen overflow-y-auto custom-scrollbar relative">
+        <Navbar role="guru" user={user} showBackButton />
 
       <main className="p-4 md:p-6 flex justify-center">
         <div className="w-full max-w-5xl">
@@ -833,6 +835,8 @@ function DetailRoom() {
           )}
         </div>
       </main>
+      </div>
+      <BottomNav role="guru" />
       <ConfirmDialog
         open={showDeleteConfirm}
         title="Hapus Room?"

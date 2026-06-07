@@ -2,6 +2,10 @@ import { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
 import BottomNav from "../components/BottomNav";
 import Navbar from "../components/Navbar";
+import { FiCheck, FiTarget } from "react-icons/fi";
+import { FaFire, FaTrophy, FaStar, FaRocket, FaGift, FaMap } from "react-icons/fa";
+
+import { Skeleton, SkeletonStatGrid } from "../components/Skeleton";
 import { useNavigate } from "react-router-dom";
 import { babList } from "../data/levelMap";
 
@@ -76,8 +80,19 @@ function Level() {
 
   if (!user) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        Loading level...
+      <div className="flex h-screen overflow-hidden genz-bg text-sora">
+        <Sidebar role="siswa" />
+        <div className="flex-1 h-screen overflow-y-auto custom-scrollbar relative">
+          <Navbar user={null} />
+          <main className="flex-1 px-4 pt-6 pb-28 md:pb-6 flex justify-center">
+            <div className="w-full max-w-md md:max-w-3xl space-y-5">
+              <Skeleton className="h-36 w-full rounded-2xl" />
+              <Skeleton className="h-48 w-full rounded-2xl" />
+              <Skeleton className="h-8 w-32" />
+              <Skeleton className="h-64 w-full rounded-2xl" />
+            </div>
+          </main>
+        </div>
       </div>
     );
   }
@@ -164,38 +179,41 @@ function Level() {
   const dialects = ["ledo", "rai"];
 
   return (
-    <div className="student-page-bg flex min-h-screen bg-gray-100">
+    <div className="flex h-screen overflow-hidden genz-bg text-sora">
       <Sidebar role="siswa" />
 
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 h-screen overflow-y-auto custom-scrollbar relative">
         <Navbar user={user} />
 
         <main className="flex-1 px-4 pt-6 pb-28 md:pb-6 flex justify-center">
           <div className="w-full max-w-md md:max-w-3xl">
-            <div className="level-wave-panel level-wave-green bg-white rounded-2xl p-5 shadow mb-5">
-              <h2 className="text-lg font-bold mb-2">Level Kamu</h2>
+            <div className="bg-sora text-cream rounded-3xl p-6 shadow-soft-sora mb-6 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/4"></div>
+              <h2 className="text-xl font-bold mb-2 relative"><span className="inline-flex items-center gap-2">Level Kamu <FaStar className="text-yellow-500" /></span></h2>
 
-              <div className="flex justify-between text-sm">
-                <p>XP: {xp}</p>
-                <p>Level: {level}</p>
+              <div className="flex justify-between text-sm font-semibold mb-3 relative text-cream/80">
+                <p>XP: <span className="text-cream text-lg">{xp}</span></p>
+                <p>Level: <span className="text-cream text-lg">{level}</span></p>
               </div>
 
-              <div className="w-full bg-gray-200 rounded-full h-4 mt-3 overflow-hidden">
+              <div className="w-full bg-cream/20 rounded-full h-4 overflow-hidden relative">
                 <div
-                  className="flag-wave h-4 rounded-full transition-all"
+                  className="bg-kaili h-4 rounded-full transition-all duration-1000 ease-out"
                   style={{ width: `${progress}%` }}
                 ></div>
               </div>
 
-              <p className="mt-2 text-sm text-gray-500">
-                {100 - progress} XP lagi untuk naik level
+              <p className="mt-2 text-sm text-cream/60 font-medium">
+                <span className="inline-flex items-center gap-2">{100 - progress} XP lagi untuk naik level <FaRocket className="text-kaili" /></span>
               </p>
 
-              <p className="mt-3 text-green-600 font-semibold">{user.title}</p>
+              <p className="mt-3 text-kaili font-black tracking-widest text-lg drop-shadow-md">
+                <span className="inline-flex items-center gap-2 text-yellow-500"><FaTrophy /> {user.title?.toUpperCase()} <FaTrophy /></span>
+              </p>
             </div>
 
-            <div className="level-wave-panel level-wave-soft bg-white rounded-2xl p-5 shadow mb-5">
-              <h3 className="font-semibold mb-4">Reward Level</h3>
+            <div className="bg-white/60 backdrop-blur-xl rounded-3xl p-6 shadow-soft-sora mb-6 border border-white/60 hover:shadow-md transition-all">
+              <h3 className="font-bold text-lg mb-4 text-sora"><span className="inline-flex items-center gap-2">Reward Level <FaGift className="text-red-500" /></span></h3>
 
               <div className="pb-2">
                 <div className="relative grid grid-cols-5 items-start gap-1 sm:gap-2 px-1 pt-4">
@@ -210,19 +228,19 @@ function Level() {
                         key={r.level}
                         className={`relative rounded-xl border px-0.5 py-2 pt-5 sm:px-2 sm:py-3 sm:pt-7 text-center transition ${
                           current
-                            ? "reward-fire-card border-orange-300 bg-orange-50 shadow-md"
+                            ? "reward-fire-card border-kaili bg-kaili/10 shadow-md scale-105"
                             : unlocked
-                            ? "border-green-300 bg-green-50"
-                            : "border-gray-200 bg-gray-50"
+                            ? "border-sora/30 bg-sora/5"
+                            : "border-sora/10 bg-transparent opacity-50"
                         }`}
                       >
                         <div
                           className={`absolute left-1/2 top-0 z-10 w-6 h-6 sm:w-8 sm:h-8 -translate-x-1/2 -translate-y-1/2 rounded-full flex items-center justify-center border-2 sm:border-4 border-white shadow ${
                             current
-                              ? "reward-fire"
+                              ? "reward-fire bg-kaili text-white"
                               : unlocked
-                              ? "bg-green-500"
-                              : "bg-gray-300"
+                              ? "bg-sora text-white"
+                              : "bg-sora/20 text-white"
                           }`}
                         >
                           {current && (
@@ -231,27 +249,27 @@ function Level() {
                               <span className="absolute -inset-1 rounded-full bg-yellow-300/50 blur-md"></span>
                             </>
                           )}
-                          <span className="reward-fire-icon relative text-[10px] sm:text-sm text-white">
-                            {current ? "🔥" : unlocked ? "✓" : r.level}
+                          <span className="reward-fire-icon relative text-[10px] sm:text-sm text-white flex items-center justify-center">
+                            {current ? <FaFire size={12} /> : unlocked ? <FiCheck size={12} /> : r.level}
                           </span>
                         </div>
 
                         <div>
-                          <p className="text-[9px] sm:text-[11px] text-gray-500">Level {r.level}</p>
+                          <p className="text-[9px] sm:text-[11px] text-sora/60 font-medium">Level {r.level}</p>
                           <p
-                            className={`text-[10px] sm:text-xs md:text-sm font-bold leading-tight ${
+                            className={`text-[10px] sm:text-xs md:text-sm font-bold leading-tight mt-1 ${
                               current
                                 ? "text-orange-700"
                                 : unlocked
-                                ? "text-green-700"
-                                : "text-gray-500"
+                                ? "text-sora"
+                                : "text-sora/40"
                             }`}
                           >
                             {r.title}
                           </p>
 
                           {current && (
-                            <span className="mt-1 sm:mt-2 inline-flex rounded-full bg-orange-100 px-1 py-0.5 sm:px-3 sm:py-1 text-[9px] sm:text-xs font-semibold text-orange-700">
+                            <span className="mt-1 sm:mt-2 inline-flex rounded-full bg-kaili px-2 py-0.5 sm:px-3 sm:py-1 text-[9px] sm:text-xs font-bold text-white shadow-glow-kaili">
                               Aktif
                             </span>
                           )}
@@ -263,15 +281,15 @@ function Level() {
               </div>
             </div>
 
-            <div className="flex gap-2 mb-3">
+            <div className="flex gap-2 mb-4">
               {dialects.map((d) => (
                 <button
                   key={d}
                   onClick={() => changeDialect(d)}
-                  className={`px-4 py-2 rounded-full text-sm font-semibold border transition ${
+                  className={`px-5 py-2.5 rounded-full text-sm font-bold transition-all btn-bouncy ${
                     dialect === d
-                      ? "bg-green-500 text-white border-green-500 shadow"
-                      : "bg-white text-gray-600 border-gray-200 hover:border-green-300"
+                      ? "bg-kaili text-white shadow-glow-kaili scale-105 border-2 border-kaili"
+                      : "bg-white text-sora/60 border-2 border-sora/10 hover:border-kaili hover:text-kaili"
                   }`}
                 >
                   {d.toUpperCase()}
@@ -279,9 +297,9 @@ function Level() {
               ))}
             </div>
 
-            <div className="level-wave-panel level-wave-soft bg-white rounded-2xl p-5 shadow mb-5">
-              <h3 className="font-semibold mb-3">
-                Peta Belajar - Dialek {dialect.toUpperCase()}
+            <div className="bg-white/60 backdrop-blur-xl rounded-3xl p-6 shadow-soft-sora mb-6 border border-white/60 hover:shadow-md transition-all">
+              <h3 className="font-bold text-lg mb-4 text-sora">
+                <span className="inline-flex items-center gap-2">Peta Belajar - Dialek {dialect.toUpperCase()} <FaMap className="text-blue-500" /></span>
               </h3>
 
               <div className="flex flex-col gap-3">
@@ -292,15 +310,15 @@ function Level() {
                   return (
                     <div
                       key={bab.key}
-                      className={`level-bab-card p-4 rounded-xl border flex justify-between items-center ${
+                      className={`level-bab-card p-4 rounded-xl border flex justify-between items-center transition-all duration-300 ${
                         isUnlocked
-                          ? `${classes.unlocked} level-bab-wave level-bab-wave-${bab.color}`
-                          : "bg-gray-100"
+                          ? `${classes.unlocked} level-bab-wave level-bab-wave-${bab.color} hover:shadow-md hover:scale-[1.02]`
+                          : "bg-sora/5 border-transparent opacity-70"
                       }`}
                     >
                       <div>
-                        <p className="font-semibold">BAB {index + 1}</p>
-                        <p className="text-sm text-gray-500">{bab.title}</p>
+                        <p className="font-black text-sora">BAB {index + 1}</p>
+                        <p className="text-sm text-sora/60 font-medium">{bab.title}</p>
                       </div>
 
                       {isUnlocked ? (
@@ -311,7 +329,7 @@ function Level() {
                           Mulai
                         </button>
                       ) : (
-                        <span className="text-gray-400 text-sm">Terkunci</span>
+                        <span className="text-sora/40 text-sm font-bold">Terkunci</span>
                       )}
                     </div>
                   );
@@ -319,22 +337,22 @@ function Level() {
               </div>
             </div>
 
-            <div className="student-card bg-yellow-100 border border-yellow-300 rounded-2xl p-4 mb-5">
-              <p className="text-sm text-yellow-700 mb-2">
-                Target Selanjutnya
+            <div className="bg-kaili/10 border border-kaili/20 rounded-2xl p-5 mb-5 shadow-soft-sora relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-24 h-24 bg-kaili/20 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl"></div>
+              <p className="text-sm text-kaili font-bold mb-1">
+                <span className="inline-flex items-center gap-2">Target Selanjutnya <FiTarget className="text-red-500" /></span>
               </p>
 
-              <p className="font-semibold">Capai Level {level + 1}</p>
+              <p className="font-black text-sora text-lg">Capai Level {level + 1}</p>
 
-              <p className="text-sm text-gray-600">
-                Selesaikan quiz & latihan
+              <p className="text-sm text-sora/60 font-medium">
+                Selesaikan kuis dan latihan untuk mendapatkan XP.
               </p>
             </div>
           </div>
         </main>
       </div>
-
-      <BottomNav role="siswa" />
+      <BottomNav />
     </div>
   );
 }

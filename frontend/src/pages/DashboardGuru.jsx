@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { BookOpenCheck, Clock3, Plus, Presentation, Sparkles } from "lucide-react";
+import { FiCheckSquare, FiClock, FiPlus, FiMonitor } from "react-icons/fi";
+import { HiSparkles } from "react-icons/hi";
 import ConfirmDialog from "../components/ConfirmDialog";
-import NavbarGuru from "../components/NavbarGuru";
+import Navbar from "../components/Navbar";
 import RoomCard from "../components/RoomCard";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
@@ -86,7 +87,7 @@ function DashboardGuru() {
 
   if (!user) {
     return (
-      <div className="teacher-page-bg min-h-screen flex items-center justify-center">
+      <div className="flex h-screen overflow-hidden genz-bg text-sora items-center justify-center">
         <div className="teacher-loading-card rounded-3xl bg-white/90 px-6 py-5 text-center shadow">
           <div className="mx-auto mb-3 h-10 w-10 rounded-full border-4 border-blue-100 border-t-blue-500 animate-spin"></div>
           <p className="font-semibold text-gray-700">Memuat dashboard guru...</p>
@@ -105,8 +106,10 @@ function DashboardGuru() {
   const latestRoom = rooms[0]?.title || "Belum ada room";
 
   return (
-    <div className="teacher-page-bg min-h-screen bg-gray-100">
-      <NavbarGuru user={user} />
+    <div className="flex h-screen overflow-hidden genz-bg text-sora">
+      <Sidebar role="guru" />
+      <div className="flex-1 h-screen overflow-y-auto custom-scrollbar relative">
+        <Navbar role="guru" user={user} />
 
       <main className="px-4 py-6 pb-10 flex justify-center">
         <div className="w-full max-w-md md:max-w-4xl">
@@ -114,7 +117,7 @@ function DashboardGuru() {
             <div className="relative z-10 flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
               <div>
                 <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-white/20 px-3 py-1 text-xs font-bold backdrop-blur">
-                  <Sparkles size={14} />
+                  <HiSparkles size={14} />
                   Ruang Guru
                 </div>
                 <h2 className="text-2xl sm:text-3xl font-black leading-tight">
@@ -130,7 +133,7 @@ function DashboardGuru() {
                 onClick={() => navigate("/guru/buat-room")}
                 className="teacher-primary-button inline-flex items-center justify-center gap-2 rounded-2xl bg-white px-5 py-3 font-bold text-blue-700 shadow-lg transition hover:-translate-y-1 hover:shadow-xl"
               >
-                <Plus size={20} />
+                <FiPlus size={20} />
                 Buat Room
               </button>
             </div>
@@ -139,7 +142,7 @@ function DashboardGuru() {
           <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-5">
             <div className="teacher-stat-card rounded-xl sm:rounded-2xl bg-white/90 p-2.5 sm:p-4 shadow flex flex-col items-center text-center">
               <div className="mb-1.5 sm:mb-3 flex h-8 w-8 sm:h-11 sm:w-11 items-center justify-center rounded-xl sm:rounded-2xl bg-blue-100 text-blue-600">
-                <Presentation className="w-4 h-4 sm:w-[22px] sm:h-[22px]" />
+                <FiMonitor className="w-4 h-4 sm:w-[22px] sm:h-[22px]" />
               </div>
               <p className="text-[10px] sm:text-sm font-semibold text-gray-500 truncate w-full">Total Room</p>
               <p className="text-lg sm:text-3xl font-black text-gray-900">{activeRooms}</p>
@@ -147,7 +150,7 @@ function DashboardGuru() {
 
             <div className="teacher-stat-card rounded-xl sm:rounded-2xl bg-white/90 p-2.5 sm:p-4 shadow flex flex-col items-center text-center">
               <div className="mb-1.5 sm:mb-3 flex h-8 w-8 sm:h-11 sm:w-11 items-center justify-center rounded-xl sm:rounded-2xl bg-cyan-100 text-cyan-600">
-                <Clock3 className="w-4 h-4 sm:w-[22px] sm:h-[22px]" />
+                <FiClock className="w-4 h-4 sm:w-[22px] sm:h-[22px]" />
               </div>
               <p className="text-[10px] sm:text-sm font-semibold text-gray-500 truncate w-full">Rata Timer</p>
               <p className="text-lg sm:text-3xl font-black text-gray-900">{averageTimer}s</p>
@@ -155,7 +158,7 @@ function DashboardGuru() {
 
             <div className="teacher-stat-card rounded-xl sm:rounded-2xl bg-white/90 p-2.5 sm:p-4 shadow flex flex-col items-center text-center">
               <div className="mb-1.5 sm:mb-3 flex h-8 w-8 sm:h-11 sm:w-11 items-center justify-center rounded-xl sm:rounded-2xl bg-indigo-100 text-indigo-600">
-                <BookOpenCheck className="w-4 h-4 sm:w-[22px] sm:h-[22px]" />
+                <FiCheckSquare className="w-4 h-4 sm:w-[22px] sm:h-[22px]" />
               </div>
               <p className="text-[10px] sm:text-sm font-semibold text-gray-500 truncate w-full">Room Baru</p>
               <p className="truncate text-xs sm:text-lg font-black text-gray-900 w-full">{latestRoom}</p>
@@ -198,7 +201,7 @@ function DashboardGuru() {
               {rooms.length === 0 && (
                 <div className="teacher-empty-state rounded-3xl border border-dashed border-blue-200 bg-white/80 p-8 text-center shadow">
                   <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-3xl bg-blue-100 text-blue-600">
-                    <Presentation size={30} />
+                    <FiMonitor size={30} />
                   </div>
                   <h4 className="text-lg font-black text-gray-900">Belum ada room</h4>
                   <p className="mt-2 text-sm text-gray-500">
@@ -208,7 +211,7 @@ function DashboardGuru() {
                     onClick={() => navigate("/guru/buat-room")}
                     className="mt-5 inline-flex items-center gap-2 rounded-2xl bg-blue-500 px-5 py-3 font-bold text-white shadow transition hover:-translate-y-0.5 hover:bg-blue-600"
                   >
-                    <Plus size={18} />
+                    <FiPlus size={18} />
                     Buat Room
                   </button>
                 </div>
@@ -218,6 +221,8 @@ function DashboardGuru() {
         </div>
       </main>
 
+      </div>
+      <BottomNav role="guru" />
       <ConfirmDialog
         open={Boolean(deleteTarget)}
         title="Hapus Room?"

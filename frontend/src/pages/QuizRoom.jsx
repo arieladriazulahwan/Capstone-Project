@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { FiTarget } from "react-icons/fi";
+import { FaRocket } from "react-icons/fa";
+
+import { Skeleton } from "../components/Skeleton";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
@@ -125,8 +129,11 @@ function QuizRoom() {
   if (loading) {
 
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        Loading room...
+      <div className="h-screen overflow-hidden genz-bg p-4 flex items-center justify-center">
+        <div className="max-w-3xl w-full space-y-5">
+          <Skeleton className="h-24 w-full rounded-3xl" />
+          <Skeleton className="h-64 w-full rounded-3xl" />
+        </div>
       </div>
     );
 
@@ -139,41 +146,34 @@ function QuizRoom() {
 
   return (
 
-    <div className="min-h-screen bg-gray-100 p-4">
-
-      <div className="max-w-3xl mx-auto">
+    <div className="h-screen overflow-hidden genz-bg p-4 text-sora pb-20">
+      <div className="max-w-3xl mx-auto pt-6">
 
         {/* HEADER */}
-        <div className="bg-white rounded-3xl p-5 shadow mb-5">
-
-          <div className="flex justify-between items-center">
-
+        <div className="bg-sora text-cream flex flex-col md:flex-row justify-between items-center mb-5 rounded-3xl p-6 shadow-soft-sora relative overflow-hidden">
+          <div className="absolute top-[-20%] left-[-10%] w-32 h-32 bg-kaili/20 rounded-full blur-2xl"></div>
+          
+          <div className="relative z-10 w-full flex justify-between items-center">
             <div>
-
-              <h1 className="text-2xl font-bold">
-                🎯 {room.title}
+              <h1 className="text-2xl font-black flex items-center gap-2">
+                <FiTarget size={24} className="text-kaili" /> {room.title}
               </h1>
-
-              <p className="text-gray-500">
+              <p className="text-cream/80 font-medium mt-1">
                 Room: {code}
               </p>
-
             </div>
 
-            <div className="bg-green-100 text-green-700 px-4 py-2 rounded-2xl font-bold">
-              Soal {currentQuestion + 1}/
-              {room.questions.length}
+            <div className="text-xl font-black text-kaili drop-shadow-md">
+              Soal {currentQuestion + 1}/{room.questions.length}
             </div>
-
           </div>
-
         </div>
 
         {/* CARD SOAL */}
-        <div className="bg-white rounded-3xl p-6 shadow">
+        <div className="bg-white/60 backdrop-blur-xl rounded-3xl p-6 shadow-soft-sora border border-white/60">
 
           {/* PERTANYAAN */}
-          <h2 className="text-2xl font-bold mb-6">
+          <h2 className="text-2xl font-black mb-6 text-sora">
             {question.question}
           </h2>
 
@@ -182,10 +182,10 @@ function QuizRoom() {
           {/* ================================= */}
           {question.image && (
 
-            <img
+              <img
               src={question.image}
               alt="soal"
-              className="w-full max-h-80 object-cover rounded-2xl mb-5"
+              className="w-full max-h-80 object-contain rounded-2xl bg-cream mb-5"
             />
 
           )}
@@ -204,14 +204,11 @@ function QuizRoom() {
 
                   <button
                     key={index}
-                    onClick={() =>
-                      saveAnswer(opt)
-                    }
-                    className={`w-full text-left p-4 rounded-2xl border transition ${
-                      answers[currentQuestion] ===
-                      opt
-                        ? "bg-green-500 text-white border-green-500"
-                        : "bg-white hover:bg-gray-50"
+                    onClick={() => saveAnswer(opt)}
+                    className={`w-full p-4 rounded-full border-2 text-lg font-black transition-all btn-bouncy shadow-sm ${
+                      answers[currentQuestion] === opt
+                        ? "bg-kaili text-white border-kaili shadow-glow-kaili"
+                        : "bg-white text-sora border-sora/10 hover:border-kaili"
                     }`}
                   >
                     {opt}
@@ -230,16 +227,12 @@ function QuizRoom() {
           {question.answerType ===
             "ketik" && (
 
-            <input
+              <input
               type="text"
               placeholder="Ketik jawaban..."
-              value={
-                answers[currentQuestion] || ""
-              }
-              onChange={(e) =>
-                saveAnswer(e.target.value)
-              }
-              className="w-full border p-4 rounded-2xl"
+              value={answers[currentQuestion] || ""}
+              onChange={(e) => saveAnswer(e.target.value)}
+              className="w-full border-2 border-white/60 p-4 rounded-full bg-white/50 backdrop-blur-md outline-none focus:bg-white focus:border-kaili font-black text-center text-xl text-sora transition-all"
             />
 
           )}
@@ -250,9 +243,8 @@ function QuizRoom() {
           {question.answerType ===
             "blok" && (
 
-            <div className="space-y-4">
-
-              <div className="flex flex-wrap gap-3">
+            <div className="space-y-5">
+              <div className="grid grid-cols-2 gap-3">
 
                 {question.blocks.map(
                   (block, index) => (
@@ -287,14 +279,10 @@ function QuizRoom() {
                         }
 
                       }}
-                      className={`px-4 py-3 rounded-2xl border ${
-                        (
-                          answers[
-                            currentQuestion
-                          ] || []
-                        ).includes(block)
-                          ? "bg-green-500 text-white"
-                          : "bg-white"
+                      className={`p-4 rounded-3xl border-2 font-black text-lg transition-all btn-bouncy shadow-sm ${
+                        (answers[currentQuestion] || []).includes(block)
+                          ? "bg-kaili text-white border-kaili shadow-glow-kaili"
+                          : "bg-white text-sora border-sora/10 hover:border-kaili"
                       }`}
                     >
                       {block}
@@ -305,19 +293,8 @@ function QuizRoom() {
 
               </div>
 
-              <div className="bg-green-50 p-4 rounded-2xl">
-
-                <p className="font-semibold mb-2">
-                  Jawaban:
-                </p>
-
-                <p className="text-green-700">
-                  {(
-                    answers[currentQuestion] ||
-                    []
-                  ).join(" ")}
-                </p>
-
+              <div className="bg-white/50 p-4 border border-white/60 rounded-3xl text-center text-3xl font-black text-sora min-h-[80px] flex items-center justify-center shadow-inner">
+                {(answers[currentQuestion] || []).join(" ") || "..."}
               </div>
 
             </div>
@@ -325,12 +302,12 @@ function QuizRoom() {
           )}
 
           {/* NAVIGATION */}
-          <div className="flex justify-between mt-8">
+          <div className="flex justify-between gap-3 mt-8">
 
             <button
               onClick={prevQuestion}
               disabled={currentQuestion === 0}
-              className="bg-gray-200 px-5 py-3 rounded-2xl disabled:opacity-50"
+              className="w-full py-4 rounded-full border-2 border-sora bg-white/50 font-black text-sora hover:bg-sora hover:text-cream transition-all btn-bouncy disabled:opacity-50 disabled:border-sora/20 disabled:text-sora/40 disabled:hover:bg-transparent"
             >
               ← Sebelumnya
             </button>
@@ -340,16 +317,16 @@ function QuizRoom() {
 
               <button
                 onClick={submitQuiz}
-                className="bg-green-600 text-white px-6 py-3 rounded-2xl font-bold"
+                className="w-full bg-kaili text-white py-4 rounded-full font-black shadow-glow-kaili btn-bouncy flex items-center justify-center gap-2 hover:scale-[1.02] transition-all"
               >
-                🚀 Submit Quiz
+                <FaRocket size={20} /> Submit
               </button>
 
             ) : (
 
               <button
                 onClick={nextQuestion}
-                className="bg-blue-600 text-white px-6 py-3 rounded-2xl font-bold"
+                className="w-full bg-sora text-white py-4 rounded-full font-black shadow-soft-sora btn-bouncy transition-all hover:scale-[1.02]"
               >
                 Selanjutnya →
               </button>

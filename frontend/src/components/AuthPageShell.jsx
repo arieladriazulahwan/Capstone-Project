@@ -1,4 +1,6 @@
 import SoraKailiLogo from "./SoraKailiLogo";
+import { FiBookOpen, FiTarget } from "react-icons/fi";
+import { FaTrophy } from "react-icons/fa";
 
 function AuthPageShell({
   children,
@@ -7,41 +9,44 @@ function AuthPageShell({
   subtitle,
   tone = "green",
 }) {
-  const toneClass =
-    tone === "blue"
-      ? "from-blue-50 via-white to-green-50 text-blue-700 bg-blue-100"
-      : "from-green-50 via-white to-blue-50 text-green-700 bg-green-100";
+  const features = [
+    { label: "Materi", Icon: FiBookOpen, color: "text-kaili" },
+    { label: "Latihan", Icon: FiTarget, color: "text-red-500" },
+    { label: "Kuis", Icon: FaTrophy, color: "text-amber-500" }
+  ];
 
   return (
-    <div className={`relative min-h-screen overflow-hidden bg-gradient-to-br ${toneClass.split(" ").slice(0, 3).join(" ")} px-4 py-8 flex items-center justify-center`}>
-      <div className="pointer-events-none absolute left-8 top-16 h-28 w-28 rounded-full bg-green-200/50 blur-3xl landing-float"></div>
-      <div className="pointer-events-none absolute bottom-16 right-8 h-32 w-32 rounded-full bg-yellow-200/60 blur-3xl landing-float-slow"></div>
+    <div className="relative min-h-screen overflow-hidden genz-bg px-4 py-8 flex items-center justify-center">
+      <div className="pointer-events-none absolute left-8 top-16 h-48 w-48 rounded-full bg-sora/10 blur-3xl landing-float"></div>
+      <div className="pointer-events-none absolute bottom-16 right-8 h-64 w-64 rounded-full bg-kaili/15 blur-3xl landing-float-slow"></div>
 
       <div className="relative grid w-full max-w-5xl items-center gap-6 md:grid-cols-[0.95fr_1.05fr]">
         <div className="hidden md:block landing-rise">
-          <div className="mb-5 inline-flex rounded-full bg-white/80 px-4 py-2 text-sm font-bold text-green-700 shadow-sm">
+          <div className="mb-5 inline-flex rounded-full bg-white/60 backdrop-blur-md px-5 py-2 text-sm font-black text-kaili shadow-soft-sora border border-sora/5">
             {eyebrow}
           </div>
-          <h1 className="mb-4 text-5xl font-black leading-tight text-gray-900">
+          <h1 className="mb-4 text-5xl font-black leading-tight text-sora drop-shadow-sm">
             {title}
           </h1>
-          <p className="max-w-md text-lg leading-relaxed text-gray-600">
+          <p className="max-w-md text-lg leading-relaxed text-sora/60 font-medium">
             {subtitle}
           </p>
           <div className="mt-8 grid max-w-sm grid-cols-3 gap-3">
-            {["Materi", "Latihan", "Kuis"].map((item) => (
-              <div key={item} className="rounded-2xl border border-white bg-white/80 p-3 text-center shadow-sm">
-                <p className="text-sm font-bold text-gray-700">{item}</p>
+            {features.map((item) => (
+              <div key={item.label} className="flex items-center justify-center gap-2 rounded-2xl border border-white/60 bg-white/40 backdrop-blur-md p-3 text-center shadow-soft-sora">
+                <item.Icon className={item.color} />
+                <p className="text-sm font-bold text-sora">{item.label}</p>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="landing-rise-delay rounded-[2rem] border border-white bg-white/90 p-6 shadow-2xl backdrop-blur md:p-8">
-          <div className="mb-2 flex justify-center">
-            <SoraKailiLogo className="h-32 w-52" />
+        <div className="landing-rise-delay rounded-[2.5rem] border border-white/60 bg-white/60 p-6 shadow-soft-sora backdrop-blur-xl md:p-10 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent pointer-events-none"></div>
+
+          <div className="relative z-10">
+            {children}
           </div>
-          {children}
         </div>
       </div>
     </div>

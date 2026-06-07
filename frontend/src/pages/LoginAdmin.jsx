@@ -41,7 +41,7 @@ function LoginAdmin() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-indigo-900 to-slate-900 flex items-center justify-center px-4">
+    <div className="h-screen overflow-hidden bg-gradient-to-br from-purple-900 via-indigo-900 to-slate-900 flex items-center justify-center px-4">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
@@ -50,16 +50,19 @@ function LoginAdmin() {
 
       <div className="relative w-full max-w-md">
         {/* Logo */}
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-24 h-24 bg-white rounded-3xl mb-4 shadow-xl shadow-purple-500/20 overflow-hidden">
-            <img src={logoSoraKaili} alt="Sora Kaili Logo" className="w-full h-full object-contain scale-[1.5]" />
+        <div className="text-center mb-8 animate-fade-slide-up">
+          <div className="inline-flex items-center justify-center w-24 h-24 bg-white rounded-3xl mb-4 shadow-xl shadow-purple-500/20 overflow-hidden animate-spring-pop">
+            <img src={logoSoraKaili} alt="Sora Kaili Logo" className="w-full h-full object-contain scale-[1.5] transition-transform duration-500 hover:scale-[1.6]" />
           </div>
           <h1 className="text-2xl font-bold text-white">Sora Kaili</h1>
           <p className="text-purple-300 text-sm mt-1">Admin Panel</p>
         </div>
 
         {/* Card */}
-        <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-8 shadow-2xl border border-white/10">
+        <div 
+          className="bg-white/10 backdrop-blur-xl rounded-2xl p-8 shadow-2xl border border-white/10 animate-fade-slide-up" 
+          style={{ animationDelay: "150ms", animationFillMode: "both" }}
+        >
           <h2 className="text-lg font-semibold text-white mb-6 text-center">
             Masuk sebagai Admin
           </h2>
@@ -102,14 +105,17 @@ function LoginAdmin() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white rounded-xl font-semibold shadow-lg shadow-purple-500/30 transition-all duration-200 disabled:opacity-50"
+              className="w-full py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white rounded-xl font-semibold shadow-lg shadow-purple-500/30 transition-all duration-200 disabled:opacity-50 btn-bouncy"
             >
               {loading ? "Memproses..." : "Masuk"}
             </button>
           </form>
         </div>
 
-        <p className="text-center text-purple-400/60 text-xs mt-6">
+        <p 
+          className="text-center text-purple-400/60 text-xs mt-6 animate-fade-slide-up"
+          style={{ animationDelay: "300ms", animationFillMode: "both" }}
+        >
           © 2026 Sora Kaili — Admin Panel
         </p>
       </div>

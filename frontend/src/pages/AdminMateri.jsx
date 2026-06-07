@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
-import NavbarAdmin from "../components/NavbarAdmin";
-import SidebarAdmin from "../components/SidebarAdmin";
-import BottomNavAdmin from "../components/BottomNavAdmin";
+import { FiBook, FiFileText, FiPlus } from "react-icons/fi";
+import { FaTrophy } from "react-icons/fa";
+
+import Navbar from "../components/Navbar";
+import { Skeleton } from "../components/Skeleton";
+import Sidebar from "../components/Sidebar";
+import BottomNav from "../components/BottomNav";
 import ConfirmDialog from "../components/ConfirmDialog";
 import { babList as initialBabList, getLevels as getInitialLevels, filterByLevel } from "../data/levelMap";
 
@@ -546,50 +550,70 @@ function AdminMateri() {
     q.category?.toLowerCase() === selectedLevel?.title.toLowerCase()
   );
 
-  if (!user) return <div className="admin-page-bg min-h-screen flex items-center justify-center">Loading...</div>;
+  if (!user) {
+    return (
+      <div className="genz-bg h-screen overflow-hidden flex overflow-hidden text-sora">
+        <Sidebar role="admin" />
+        <div className="flex-1 flex flex-col min-w-0">
+          <Navbar role="admin" user={null} />
+          <main className="flex-1 p-4 pb-24 md:p-6">
+            <div className="max-w-6xl mx-auto w-full space-y-6">
+              <Skeleton className="h-24 w-full rounded-3xl" />
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <Skeleton className="h-48 w-full rounded-3xl" />
+                <Skeleton className="h-48 w-full rounded-3xl" />
+                <Skeleton className="h-48 w-full rounded-3xl" />
+              </div>
+            </div>
+          </main>
+        </div>
+        <BottomNav role="admin" />
+      </div>
+    );
+  }
 
   return (
-    <div className="admin-page-bg min-h-screen flex overflow-hidden">
-      <SidebarAdmin />
+    <div className="genz-bg h-screen overflow-hidden flex overflow-hidden text-sora">
+      <Sidebar role="admin" />
       <div className="flex-1 flex flex-col min-w-0">
-        <NavbarAdmin user={user} />
+        <Navbar role="admin" user={user} />
         <main className="flex-1 p-4 pb-24 md:p-6 overflow-y-auto overflow-x-hidden">
           <div className="max-w-6xl mx-auto w-full">
 
             {/* HEADER & BREADCRUMBS */}
-            <div className="admin-hero-card mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4 rounded-3xl p-5 text-white shadow-lg shadow-purple-500/20">
+            <div className="bg-white/80 backdrop-blur-md border border-sora/10 shadow-soft-sora mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4 rounded-3xl p-6 sm:p-8">
               <div>
-                <h1 className="text-2xl font-bold flex items-center gap-2">
+                <h1 className="text-2xl sm:text-3xl font-black text-sora flex items-center gap-2 mb-1">
                   Kelola Materi
                 </h1>
-                <div className="flex items-center gap-2 mt-2 text-sm text-purple-100">
-                  <span className="cursor-pointer hover:text-white" onClick={() => { setSelectedBab(null); setSelectedLevel(null); }}>Semua Bab</span>
+                <div className="flex items-center gap-2 text-sm font-bold text-sora/60 mt-2">
+                  <span className="cursor-pointer hover:text-kaili transition-colors" onClick={() => { setSelectedBab(null); setSelectedLevel(null); }}>Semua Bab</span>
                   {selectedBab && (
                     <>
                       <span>/</span>
-                      <span className="cursor-pointer hover:text-white" onClick={() => setSelectedLevel(null)}>{getBabTitle(selectedBab)}</span>
+                      <span className="cursor-pointer hover:text-kaili transition-colors" onClick={() => setSelectedLevel(null)}>{getBabTitle(selectedBab)}</span>
                     </>
                   )}
                   {selectedLevel && (
                     <>
                       <span>/</span>
-                      <span className="font-semibold text-white">{selectedLevel.title}</span>
+                      <span className="font-black text-sora">{selectedLevel.title}</span>
                     </>
                   )}
                 </div>
               </div>
 
               {/* Dialect Selector */}
-              <div className="flex gap-2 bg-white/15 p-1 rounded-xl shadow-sm border border-white/20 backdrop-blur">
+              <div className="flex gap-2 bg-white/50 p-1.5 rounded-2xl shadow-sm border border-sora/10 backdrop-blur">
                 <button
                   onClick={() => { setSelectedDialect("ledo"); setSelectedLevel(null); }}
-                  className={`px-4 py-2 rounded-lg text-sm font-bold transition ${selectedDialect === "ledo" ? "bg-purple-100 text-purple-700" : "text-gray-500 hover:bg-gray-50"}`}
+                  className={`px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${selectedDialect === "ledo" ? "bg-kaili text-white shadow-glow-kaili" : "text-sora/60 hover:text-sora hover:bg-white"}`}
                 >
                   Ledo
                 </button>
                 <button
                   onClick={() => { setSelectedDialect("rai"); setSelectedLevel(null); }}
-                  className={`px-4 py-2 rounded-lg text-sm font-bold transition ${selectedDialect === "rai" ? "bg-purple-100 text-purple-700" : "text-gray-500 hover:bg-gray-50"}`}
+                  className={`px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${selectedDialect === "rai" ? "bg-kaili text-white shadow-glow-kaili" : "text-sora/60 hover:text-sora hover:bg-white"}`}
                 >
                   Rai
                 </button>
@@ -600,28 +624,28 @@ function AdminMateri() {
             {!selectedBab && (
               <>
                 <div className="flex justify-end mb-4">
-                  <button onClick={() => { setBabForm({ key: "", label: "", title: "", description: "", color: "blue", isEdit: false }); setShowBabModal(true); }} className="px-5 py-2.5 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-xl text-sm font-bold shadow-md hover:shadow-lg transition">＋ Tambah Bab</button>
+                  <button onClick={() => { setBabForm({ key: "", label: "", title: "", description: "", color: "blue", isEdit: false }); setShowBabModal(true); }} className="px-5 py-3 bg-kaili text-white rounded-xl text-sm font-bold shadow-glow-kaili transition-all hover:-translate-y-1 flex items-center gap-2"><FiPlus size={18} /> Tambah Bab</button>
                 </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {editableBabs.map((bab, index) => (
-                  <div key={bab.key} className="admin-glass-card rounded-3xl shadow-sm hover:shadow-md hover:border-purple-300 transition group overflow-hidden">
+                  <div key={bab.key} className="bg-white/80 backdrop-blur-md border border-sora/10 shadow-soft-sora rounded-3xl hover:-translate-y-1 hover:border-kaili/30 hover:shadow-xl transition-all group overflow-hidden">
                     <div onClick={() => setSelectedBab(bab.key)} className="p-6 cursor-pointer">
                       <div className="flex justify-between items-start mb-4">
-                        <div className={`w-12 h-12 rounded-xl flex items-center justify-center bg-${bab.color}-100 text-${bab.color}-600`}>
-                          <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                        <div className={`w-14 h-14 rounded-2xl flex items-center justify-center bg-${bab.color}-100 text-${bab.color}-600 shadow-sm group-hover:scale-110 transition-transform`}>
+                          <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                           </svg>
                         </div>
-                        <span className="text-xs font-bold text-gray-400 group-hover:text-purple-500 transition">{bab.label}</span>
+                        <span className="text-xs font-black uppercase tracking-wider text-sora/40 group-hover:text-kaili transition-colors">{bab.label}</span>
                       </div>
-                      <h3 className="text-xl font-bold text-gray-800 mb-1">{bab.title}</h3>
-                      <p className="text-sm text-gray-500">{bab.description}</p>
+                      <h3 className="text-xl font-black text-sora mb-2">{bab.title}</h3>
+                      <p className="text-sm font-bold text-sora/60 line-clamp-2">{bab.description}</p>
                     </div>
-                    <div className="bg-gray-50 px-6 py-3 border-t border-gray-100 flex flex-wrap gap-3">
-                      <button disabled={index === 0} onClick={(e) => { e.stopPropagation(); moveBab(index, -1); }} className="text-sm font-semibold text-gray-600 hover:text-purple-700 disabled:opacity-30">Naik</button>
-                      <button disabled={index === editableBabs.length - 1} onClick={(e) => { e.stopPropagation(); moveBab(index, 1); }} className="text-sm font-semibold text-gray-600 hover:text-purple-700 disabled:opacity-30">Turun</button>
-                      <button onClick={(e) => { e.stopPropagation(); setBabForm({ ...bab, isEdit: true }); setShowBabModal(true); }} className="text-sm font-semibold text-blue-600 hover:text-blue-800">Edit</button>
-                      <button onClick={(e) => { e.stopPropagation(); setDeleteTarget({ type: "bab", id: bab.key, title: bab.title }); }} className="text-sm font-semibold text-red-600 hover:text-red-800">Hapus</button>
+                    <div className="bg-sora/5 px-6 py-4 border-t border-sora/10 flex flex-wrap gap-3">
+                      <button disabled={index === 0} onClick={(e) => { e.stopPropagation(); moveBab(index, -1); }} className="text-xs font-bold text-sora/60 hover:text-kaili disabled:opacity-30 transition-colors uppercase tracking-wider px-2 py-1">Naik</button>
+                      <button disabled={index === editableBabs.length - 1} onClick={(e) => { e.stopPropagation(); moveBab(index, 1); }} className="text-xs font-bold text-sora/60 hover:text-kaili disabled:opacity-30 transition-colors uppercase tracking-wider px-2 py-1">Turun</button>
+                      <button onClick={(e) => { e.stopPropagation(); setBabForm({ ...bab, isEdit: true }); setShowBabModal(true); }} className="text-xs font-bold bg-white border-2 border-sora/10 text-sora hover:border-kaili hover:text-kaili rounded-lg px-3 py-1 shadow-sm transition-all ml-auto">Edit</button>
+                      <button onClick={(e) => { e.stopPropagation(); setDeleteTarget({ type: "bab", id: bab.key, title: bab.title }); }} className="text-xs font-bold bg-red-50 border-2 border-red-100 text-red-500 hover:bg-red-500 hover:text-white rounded-lg px-3 py-1 shadow-sm transition-all">Hapus</button>
                     </div>
                   </div>
                 ))}
@@ -633,23 +657,23 @@ function AdminMateri() {
             {selectedBab && !selectedLevel && (
               <>
                 <div className="flex justify-end mb-4">
-                  <button onClick={() => { setLevelForm({ key: "", title: "", description: "", isEdit: false }); setShowLevelModal(true); }} className="px-5 py-2.5 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-xl text-sm font-bold shadow-md hover:shadow-lg transition">＋ Tambah Level</button>
+                  <button onClick={() => { setLevelForm({ key: "", title: "", description: "", isEdit: false }); setShowLevelModal(true); }} className="px-5 py-3 bg-kaili text-white rounded-xl text-sm font-bold shadow-glow-kaili transition-all hover:-translate-y-1 flex items-center gap-2"><FiPlus size={18} /> Tambah Level</button>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                   {getLevels(selectedBab).map((level, index) => (
-                    <div key={level.key} className="admin-glass-card rounded-3xl shadow-sm hover:shadow-md hover:border-purple-300 transition overflow-hidden">
-                      <div onClick={() => setSelectedLevel(level)} className="p-5 cursor-pointer">
-                        <span className="inline-flex mb-3 rounded-full bg-purple-50 px-3 py-1 text-xs font-bold text-purple-700">
+                    <div key={level.key} className="bg-white/80 backdrop-blur-md border border-sora/10 shadow-soft-sora rounded-3xl hover:-translate-y-1 hover:border-kaili/30 hover:shadow-xl transition-all overflow-hidden">
+                      <div onClick={() => setSelectedLevel(level)} className="p-6 cursor-pointer">
+                        <span className="inline-block mb-3 rounded-xl bg-kaili/10 px-3 py-1.5 text-xs font-black uppercase tracking-wider text-kaili border border-kaili/20">
                           Level {index + 1}
                         </span>
-                        <h4 className="font-bold text-gray-800 mb-1">{level.title}</h4>
-                        <p className="text-xs text-gray-500 line-clamp-2">{level.description}</p>
+                        <h4 className="font-black text-sora text-lg mb-2">{level.title}</h4>
+                        <p className="text-sm font-bold text-sora/60 line-clamp-2">{level.description}</p>
                       </div>
-                      <div className="bg-gray-50 px-5 py-3 border-t border-gray-100 flex flex-wrap gap-3">
-                        <button onClick={(e) => { e.stopPropagation(); moveLevel(index, -1); }} disabled={index === 0} className="text-sm font-semibold text-gray-600 hover:text-purple-700 disabled:opacity-30">Naik</button>
-                        <button onClick={(e) => { e.stopPropagation(); moveLevel(index, 1); }} disabled={index === getLevels(selectedBab).length - 1} className="text-sm font-semibold text-gray-600 hover:text-purple-700 disabled:opacity-30">Turun</button>
-                        <button onClick={(e) => { e.stopPropagation(); setLevelForm({ ...level, isEdit: true }); setShowLevelModal(true); }} className="text-sm font-semibold text-blue-600 hover:text-blue-800">Edit</button>
-                        <button onClick={(e) => { e.stopPropagation(); setDeleteTarget({ type: "level", id: level.key, title: level.title }); }} className="text-sm font-semibold text-red-600 hover:text-red-800">Hapus</button>
+                      <div className="bg-sora/5 px-6 py-4 border-t border-sora/10 flex flex-wrap gap-2">
+                        <button onClick={(e) => { e.stopPropagation(); moveLevel(index, -1); }} disabled={index === 0} className="text-xs font-bold text-sora/60 hover:text-kaili disabled:opacity-30 transition-colors uppercase tracking-wider px-2 py-1">Naik</button>
+                        <button onClick={(e) => { e.stopPropagation(); moveLevel(index, 1); }} disabled={index === getLevels(selectedBab).length - 1} className="text-xs font-bold text-sora/60 hover:text-kaili disabled:opacity-30 transition-colors uppercase tracking-wider px-2 py-1">Turun</button>
+                        <button onClick={(e) => { e.stopPropagation(); setLevelForm({ ...level, isEdit: true }); setShowLevelModal(true); }} className="text-xs font-bold bg-white border-2 border-sora/10 text-sora hover:border-kaili hover:text-kaili rounded-lg px-3 py-1.5 shadow-sm transition-all ml-auto">Edit</button>
+                        <button onClick={(e) => { e.stopPropagation(); setDeleteTarget({ type: "level", id: level.key, title: level.title }); }} className="text-xs font-bold bg-red-50 border-2 border-red-100 text-red-500 hover:bg-red-500 hover:text-white rounded-lg px-3 py-1.5 shadow-sm transition-all">Hapus</button>
                       </div>
                     </div>
                   ))}
@@ -660,55 +684,57 @@ function AdminMateri() {
             {/* LEVEL 3: CONTENT MANAGEMENT */}
             {selectedBab && selectedLevel && (
               <>
-                <div className="flex flex-wrap gap-2 mb-6 bg-white p-1 rounded-xl shadow-sm w-fit border border-gray-100">
-                  <button onClick={() => setTab("materi")} className={`px-5 py-2 rounded-lg text-sm font-bold transition ${tab === "materi" ? "bg-purple-50 text-purple-700" : "text-gray-500 hover:bg-gray-50"}`}>
-                    📖 Materi ({filteredMateri.length})
+                <div className="flex flex-wrap gap-2 mb-6 bg-white/80 backdrop-blur-md p-1.5 rounded-2xl shadow-soft-sora w-fit border border-sora/10">
+                  <button onClick={() => setTab("materi")} className={`px-6 py-2.5 rounded-xl text-sm font-bold transition-all flex items-center gap-2 ${tab === "materi" ? "bg-kaili text-white shadow-glow-kaili" : "text-sora/60 hover:text-sora hover:bg-white"}`}>
+                    <FiBook size={18} /> Materi ({filteredMateri.length})
                   </button>
-                  <button onClick={() => setTab("latihan")} className={`px-5 py-2 rounded-lg text-sm font-bold transition ${tab === "latihan" ? "bg-purple-50 text-purple-700" : "text-gray-500 hover:bg-gray-50"}`}>
-                    📝 Latihan ({filteredPractices.length})
+                  <button onClick={() => setTab("latihan")} className={`px-6 py-2.5 rounded-xl text-sm font-bold transition-all flex items-center gap-2 ${tab === "latihan" ? "bg-kaili text-white shadow-glow-kaili" : "text-sora/60 hover:text-sora hover:bg-white"}`}>
+                    <FiFileText size={18} /> Latihan ({filteredPractices.length})
                   </button>
-                  <button onClick={() => setTab("quiz")} className={`px-5 py-2 rounded-lg text-sm font-bold transition ${tab === "quiz" ? "bg-purple-50 text-purple-700" : "text-gray-500 hover:bg-gray-50"}`}>
-                    🏆 Kuis ({filteredQuizzes.length})
+                  <button onClick={() => setTab("quiz")} className={`px-6 py-2.5 rounded-xl text-sm font-bold transition-all flex items-center gap-2 ${tab === "quiz" ? "bg-kaili text-white shadow-glow-kaili" : "text-sora/60 hover:text-sora hover:bg-white"}`}>
+                    <FaTrophy size={18} /> Kuis ({filteredQuizzes.length})
                   </button>
                 </div>
 
                 {loading ? (
-                  <div className="text-center p-10 text-gray-400">Memuat data...</div>
+                  <div className="text-center p-10 font-bold text-sora/50">Memuat data...</div>
                 ) : (
-                  <div className="admin-glass-card rounded-3xl shadow-sm overflow-hidden">
+                  <div className="bg-white/80 backdrop-blur-md border border-sora/10 shadow-soft-sora rounded-3xl overflow-hidden">
                     
                     {/* TAB MATERI */}
                     {tab === "materi" && (
-                      <div className="p-5">
+                      <div className="p-6">
                         <div className="flex justify-end mb-4">
-                          <button onClick={openAddLesson} className="px-5 py-2.5 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-xl text-sm font-bold shadow-md hover:shadow-lg transition">＋ Tambah Materi</button>
+                          <button onClick={openAddLesson} className="px-5 py-3 bg-kaili text-white rounded-xl text-sm font-bold shadow-glow-kaili transition-all hover:-translate-y-1 flex items-center gap-2"><FiPlus size={18} /> Tambah Materi</button>
                         </div>
-                        {filteredMateri.length === 0 ? <div className="text-center p-10 text-gray-400">Belum ada materi untuk level ini</div> : (
-                          <div className="overflow-x-auto">
-                            <table className="w-full text-sm">
-                              <thead className="bg-gray-50 text-gray-600 border-b">
+                        {filteredMateri.length === 0 ? <div className="text-center p-10 font-bold text-sora/50">Belum ada materi untuk level ini</div> : (
+                          <div className="overflow-x-auto rounded-2xl border border-sora/10">
+                            <table className="w-full text-sm text-sora">
+                              <thead className="bg-sora/5 border-b border-sora/10">
                                 <tr>
-                                  <th className="px-4 py-3 text-center w-24">Urutan</th>
-                                  <th className="px-4 py-3 text-left">Indonesia</th>
-                                  <th className="px-4 py-3 text-left">Kaili ({selectedDialect})</th>
-                                  <th className="px-4 py-3 text-center w-32">Aksi</th>
+                                  <th className="px-5 py-4 text-center font-black text-sora/60 uppercase tracking-wider text-xs w-24">Urutan</th>
+                                  <th className="px-5 py-4 text-left font-black text-sora/60 uppercase tracking-wider text-xs">Indonesia</th>
+                                  <th className="px-5 py-4 text-left font-black text-sora/60 uppercase tracking-wider text-xs">Kaili ({selectedDialect})</th>
+                                  <th className="px-5 py-4 text-center font-black text-sora/60 uppercase tracking-wider text-xs w-32">Aksi</th>
                                 </tr>
                               </thead>
-                              <tbody className="divide-y">
+                              <tbody className="divide-y divide-sora/10">
                                 {filteredMateri.map((m) => (
-                                  <tr key={m._originalIndex} className="hover:bg-gray-50">
-                                    <td className="px-4 py-3 text-center whitespace-nowrap">
-                                      <span className="mr-3 inline-flex min-w-6 justify-center rounded-full bg-gray-100 px-2 py-1 text-xs font-bold text-gray-600">
+                                  <tr key={m._originalIndex} className="hover:bg-sora/5 transition-colors">
+                                    <td className="px-5 py-4 text-center whitespace-nowrap">
+                                      <span className="mr-3 inline-flex min-w-8 justify-center rounded-xl bg-sora/10 px-2 py-1 text-xs font-black text-sora">
                                         {m._originalIndex + 1}
                                       </span>
-                                      <button onClick={() => moveLesson(m._originalIndex, -1)} disabled={m._originalIndex === 0} className="mr-2 font-bold text-gray-500 hover:text-purple-700 disabled:opacity-30">↑</button>
-                                      <button onClick={() => moveLesson(m._originalIndex, 1)} disabled={m._originalIndex === fullBabLessons.length - 1} className="font-bold text-gray-500 hover:text-purple-700 disabled:opacity-30">↓</button>
+                                      <button onClick={() => moveLesson(m._originalIndex, -1)} disabled={m._originalIndex === 0} className="mr-2 font-black text-sora/40 hover:text-kaili disabled:opacity-30 transition-colors">↑</button>
+                                      <button onClick={() => moveLesson(m._originalIndex, 1)} disabled={m._originalIndex === fullBabLessons.length - 1} className="font-black text-sora/40 hover:text-kaili disabled:opacity-30 transition-colors">↓</button>
                                     </td>
-                                    <td className="px-4 py-3 font-medium text-gray-800">{m.indo}</td>
-                                    <td className="px-4 py-3 text-gray-600">{m.kaili}</td>
-                                    <td className="px-4 py-3 text-center whitespace-nowrap">
-                                      <button onClick={() => openEditLesson(m, m._originalIndex)} className="text-blue-600 font-medium mr-3">Edit</button>
-                                      <button onClick={() => setDeleteTarget({ type: "lesson", id: m._originalIndex, title: m.indo })} className="text-red-500 font-medium">Hapus</button>
+                                    <td className="px-5 py-4 font-black text-sora text-base">{m.indo}</td>
+                                    <td className="px-5 py-4 font-bold text-sora/80">{m.kaili}</td>
+                                    <td className="px-5 py-4 text-center whitespace-nowrap">
+                                      <div className="flex items-center justify-center gap-2">
+                                        <button onClick={() => openEditLesson(m, m._originalIndex)} className="text-xs font-bold bg-white border-2 border-sora/10 text-sora hover:border-kaili hover:text-kaili rounded-xl px-3 py-1.5 shadow-sm transition-all">Edit</button>
+                                        <button onClick={() => setDeleteTarget({ type: "lesson", id: m._originalIndex, title: m.indo })} className="text-xs font-bold bg-red-50 border-2 border-red-100 text-red-500 hover:bg-red-500 hover:text-white rounded-xl px-3 py-1.5 shadow-sm transition-all">Hapus</button>
+                                      </div>
                                     </td>
                                   </tr>
                                 ))}
@@ -721,36 +747,38 @@ function AdminMateri() {
 
                     {/* TAB LATIHAN */}
                     {tab === "latihan" && (
-                      <div className="p-5">
+                      <div className="p-6">
                         <div className="flex justify-end mb-4">
-                          <button onClick={openAddPractice} className="px-5 py-2.5 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-xl text-sm font-bold shadow-md hover:shadow-lg transition">＋ Tambah Latihan</button>
+                          <button onClick={openAddPractice} className="px-5 py-3 bg-kaili text-white rounded-xl text-sm font-bold shadow-glow-kaili transition-all hover:-translate-y-1 flex items-center gap-2"><FiPlus size={18} /> Tambah Latihan</button>
                         </div>
-                        {filteredPractices.length === 0 ? <div className="text-center p-10 text-gray-400">Belum ada latihan untuk level ini</div> : (
-                          <div className="overflow-x-auto">
-                            <table className="w-full text-sm">
-                              <thead className="bg-gray-50 text-gray-600 border-b">
+                        {filteredPractices.length === 0 ? <div className="text-center p-10 font-bold text-sora/50">Belum ada latihan untuk level ini</div> : (
+                          <div className="overflow-x-auto rounded-2xl border border-sora/10">
+                            <table className="w-full text-sm text-sora">
+                              <thead className="bg-sora/5 border-b border-sora/10">
                                 <tr>
-                                  <th className="px-4 py-3 text-center w-24">Urutan</th>
-                                  <th className="px-4 py-3 text-left">Pertanyaan</th>
-                                  <th className="px-4 py-3 text-left">Jawaban</th>
-                                  <th className="px-4 py-3 text-center w-32">Aksi</th>
+                                  <th className="px-5 py-4 text-center font-black text-sora/60 uppercase tracking-wider text-xs w-24">Urutan</th>
+                                  <th className="px-5 py-4 text-left font-black text-sora/60 uppercase tracking-wider text-xs">Pertanyaan</th>
+                                  <th className="px-5 py-4 text-left font-black text-sora/60 uppercase tracking-wider text-xs">Jawaban</th>
+                                  <th className="px-5 py-4 text-center font-black text-sora/60 uppercase tracking-wider text-xs w-32">Aksi</th>
                                 </tr>
                               </thead>
-                              <tbody className="divide-y">
+                              <tbody className="divide-y divide-sora/10">
                                 {filteredPractices.map((p) => (
-                                  <tr key={p._originalIndex} className="hover:bg-gray-50">
-                                    <td className="px-4 py-3 text-center whitespace-nowrap">
-                                      <span className="mr-3 inline-flex min-w-6 justify-center rounded-full bg-gray-100 px-2 py-1 text-xs font-bold text-gray-600">
+                                  <tr key={p._originalIndex} className="hover:bg-sora/5 transition-colors">
+                                    <td className="px-5 py-4 text-center whitespace-nowrap">
+                                      <span className="mr-3 inline-flex min-w-8 justify-center rounded-xl bg-sora/10 px-2 py-1 text-xs font-black text-sora">
                                         {p._originalIndex + 1}
                                       </span>
-                                      <button onClick={() => movePractice(p._originalIndex, -1)} disabled={p._originalIndex === 0} className="mr-2 font-bold text-gray-500 hover:text-purple-700 disabled:opacity-30">↑</button>
-                                      <button onClick={() => movePractice(p._originalIndex, 1)} disabled={p._originalIndex === fullBabPractices.length - 1} className="font-bold text-gray-500 hover:text-purple-700 disabled:opacity-30">↓</button>
+                                      <button onClick={() => movePractice(p._originalIndex, -1)} disabled={p._originalIndex === 0} className="mr-2 font-black text-sora/40 hover:text-kaili disabled:opacity-30 transition-colors">↑</button>
+                                      <button onClick={() => movePractice(p._originalIndex, 1)} disabled={p._originalIndex === fullBabPractices.length - 1} className="font-black text-sora/40 hover:text-kaili disabled:opacity-30 transition-colors">↓</button>
                                     </td>
-                                    <td className="px-4 py-3 font-medium text-gray-800">{p.question}</td>
-                                    <td className="px-4 py-3 text-green-600 font-bold">{p.answer}</td>
-                                    <td className="px-4 py-3 text-center whitespace-nowrap">
-                                      <button onClick={() => openEditPractice(p, p._originalIndex)} className="text-blue-600 font-medium mr-3">Edit</button>
-                                      <button onClick={() => setDeleteTarget({ type: "practice", id: p._originalIndex, title: "Latihan ini" })} className="text-red-500 font-medium">Hapus</button>
+                                    <td className="px-5 py-4 font-black text-sora text-base">{p.question}</td>
+                                    <td className="px-5 py-4 text-green-600 font-bold bg-green-50/30">{p.answer}</td>
+                                    <td className="px-5 py-4 text-center whitespace-nowrap">
+                                      <div className="flex items-center justify-center gap-2">
+                                        <button onClick={() => openEditPractice(p, p._originalIndex)} className="text-xs font-bold bg-white border-2 border-sora/10 text-sora hover:border-kaili hover:text-kaili rounded-xl px-3 py-1.5 shadow-sm transition-all">Edit</button>
+                                        <button onClick={() => setDeleteTarget({ type: "practice", id: p._originalIndex, title: "Latihan ini" })} className="text-xs font-bold bg-red-50 border-2 border-red-100 text-red-500 hover:bg-red-500 hover:text-white rounded-xl px-3 py-1.5 shadow-sm transition-all">Hapus</button>
+                                      </div>
                                     </td>
                                   </tr>
                                 ))}
@@ -763,44 +791,46 @@ function AdminMateri() {
 
                     {/* TAB KUIS */}
                     {tab === "quiz" && (
-                      <div className="p-5">
+                      <div className="p-6">
                         <div className="flex justify-end mb-4">
-                          <button onClick={openAddQuiz} className="px-5 py-2.5 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-xl text-sm font-bold shadow-md hover:shadow-lg transition">＋ Tambah Kuis</button>
+                          <button onClick={openAddQuiz} className="px-5 py-3 bg-kaili text-white rounded-xl text-sm font-bold shadow-glow-kaili transition-all hover:-translate-y-1 flex items-center gap-2"><FiPlus size={18} /> Tambah Kuis</button>
                         </div>
-                        {filteredQuizzes.length === 0 ? <div className="text-center p-10 text-gray-400">Belum ada soal kuis untuk level ini</div> : (
-                          <div className="overflow-x-auto">
-                            <table className="w-full text-sm">
-                              <thead className="bg-gray-50 text-gray-600 border-b">
+                        {filteredQuizzes.length === 0 ? <div className="text-center p-10 font-bold text-sora/50">Belum ada soal kuis untuk level ini</div> : (
+                          <div className="overflow-x-auto rounded-2xl border border-sora/10">
+                            <table className="w-full text-sm text-sora">
+                              <thead className="bg-sora/5 border-b border-sora/10">
                                 <tr>
-                                  <th className="px-4 py-3 text-center w-24">Urutan</th>
-                                  <th className="px-4 py-3 text-left">Tipe Soal</th>
-                                  <th className="px-4 py-3 text-left">Pertanyaan</th>
-                                  <th className="px-4 py-3 text-left">Jawaban Benar</th>
-                                  <th className="px-4 py-3 text-center w-32">Aksi</th>
+                                  <th className="px-5 py-4 text-center font-black text-sora/60 uppercase tracking-wider text-xs w-24">Urutan</th>
+                                  <th className="px-5 py-4 text-left font-black text-sora/60 uppercase tracking-wider text-xs">Tipe Soal</th>
+                                  <th className="px-5 py-4 text-left font-black text-sora/60 uppercase tracking-wider text-xs">Pertanyaan</th>
+                                  <th className="px-5 py-4 text-left font-black text-sora/60 uppercase tracking-wider text-xs">Jawaban Benar</th>
+                                  <th className="px-5 py-4 text-center font-black text-sora/60 uppercase tracking-wider text-xs w-32">Aksi</th>
                                 </tr>
                               </thead>
-                              <tbody className="divide-y">
+                              <tbody className="divide-y divide-sora/10">
                                 {filteredQuizzes.map((q, index) => (
-                                  <tr key={q.id} className="hover:bg-gray-50">
-                                    <td className="px-4 py-3 text-center whitespace-nowrap">
-                                      <span className="mr-3 inline-flex min-w-6 justify-center rounded-full bg-gray-100 px-2 py-1 text-xs font-bold text-gray-600">
+                                  <tr key={q.id} className="hover:bg-sora/5 transition-colors">
+                                    <td className="px-5 py-4 text-center whitespace-nowrap">
+                                      <span className="mr-3 inline-flex min-w-8 justify-center rounded-xl bg-sora/10 px-2 py-1 text-xs font-black text-sora">
                                         {index + 1}
                                       </span>
-                                      <button onClick={() => moveQuiz(q.id, -1)} disabled={index === 0} className="mr-2 font-bold text-gray-500 hover:text-purple-700 disabled:opacity-30">↑</button>
-                                      <button onClick={() => moveQuiz(q.id, 1)} disabled={index === filteredQuizzes.length - 1} className="font-bold text-gray-500 hover:text-purple-700 disabled:opacity-30">↓</button>
+                                      <button onClick={() => moveQuiz(q.id, -1)} disabled={index === 0} className="mr-2 font-black text-sora/40 hover:text-kaili disabled:opacity-30 transition-colors">↑</button>
+                                      <button onClick={() => moveQuiz(q.id, 1)} disabled={index === filteredQuizzes.length - 1} className="font-black text-sora/40 hover:text-kaili disabled:opacity-30 transition-colors">↓</button>
                                     </td>
-                                    <td className="px-4 py-3">
-                                      <span className="inline-flex rounded-full bg-purple-50 px-3 py-1 text-xs font-bold text-purple-700">
+                                    <td className="px-5 py-4">
+                                      <span className="inline-block rounded-xl bg-kaili/10 border border-kaili/20 px-3 py-1.5 text-xs font-black uppercase tracking-wider text-kaili">
                                         {getQuizTypeLabel(q)}
                                       </span>
                                     </td>
-                                    <td className="px-4 py-3 font-medium text-gray-800">
+                                    <td className="px-5 py-4 font-black text-sora text-base">
                                       {q.question}
                                     </td>
-                                    <td className="px-4 py-3 text-green-600 font-bold">{typeof q.answer === "number" ? q.options?.[q.answer] : q.answer}</td>
-                                    <td className="px-4 py-3 text-center whitespace-nowrap">
-                                      <button onClick={() => openEditQuiz(q)} className="text-blue-600 font-medium mr-3">Edit</button>
-                                      <button onClick={() => setDeleteTarget({ type: "quiz", id: q.id, title: "Kuis ini" })} className="text-red-500 font-medium">Hapus</button>
+                                    <td className="px-5 py-4 text-green-600 font-bold bg-green-50/30">{typeof q.answer === "number" ? q.options?.[q.answer] : q.answer}</td>
+                                    <td className="px-5 py-4 text-center whitespace-nowrap">
+                                      <div className="flex items-center justify-center gap-2">
+                                        <button onClick={() => openEditQuiz(q)} className="text-xs font-bold bg-white border-2 border-sora/10 text-sora hover:border-kaili hover:text-kaili rounded-xl px-3 py-1.5 shadow-sm transition-all">Edit</button>
+                                        <button onClick={() => setDeleteTarget({ type: "quiz", id: q.id, title: "Kuis ini" })} className="text-xs font-bold bg-red-50 border-2 border-red-100 text-red-500 hover:bg-red-500 hover:text-white rounded-xl px-3 py-1.5 shadow-sm transition-all">Hapus</button>
+                                      </div>
                                     </td>
                                   </tr>
                                 ))}
@@ -822,17 +852,17 @@ function AdminMateri() {
       {/* MODALS */}
       {/* MATERI MODAL */}
       {showLessonModal && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/50 p-4">
-          <div className="admin-glass-card rounded-3xl w-full max-w-md p-6 shadow-2xl">
-            <h3 className="font-bold text-lg mb-4">{editLessonIndex !== null ? "Edit Materi" : "Tambah Materi"}</h3>
-            <div className="space-y-4">
-              <div><label className="text-sm font-medium mb-1 block text-gray-700">Indonesia</label><input type="text" value={lessonForm.indo} onChange={e => setLessonForm({...lessonForm, indo: e.target.value})} className="w-full border rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-purple-500/50" /></div>
-              <div><label className="text-sm font-medium mb-1 block text-gray-700">Kaili ({selectedDialect})</label><input type="text" value={lessonForm.kaili} onChange={e => setLessonForm({...lessonForm, kaili: e.target.value})} className="w-full border rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-purple-500/50" /></div>
-              <div><label className="text-sm font-medium mb-1 block text-gray-700">Gambar (Opsional)</label><input type="file" accept="image/*" onChange={e => handleLessonImage(e.target.files[0])} className="text-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100" />{lessonForm.image && <img src={lessonForm.image} alt="Preview" className="h-24 mt-3 rounded-lg object-contain bg-gray-50" />}</div>
+        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-sora/80 backdrop-blur-sm p-4">
+          <div className="bg-white/90 backdrop-blur-xl border border-sora/10 shadow-soft-sora rounded-3xl w-full max-w-md p-6 sm:p-8">
+            <h3 className="font-black text-xl text-sora mb-6">{editLessonIndex !== null ? "Edit Materi" : "Tambah Materi"}</h3>
+            <div className="space-y-5">
+              <div><label className="text-xs font-black text-sora/60 uppercase tracking-wider mb-2 block">Indonesia</label><input type="text" value={lessonForm.indo} onChange={e => setLessonForm({...lessonForm, indo: e.target.value})} className="w-full px-4 py-3 border-2 border-sora/10 rounded-xl focus:outline-none focus:border-kaili bg-white/50 focus:bg-white text-sora font-bold transition-all text-sm" /></div>
+              <div><label className="text-xs font-black text-sora/60 uppercase tracking-wider mb-2 block">Kaili ({selectedDialect})</label><input type="text" value={lessonForm.kaili} onChange={e => setLessonForm({...lessonForm, kaili: e.target.value})} className="w-full px-4 py-3 border-2 border-sora/10 rounded-xl focus:outline-none focus:border-kaili bg-white/50 focus:bg-white text-sora font-bold transition-all text-sm" /></div>
+              <div><label className="text-xs font-black text-sora/60 uppercase tracking-wider mb-2 block">Gambar (Opsional)</label><input type="file" accept="image/*" onChange={e => handleLessonImage(e.target.files[0])} className="text-sm file:mr-4 file:py-2.5 file:px-5 file:rounded-xl file:border-0 file:text-sm file:font-bold file:bg-kaili/10 file:text-kaili hover:file:bg-kaili/20 cursor-pointer" />{lessonForm.image && <img src={lessonForm.image} alt="Preview" className="h-24 mt-4 rounded-2xl object-cover border border-sora/10 shadow-sm" />}</div>
             </div>
             <div className="flex gap-3 mt-8">
-              <button onClick={() => setShowLessonModal(false)} className="flex-1 py-2.5 border border-gray-300 rounded-xl font-bold text-gray-700 hover:bg-gray-50 transition">Batal</button>
-              <button onClick={saveLesson} className="flex-1 py-2.5 bg-purple-600 text-white rounded-xl font-bold hover:bg-purple-700 transition shadow-lg shadow-purple-600/30">Simpan</button>
+              <button onClick={() => setShowLessonModal(false)} className="flex-1 py-3.5 bg-white border-2 border-sora/10 text-sora rounded-xl text-sm font-bold hover:border-kaili hover:text-kaili transition-all shadow-sm">Batal</button>
+              <button onClick={saveLesson} className="flex-1 py-3.5 bg-kaili text-white rounded-xl text-sm font-bold shadow-glow-kaili transition-all hover:-translate-y-1">Simpan</button>
             </div>
           </div>
         </div>
@@ -840,13 +870,14 @@ function AdminMateri() {
 
       {/* LATIHAN MODAL */}
       {showPracticeModal && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/50 p-4">
-          <div className="admin-glass-card rounded-3xl w-full max-w-md p-6 max-h-[90vh] overflow-y-auto shadow-2xl">
-            <h3 className="font-bold text-lg mb-4">{editPracticeIndex !== null ? "Edit Latihan" : "Tambah Latihan"}</h3>
-            <div className="space-y-4">
-              <div><label className="text-sm font-medium mb-1 block text-gray-700">Pertanyaan</label><input type="text" value={practiceForm.question} onChange={e => setPracticeForm({...practiceForm, question: e.target.value})} className="w-full border rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-purple-500/50" /></div>
+        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-sora/80 backdrop-blur-sm p-4">
+          <div className="bg-white/90 backdrop-blur-xl border border-sora/10 shadow-soft-sora rounded-3xl w-full max-w-md p-6 sm:p-8 max-h-[90vh] overflow-y-auto">
+            <h3 className="font-black text-xl text-sora mb-6">{editPracticeIndex !== null ? "Edit Latihan" : "Tambah Latihan"}</h3>
+            <div className="space-y-5">
+              <div><label className="text-xs font-black text-sora/60 uppercase tracking-wider mb-2 block">Pertanyaan</label><input type="text" value={practiceForm.question} onChange={e => setPracticeForm({...practiceForm, question: e.target.value})} className="w-full px-4 py-3 border-2 border-sora/10 rounded-xl focus:outline-none focus:border-kaili bg-white/50 focus:bg-white text-sora font-bold transition-all text-sm" /></div>
               <div>
-                <label className="text-sm font-medium mb-1 block text-gray-700">Pilihan (Termasuk jawaban benar)</label>
+                <label className="text-xs font-black text-sora/60 uppercase tracking-wider mb-2 block">Pilihan (Termasuk jawaban benar)</label>
+                <div className="space-y-2">
                 {practiceForm.options.map((opt, idx) => (
                   <input key={idx} type="text" value={opt} onChange={e => {
                     const newOpts = [...practiceForm.options];
@@ -856,15 +887,16 @@ function AdminMateri() {
                       options: newOpts,
                       answer: prev.answer === opt ? e.target.value : prev.answer,
                     }));
-                  }} className="w-full border rounded-xl px-4 py-2 text-sm mb-2 outline-none focus:ring-2 focus:ring-purple-500/50" placeholder={`Pilihan ${idx+1}`} />
+                  }} className="w-full px-4 py-3 border-2 border-sora/10 rounded-xl focus:outline-none focus:border-kaili bg-white/50 focus:bg-white text-sora font-bold transition-all text-sm" placeholder={`Pilihan ${idx+1}`} />
                 ))}
+                </div>
               </div>
               <div>
-                <label className="text-sm font-medium mb-1 block text-gray-700">Jawaban Benar</label>
+                <label className="text-xs font-black text-sora/60 uppercase tracking-wider mb-2 block">Jawaban Benar</label>
                 <select
                   value={practiceForm.answer}
                   onChange={e => setPracticeForm({...practiceForm, answer: e.target.value})}
-                  className="w-full border rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-green-500/50 font-bold bg-green-50/50 text-green-700"
+                  className="w-full px-4 py-3 border-2 border-green-500/20 rounded-xl focus:outline-none focus:border-green-500 font-bold bg-green-50/50 text-green-700 transition-all text-sm"
                 >
                   <option value="">Pilih jawaban dari opsi</option>
                   {practiceForm.options.map((opt, idx) => (
@@ -876,8 +908,8 @@ function AdminMateri() {
               </div>
             </div>
             <div className="flex gap-3 mt-8">
-              <button onClick={() => setShowPracticeModal(false)} className="flex-1 py-2.5 border border-gray-300 rounded-xl font-bold text-gray-700 hover:bg-gray-50 transition">Batal</button>
-              <button onClick={savePractice} className="flex-1 py-2.5 bg-purple-600 text-white rounded-xl font-bold hover:bg-purple-700 transition shadow-lg shadow-purple-600/30">Simpan</button>
+              <button onClick={() => setShowPracticeModal(false)} className="flex-1 py-3.5 bg-white border-2 border-sora/10 text-sora rounded-xl text-sm font-bold hover:border-kaili hover:text-kaili transition-all shadow-sm">Batal</button>
+              <button onClick={savePractice} className="flex-1 py-3.5 bg-kaili text-white rounded-xl text-sm font-bold shadow-glow-kaili transition-all hover:-translate-y-1">Simpan</button>
             </div>
           </div>
         </div>
@@ -885,12 +917,12 @@ function AdminMateri() {
 
       {/* KUIS MODAL */}
       {showQuizModal && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/50 p-4">
-          <div className="admin-glass-card rounded-3xl w-full max-w-2xl p-6 max-h-[90vh] overflow-y-auto shadow-2xl">
-            <h3 className="font-bold text-lg mb-4">{editQuiz ? "Edit Kuis" : "Tambah Kuis"}</h3>
-            <div className="space-y-4">
+        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-sora/80 backdrop-blur-sm p-4">
+          <div className="bg-white/90 backdrop-blur-xl border border-sora/10 shadow-soft-sora rounded-3xl w-full max-w-2xl p-6 sm:p-8 max-h-[90vh] overflow-y-auto">
+            <h3 className="font-black text-xl text-sora mb-6">{editQuiz ? "Edit Kuis" : "Tambah Kuis"}</h3>
+            <div className="space-y-5">
               <div>
-                <label className="text-sm font-medium mb-1 block text-gray-700">Tipe Soal</label>
+                <label className="text-xs font-black text-sora/60 uppercase tracking-wider mb-2 block">Tipe Soal</label>
                 <select
                   value={quizForm.type}
                   onChange={e => {
@@ -908,7 +940,7 @@ function AdminMateri() {
                           : "blok",
                     });
                   }}
-                  className="w-full border rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-purple-500/50"
+                  className="w-full px-4 py-3 border-2 border-sora/10 rounded-xl focus:outline-none focus:border-kaili bg-white/50 focus:bg-white text-sora font-bold transition-all text-sm"
                 >
                   <option value="multiple">Pilihan Ganda</option>
                   <option value="susun">Susun Kata</option>
@@ -917,18 +949,18 @@ function AdminMateri() {
                 </select>
               </div>
 
-              <div><label className="text-sm font-medium mb-1 block text-gray-700">Pertanyaan</label><input type="text" value={quizForm.question} onChange={e => setQuizForm({...quizForm, question: e.target.value})} className="w-full border rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-purple-500/50" /></div>
+              <div><label className="text-xs font-black text-sora/60 uppercase tracking-wider mb-2 block">Pertanyaan</label><input type="text" value={quizForm.question} onChange={e => setQuizForm({...quizForm, question: e.target.value})} className="w-full px-4 py-3 border-2 border-sora/10 rounded-xl focus:outline-none focus:border-kaili bg-white/50 focus:bg-white text-sora font-bold transition-all text-sm" /></div>
 
               {quizForm.type === "gambar" && (
                 <>
                   <div>
-                    <label className="text-sm font-medium mb-1 block text-gray-700">Gambar</label>
-                    <input type="file" accept="image/*" onChange={e => handleQuizImage(e.target.files[0])} className="text-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100" />
-                    {quizForm.image && <img src={quizForm.image} alt="Preview" className="h-32 mt-3 rounded-lg object-contain bg-gray-50 border" />}
+                    <label className="text-xs font-black text-sora/60 uppercase tracking-wider mb-2 block">Gambar</label>
+                    <input type="file" accept="image/*" onChange={e => handleQuizImage(e.target.files[0])} className="text-sm file:mr-4 file:py-2.5 file:px-5 file:rounded-xl file:border-0 file:text-sm file:font-bold file:bg-kaili/10 file:text-kaili hover:file:bg-kaili/20 cursor-pointer" />
+                    {quizForm.image && <img src={quizForm.image} alt="Preview" className="h-32 mt-4 rounded-2xl object-cover border border-sora/10 shadow-sm" />}
                   </div>
                   <div>
-                    <label className="text-sm font-medium mb-1 block text-gray-700">Tipe Jawaban Gambar</label>
-                    <select value={quizForm.answerType} onChange={e => setQuizForm({...quizForm, answerType: e.target.value})} className="w-full border rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-purple-500/50">
+                    <label className="text-xs font-black text-sora/60 uppercase tracking-wider mb-2 block">Tipe Jawaban Gambar</label>
+                    <select value={quizForm.answerType} onChange={e => setQuizForm({...quizForm, answerType: e.target.value})} className="w-full px-4 py-3 border-2 border-sora/10 rounded-xl focus:outline-none focus:border-kaili bg-white/50 focus:bg-white text-sora font-bold transition-all text-sm">
                       <option value="pilihan">Pilihan Ganda</option>
                       <option value="blok">Susun Kata</option>
                     </select>
@@ -938,8 +970,8 @@ function AdminMateri() {
 
               {quizForm.type === "sambung" && (
                 <div>
-                  <label className="text-sm font-medium mb-1 block text-gray-700">Tipe Jawaban Sambung Kalimat</label>
-                  <select value={quizForm.answerType} onChange={e => setQuizForm({...quizForm, answerType: e.target.value})} className="w-full border rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-purple-500/50">
+                  <label className="text-xs font-black text-sora/60 uppercase tracking-wider mb-2 block">Tipe Jawaban Sambung Kalimat</label>
+                  <select value={quizForm.answerType} onChange={e => setQuizForm({...quizForm, answerType: e.target.value})} className="w-full px-4 py-3 border-2 border-sora/10 rounded-xl focus:outline-none focus:border-kaili bg-white/50 focus:bg-white text-sora font-bold transition-all text-sm">
                     <option value="ketik">Ketik Jawaban</option>
                     <option value="blok">Blok Kata</option>
                   </select>
@@ -948,64 +980,68 @@ function AdminMateri() {
 
               {(quizForm.type === "multiple" || (quizForm.type === "gambar" && quizForm.answerType === "pilihan")) && (
                 <div>
-                <label className="text-sm font-medium mb-1 block text-gray-700">Pilihan Ganda</label>
+                <label className="text-xs font-black text-sora/60 uppercase tracking-wider mb-2 block">Pilihan Ganda</label>
+                <div className="space-y-2">
                 {quizForm.options.map((opt, idx) => (
                   <input key={idx} type="text" value={opt} onChange={e => {
                     const newOpts = [...quizForm.options];
                     newOpts[idx] = e.target.value;
                     setQuizForm({...quizForm, options: newOpts});
-                  }} className="w-full border rounded-xl px-4 py-2 text-sm mb-2 outline-none focus:ring-2 focus:ring-purple-500/50" placeholder={`Pilihan ${idx+1}`} />
+                  }} className="w-full px-4 py-3 border-2 border-sora/10 rounded-xl focus:outline-none focus:border-kaili bg-white/50 focus:bg-white text-sora font-bold transition-all text-sm" placeholder={`Pilihan ${idx+1}`} />
                 ))}
+                </div>
               </div>
               )}
 
               {(quizForm.type === "susun" || (quizForm.type === "sambung" && quizForm.answerType === "blok") || (quizForm.type === "gambar" && quizForm.answerType === "blok")) && (
                 <div>
-                  <label className="text-sm font-medium mb-1 block text-gray-700">Blok Kata</label>
+                  <label className="text-xs font-black text-sora/60 uppercase tracking-wider mb-2 block">Blok Kata</label>
+                  <div className="space-y-2 mb-3">
                   {quizForm.blocks.map((block, idx) => (
                     <input key={idx} type="text" value={block} onChange={e => {
                       const newBlocks = [...quizForm.blocks];
                       newBlocks[idx] = e.target.value;
                       setQuizForm({...quizForm, blocks: newBlocks});
-                    }} className="w-full border rounded-xl px-4 py-2 text-sm mb-2 outline-none focus:ring-2 focus:ring-purple-500/50" placeholder={`Blok ${idx+1}`} />
+                    }} className="w-full px-4 py-3 border-2 border-sora/10 rounded-xl focus:outline-none focus:border-kaili bg-white/50 focus:bg-white text-sora font-bold transition-all text-sm" placeholder={`Blok ${idx+1}`} />
                   ))}
-                  <button type="button" onClick={() => setQuizForm({...quizForm, blocks: [...quizForm.blocks, ""]})} className="text-sm font-bold text-purple-600 hover:text-purple-800">+ Tambah Blok</button>
+                  </div>
+                  <button type="button" onClick={() => setQuizForm({...quizForm, blocks: [...quizForm.blocks, ""]})} className="text-sm font-black text-kaili hover:text-kaili/80 uppercase tracking-wider">+ Tambah Blok</button>
 
-                  <div className="mt-4 rounded-2xl bg-gray-50 p-3">
-                    <p className="mb-2 text-sm font-semibold text-gray-700">Pilih Jawaban dari Blok</p>
-                    <div className="mb-3 flex flex-wrap gap-2">
+                  <div className="mt-6 rounded-2xl bg-sora/5 border border-sora/10 p-5">
+                    <p className="mb-3 text-xs font-black text-sora/60 uppercase tracking-wider">Pilih Jawaban dari Blok</p>
+                    <div className="mb-5 flex flex-wrap gap-2">
                       {quizForm.blocks.map((block, idx) => (
                         <button
                           key={idx}
                           type="button"
                           onClick={() => selectQuizAnswerBlock(block)}
-                          className="rounded-xl border bg-white px-3 py-2 text-sm font-semibold text-gray-700 hover:border-purple-300 hover:bg-purple-50"
+                          className="rounded-xl border-2 border-sora/10 bg-white px-4 py-2 text-sm font-bold text-sora hover:border-kaili hover:text-kaili transition-all shadow-sm"
                         >
                           {block || "Kosong"}
                         </button>
                       ))}
                     </div>
 
-                    <p className="mb-2 text-sm font-semibold text-gray-700">Jawaban Tersusun</p>
-                    <div className="flex min-h-[44px] flex-wrap gap-2 rounded-xl border bg-white p-2">
+                    <p className="mb-3 text-xs font-black text-sora/60 uppercase tracking-wider">Jawaban Tersusun</p>
+                    <div className="flex min-h-[52px] flex-wrap gap-2 rounded-xl border-2 border-sora/10 bg-white p-2">
                       {(quizForm.answerBlocks || []).length > 0 ? (
                         quizForm.answerBlocks.map((block, idx) => (
                           <button
                             key={`${block}-${idx}`}
                             type="button"
                             onClick={() => removeQuizAnswerBlock(idx)}
-                            className="rounded-xl bg-green-500 px-3 py-2 text-sm font-semibold text-white"
+                            className="rounded-xl bg-kaili px-4 py-2 text-sm font-bold text-white shadow-glow-kaili hover:-translate-y-0.5 transition-all"
                           >
                             {block} x
                           </button>
                         ))
                       ) : (
-                        <span className="px-2 py-1 text-sm text-gray-400">Belum ada blok yang dipilih</span>
+                        <span className="px-3 py-2 text-sm font-bold text-sora/40">Belum ada blok yang dipilih</span>
                       )}
                     </div>
 
                     {(quizForm.answerBlocks || []).length > 0 && (
-                      <button type="button" onClick={clearQuizBlockAnswer} className="mt-3 rounded-xl bg-red-500 px-3 py-2 text-sm font-bold text-white hover:bg-red-600">
+                      <button type="button" onClick={clearQuizBlockAnswer} className="mt-4 rounded-xl bg-red-50 text-red-500 border-2 border-red-100 px-4 py-2.5 text-sm font-bold hover:bg-red-500 hover:text-white transition-all w-full sm:w-auto">
                         Hapus Jawaban
                       </button>
                     )}
@@ -1015,8 +1051,8 @@ function AdminMateri() {
 
               {(quizForm.type === "multiple" || (quizForm.type === "gambar" && quizForm.answerType === "pilihan")) ? (
                 <div>
-                  <label className="text-sm font-medium mb-1 block text-gray-700">Jawaban Benar</label>
-                  <select value={quizForm.answer} onChange={e => setQuizForm({...quizForm, answer: e.target.value})} className="w-full border rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-green-500/50 font-bold bg-green-50/50 text-green-700">
+                  <label className="text-xs font-black text-sora/60 uppercase tracking-wider mb-2 block">Jawaban Benar</label>
+                  <select value={quizForm.answer} onChange={e => setQuizForm({...quizForm, answer: e.target.value})} className="w-full px-4 py-3 border-2 border-green-500/20 rounded-xl focus:outline-none focus:border-green-500 font-bold bg-green-50/50 text-green-700 transition-all text-sm">
                     <option value="">Pilih jawaban benar</option>
                   {quizForm.options.map((opt, idx) => (
                       <option key={idx} value={opt}>{idx+1}. {opt || "Kosong"}</option>
@@ -1024,39 +1060,38 @@ function AdminMateri() {
                 </select>
               </div>
               ) : (quizForm.type === "sambung" && quizForm.answerType === "ketik") ? (
-                <div><label className="text-sm font-medium mb-1 block text-gray-700">Jawaban Benar</label><input type="text" value={quizForm.answer} onChange={e => setQuizForm({...quizForm, answer: e.target.value})} className="w-full border rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-green-500/50 text-green-700 font-bold bg-green-50/50" placeholder="Contoh: Kata benda" /></div>
+                <div><label className="text-xs font-black text-sora/60 uppercase tracking-wider mb-2 block">Jawaban Benar</label><input type="text" value={quizForm.answer} onChange={e => setQuizForm({...quizForm, answer: e.target.value})} className="w-full px-4 py-3 border-2 border-green-500/20 rounded-xl focus:outline-none focus:border-green-500 font-bold bg-green-50/50 text-green-700 transition-all text-sm" placeholder="Contoh: Kata benda" /></div>
               ) : (
                 <div>
-                  <label className="text-sm font-medium mb-1 block text-gray-700">Jawaban Benar</label>
-                  <div className="w-full rounded-xl border bg-green-50/50 px-4 py-2.5 text-sm font-bold text-green-700">
+                  <label className="text-xs font-black text-sora/60 uppercase tracking-wider mb-2 block">Jawaban Benar</label>
+                  <div className="w-full rounded-xl border-2 border-green-500/20 bg-green-50/50 px-4 py-3 text-sm font-bold text-green-700">
                     {quizForm.answer || "Pilih blok jawaban di atas"}
                   </div>
                 </div>
               )}
             </div>
             <div className="flex gap-3 mt-8">
-              <button onClick={() => setShowQuizModal(false)} className="flex-1 py-2.5 border border-gray-300 rounded-xl font-bold text-gray-700 hover:bg-gray-50 transition">Batal</button>
-              <button onClick={saveQuiz} className="flex-1 py-2.5 bg-purple-600 text-white rounded-xl font-bold hover:bg-purple-700 transition shadow-lg shadow-purple-600/30">Simpan</button>
+              <button onClick={() => setShowQuizModal(false)} className="flex-1 py-3.5 bg-white border-2 border-sora/10 text-sora rounded-xl text-sm font-bold hover:border-kaili hover:text-kaili transition-all shadow-sm">Batal</button>
+              <button onClick={saveQuiz} className="flex-1 py-3.5 bg-kaili text-white rounded-xl text-sm font-bold shadow-glow-kaili transition-all hover:-translate-y-1">Simpan</button>
             </div>
           </div>
         </div>
       )}
 
-      <BottomNavAdmin />
       {/* BAB MODAL */}
       {showBabModal && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/50 p-4">
-          <div className="admin-glass-card rounded-3xl w-full max-w-md p-6 shadow-2xl">
-            <h3 className="font-bold text-lg mb-4">{babForm.isEdit ? "Edit Bab" : "Tambah Bab"}</h3>
-            <div className="space-y-4">
-              <div><label className="text-sm font-medium mb-1 block text-gray-700">Key (Contoh: bab4)</label><input type="text" value={babForm.key} disabled={babForm.isEdit} onChange={e => setBabForm({...babForm, key: e.target.value})} className="w-full border rounded-xl px-4 py-2 text-sm outline-none focus:ring-2 focus:ring-purple-500/50 disabled:bg-gray-100" /></div>
-              <div><label className="text-sm font-medium mb-1 block text-gray-700">Label (Contoh: BAB 4)</label><input type="text" value={babForm.label} onChange={e => setBabForm({...babForm, label: e.target.value})} className="w-full border rounded-xl px-4 py-2 text-sm outline-none focus:ring-2 focus:ring-purple-500/50" /></div>
-              <div><label className="text-sm font-medium mb-1 block text-gray-700">Title</label><input type="text" value={babForm.title} onChange={e => setBabForm({...babForm, title: e.target.value})} className="w-full border rounded-xl px-4 py-2 text-sm outline-none focus:ring-2 focus:ring-purple-500/50" /></div>
-              <div><label className="text-sm font-medium mb-1 block text-gray-700">Description</label><input type="text" value={babForm.description} onChange={e => setBabForm({...babForm, description: e.target.value})} className="w-full border rounded-xl px-4 py-2 text-sm outline-none focus:ring-2 focus:ring-purple-500/50" /></div>
+        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-sora/80 backdrop-blur-sm p-4">
+          <div className="bg-white/90 backdrop-blur-xl border border-sora/10 shadow-soft-sora rounded-3xl w-full max-w-md p-6 sm:p-8">
+            <h3 className="font-black text-xl text-sora mb-6">{babForm.isEdit ? "Edit Bab" : "Tambah Bab"}</h3>
+            <div className="space-y-5">
+              <div><label className="text-xs font-black text-sora/60 uppercase tracking-wider mb-2 block">Key (Contoh: bab4)</label><input type="text" value={babForm.key} disabled={babForm.isEdit} onChange={e => setBabForm({...babForm, key: e.target.value})} className="w-full px-4 py-3 border-2 border-sora/10 rounded-xl focus:outline-none focus:border-kaili bg-white/50 focus:bg-white text-sora font-bold transition-all text-sm disabled:opacity-50 disabled:cursor-not-allowed" /></div>
+              <div><label className="text-xs font-black text-sora/60 uppercase tracking-wider mb-2 block">Label (Contoh: BAB 4)</label><input type="text" value={babForm.label} onChange={e => setBabForm({...babForm, label: e.target.value})} className="w-full px-4 py-3 border-2 border-sora/10 rounded-xl focus:outline-none focus:border-kaili bg-white/50 focus:bg-white text-sora font-bold transition-all text-sm" /></div>
+              <div><label className="text-xs font-black text-sora/60 uppercase tracking-wider mb-2 block">Title</label><input type="text" value={babForm.title} onChange={e => setBabForm({...babForm, title: e.target.value})} className="w-full px-4 py-3 border-2 border-sora/10 rounded-xl focus:outline-none focus:border-kaili bg-white/50 focus:bg-white text-sora font-bold transition-all text-sm" /></div>
+              <div><label className="text-xs font-black text-sora/60 uppercase tracking-wider mb-2 block">Description</label><input type="text" value={babForm.description} onChange={e => setBabForm({...babForm, description: e.target.value})} className="w-full px-4 py-3 border-2 border-sora/10 rounded-xl focus:outline-none focus:border-kaili bg-white/50 focus:bg-white text-sora font-bold transition-all text-sm" /></div>
             </div>
             <div className="flex gap-3 mt-8">
-              <button onClick={() => setShowBabModal(false)} className="flex-1 py-2.5 border border-gray-300 rounded-xl font-bold text-gray-700 hover:bg-gray-50 transition">Batal</button>
-              <button onClick={saveBab} className="flex-1 py-2.5 bg-purple-600 text-white rounded-xl font-bold hover:bg-purple-700 transition shadow-lg shadow-purple-600/30">Simpan</button>
+              <button onClick={() => setShowBabModal(false)} className="flex-1 py-3.5 bg-white border-2 border-sora/10 text-sora rounded-xl text-sm font-bold hover:border-kaili hover:text-kaili transition-all shadow-sm">Batal</button>
+              <button onClick={saveBab} className="flex-1 py-3.5 bg-kaili text-white rounded-xl text-sm font-bold shadow-glow-kaili transition-all hover:-translate-y-1">Simpan</button>
             </div>
           </div>
         </div>
@@ -1064,17 +1099,17 @@ function AdminMateri() {
 
       {/* LEVEL MODAL */}
       {showLevelModal && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/50 p-4">
-          <div className="admin-glass-card rounded-3xl w-full max-w-md p-6 shadow-2xl">
-            <h3 className="font-bold text-lg mb-4">{levelForm.isEdit ? "Edit Level" : "Tambah Level"}</h3>
-            <div className="space-y-4">
-              <div><label className="text-sm font-medium mb-1 block text-gray-700">Key (Contoh: kata-sifat)</label><input type="text" value={levelForm.key} disabled={levelForm.isEdit} onChange={e => setLevelForm({...levelForm, key: e.target.value})} className="w-full border rounded-xl px-4 py-2 text-sm outline-none focus:ring-2 focus:ring-purple-500/50 disabled:bg-gray-100" /></div>
-              <div><label className="text-sm font-medium mb-1 block text-gray-700">Title (Contoh: Kata Sifat)</label><input type="text" value={levelForm.title} onChange={e => setLevelForm({...levelForm, title: e.target.value})} className="w-full border rounded-xl px-4 py-2 text-sm outline-none focus:ring-2 focus:ring-purple-500/50" /></div>
-              <div><label className="text-sm font-medium mb-1 block text-gray-700">Description</label><input type="text" value={levelForm.description} onChange={e => setLevelForm({...levelForm, description: e.target.value})} className="w-full border rounded-xl px-4 py-2 text-sm outline-none focus:ring-2 focus:ring-purple-500/50" /></div>
+        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-sora/80 backdrop-blur-sm p-4">
+          <div className="bg-white/90 backdrop-blur-xl border border-sora/10 shadow-soft-sora rounded-3xl w-full max-w-md p-6 sm:p-8">
+            <h3 className="font-black text-xl text-sora mb-6">{levelForm.isEdit ? "Edit Level" : "Tambah Level"}</h3>
+            <div className="space-y-5">
+              <div><label className="text-xs font-black text-sora/60 uppercase tracking-wider mb-2 block">Key (Contoh: kata-sifat)</label><input type="text" value={levelForm.key} disabled={levelForm.isEdit} onChange={e => setLevelForm({...levelForm, key: e.target.value})} className="w-full px-4 py-3 border-2 border-sora/10 rounded-xl focus:outline-none focus:border-kaili bg-white/50 focus:bg-white text-sora font-bold transition-all text-sm disabled:opacity-50 disabled:cursor-not-allowed" /></div>
+              <div><label className="text-xs font-black text-sora/60 uppercase tracking-wider mb-2 block">Title (Contoh: Kata Sifat)</label><input type="text" value={levelForm.title} onChange={e => setLevelForm({...levelForm, title: e.target.value})} className="w-full px-4 py-3 border-2 border-sora/10 rounded-xl focus:outline-none focus:border-kaili bg-white/50 focus:bg-white text-sora font-bold transition-all text-sm" /></div>
+              <div><label className="text-xs font-black text-sora/60 uppercase tracking-wider mb-2 block">Description</label><input type="text" value={levelForm.description} onChange={e => setLevelForm({...levelForm, description: e.target.value})} className="w-full px-4 py-3 border-2 border-sora/10 rounded-xl focus:outline-none focus:border-kaili bg-white/50 focus:bg-white text-sora font-bold transition-all text-sm" /></div>
             </div>
             <div className="flex gap-3 mt-8">
-              <button onClick={() => setShowLevelModal(false)} className="flex-1 py-2.5 border border-gray-300 rounded-xl font-bold text-gray-700 hover:bg-gray-50 transition">Batal</button>
-              <button onClick={saveLevel} className="flex-1 py-2.5 bg-purple-600 text-white rounded-xl font-bold hover:bg-purple-700 transition shadow-lg shadow-purple-600/30">Simpan</button>
+              <button onClick={() => setShowLevelModal(false)} className="flex-1 py-3.5 bg-white border-2 border-sora/10 text-sora rounded-xl text-sm font-bold hover:border-kaili hover:text-kaili transition-all shadow-sm">Batal</button>
+              <button onClick={saveLevel} className="flex-1 py-3.5 bg-kaili text-white rounded-xl text-sm font-bold shadow-glow-kaili transition-all hover:-translate-y-1">Simpan</button>
             </div>
           </div>
         </div>

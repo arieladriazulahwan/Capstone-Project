@@ -1,5 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
-import { AlertCircle, CheckCircle2, Info, X, Flame } from "lucide-react";
+import { FiAlertCircle, FiCheckCircle, FiInfo, FiX } from "react-icons/fi";
+import { FaFire } from "react-icons/fa";
+
 
 export const ToastContext = createContext(null);
 
@@ -45,7 +47,7 @@ const getToastType = (message) => {
 
 const styles = {
   success: {
-    icon: CheckCircle2,
+    icon: FiCheckCircle,
     bg: "bg-white",
     border: "border-green-200",
     text: "text-green-800",
@@ -53,7 +55,7 @@ const styles = {
     bar: "bg-gradient-to-r from-green-400 to-emerald-500",
   },
   error: {
-    icon: AlertCircle,
+    icon: FiAlertCircle,
     bg: "bg-white",
     border: "border-red-200",
     text: "text-red-800",
@@ -61,7 +63,7 @@ const styles = {
     bar: "bg-gradient-to-r from-red-400 to-rose-500",
   },
   info: {
-    icon: Info,
+    icon: FiInfo,
     bg: "bg-white",
     border: "border-blue-200",
     text: "text-blue-800",
@@ -69,7 +71,7 @@ const styles = {
     bar: "bg-gradient-to-r from-blue-400 to-sky-500",
   },
   warning: {
-    icon: Flame,
+    icon: FaFire,
     bg: "bg-white",
     border: "border-orange-200",
     text: "text-orange-800",
@@ -156,7 +158,7 @@ function ToastProvider({ children }) {
                   className="text-gray-400 hover:text-gray-600"
                   aria-label="Tutup notifikasi"
                 >
-                  <X size={18} />
+                  <FiX size={18} />
                 </button>
               </div>
             </div>
