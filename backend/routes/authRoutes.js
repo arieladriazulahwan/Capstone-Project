@@ -15,5 +15,6 @@ router.post("/complete-bab", authMiddleware, authController.completeBab);
 router.put("/dialect", authMiddleware, authController.updateDialect);
 router.put("/add-xp", authMiddleware, authController.addXP);
 router.get("/leaderboard", authMiddleware, authController.getLeaderboard);
+router.post("/onboarding/complete", authMiddleware, authController.completeOnboarding);
 
 module.exports = router;

@@ -1,7 +1,7 @@
 const createJsonDataTables = async (db) => {
   const queries = [
     `CREATE TABLE IF NOT EXISTS vocab_entries (
-      id INT PRIMARY KEY,
+      id BIGINT PRIMARY KEY,
       subject VARCHAR(255),
       indonesia LONGTEXT NOT NULL,
       category VARCHAR(255),
@@ -11,7 +11,7 @@ const createJsonDataTables = async (db) => {
     )`,
     `CREATE TABLE IF NOT EXISTS vocab_translations (
       id INT AUTO_INCREMENT PRIMARY KEY,
-      vocab_id INT NOT NULL,
+      vocab_id BIGINT NOT NULL,
       dialect VARCHAR(50) NOT NULL,
       word LONGTEXT NOT NULL,
       created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -55,7 +55,7 @@ const createJsonDataTables = async (db) => {
     )`,
     `CREATE TABLE IF NOT EXISTS quiz_items (
       id INT AUTO_INCREMENT PRIMARY KEY,
-      source_id INT,
+      source_id BIGINT,
       dialect VARCHAR(50) NOT NULL,
       bab VARCHAR(50) NOT NULL,
       item_order INT NOT NULL DEFAULT 0,

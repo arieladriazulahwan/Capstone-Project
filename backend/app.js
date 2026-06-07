@@ -11,7 +11,6 @@ const adminRoutes = require("./routes/adminRoutes");
 const createJsonDataTables = require("./utils/jsonDataTables");
 const { seedJsonData, logSeedSummary } = require("./scripts/seedJsonData");
 
-
 const app = express();
 const defaultProgressString = () =>
   JSON.stringify({
@@ -247,8 +246,72 @@ const ensureExistingStudentData = async () => {
 const startServer = async () => {
   try {
     await createTables();
+
+    // 🛠️ PROSES MIGRASI BIGINT AMAN DARI FOREIGN KEY CONSTRAINT
+    console.log("⏳ Menyiapkan migrasi kolom ID ke BIGINT...");
+
+    try {
+      // 1. Cari tahu nama constraint dan kolom penghubung secara dinamis sebelum di-drop
+      const [fkData] = await db.promise().query(
+        `SELECT CONSTRAINT_NAME, COLUMN_NAME 
+         FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE 
+         WHERE TABLE_SCHEMA = DATABASE() 
+           AND TABLE_NAME = 'vocab_translations' 
+           AND REFERENCED_TABLE_NAME = 'vocab_entries'`
+      );
+
+      let fkName = "vocab_translations_ibfk_1";
+      let childColumnName = "vocab_entry_id"; // default fallback jika query kosong
+
+      if (fkData.length > 0) {
+        fkName = fkData[0].CONSTRAINT_NAME;
+        childColumnName = fkData[0].COLUMN_NAME;
+      }
+
+      // 2. Drop (Jatuhkan) Foreign Key constraint secara fisik
+      try {
+        await db.promise().query(`ALTER TABLE vocab_translations DROP FOREIGN KEY \`${fkName}\``);
+        console.log(`✅ Constraint ${fkName} berhasil di-drop.`);
+      } catch (dropErr) {
+        console.log(`ℹ️ Constraint ${fkName} mungkin sudah tidak ada atau di-drop, melanjutkan migrasi...`);
+      }
+
+      // 3. Ubah tipe data tabel utama (parent table)
+      await db.promise().query("ALTER TABLE vocab_entries MODIFY COLUMN id BIGINT NOT NULL");
+      console.log("✅ Kolom id pada tabel vocab_entries berhasil diubah ke BIGINT.");
+
+      // 4. Ubah tipe data tabel anak (child table)
+      await db.promise().query(`ALTER TABLE vocab_translations MODIFY COLUMN \`${childColumnName}\` BIGINT NOT NULL`);
+      console.log(`✅ Kolom child '${childColumnName}' pada tabel vocab_translations berhasil diubah ke BIGINT.`);
+
+      // 5. Restore (Bangun kembali) Foreign Key Constraint dengan ON DELETE CASCADE
+      await db.promise().query(`
+        ALTER TABLE vocab_translations 
+        ADD CONSTRAINT \`${fkName}\` 
+        FOREIGN KEY (\`${childColumnName}\`) 
+        REFERENCES vocab_entries(id) 
+        ON DELETE CASCADE
+      `);
+      console.log(`✅ Constraint ${fkName} berhasil dibangun kembali dengan ON DELETE CASCADE.`);
+
+      // 6. Ubah tipe data source_id pada quiz_items (untuk menampung timestamp besar)
+      try {
+        await db.promise().query("ALTER TABLE quiz_items MODIFY COLUMN source_id BIGINT");
+        console.log("✅ Kolom source_id pada tabel quiz_items berhasil diubah ke BIGINT.");
+      } catch (err) {
+        console.log("ℹ️ Tabel quiz_items mungkin belum ada atau tidak memiliki source_id, melanjutkan...");
+      }
+
+      console.log("✅ Keseluruhan struktur tabel database berhasil disesuaikan ke BIGINT dengan aman.");
+    } catch (migErr) {
+      console.error("❌ Gagal melakukan migrasi BIGINT:", migErr);
+      throw migErr; // Lempar error agar ditangkap oleh catch utama startServer
+    }
+
+    // Jalankan Seeder
     const seedSummary = await seedJsonData();
     logSeedSummary(seedSummary);
+
     await seedAdmin();
     const port = process.env.PORT || 3000;
     app.listen(port, () => {

@@ -450,7 +450,7 @@ exports.getProfile = async (req, res) => {
   try {
     const [users] = await db.promise().query(
       `SELECT u.id, u.name, u.username, u.role, u.created_at, u.last_login,
-        sp.xp, sp.level, sp.title, sp.streak, sp.dialect
+        sp.xp, sp.level, sp.title, sp.streak, sp.dialect, sp.onboarding_completed
       FROM users u
       LEFT JOIN student_profiles sp ON u.id = sp.user_id
       WHERE u.id = ?`,
@@ -508,6 +508,7 @@ exports.getProfile = async (req, res) => {
         title: profile.title || "Pemula",
         streak: profile.streak || 0,
         dialect: currentDialect,
+        onboarding_completed: !!profile.onboarding_completed,
         progress,
         progressByDialect,
         total_quizzes: Number(stats.total_quizzes) || 0,
@@ -666,6 +667,18 @@ exports.completeBab = (req, res) => {
     score,
     total,
     dialect?.toLowerCase()
+  );
+};
+
+exports.completeOnboarding = (req, res) => {
+  const userId = req.user.id;
+  db.query(
+    "UPDATE student_profiles SET onboarding_completed = TRUE WHERE user_id = ?",
+    [userId],
+    (err) => {
+      if (err) return res.status(500).json({ message: "Gagal menyimpan status onboarding", error: err });
+      res.json({ message: "Onboarding selesai" });
+    }
   );
 };
 
