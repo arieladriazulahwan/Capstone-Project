@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { FiBookOpen, FiChevronRight, FiFileText, FiHome, FiUsers, FiZap } from "react-icons/fi";
+import { FiBookOpen, FiChevronRight, FiFileText, FiHome, FiUsers, FiZap, FiTrendingUp } from "react-icons/fi";
 import { FaGraduationCap, FaUserCog } from "react-icons/fa";
 
 import Navbar from "../components/Navbar";
