@@ -6,7 +6,7 @@ const db = require("../config/db");
 // ============================================
 // 📂 FILE PATHS
 // ============================================
-const vocabPath = path.join(__dirname, "../data/vocab.json");
+const vocabPath = path.join(__dirname, "../data/vocab1.json");
 const quizPath = path.join(__dirname, "../data/quiz.json");
 const lessonDir = path.join(__dirname, "../data/lesson");
 const practiceDir = path.join(__dirname, "../data/practice");

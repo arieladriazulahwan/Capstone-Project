@@ -4,7 +4,7 @@ const fs = require("fs");
 const fsPromises = require("fs").promises;
 const path = require("path");
 
-const vocabPath = path.join(__dirname, "../data/vocab.json");
+const vocabPath = path.join(__dirname, "../data/vocab1.json");
 
 // ➕ TAMBAH FAVORIT
 exports.addFavorite = (req, res) => {

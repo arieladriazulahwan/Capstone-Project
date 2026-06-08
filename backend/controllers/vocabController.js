@@ -1,8 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const filePath = path.join(__dirname, "../data/vocab.json");
-const extraVocabPath = path.join(__dirname, "../data/vocab1.json");
+const filePath = path.join(__dirname, "../data/vocab1.json");
 const validDialects = ["ledo", "rai"];
 
 const descWords = [
@@ -133,7 +132,7 @@ const loadDictionary = () => {
   indoToKailiMap = new Map();
   kailiToIndoMap = new Map();
 
-  const data = [...readJsonFile(filePath), ...readJsonFile(extraVocabPath)];
+  const data = readJsonFile(filePath);
 
   data.forEach((item) => {
     const indoParts = splitMeaningParts(item.indonesia);
