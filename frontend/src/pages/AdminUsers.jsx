@@ -378,7 +378,7 @@ function AdminUsers() {
       {/* ============ MODAL TAMBAH / EDIT ============ */}
       {showModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-sora/80 backdrop-blur-sm p-4">
-          <div className="bg-white/90 backdrop-blur-xl border border-sora/10 shadow-soft-sora rounded-3xl w-full max-w-md">
+          <div className="bg-white/90 backdrop-blur-xl border border-sora/10 shadow-soft-sora rounded-3xl w-full max-w-md max-h-[90vh] overflow-y-auto custom-scrollbar">
             <div className="p-6 sm:p-8">
               <h3 className="text-xl font-black text-sora mb-6">
                 <div className="flex items-center gap-2">{editItem ? <><FiEdit3 size={24} className="text-kaili" /> Edit Pengguna</> : <><FiPlus size={24} className="text-kaili" /> Tambah Pengguna</>}</div>
@@ -487,7 +487,7 @@ function AdminUsers() {
       {/* ============ MODAL RESET PASSWORD ============ */}
       {showResetModal && resetTarget && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-sora/80 backdrop-blur-sm p-4">
-          <div className="bg-white/90 backdrop-blur-xl border border-sora/10 shadow-soft-sora rounded-3xl w-full max-w-sm">
+          <div className="bg-white/90 backdrop-blur-xl border border-sora/10 shadow-soft-sora rounded-3xl w-full max-w-sm max-h-[90vh] overflow-y-auto custom-scrollbar">
             <div className="p-6 sm:p-8">
                 <h3 className="text-xl font-black text-sora mb-1 flex items-center gap-2">
                   <FiKey size={24} className="text-kaili" /> Reset Password

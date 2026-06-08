@@ -57,26 +57,7 @@ function Login() {
           </div>
         </button>
 
-        {/* Admin Card */}
-        <button
-          type="button"
-          onClick={() => navigate("/login/admin")}
-          className="group relative overflow-hidden rounded-[2rem] border-2 border-transparent bg-white p-6 text-left shadow-soft-sora transition-all hover:border-purple-400 hover:bg-purple-50 hover:shadow-xl btn-bouncy w-full"
-        >
-          <div className="absolute -right-6 -top-6 h-32 w-32 rounded-full bg-purple-500/10 transition-transform duration-500 group-hover:scale-150"></div>
-          <div className="relative flex items-center gap-6">
-            <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-purple-600 text-3xl font-black text-white shadow-md transition-transform duration-300 group-hover:scale-110">
-              A
-            </span>
-            <div className="flex-1">
-              <p className="text-xl font-black text-sora mb-1">Admin Panel</p>
-              <p className="text-sm text-sora/70 font-medium">Kelola sistem, pengguna, dan data master Sora Kaili.</p>
-            </div>
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-purple-100 text-purple-600 transition-all duration-300 group-hover:translate-x-1 group-hover:bg-purple-600 group-hover:text-white">
-              →
-            </div>
-          </div>
-        </button>
+
       </div>
 
     </AuthPageShell>

@@ -709,7 +709,7 @@ function AdminMateri() {
                         </div>
                         {filteredMateri.length === 0 ? <div className="text-center p-10 font-bold text-sora/50">Belum ada materi untuk level ini</div> : (
                           <div className="overflow-x-auto rounded-2xl border border-sora/10">
-                            <table className="w-full text-sm text-sora">
+                            <table className="w-full min-w-[760px] text-sm text-sora">
                               <thead className="bg-sora/5 border-b border-sora/10">
                                 <tr>
                                   <th className="px-5 py-4 text-center font-black text-sora/60 uppercase tracking-wider text-xs w-24">Urutan</th>
@@ -753,7 +753,7 @@ function AdminMateri() {
                         </div>
                         {filteredPractices.length === 0 ? <div className="text-center p-10 font-bold text-sora/50">Belum ada latihan untuk level ini</div> : (
                           <div className="overflow-x-auto rounded-2xl border border-sora/10">
-                            <table className="w-full text-sm text-sora">
+                            <table className="w-full min-w-[760px] text-sm text-sora">
                               <thead className="bg-sora/5 border-b border-sora/10">
                                 <tr>
                                   <th className="px-5 py-4 text-center font-black text-sora/60 uppercase tracking-wider text-xs w-24">Urutan</th>
@@ -797,7 +797,7 @@ function AdminMateri() {
                         </div>
                         {filteredQuizzes.length === 0 ? <div className="text-center p-10 font-bold text-sora/50">Belum ada soal kuis untuk level ini</div> : (
                           <div className="overflow-x-auto rounded-2xl border border-sora/10">
-                            <table className="w-full text-sm text-sora">
+                            <table className="w-full min-w-[760px] text-sm text-sora">
                               <thead className="bg-sora/5 border-b border-sora/10">
                                 <tr>
                                   <th className="px-5 py-4 text-center font-black text-sora/60 uppercase tracking-wider text-xs w-24">Urutan</th>
@@ -853,7 +853,7 @@ function AdminMateri() {
       {/* MATERI MODAL */}
       {showLessonModal && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center bg-sora/80 backdrop-blur-sm p-4">
-          <div className="bg-white/90 backdrop-blur-xl border border-sora/10 shadow-soft-sora rounded-3xl w-full max-w-md p-6 sm:p-8">
+          <div className="bg-white/90 backdrop-blur-xl border border-sora/10 shadow-soft-sora rounded-3xl w-full max-w-md p-6 sm:p-8 max-h-[90vh] overflow-y-auto custom-scrollbar">
             <h3 className="font-black text-xl text-sora mb-6">{editLessonIndex !== null ? "Edit Materi" : "Tambah Materi"}</h3>
             <div className="space-y-5">
               <div><label className="text-xs font-black text-sora/60 uppercase tracking-wider mb-2 block">Indonesia</label><input type="text" value={lessonForm.indo} onChange={e => setLessonForm({...lessonForm, indo: e.target.value})} className="w-full px-4 py-3 border-2 border-sora/10 rounded-xl focus:outline-none focus:border-kaili bg-white/50 focus:bg-white text-sora font-bold transition-all text-sm" /></div>

@@ -230,7 +230,7 @@ function Kamus() {
     <div className="flex h-screen overflow-hidden genz-bg text-sora">
       <Sidebar role="siswa" />
 
-      <div className="flex-1 flex flex-col pb-20 md:pb-0">
+      <div className="flex-1 flex flex-col pb-20 md:pb-0 overflow-y-auto custom-scrollbar">
         <Navbar user={user} />
 
         <main className="flex-1 px-4 py-6 flex justify-center">

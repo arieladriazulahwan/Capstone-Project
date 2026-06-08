@@ -189,7 +189,7 @@ function Practice() {
             Soal {index + 1} / {data.length}
           </p>
 
-          <h2 className="text-xl font-black text-sora mb-5">{current.question}</h2>
+          <h2 className="text-lg sm:text-xl font-black text-sora mb-5 leading-snug">{current.question}</h2>
 
           {current.image && (
             <img
@@ -201,24 +201,24 @@ function Practice() {
 
           <div className="grid grid-cols-2 gap-3">
             {options.map((option, i) => {
-              let btnClass = "student-answer-button p-4 bg-white border-2 border-sora/10 shadow-sm rounded-3xl font-black text-lg text-sora transition-all btn-bouncy relative overflow-hidden flex items-center justify-center text-center hover:border-kaili";
+              let btnClass = "student-answer-button p-3 sm:p-4 bg-white border-2 border-sora/10 shadow-sm rounded-2xl sm:rounded-3xl font-bold text-sm sm:text-base text-sora transition-all btn-bouncy relative overflow-hidden flex items-center justify-center text-center hover:border-kaili leading-snug break-words";
 
               if (isEvaluating) {
                 if (selectedOption === option) {
                   if (feedback === "correct") {
-                    btnClass = "p-4 bg-green-500 border-2 border-green-500 rounded-3xl font-black text-lg text-white shadow-soft-sora relative overflow-hidden flex items-center justify-center text-center";
+                    btnClass = "p-3 sm:p-4 bg-green-500 border-2 border-green-500 rounded-2xl sm:rounded-3xl font-bold text-sm sm:text-base text-white shadow-soft-sora relative overflow-hidden flex items-center justify-center text-center leading-snug break-words";
                   } else if (feedback === "wrong") {
-                    btnClass = "p-4 bg-red-500 border-2 border-red-500 rounded-3xl font-black text-lg text-white animate-shake-x relative overflow-hidden flex items-center justify-center text-center";
+                    btnClass = "p-3 sm:p-4 bg-red-500 border-2 border-red-500 rounded-2xl sm:rounded-3xl font-bold text-sm sm:text-base text-white animate-shake-x relative overflow-hidden flex items-center justify-center text-center leading-snug break-words";
                   } else {
                     // Selected state before evaluating
-                    btnClass = "p-4 bg-white border-2 border-kaili shadow rounded-3xl font-black text-lg text-sora scale-95 flex items-center justify-center text-center";
+                    btnClass = "p-3 sm:p-4 bg-white border-2 border-kaili shadow rounded-2xl sm:rounded-3xl font-bold text-sm sm:text-base text-sora scale-95 flex items-center justify-center text-center leading-snug break-words";
                   }
                 } else if (option === correctOption && feedback === "wrong") {
                   // Color hinting for the actual correct option when user chose wrong
-                  btnClass = "p-4 bg-green-50 border-2 border-green-500 rounded-3xl font-black text-lg text-green-700 shadow-soft-sora shadow-glow-kaili flex items-center justify-center text-center";
+                  btnClass = "p-3 sm:p-4 bg-green-50 border-2 border-green-500 rounded-2xl sm:rounded-3xl font-bold text-sm sm:text-base text-green-700 shadow-soft-sora shadow-glow-kaili flex items-center justify-center text-center leading-snug break-words";
                 } else {
                   // Unselected options during evaluation
-                  btnClass = "p-4 bg-sora/5 border-2 border-transparent rounded-3xl font-bold text-lg text-sora/40 opacity-60 flex items-center justify-center text-center";
+                  btnClass = "p-3 sm:p-4 bg-sora/5 border-2 border-transparent rounded-2xl sm:rounded-3xl font-bold text-sm sm:text-base text-sora/40 opacity-60 flex items-center justify-center text-center leading-snug break-words";
                 }
               }
 

@@ -121,7 +121,7 @@ function BabLevels() {
   };
 
   return (
-    <div className="genz-bg h-screen overflow-hidden text-sora">
+    <div className="genz-bg h-screen overflow-y-auto custom-scrollbar text-sora">
       <Navbar showBackButton backTo="/level" />
 
       <main className="p-4 max-w-xl mx-auto pb-20">
