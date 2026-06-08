@@ -82,7 +82,7 @@ function ProtectedRoute({ children, allowedRole }) {
 
   if (status === "checking") {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50/80">
+      <div className="min-h-[100dvh] flex items-center justify-center bg-gray-50/80">
         <div className="flex flex-col items-center gap-3">
           <div className="w-9 h-9 border-[3px] border-green-200 border-t-green-500 rounded-full animate-spin" />
           <p className="text-sm text-gray-400 font-medium animate-pulse">

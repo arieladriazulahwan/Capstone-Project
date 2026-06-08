@@ -16,7 +16,7 @@ function AuthPageShell({
   ];
 
   return (
-    <div className="relative min-h-screen overflow-hidden genz-bg px-4 py-8 flex items-center justify-center">
+    <div className="relative min-h-[100dvh] overflow-hidden genz-bg px-4 py-8 flex items-center justify-center">
       <div className="pointer-events-none absolute left-8 top-16 h-48 w-48 rounded-full bg-sora/10 blur-3xl landing-float"></div>
       <div className="pointer-events-none absolute bottom-16 right-8 h-64 w-64 rounded-full bg-kaili/15 blur-3xl landing-float-slow"></div>
 

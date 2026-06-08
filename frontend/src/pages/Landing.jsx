@@ -40,7 +40,7 @@ function Landing() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen genz-bg text-sora font-sans selection:bg-kaili/30 overflow-x-hidden relative">
+    <div className="min-h-[100dvh] genz-bg text-sora font-sans selection:bg-kaili/30 overflow-x-hidden relative">
 
 
       {/* HERO SECTION */}

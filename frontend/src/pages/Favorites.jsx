@@ -25,10 +25,10 @@ function Favorites() {
   }, []);
 
   return (
-    <div className="genz-bg flex h-screen overflow-hidden text-sora">
+    <div className="genz-bg flex h-[100dvh] overflow-hidden text-sora">
       <Sidebar role="siswa" />
 
-      <div className="flex-1 h-screen overflow-y-auto custom-scrollbar relative">
+      <div className="flex-1 h-[100dvh] overflow-y-auto custom-scrollbar relative">
         <Navbar />
 
         <main className="flex-1 px-4 py-6 flex justify-center">

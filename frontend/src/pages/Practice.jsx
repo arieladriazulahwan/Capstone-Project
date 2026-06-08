@@ -88,7 +88,7 @@ function Practice() {
 
   if (data.length === 0) {
     return (
-      <div className="flex h-screen overflow-hidden genz-bg text-sora">
+      <div className="flex h-[100dvh] overflow-hidden genz-bg text-sora">
         <Navbar showBackButton backTo={lessonPath} />
         <main className="p-5 max-w-xl mx-auto space-y-5 overflow-y-auto overflow-x-hidden flex-1">
           <Skeleton className="h-32 w-full rounded-3xl" />
@@ -135,7 +135,7 @@ function Practice() {
 
   if (isCompleted) {
     return (
-      <div className="h-screen overflow-hidden genz-bg text-sora">
+      <div className="h-[100dvh] overflow-hidden genz-bg text-sora">
         <Navbar showBackButton backTo={lessonPath} />
 
         <main className="p-5 max-w-xl mx-auto overflow-y-auto overflow-x-hidden flex-1">
@@ -171,7 +171,7 @@ function Practice() {
   }
 
   return (
-    <div className="h-screen overflow-hidden genz-bg text-sora">
+    <div className="h-[100dvh] overflow-hidden genz-bg text-sora">
       <Navbar showBackButton backTo={lessonPath} />
 
       <main className="p-5 max-w-xl mx-auto overflow-y-auto overflow-x-hidden flex-1">

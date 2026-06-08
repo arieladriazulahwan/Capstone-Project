@@ -39,7 +39,7 @@ function Lesson() {
   }, [bab, dialect, level, levelInfo?.title]);
 
   return (
-    <div className="h-screen overflow-hidden genz-bg text-sora flex flex-col">
+    <div className="h-[100dvh] overflow-hidden genz-bg text-sora flex flex-col">
       <Navbar
         showBackButton
         backTo={level ? `/level/${dialect}/${bab}` : "/level"}

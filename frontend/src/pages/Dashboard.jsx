@@ -186,9 +186,9 @@ function Dashboard() {
   // Skeleton loading state
   if (loading) {
     return (
-      <div className="flex h-screen overflow-hidden bg-cream">
+      <div className="flex h-[100dvh] overflow-hidden bg-cream">
         <Sidebar role="siswa" />
-        <div className="flex-1 h-screen overflow-y-auto custom-scrollbar relative">
+        <div className="flex-1 h-[100dvh] overflow-y-auto custom-scrollbar relative">
           <Navbar user={null} />
           <main className="flex-1 px-4 py-6 flex justify-center">
             <div className="w-full max-w-md md:max-w-3xl space-y-5">
@@ -205,7 +205,7 @@ function Dashboard() {
 
   if (!user) {
     return (
-      <div className="h-screen overflow-hidden flex flex-col items-center justify-center bg-cream p-5 text-center">
+      <div className="h-[100dvh] overflow-hidden flex flex-col items-center justify-center bg-cream p-5 text-center">
         <p className="text-sora/60 mb-4">Gagal memuat data pengguna. Sesi mungkin telah berakhir.</p>
         <button onClick={() => navigate("/login/siswa")} className="bg-kaili text-white px-6 py-3 rounded-full font-bold shadow-glow-kaili btn-bouncy">
           Kembali ke Halaman Login
@@ -215,13 +215,13 @@ function Dashboard() {
   }
 
   return (
-    <div className="flex h-screen overflow-hidden genz-bg text-sora">
+    <div className="flex h-[100dvh] overflow-hidden genz-bg text-sora">
 
       {/* SIDEBAR */}
       <Sidebar role="siswa" />
 
       {/* RIGHT AREA */}
-      <div className="flex-1 h-screen overflow-y-auto custom-scrollbar relative">
+      <div className="flex-1 h-[100dvh] overflow-y-auto custom-scrollbar relative">
 
         {/* NAVBAR */}
         <Navbar user={user} />

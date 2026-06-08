@@ -80,9 +80,9 @@ function Level() {
 
   if (!user) {
     return (
-      <div className="flex h-screen overflow-hidden genz-bg text-sora">
+      <div className="flex h-[100dvh] overflow-hidden genz-bg text-sora">
         <Sidebar role="siswa" />
-        <div className="flex-1 h-screen overflow-y-auto custom-scrollbar relative">
+        <div className="flex-1 h-[100dvh] overflow-y-auto custom-scrollbar relative">
           <Navbar user={null} />
           <main className="flex-1 px-4 pt-6 pb-28 md:pb-6 flex justify-center">
             <div className="w-full max-w-md md:max-w-3xl space-y-5">
@@ -179,10 +179,10 @@ function Level() {
   const dialects = ["ledo", "rai"];
 
   return (
-    <div className="flex h-screen overflow-hidden genz-bg text-sora">
+    <div className="flex h-[100dvh] overflow-hidden genz-bg text-sora">
       <Sidebar role="siswa" />
 
-      <div className="flex-1 h-screen overflow-y-auto custom-scrollbar relative">
+      <div className="flex-1 h-[100dvh] overflow-y-auto custom-scrollbar relative">
         <Navbar user={user} />
 
         <main className="flex-1 px-4 pt-6 pb-28 md:pb-6 flex justify-center">

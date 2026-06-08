@@ -40,7 +40,7 @@ function Sidebar({ role = "siswa" }) {
 
   return (
     <div
-      className={`hidden md:flex shrink-0 flex-col bg-white/70 backdrop-blur-xl border-r border-white/60 shadow-soft-sora transition-all duration-300 h-screen z-50 ${
+      className={`hidden md:flex shrink-0 flex-col bg-white/70 backdrop-blur-xl border-r border-white/60 shadow-soft-sora transition-all duration-300 h-[100dvh] z-50 ${
         collapsed ? "w-20" : "w-64"
       }`}
     >

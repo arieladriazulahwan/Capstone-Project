@@ -129,7 +129,7 @@ function QuizRoom() {
   if (loading) {
 
     return (
-      <div className="h-screen overflow-hidden genz-bg p-4 flex items-center justify-center">
+      <div className="h-[100dvh] overflow-hidden genz-bg p-4 flex items-center justify-center">
         <div className="max-w-3xl w-full space-y-5">
           <Skeleton className="h-24 w-full rounded-3xl" />
           <Skeleton className="h-64 w-full rounded-3xl" />
@@ -146,7 +146,7 @@ function QuizRoom() {
 
   return (
 
-    <div className="h-screen overflow-y-auto overflow-x-hidden genz-bg p-4 text-sora pb-20">
+    <div className="h-[100dvh] overflow-y-auto overflow-x-hidden genz-bg p-4 text-sora pb-20">
       <div className="max-w-3xl mx-auto pt-6">
 
         {/* HEADER */}

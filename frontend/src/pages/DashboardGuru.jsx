@@ -87,7 +87,7 @@ function DashboardGuru() {
 
   if (!user) {
     return (
-      <div className="flex h-screen overflow-hidden genz-bg text-sora items-center justify-center">
+      <div className="flex h-[100dvh] overflow-hidden genz-bg text-sora items-center justify-center">
         <div className="bg-white p-8 rounded-3xl shadow-soft-sora text-center">
           <div className="mx-auto mb-3 h-10 w-10 rounded-full border-4 border-sora/10 border-t-kaili animate-spin"></div>
           <p className="font-semibold text-gray-700">Memuat dashboard guru...</p>
@@ -106,8 +106,8 @@ function DashboardGuru() {
   const latestRoom = rooms[0]?.title || "Belum ada room";
 
   return (
-    <div className="flex h-screen overflow-hidden genz-bg text-sora">
-      <div className="flex-1 h-screen overflow-y-auto custom-scrollbar relative">
+    <div className="flex h-[100dvh] overflow-hidden genz-bg text-sora">
+      <div className="flex-1 h-[100dvh] overflow-y-auto custom-scrollbar relative">
         <Navbar role="guru" user={user} />
 
       <main className="px-4 py-6 pb-10 flex justify-center">

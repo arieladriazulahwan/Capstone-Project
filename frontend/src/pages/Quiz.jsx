@@ -115,7 +115,7 @@ function Quiz() {
 
   if (questions.length === 0) {
     return (
-      <div className="h-screen overflow-hidden genz-bg text-sora flex flex-col">
+      <div className="h-[100dvh] overflow-hidden genz-bg text-sora flex flex-col">
         <Navbar showBackButton backTo={practicePath} />
         <div className="p-5 max-w-xl mx-auto space-y-4">
           <Skeleton className="h-24 w-full rounded-3xl" />
@@ -237,7 +237,7 @@ function Quiz() {
       "Tetap semangat, coba lagi pelan-pelan";
 
     return (
-      <div className="h-screen overflow-hidden genz-bg p-5 flex items-center justify-center">
+      <div className="h-[100dvh] overflow-hidden genz-bg p-5 flex items-center justify-center">
         <div className="bg-white/60 backdrop-blur-xl border border-white/60 p-6 sm:p-8 rounded-3xl shadow-soft-sora max-w-md w-full text-center text-sora relative overflow-hidden">
           <div className="quiz-result-spark spark-one"></div>
           <div className="quiz-result-spark spark-two"></div>
@@ -287,7 +287,7 @@ function Quiz() {
   }
 
   return (
-    <div className="h-screen overflow-hidden genz-bg text-sora flex flex-col">
+    <div className="h-[100dvh] overflow-hidden genz-bg text-sora flex flex-col">
       <Navbar showBackButton backTo={practicePath} />
 
       <main className="p-5 w-full max-w-xl mx-auto overflow-y-auto overflow-x-hidden flex-1">

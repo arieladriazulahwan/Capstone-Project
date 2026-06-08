@@ -227,7 +227,7 @@ function Kamus() {
   };
 
   return (
-    <div className="flex h-screen overflow-hidden genz-bg text-sora">
+    <div className="flex h-[100dvh] overflow-hidden genz-bg text-sora">
       <Sidebar role="siswa" />
 
       <div className="flex-1 flex flex-col pb-20 md:pb-0">

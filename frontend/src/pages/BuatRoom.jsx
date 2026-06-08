@@ -54,7 +54,7 @@ function BuatRoom() {
   // Loading state
   if (!user) {
     return (
-      <div className="flex h-screen overflow-hidden genz-bg text-sora items-center justify-center">
+      <div className="flex h-[100dvh] overflow-hidden genz-bg text-sora items-center justify-center">
         <div className="bg-white p-8 rounded-3xl shadow-soft-sora text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
           <p className="font-semibold text-gray-700">Memuat halaman buat room...</p>

@@ -374,7 +374,7 @@ function DetailRoom() {
 
   if (loading) {
     return (
-      <div className="flex h-screen overflow-hidden genz-bg text-sora items-center justify-center">
+      <div className="flex h-[100dvh] overflow-hidden genz-bg text-sora items-center justify-center">
         <div className="bg-white p-8 rounded-3xl shadow-soft-sora text-center">
           <div className="mx-auto mb-3 h-10 w-10 rounded-full border-4 border-sora/10 border-t-kaili animate-spin"></div>
           <p className="text-gray-700 text-lg font-semibold">Memuat detail room...</p>
@@ -385,7 +385,7 @@ function DetailRoom() {
 
   if (!room) {
     return (
-      <div className="flex h-screen overflow-hidden genz-bg text-sora items-center justify-center">
+      <div className="flex h-[100dvh] overflow-hidden genz-bg text-sora items-center justify-center">
         <div className="bg-white p-8 rounded-3xl shadow-soft-sora text-center text-sora/60">
           Room tidak ditemukan
         </div>
@@ -394,8 +394,8 @@ function DetailRoom() {
   }
 
   return (
-    <div className="flex genz-bg text-sora h-screen overflow-hidden">
-      <div className="flex-1 h-screen overflow-y-auto custom-scrollbar relative">
+    <div className="flex genz-bg text-sora h-[100dvh] overflow-hidden">
+      <div className="flex-1 h-[100dvh] overflow-y-auto custom-scrollbar relative">
         <Navbar role="guru" user={user} showBackButton />
 
       <main className="p-4 md:p-6 flex justify-center">

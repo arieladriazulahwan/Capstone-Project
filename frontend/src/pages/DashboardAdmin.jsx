@@ -138,7 +138,7 @@ function DashboardAdmin() {
   // Skeleton loading state
   if (!user) {
     return (
-      <div className="genz-bg h-screen overflow-hidden flex overflow-hidden text-sora">
+      <div className="genz-bg h-[100dvh] overflow-hidden flex overflow-hidden text-sora">
         <Sidebar role="admin" />
         <div className="flex-1 flex flex-col min-w-0">
           <Navbar role="admin" user={null} />
@@ -237,7 +237,7 @@ function DashboardAdmin() {
   ];
 
   return (
-    <div className="genz-bg h-screen overflow-hidden flex overflow-hidden text-sora">
+    <div className="genz-bg h-[100dvh] overflow-hidden flex overflow-hidden text-sora">
       <Sidebar role="admin" />
 
       <div className="flex-1 flex flex-col min-w-0">

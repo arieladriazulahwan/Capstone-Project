@@ -218,7 +218,7 @@ function QuizPage() {
   // =====================================
   if (loading) {
     return (
-      <div className="genz-bg h-screen overflow-hidden p-4 flex items-center justify-center">
+      <div className="genz-bg h-[100dvh] overflow-hidden p-4 flex items-center justify-center">
         <div className="max-w-3xl mx-auto space-y-5 w-full">
           <Skeleton className="h-28 w-full rounded-3xl" />
           <Skeleton className="h-64 w-full rounded-3xl" />
@@ -237,7 +237,7 @@ function QuizPage() {
   ) {
 
     return (
-      <div className="h-screen overflow-hidden flex items-center justify-center">
+      <div className="h-[100dvh] overflow-hidden flex items-center justify-center">
         Room belum memiliki soal
       </div>
     );
@@ -258,7 +258,7 @@ function QuizPage() {
       "Tetap semangat, coba lagi nanti";
 
     return (
-      <div className="genz-bg h-screen overflow-hidden p-5 flex items-center justify-center text-sora">
+      <div className="genz-bg h-[100dvh] overflow-hidden p-5 flex items-center justify-center text-sora">
         <div className="bg-white/80 backdrop-blur-md border border-sora/10 shadow-soft-sora p-6 sm:p-8 rounded-3xl max-w-md w-full text-center relative overflow-hidden">
           <div className="quiz-result-spark spark-one"></div>
           <div className="quiz-result-spark spark-two"></div>
@@ -309,7 +309,7 @@ function QuizPage() {
   const renderType = question.renderType;
 
   return (
-    <div className="genz-bg h-screen overflow-y-auto overflow-x-hidden p-4 text-sora pb-20">
+    <div className="genz-bg h-[100dvh] overflow-y-auto overflow-x-hidden p-4 text-sora pb-20">
       <div className="max-w-3xl mx-auto">
         {/* HEADER */}
         <div className="bg-white/80 backdrop-blur-md border border-sora/10 shadow-soft-sora rounded-3xl p-6 mb-6 flex justify-between items-center">
