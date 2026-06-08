@@ -63,6 +63,7 @@ const createTables = async () => {
       streak INT NOT NULL DEFAULT 0,
       title VARCHAR(255) NOT NULL DEFAULT 'Pemula',
       dialect VARCHAR(50) NOT NULL DEFAULT 'ledo',
+      onboarding_completed TINYINT(1) NOT NULL DEFAULT 0,
       created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
       UNIQUE KEY user_profile_unique (user_id),
       FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
@@ -136,6 +137,18 @@ const createTables = async () => {
 
   for (const query of queries) {
     await db.promise().query(query);
+  }
+
+  // Fallback / Auto-migrate for onboarding_completed column
+  try {
+    await db.promise().query(
+      "ALTER TABLE student_profiles ADD COLUMN onboarding_completed TINYINT(1) NOT NULL DEFAULT 0"
+    );
+    console.log("Migration: Column onboarding_completed added to student_profiles.");
+  } catch (err) {
+    if (err.code !== "ER_DUP_FIELDNAME") {
+      console.error("Error migrating onboarding_completed column:", err.message);
+    }
   }
 
   await createJsonDataTables(db);
