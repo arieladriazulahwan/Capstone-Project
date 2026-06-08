@@ -396,7 +396,7 @@ function BuatRoom() {
       <div className="flex-1 h-screen overflow-y-auto custom-scrollbar relative">
         <Navbar role="guru" user={user} showBackButton={true} />
 
-      <div className="max-w-7xl mx-auto p-4 pb-24 grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <div className="max-w-7xl mx-auto p-4 pb-48 lg:pb-12 grid grid-cols-1 lg:grid-cols-12 gap-6">
 
         {/* KOLOM KIRI (KONTEN UTAMA) */}
         <div className="lg:col-span-8 lg:col-start-1 flex flex-col gap-5">
