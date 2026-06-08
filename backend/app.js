@@ -155,6 +155,7 @@ const createTables = async () => {
 
   await ensureColumn("users", "created_at", "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP");
   await ensureColumn("users", "is_blocked", "TINYINT(1) NOT NULL DEFAULT 0");
+  await ensureColumn("users", "last_login", "DATE DEFAULT NULL");
   await ensureColumn("room_questions", "answer_type", "VARCHAR(50)");
   await ensureColumn("favorites", "vocab_id", "INT NULL");
   await ensureColumn("rooms", "teacher_id", "INT NULL");
