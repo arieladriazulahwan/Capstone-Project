@@ -44,11 +44,11 @@ function Login() {
         <button
           type="button"
           onClick={() => navigate(mode === "login" ? "/login/siswa" : "/register/siswa")}
-          className="group relative overflow-hidden rounded-[2rem] border-2 border-transparent bg-white p-6 text-left shadow-soft-sora transition-all hover:border-kaili hover:bg-cream hover:shadow-xl btn-bouncy w-full"
+          className="group relative overflow-hidden rounded-[2rem] border-2 border-transparent bg-white p-6 text-left shadow-soft-sora transition-all w-full lg:hover:border-kaili lg:hover:bg-cream lg:hover:shadow-xl"
         >
-          <div className="absolute -right-6 -top-6 h-32 w-32 rounded-full bg-sora/5 transition-transform duration-500 group-hover:scale-150"></div>
+          <div className="absolute -right-6 -top-6 h-32 w-32 rounded-full bg-sora/5 transition-transform duration-500 lg:group-hover:scale-150"></div>
           <div className="relative flex items-center gap-6">
-            <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-sora text-3xl font-black text-cream shadow-md transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6">
+            <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-sora text-3xl font-black text-cream shadow-md transition-transform duration-300 lg:group-hover:scale-110 lg:group-hover:rotate-6">
               S
             </span>
             <div className="flex-1">
@@ -61,7 +61,7 @@ function Login() {
                   : "Buat akun untuk mulai belajar dan kumpulkan XP."}
               </p>
             </div>
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-sora/10 text-sora transition-all duration-300 group-hover:translate-x-1 group-hover:bg-sora group-hover:text-cream">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-sora/10 text-sora transition-all duration-300 lg:group-hover:translate-x-1 lg:group-hover:bg-sora lg:group-hover:text-cream">
               →
             </div>
           </div>
@@ -71,11 +71,11 @@ function Login() {
         <button
           type="button"
           onClick={() => navigate(mode === "login" ? "/login/guru" : "/register/guru")}
-          className="group relative overflow-hidden rounded-[2rem] border-2 border-transparent bg-white p-6 text-left shadow-soft-sora transition-all hover:border-kaili hover:bg-cream hover:shadow-xl btn-bouncy w-full"
+          className="group relative overflow-hidden rounded-[2rem] border-2 border-transparent bg-white p-6 text-left shadow-soft-sora transition-all w-full lg:hover:border-kaili lg:hover:bg-cream lg:hover:shadow-xl"
         >
-          <div className="absolute -right-6 -top-6 h-32 w-32 rounded-full bg-kaili/10 transition-transform duration-500 group-hover:scale-150"></div>
+          <div className="absolute -right-6 -top-6 h-32 w-32 rounded-full bg-kaili/10 transition-transform duration-500 lg:group-hover:scale-150"></div>
           <div className="relative flex items-center gap-6">
-            <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-kaili text-3xl font-black text-white shadow-md transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6">
+            <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-kaili text-3xl font-black text-white shadow-md transition-transform duration-300 lg:group-hover:scale-110 lg:group-hover:-rotate-6">
               G
             </span>
             <div className="flex-1">
@@ -88,7 +88,7 @@ function Login() {
                   : "Buat akun guru untuk mengelola room dan soal."}
               </p>
             </div>
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-kaili/10 text-kaili transition-all duration-300 group-hover:translate-x-1 group-hover:bg-kaili group-hover:text-white">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-kaili/10 text-kaili transition-all duration-300 lg:group-hover:translate-x-1 lg:group-hover:bg-kaili lg:group-hover:text-white">
               →
             </div>
           </div>
