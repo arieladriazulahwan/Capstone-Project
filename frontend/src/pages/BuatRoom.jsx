@@ -1,18 +1,16 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { FiBookOpen, FiClock, FiType } from "react-icons/fi";
+import { FiBookOpen, FiClock, FiType, FiCheckCircle, FiX, FiTarget, FiPlus, FiChevronRight } from "react-icons/fi";
 import Navbar from "../components/Navbar";
-import Sidebar from "../components/Sidebar";
-import BottomNav from "../components/BottomNav";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 const MAX_UPLOAD_FILE_SIZE = 50 * 1024 * 1024;
 
 const questionTypes = [
-  { type: "multiple", label: "Pilihan Ganda", className: "bg-blue-500 hover:bg-blue-600" },
-  { type: "susun", label: "Susun Kata", className: "bg-green-500 hover:bg-green-600" },
-  { type: "gambar", label: "Soal Gambar", className: "bg-yellow-500 hover:bg-yellow-600" },
-  { type: "sambung", label: "Sambung Kalimat", className: "bg-purple-500 hover:bg-purple-600" },
+  { type: "multiple", label: "Pilihan Ganda" },
+  { type: "susun", label: "Susun Kata" },
+  { type: "gambar", label: "Soal Gambar" },
+  { type: "sambung", label: "Sambung Kalimat" },
 ];
 
 function BuatRoom() {
@@ -57,7 +55,7 @@ function BuatRoom() {
   if (!user) {
     return (
       <div className="flex h-screen overflow-hidden genz-bg text-sora items-center justify-center">
-        <div className="teacher-loading-card rounded-3xl bg-white/90 px-6 py-5 text-center shadow">
+        <div className="bg-white p-8 rounded-3xl shadow-soft-sora text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
           <p className="font-semibold text-gray-700">Memuat halaman buat room...</p>
         </div>
@@ -394,37 +392,35 @@ function BuatRoom() {
   };
 
   return (
-    <div className="flex teacher-page-bg h-screen overflow-hidden">
-      <Sidebar role="guru" />
+    <div className="flex genz-bg text-sora h-screen overflow-hidden">
       <div className="flex-1 h-screen overflow-y-auto custom-scrollbar relative">
         <Navbar role="guru" user={user} showBackButton={true} />
 
-      <div className="max-w-5xl mx-auto p-4 pb-64">
+      <div className="max-w-7xl mx-auto p-4 pb-24 grid grid-cols-1 lg:grid-cols-12 gap-6">
 
-        {/* HEADER */}
-        <div className="teacher-hero-card mb-5 rounded-3xl p-5 text-white shadow-xl">
+        {/* KOLOM KIRI (KONTEN UTAMA) */}
+        <div className="lg:col-span-8 lg:col-start-1 flex flex-col gap-5">
+        <div className="bg-sora relative overflow-hidden rounded-3xl p-7 mb-6 shadow-soft-sora border border-sora/10 text-white">
           <p className="mb-2 inline-flex rounded-full bg-white/20 px-3 py-1 text-xs font-bold">
             Buat aktivitas guru
           </p>
           <h1 className="text-2xl font-black">Buat Room</h1>
-          <p className="mt-1 text-sm text-blue-50">
+          <p className="mt-1 text-sm text-white/80">
             Buat Room Untuk Siswa.
           </p>
         </div>
-        <h1 className="sr-only">
-          🎯 Buat Room
-        </h1>
+          Buat Room
 
-      {/* ROOM */}
-      <div className="teacher-form-card bg-white/90 p-5 rounded-3xl shadow mb-5">
+      {/* ROOM DETAIL */}
+      <div className="bg-white p-5 rounded-3xl shadow-soft-sora">
         <div className="mb-5 flex items-center justify-between gap-3">
           <div>
-            <p className="text-xs font-bold uppercase tracking-wide text-blue-500">
+            <p className="text-xs font-bold uppercase tracking-wide text-white/800">
               Room
             </p>
             <h2 className="text-lg font-black text-gray-900">Masukkan Detail Room</h2>
           </div>
-          <div className="hidden h-12 w-12 items-center justify-center rounded-2xl bg-blue-100 text-blue-600 sm:flex">
+          <div className="hidden h-12 w-12 items-center justify-center rounded-2xl bg-cream text-kaili sm:flex">
             <FiBookOpen size={24} />
           </div>
         </div>
@@ -432,8 +428,8 @@ function BuatRoom() {
         <div className="grid gap-4 md:grid-cols-2">
           <div className="teacher-field">
             <label className={labelClass}>Nama Room</label>
-            <div className="teacher-input-shell">
-              <FiType className="teacher-input-icon" size={19} />
+            <div className="relative">
+              <FiType className="absolute left-4 top-1/2 -translate-y-1/2 text-sora/40" size={19} />
               <input
                 type="text"
                 placeholder="Contoh: Kuis Bab 1"
@@ -441,15 +437,15 @@ function BuatRoom() {
                 onChange={(e) =>
                   setTitle(e.target.value)
                 }
-                className="teacher-input teacher-input-with-icon w-full border p-3 rounded-xl"
+                className="w-full border-2 border-sora/10 bg-cream/50 p-3 pl-11 rounded-2xl outline-none focus:border-kaili focus:bg-white transition-all"
               />
             </div>
           </div>
 
           <div className="teacher-field">
             <label className={labelClass}>Subjek</label>
-            <div className="teacher-input-shell">
-              <FiBookOpen className="teacher-input-icon" size={19} />
+            <div className="relative">
+              <FiBookOpen className="absolute left-4 top-1/2 -translate-y-1/2 text-sora/40" size={19} />
               <input
                 type="text"
                 placeholder="Contoh: Bahasa Kaili Ledo"
@@ -457,15 +453,15 @@ function BuatRoom() {
                 onChange={(e) =>
                   setCategory(e.target.value)
                 }
-                className="teacher-input teacher-input-with-icon w-full border p-3 rounded-xl"
+                className="w-full border-2 border-sora/10 bg-cream/50 p-3 pl-11 rounded-2xl outline-none focus:border-kaili focus:bg-white transition-all"
               />
             </div>
           </div>
 
           <div className="teacher-field md:col-span-2">
             <label className={labelClass}>Timer per Soal</label>
-            <div className="teacher-input-shell">
-              <FiClock className="teacher-input-icon" size={19} />
+            <div className="relative">
+              <FiClock className="absolute left-4 top-1/2 -translate-y-1/2 text-sora/40" size={19} />
               <input
                 type="number"
                 placeholder="Contoh: 15"
@@ -473,7 +469,7 @@ function BuatRoom() {
                 onChange={(e) =>
                   setTimer(parseInt(e.target.value) || 0)
                 }
-                className="teacher-input teacher-input-with-icon w-full border p-3 rounded-xl"
+                className="w-full border-2 border-sora/10 bg-cream/50 p-3 pl-11 rounded-2xl outline-none focus:border-kaili focus:bg-white transition-all"
               />
             </div>
             <p className={`${hintClass} text-left`}>Waktu dihitung dalam detik.</p>
@@ -483,12 +479,12 @@ function BuatRoom() {
       </div>
 
       {/* LIST */}
-      <div className="space-y-5">
+      <div className="flex flex-col gap-5">
 
         {questions.map((q, index) => (
           <div
             key={index}
-            className="teacher-question-card bg-white/90 p-5 rounded-3xl shadow"
+            className="bg-white p-5 rounded-3xl shadow-soft-sora"
           >
 
             <div className="flex items-center justify-between mb-4">
@@ -518,7 +514,7 @@ function BuatRoom() {
                     e.target.value
                   )
                 }
-                className="teacher-input w-full border p-3 rounded-xl"
+                className="w-full border-2 border-sora/10 bg-cream/50 p-3 rounded-2xl outline-none focus:border-kaili focus:bg-white transition-all"
               />
             </div>
 
@@ -573,7 +569,7 @@ function BuatRoom() {
                       e.target.value
                     )
                   }
-                  className="teacher-input w-full border p-3 rounded-xl"
+                  className="w-full border-2 border-sora/10 bg-cream/50 p-3 rounded-2xl outline-none focus:border-kaili focus:bg-white transition-all"
                 >
                   {q.type === "gambar" && (
                     <option value="pilihan">
@@ -626,7 +622,7 @@ function BuatRoom() {
                             e.target.value
                           )
                         }
-                        className="teacher-input flex-1 border p-2 rounded-xl"
+                        className="flex-1 border-2 border-sora/10 bg-cream/50 p-3 rounded-2xl outline-none focus:border-kaili focus:bg-white transition-all"
                         aria-label={`Opsi jawaban ${oIndex + 1}`}
                       />
 
@@ -668,7 +664,7 @@ function BuatRoom() {
                         e.target.value
                       )
                     }
-                    className="teacher-input w-full border p-3 rounded-xl"
+                    className="w-full border-2 border-sora/10 bg-cream/50 p-3 rounded-2xl outline-none focus:border-kaili focus:bg-white transition-all"
                   >
                     <option value="">
                       Pilih Jawaban Benar
@@ -712,7 +708,7 @@ function BuatRoom() {
                         e.target.value
                       )
                     }
-                    className="teacher-input w-full border p-3 rounded-xl"
+                    className="w-full border-2 border-sora/10 bg-cream/50 p-3 rounded-2xl outline-none focus:border-kaili focus:bg-white transition-all"
                   />
                 </div>
               )}
@@ -748,7 +744,7 @@ function BuatRoom() {
                             e.target.value
                           )
                         }
-                        className="teacher-input flex-1 border p-2 rounded-xl"
+                        className="flex-1 border-2 border-sora/10 bg-cream/50 p-3 rounded-2xl outline-none focus:border-kaili focus:bg-white transition-all"
                         aria-label={`Blok kata ${bIndex + 1}`}
                       />
 
@@ -814,9 +810,9 @@ function BuatRoom() {
                             i
                           )
                         }
-                        className="bg-green-500 text-white px-4 py-2 rounded-xl"
+                        className="bg-kaili text-white px-4 py-2 rounded-2xl flex items-center gap-2 transition hover:bg-kaili/90"
                       >
-                        {block} ✕
+                        <span>{block}</span> <FiX size={16} />
                       </button>
                     )
                   )}
@@ -839,55 +835,110 @@ function BuatRoom() {
         ))}
 
       </div>
+      </div> {/* END KOLOM KIRI */}
 
-      <div className="teacher-floating-actions fixed bottom-4 left-4 right-4 z-50 mx-auto max-w-5xl rounded-3xl border border-blue-100 bg-white/95 p-3 shadow-2xl backdrop-blur">
-        <div className="mb-2 flex items-center justify-between gap-3">
-          <p className="text-sm font-bold text-gray-700">Tambah Soal</p>
-          <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-semibold text-gray-500">
-            {questions.length} soal
+      {/* KOLOM KANAN (SIDEBAR DESKTOP) */}
+      <div className="hidden lg:flex lg:col-span-4 flex-col gap-5">
+        <div className="sticky top-6 flex flex-col gap-5">
+          
+          {/* WIDGET TAMBAH SOAL */}
+          <div className="bg-white p-5 rounded-3xl shadow-soft-sora border border-sora/5">
+            <div className="mb-4 flex items-center justify-between gap-3 border-b border-sora/5 pb-3">
+              <p className="text-base font-black text-gray-800">Tambah Soal</p>
+              <div className="bg-cream text-kaili px-3 py-1 rounded-full text-xs font-bold">
+                {questions.length} Soal
+              </div>
+            </div>
+            
+            <div className="flex flex-col gap-2">
+              {questionTypes.map((item) => (
+                <button
+                  key={item.type}
+                  type="button"
+                  onClick={() => addQuestion(item.type)}
+                  className="group flex w-full items-center justify-between rounded-2xl border-2 border-sora/5 bg-cream/30 px-4 py-3 font-bold text-sora transition hover:-translate-y-1 hover:border-kaili/40 hover:bg-white hover:shadow-soft-sora active:scale-95"
+                >
+                  <span>{item.label}</span>
+                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-sora/5 text-sora transition group-hover:bg-kaili group-hover:text-white"><FiPlus size={14} /></span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* WIDGET AKSI */}
+          <div className="bg-white p-5 rounded-3xl shadow-soft-sora border border-sora/5">
+            <p className="mb-4 text-sm font-semibold text-gray-500">Tindakan</p>
+            <div className="flex flex-col gap-3">
+              <button
+                type="button"
+                onClick={submitRoom}
+                className="w-full bg-kaili text-white px-6 py-3.5 rounded-2xl font-black shadow-glow-kaili btn-bouncy flex items-center justify-center gap-2"
+              >
+                <FiCheckCircle size={20} /> Buat Room
+              </button>
+              <button
+                type="button"
+                onClick={() => navigate("/dashboard/guru")}
+                className="w-full bg-cream text-sora px-6 py-3.5 rounded-2xl font-bold hover:bg-sora/10 transition-colors flex items-center justify-center gap-2"
+              >
+                Batal
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div> {/* END KOLOM KANAN */}
+
+      {/* MOBILE FLOATING BAR (Hanya muncul di HP) */}
+      <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-[0_-10px_40px_rgba(0,0,0,0.1)] border-t border-sora/10 pt-3 pb-safe">
+        <div className="mb-2 px-4 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <p className="text-xs font-bold text-gray-500">Tambah Tipe Soal</p>
+            <span className="text-[10px] text-sora/50 font-medium animate-pulse flex items-center">
+              Geser <FiChevronRight size={12} className="ml-0.5" />
+            </span>
+          </div>
+          <span className="bg-cream text-kaili px-2 py-0.5 rounded-full text-[10px] font-bold">
+            {questions.length} Soal
           </span>
         </div>
-        <div className="grid grid-cols-2 gap-2 md:grid-cols-4">
+        
+        {/* Scroll Container yang melebar ke ujung layar */}
+        <div className="flex gap-2.5 overflow-x-auto custom-scrollbar pb-3 mb-1 px-4 snap-x snap-mandatory">
           {questionTypes.map((item) => (
             <button
               key={item.type}
               type="button"
               onClick={() => addQuestion(item.type)}
-              className={`${item.className} rounded-xl px-3 py-2 text-sm font-semibold text-white shadow transition hover:-translate-y-0.5`}
+              className="snap-start flex-none whitespace-nowrap bg-cream/50 border border-sora/5 text-sora px-3 py-1.5 rounded-lg text-xs font-bold shadow-sm transition hover:bg-white hover:border-kaili/40 active:scale-95 flex items-center gap-1.5"
             >
-              + {item.label}
+              {item.label} <span className="bg-sora/5 p-0.5 rounded-full"><FiPlus size={12} /></span>
             </button>
           ))}
+          {/* Spacer untuk memastikan item terakhir bisa di-scroll sepenuhnya */}
+          <div className="snap-start flex-none w-1"></div>
         </div>
-        <div className="mt-3 grid grid-cols-2 gap-2">
+
+        <div className="flex gap-3 px-4 pb-4">
           <button
             type="button"
             onClick={() => navigate("/dashboard/guru")}
-            className="rounded-xl border border-gray-200 bg-white p-3 text-sm font-bold text-gray-600 shadow-sm hover:bg-gray-50"
+            className="flex-[1] bg-cream text-sora py-3 rounded-xl font-bold text-sm hover:bg-sora/10 transition-colors"
           >
             Batal
           </button>
           <button
             type="button"
             onClick={submitRoom}
-            className="teacher-room-action rounded-xl bg-blue-600 p-3 text-sm font-bold text-white shadow hover:bg-blue-700"
+            className="flex-[2] bg-kaili text-white py-3 rounded-xl font-bold text-sm shadow-glow-kaili btn-bouncy flex items-center justify-center gap-2"
           >
-            Buat Room
+            <FiCheckCircle size={18} /> Buat Room
           </button>
         </div>
       </div>
 
-      {/* SUBMIT */}
-      <button
-        onClick={submitRoom}
-        className="hidden"
-      >
-        🚀 Buat Room
-      </button>
-
       </div>
       </div>
-      <BottomNav role="guru" />
     </div>
   );
 }

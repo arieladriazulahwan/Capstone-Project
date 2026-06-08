@@ -3,8 +3,6 @@ import { useParams, useNavigate } from "react-router-dom";
 
 import Navbar from "../components/Navbar";
 import ConfirmDialog from "../components/ConfirmDialog";
-import Sidebar from "../components/Sidebar";
-import BottomNav from "../components/BottomNav";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
@@ -377,8 +375,8 @@ function DetailRoom() {
   if (loading) {
     return (
       <div className="flex h-screen overflow-hidden genz-bg text-sora items-center justify-center">
-        <div className="teacher-loading-card rounded-3xl bg-white/90 px-6 py-5 text-center shadow">
-          <div className="mx-auto mb-3 h-10 w-10 rounded-full border-4 border-blue-100 border-t-blue-500 animate-spin"></div>
+        <div className="bg-white p-8 rounded-3xl shadow-soft-sora text-center">
+          <div className="mx-auto mb-3 h-10 w-10 rounded-full border-4 border-sora/10 border-t-kaili animate-spin"></div>
           <p className="text-gray-700 text-lg font-semibold">Memuat detail room...</p>
         </div>
       </div>
@@ -388,7 +386,7 @@ function DetailRoom() {
   if (!room) {
     return (
       <div className="flex h-screen overflow-hidden genz-bg text-sora items-center justify-center">
-        <div className="teacher-empty-state rounded-3xl bg-white/90 p-8 text-center text-gray-500 shadow">
+        <div className="bg-white p-8 rounded-3xl shadow-soft-sora text-center text-sora/60">
           Room tidak ditemukan
         </div>
       </div>
@@ -396,14 +394,13 @@ function DetailRoom() {
   }
 
   return (
-    <div className="flex teacher-page-bg h-screen overflow-hidden">
-      <Sidebar role="guru" />
+    <div className="flex genz-bg text-sora h-screen overflow-hidden">
       <div className="flex-1 h-screen overflow-y-auto custom-scrollbar relative">
         <Navbar role="guru" user={user} showBackButton />
 
       <main className="p-4 md:p-6 flex justify-center">
         <div className="w-full max-w-5xl">
-          <div className="teacher-hero-card rounded-3xl p-6 text-white shadow-xl mb-6">
+          <div className="bg-sora relative overflow-hidden rounded-3xl p-7 mb-6 shadow-soft-sora border border-sora/10 text-white">
             <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
               {isEditingRoom ? (
                 <div className="flex-1 space-y-3">
@@ -411,19 +408,19 @@ function DetailRoom() {
                     type="text"
                     value={draftRoomDetails.title}
                     onChange={(e) => handleDetailChange("title", e.target.value)}
-                    className="teacher-input w-full bg-white/20 text-white placeholder-blue-200 text-3xl font-bold rounded-xl p-2"
+                    className="w-full bg-white/10 text-white placeholder-white/50 text-3xl font-bold rounded-2xl p-3 outline-none focus:bg-white/20 transition-all"
                   />
                   <input
                     type="text"
                     value={draftRoomDetails.category}
                     onChange={(e) => handleDetailChange("category", e.target.value)}
-                    className="teacher-input w-full bg-white/20 text-white placeholder-blue-200 rounded-xl p-2"
+                    className="w-full bg-white/10 text-white placeholder-white/50 rounded-2xl p-3 outline-none focus:bg-white/20 transition-all"
                   />
                 </div>
               ) : (
                 <div>
                   <h1 className="text-3xl font-bold mb-2">{room.title}</h1>
-                  <p className="text-blue-100">{room.category}</p>
+                  <p className="text-white/80">{room.category}</p>
                 </div>
               )}
               <div
@@ -435,7 +432,7 @@ function DetailRoom() {
                 className="bg-white/20 hover:bg-white/30 cursor-pointer px-5 py-3 rounded-2xl backdrop-blur-sm transition"
                 title="Klik untuk salin kode"
               >
-                <p className="text-xs text-blue-100 font-semibold mb-1">
+                <p className="text-xs text-white/80 font-semibold mb-1">
                   Kode Room
                 </p>
                 <p className="text-2xl font-bold tracking-widest text-center">
@@ -483,7 +480,7 @@ function DetailRoom() {
             </div>
           </div>
 
-          <div className="teacher-form-card mb-5 rounded-3xl border border-white/80 bg-white/90 p-5 shadow">
+          <div className="bg-white p-5 rounded-3xl shadow-soft-sora mb-5">
             <div className="mb-4 flex flex-col gap-1">
               <h2 className="text-xl font-bold text-gray-800">Daftar Soal</h2>
               <p className="text-sm text-gray-500">
@@ -502,7 +499,7 @@ function DetailRoom() {
                   onClick={() => setQuestionView(item.key)}
                   className={`rounded-xl px-4 py-2.5 text-sm font-semibold transition ${
                     questionView === item.key
-                      ? "bg-blue-600 text-white shadow"
+                      ? "bg-kaili text-white shadow"
                       : "text-gray-500 hover:bg-white"
                   }`}
                 >
@@ -521,7 +518,7 @@ function DetailRoom() {
               const answerType = getAnswerType(currentQuestion);
               const canChangeAnswerType = q.type === "gambar" || q.type === "sambung";
               return (
-                <div key={q.id} className="teacher-question-card bg-white/90 rounded-3xl shadow-sm border border-white/80 overflow-hidden">
+                <div key={q.id} className="bg-white rounded-3xl shadow-soft-sora overflow-hidden border border-sora/5">
                   <div className="flex flex-col gap-3 px-5 py-4 border-b bg-gray-50 md:flex-row md:items-center md:justify-between">
                     <div>
                       <h2 className="font-bold text-gray-800 text-lg">Soal {index + 1}</h2>
@@ -530,7 +527,7 @@ function DetailRoom() {
                     <div className="flex gap-2">
                       <button
                         onClick={() => toggleEdit(index)}
-                        className="bg-blue-600 text-white px-4 py-2 rounded-2xl"
+                        className="bg-kaili text-white px-4 py-2 rounded-2xl"
                       >
                         {isEditing ? "Batal" : "Edit Soal"}
                       </button>
@@ -561,7 +558,7 @@ function DetailRoom() {
                             type="text"
                             value={currentQuestion.question}
                             onChange={(e) => updateDraftField(index, "question", e.target.value)}
-                            className="teacher-input w-full border p-3 rounded-xl"
+                            className="w-full border-2 border-sora/10 bg-cream/50 p-3 rounded-2xl outline-none focus:border-kaili focus:bg-white transition-all"
                           />
                         </div>
 
@@ -572,7 +569,7 @@ function DetailRoom() {
                               <select
                                 value={answerType}
                                 onChange={(e) => updateDraftField(index, "answerType", e.target.value)}
-                                className="teacher-input w-full border p-3 rounded-xl"
+                                className="w-full border-2 border-sora/10 bg-cream/50 p-3 rounded-2xl outline-none focus:border-kaili focus:bg-white transition-all"
                               >
                                 <option value="pilihan">Pilihan Ganda</option>
                                 <option value="ketik">Ketik Jawaban</option>
@@ -618,7 +615,7 @@ function DetailRoom() {
                               type="text"
                               value={currentQuestion.answer || ""}
                               onChange={(e) => updateDraftField(index, "answer", e.target.value)}
-                              className="teacher-input w-full border p-3 rounded-xl"
+                              className="w-full border-2 border-sora/10 bg-cream/50 p-3 rounded-2xl outline-none focus:border-kaili focus:bg-white transition-all"
                             />
                           </div>
                         )}
@@ -632,7 +629,7 @@ function DetailRoom() {
                                 type="text"
                                 value={block}
                                 onChange={(e) => updateDraftBlock(index, bIndex, e.target.value)}
-                                className="teacher-input w-full border p-3 rounded-xl"
+                                className="w-full border-2 border-sora/10 bg-cream/50 p-3 rounded-2xl outline-none focus:border-kaili focus:bg-white transition-all"
                               />
                             ))}
                             <button
@@ -660,7 +657,7 @@ function DetailRoom() {
                             <select
                               value={currentQuestion.answer || ""}
                               onChange={(e) => updateDraftField(index, "answer", e.target.value)}
-                              className="teacher-input w-full border p-3 rounded-xl"
+                              className="w-full border-2 border-sora/10 bg-cream/50 p-3 rounded-2xl outline-none focus:border-kaili focus:bg-white transition-all"
                             >
                               <option value="">Pilih Jawaban Benar</option>
                               {currentQuestion.options?.map((opt, i) => (
@@ -674,10 +671,10 @@ function DetailRoom() {
                       </div>
                     ) : (
                       <>
-                        <div className="bg-blue-50 border border-blue-100 rounded-2xl p-4 mb-5">
-                          <p className="text-sm text-blue-500 font-semibold mb-2">Pertanyaan</p>
+                        <div className="bg-cream/50 border border-sora/10 rounded-2xl p-4 mb-5">
+                          <p className="text-sm text-white/800 font-semibold mb-2">Pertanyaan</p>
                           <p className="text-gray-800 text-lg font-medium leading-relaxed">{q.question}</p>
-                          <p className="text-xs text-blue-400 mt-2">
+                          <p className="text-xs text-kaili/80 mt-2">
                             Jawaban: {answerType === "pilihan" ? "Pilihan Ganda" : answerType === "ketik" ? "Ketik Jawaban" : "Blok Kata"}
                           </p>
                         </div>
@@ -703,7 +700,7 @@ function DetailRoom() {
                               {q.blocks.map((block, bIndex) => (
                                 <span
                                   key={bIndex}
-                                  className="bg-blue-100 text-blue-700 px-4 py-2 rounded-xl"
+                                  className="bg-cream text-sora px-4 py-2 rounded-xl"
                                 >
                                   {block || `Blok ${bIndex + 1}`}
                                 </span>
@@ -726,7 +723,7 @@ function DetailRoom() {
           ) : null}
 
           {questionView === "jawaban" && (
-          <div className="teacher-form-card bg-white/90 rounded-3xl shadow p-6 mt-6">
+          <div className="bg-white p-6 rounded-3xl shadow-soft-sora mt-6">
             <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between mb-5">
               <div>
                 <h2 className="text-2xl font-bold">Nilai Siswa</h2>
@@ -743,7 +740,7 @@ function DetailRoom() {
                   const percentage = attempt.total > 0 ? Math.round((attempt.score / attempt.total) * 100) : 0;
 
                   return (
-                    <div key={attempt.id} className="teacher-attempt-card border border-gray-200 rounded-3xl overflow-hidden transition-all">
+                    <div key={attempt.id} className="bg-white border border-sora/10 rounded-3xl overflow-hidden transition-all shadow-soft-sora">
                       {/* Summary Row - Clickable */}
                       <button
                         type="button"
@@ -753,7 +750,7 @@ function DetailRoom() {
                         {/* LEFT GROUP: Rank & Student Info */}
                         <div className="flex items-center gap-3 min-w-0">
                           {/* Rank Number */}
-                          <div className="flex-shrink-0 w-8 h-8 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-sm">
+                          <div className="flex-shrink-0 w-8 h-8 rounded-full bg-cream text-sora flex items-center justify-center font-bold text-sm">
                             {idx + 1}
                           </div>
 
@@ -838,7 +835,6 @@ function DetailRoom() {
         </div>
       </main>
       </div>
-      <BottomNav role="guru" />
       <ConfirmDialog
         open={showDeleteConfirm}
         title="Hapus Room?"

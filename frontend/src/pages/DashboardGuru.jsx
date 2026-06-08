@@ -5,8 +5,6 @@ import { HiSparkles } from "react-icons/hi";
 import ConfirmDialog from "../components/ConfirmDialog";
 import Navbar from "../components/Navbar";
 import RoomCard from "../components/RoomCard";
-import Sidebar from "../components/Sidebar";
-import BottomNav from "../components/BottomNav";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
@@ -90,8 +88,8 @@ function DashboardGuru() {
   if (!user) {
     return (
       <div className="flex h-screen overflow-hidden genz-bg text-sora items-center justify-center">
-        <div className="teacher-loading-card rounded-3xl bg-white/90 px-6 py-5 text-center shadow">
-          <div className="mx-auto mb-3 h-10 w-10 rounded-full border-4 border-blue-100 border-t-blue-500 animate-spin"></div>
+        <div className="bg-white p-8 rounded-3xl shadow-soft-sora text-center">
+          <div className="mx-auto mb-3 h-10 w-10 rounded-full border-4 border-sora/10 border-t-kaili animate-spin"></div>
           <p className="font-semibold text-gray-700">Memuat dashboard guru...</p>
         </div>
       </div>
@@ -109,13 +107,12 @@ function DashboardGuru() {
 
   return (
     <div className="flex h-screen overflow-hidden genz-bg text-sora">
-      <Sidebar role="guru" />
       <div className="flex-1 h-screen overflow-y-auto custom-scrollbar relative">
         <Navbar role="guru" user={user} />
 
       <main className="px-4 py-6 pb-10 flex justify-center">
         <div className="w-full max-w-md md:max-w-4xl">
-          <div className="teacher-hero-card rounded-3xl p-5 sm:p-6 mb-5 shadow-xl text-white">
+          <div className="bg-sora relative overflow-hidden rounded-3xl p-7 mb-6 shadow-soft-sora border border-sora/10 text-white">
             <div className="relative z-10 flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
               <div>
                 <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-white/20 px-3 py-1 text-xs font-bold backdrop-blur">
@@ -126,14 +123,14 @@ function DashboardGuru() {
                   Selamat datang, {user.name}
                 </h2>
 
-                <p className="mt-2 max-w-md text-sm text-blue-50">
+                <p className="mt-2 max-w-md text-sm text-white/80">
                   Buat room kuis, bagikan kode ke siswa, lalu pantau hasilnya dari satu tempat.
                 </p>
               </div>
 
               <button
                 onClick={() => navigate("/guru/buat-room")}
-                className="teacher-primary-button inline-flex items-center justify-center gap-2 rounded-2xl bg-white px-5 py-3 font-bold text-blue-700 shadow-lg transition hover:-translate-y-1 hover:shadow-xl"
+                className="bg-white text-sora px-6 py-3 rounded-full font-bold shadow-soft-sora btn-bouncy flex items-center justify-center gap-2 transition hover:bg-cream hover:-translate-y-1"
               >
                 <FiPlus size={20} />
                 Buat Room
@@ -142,24 +139,24 @@ function DashboardGuru() {
           </div>
 
           <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-5">
-            <div className="teacher-stat-card rounded-xl sm:rounded-2xl bg-white/90 p-2.5 sm:p-4 shadow flex flex-col items-center text-center">
-              <div className="mb-1.5 sm:mb-3 flex h-8 w-8 sm:h-11 sm:w-11 items-center justify-center rounded-xl sm:rounded-2xl bg-blue-100 text-blue-600">
+            <div className="bg-gradient-to-b from-cream to-white rounded-2xl p-4 border border-sora/5 shadow-sm flex flex-col items-center text-center">
+              <div className="mb-1.5 sm:mb-3 flex h-8 w-8 sm:h-11 sm:w-11 items-center justify-center rounded-xl sm:rounded-2xl bg-cream text-kaili">
                 <FiMonitor className="w-4 h-4 sm:w-[22px] sm:h-[22px]" />
               </div>
               <p className="text-[10px] sm:text-sm font-semibold text-gray-500 truncate w-full">Total Room</p>
               <p className="text-lg sm:text-3xl font-black text-gray-900">{activeRooms}</p>
             </div>
 
-            <div className="teacher-stat-card rounded-xl sm:rounded-2xl bg-white/90 p-2.5 sm:p-4 shadow flex flex-col items-center text-center">
-              <div className="mb-1.5 sm:mb-3 flex h-8 w-8 sm:h-11 sm:w-11 items-center justify-center rounded-xl sm:rounded-2xl bg-cyan-100 text-cyan-600">
+            <div className="bg-gradient-to-b from-cream to-white rounded-2xl p-4 border border-sora/5 shadow-sm flex flex-col items-center text-center">
+              <div className="mb-1.5 sm:mb-3 flex h-8 w-8 sm:h-11 sm:w-11 items-center justify-center rounded-xl sm:rounded-2xl bg-cream text-kaili">
                 <FiClock className="w-4 h-4 sm:w-[22px] sm:h-[22px]" />
               </div>
               <p className="text-[10px] sm:text-sm font-semibold text-gray-500 truncate w-full">Rata Timer</p>
               <p className="text-lg sm:text-3xl font-black text-gray-900">{averageTimer}s</p>
             </div>
 
-            <div className="teacher-stat-card rounded-xl sm:rounded-2xl bg-white/90 p-2.5 sm:p-4 shadow flex flex-col items-center text-center">
-              <div className="mb-1.5 sm:mb-3 flex h-8 w-8 sm:h-11 sm:w-11 items-center justify-center rounded-xl sm:rounded-2xl bg-indigo-100 text-indigo-600">
+            <div className="bg-gradient-to-b from-cream to-white rounded-2xl p-4 border border-sora/5 shadow-sm flex flex-col items-center text-center">
+              <div className="mb-1.5 sm:mb-3 flex h-8 w-8 sm:h-11 sm:w-11 items-center justify-center rounded-xl sm:rounded-2xl bg-cream text-kaili">
                 <FiCheckSquare className="w-4 h-4 sm:w-[22px] sm:h-[22px]" />
               </div>
               <p className="text-[10px] sm:text-sm font-semibold text-gray-500 truncate w-full">Room Baru</p>
@@ -174,7 +171,7 @@ function DashboardGuru() {
                 Room Kuis Saya
               </h3>
 
-              <span className="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm font-bold">
+              <span className="bg-cream text-kaili px-3 py-1 rounded-full text-sm font-bold">
                 {rooms.length} room
               </span>
             </div>
@@ -183,7 +180,7 @@ function DashboardGuru() {
               {rooms.map((room, index) => (
                 <div
                   key={room.id}
-                  className="teacher-room-row relative"
+                  className="bg-white p-4 rounded-3xl shadow-soft-sora relative"
                   style={{ animationDelay: `${index * 70}ms` }}
                 >
                   <RoomCard room={room} />
@@ -201,8 +198,8 @@ function DashboardGuru() {
               ))}
 
               {rooms.length === 0 && (
-                <div className="teacher-empty-state rounded-3xl border border-dashed border-blue-200 bg-white/80 p-8 text-center shadow">
-                  <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-3xl bg-blue-100 text-blue-600">
+                <div className="bg-white p-8 rounded-3xl shadow-soft-sora text-center border-2 border-dashed border-sora/20">
+                  <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-3xl bg-cream text-kaili">
                     <FiMonitor size={30} />
                   </div>
                   <h4 className="text-lg font-black text-gray-900">Belum ada room</h4>
@@ -211,7 +208,7 @@ function DashboardGuru() {
                   </p>
                   <button
                     onClick={() => navigate("/guru/buat-room")}
-                    className="mt-5 inline-flex items-center gap-2 rounded-2xl bg-blue-500 px-5 py-3 font-bold text-white shadow transition hover:-translate-y-0.5 hover:bg-blue-600"
+                    className="mt-5 inline-flex items-center gap-2 rounded-2xl bg-kaili px-5 py-3 font-bold text-white shadow transition hover:-translate-y-0.5 hover:bg-kaili/90"
                   >
                     <FiPlus size={18} />
                     Buat Room
@@ -224,7 +221,6 @@ function DashboardGuru() {
       </main>
 
       </div>
-      <BottomNav role="guru" />
       <ConfirmDialog
         open={Boolean(deleteTarget)}
         title="Hapus Room?"
