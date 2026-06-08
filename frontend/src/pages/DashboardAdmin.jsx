@@ -119,24 +119,28 @@ function DashboardAdmin() {
     const fetchData = async () => {
       const token = localStorage.getItem("token");
 
-      const [userRes, statsRes] = await Promise.all([
-        fetch(`${API_BASE_URL}/api/auth/profile`, {
-          headers: { Authorization: "Bearer " + token },
-        }),
-        fetch(`${API_BASE_URL}/api/admin/stats`, {
-          headers: { Authorization: "Bearer " + token },
-        }),
-      ]);
+      try {
+        const [userRes, statsRes] = await Promise.all([
+          fetch(`${API_BASE_URL}/api/auth/profile`, {
+            headers: { Authorization: "Bearer " + token },
+          }),
+          fetch(`${API_BASE_URL}/api/admin/stats`, {
+            headers: { Authorization: "Bearer " + token },
+          }),
+        ]);
 
-      if (userRes.ok) setUser(await userRes.json());
-      if (statsRes.ok) setStats(await statsRes.json());
+        if (userRes.ok) setUser(await userRes.json());
+        if (statsRes.ok) setStats(await statsRes.json());
+      } catch (err) {
+        console.error("Gagal mengambil data dashboard admin:", err);
+      }
     };
 
     fetchData();
   }, []);
 
   // Skeleton loading state
-  if (!user) {
+  if (!user || !stats) {
     return (
       <div className="genz-bg h-[100dvh] overflow-hidden flex overflow-hidden text-sora">
         <Sidebar role="admin" />
