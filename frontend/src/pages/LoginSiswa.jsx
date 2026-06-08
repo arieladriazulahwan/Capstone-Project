@@ -45,6 +45,19 @@ function LoginSiswa() {
       title="Selamat datang kembali"
       subtitle="Masuk sebagai siswa untuk melanjutkan level, menjaga streak, dan mengerjakan kuis."
     >
+      <div className="mb-6 flex rounded-full bg-sora/5 p-1 border border-sora/10">
+        <button className="flex-1 rounded-full bg-white py-2 text-sm font-bold text-sora shadow-sm">
+          Siswa
+        </button>
+        <button
+          type="button"
+          onClick={() => navigate("/login/guru")}
+          className="flex-1 rounded-full py-2 text-sm font-bold text-sora/50 hover:text-sora transition-colors"
+        >
+          Guru
+        </button>
+      </div>
+
       <div className="text-center">
         <h2 className="text-2xl font-black text-sora">Login Siswa</h2>
         <p className="mt-2 text-sm text-sora/60 font-medium">Masukkan info akunmu.</p>

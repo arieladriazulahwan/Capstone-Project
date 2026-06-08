@@ -46,6 +46,19 @@ function LoginGuru() {
       title="Kelola kelas dengan mudah"
       subtitle="Masuk sebagai guru untuk membuat room, mengelola soal, dan melihat nilai siswa."
     >
+      <div className="mb-6 flex rounded-full bg-sora/5 p-1 border border-sora/10">
+        <button
+          type="button"
+          onClick={() => navigate("/login/siswa")}
+          className="flex-1 rounded-full py-2 text-sm font-bold text-sora/50 hover:text-sora transition-colors"
+        >
+          Siswa
+        </button>
+        <button className="flex-1 rounded-full bg-white py-2 text-sm font-bold text-sora shadow-sm">
+          Guru
+        </button>
+      </div>
+
       <div className="text-center">
         <h2 className="text-2xl font-black text-sora">Login Guru</h2>
         <p className="mt-2 text-sm text-sora/60 font-medium">Masuk dengan akun gurumu.</p>
