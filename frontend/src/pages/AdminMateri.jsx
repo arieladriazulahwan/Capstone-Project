@@ -848,6 +848,7 @@ function AdminMateri() {
           </div>
         </main>
       </div>
+      <BottomNav role="admin" />
 
       {/* MODALS */}
       {/* MATERI MODAL */}

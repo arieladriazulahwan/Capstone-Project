@@ -59,7 +59,7 @@ function AdminUsers() {
     if (res.ok) setUser(await res.json());
   };
 
-  const fetchUsers = async () => {
+  async function fetchUsers() {
     setLoading(true);
     const params = new URLSearchParams();
     if (filterRole) params.set("role", filterRole);
@@ -374,6 +374,7 @@ function AdminUsers() {
           </div>
         </main>
       </div>
+      <BottomNav role="admin" />
 
       {/* ============ MODAL TAMBAH / EDIT ============ */}
       {showModal && (

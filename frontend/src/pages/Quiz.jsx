@@ -115,7 +115,7 @@ function Quiz() {
 
   if (questions.length === 0) {
     return (
-      <div className="h-screen overflow-hidden genz-bg text-sora">
+      <div className="h-screen overflow-hidden genz-bg text-sora flex flex-col">
         <Navbar showBackButton backTo={practicePath} />
         <div className="p-5 max-w-xl mx-auto space-y-4">
           <Skeleton className="h-24 w-full rounded-3xl" />
@@ -130,7 +130,7 @@ function Quiz() {
   const hasOptions = !hasBlocks && Array.isArray(current.options) && current.options.length > 0;
   const hasTextAnswer = !hasOptions && !hasBlocks;
 
-  const nextQuestion = async (updatedScore) => {
+  async function nextQuestion(updatedScore) {
     if (index + 1 < questions.length) {
       setIndex(index + 1);
       setSelected("");
@@ -287,10 +287,10 @@ function Quiz() {
   }
 
   return (
-    <div className="h-screen overflow-hidden genz-bg text-sora">
+    <div className="h-screen overflow-hidden genz-bg text-sora flex flex-col">
       <Navbar showBackButton backTo={practicePath} />
 
-      <main className="p-5 max-w-xl mx-auto">
+      <main className="p-5 w-full max-w-xl mx-auto overflow-y-auto overflow-x-hidden flex-1">
         <div className="bg-sora text-cream flex justify-between items-center mb-5 rounded-3xl p-6 shadow-soft-sora relative overflow-hidden">
           <div className="absolute top-[-20%] left-[-10%] w-32 h-32 bg-kaili/20 rounded-full blur-2xl"></div>
           <div className="relative z-10">
@@ -335,7 +335,7 @@ function Quiz() {
 
           {hasBlocks && (
             <>
-              <div className="mb-5 p-4 bg-cream rounded-3xl text-center text-3xl font-black text-sora min-h-[80px] flex items-center justify-center">
+              <div className="mb-5 p-4 bg-cream rounded-3xl text-center text-2xl md:text-3xl font-black text-sora min-h-[80px] flex flex-wrap items-center justify-center break-words">
                 {selected || "..."}
               </div>
 

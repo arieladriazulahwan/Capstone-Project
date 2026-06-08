@@ -90,7 +90,7 @@ function Practice() {
     return (
       <div className="flex h-screen overflow-hidden genz-bg text-sora">
         <Navbar showBackButton backTo={lessonPath} />
-        <main className="p-5 max-w-xl mx-auto space-y-5">
+        <main className="p-5 max-w-xl mx-auto space-y-5 overflow-y-auto overflow-x-hidden flex-1">
           <Skeleton className="h-32 w-full rounded-3xl" />
           <Skeleton className="h-96 w-full rounded-2xl" />
         </main>
@@ -138,7 +138,7 @@ function Practice() {
       <div className="h-screen overflow-hidden genz-bg text-sora">
         <Navbar showBackButton backTo={lessonPath} />
 
-        <main className="p-5 max-w-xl mx-auto">
+        <main className="p-5 max-w-xl mx-auto overflow-y-auto overflow-x-hidden flex-1">
           <div className="bg-white/60 backdrop-blur-xl p-6 rounded-3xl shadow-soft-sora border border-white/60 text-center">
             <p className="text-sm font-black text-kaili mb-2">
               <span className="inline-flex items-center gap-2 text-yellow-500">Latihan Selesai <FaStar /></span>
@@ -174,7 +174,7 @@ function Practice() {
     <div className="h-screen overflow-hidden genz-bg text-sora">
       <Navbar showBackButton backTo={lessonPath} />
 
-      <main className="p-5 max-w-xl mx-auto">
+      <main className="p-5 max-w-xl mx-auto overflow-y-auto overflow-x-hidden flex-1">
         <div className="bg-sora text-cream rounded-3xl p-6 mb-5 shadow-soft-sora relative overflow-hidden">
           <div className="absolute top-[-20%] right-[-10%] w-32 h-32 bg-kaili/20 rounded-full blur-2xl"></div>
           <h1 className="text-2xl font-black">Latihan Bahasa Kaili</h1>
@@ -199,9 +199,9 @@ function Practice() {
             />
           )}
 
-          <div className="grid grid-cols-2 gap-3">
+          <div className={`grid gap-3 ${options.some(opt => opt.length > 15) ? "grid-cols-1" : "grid-cols-2"}`}>
             {options.map((option, i) => {
-              let btnClass = "student-answer-button p-4 bg-white border-2 border-sora/10 shadow-sm rounded-3xl font-black text-lg text-sora transition-all btn-bouncy relative overflow-hidden flex items-center justify-center text-center hover:border-kaili";
+              let btnClass = "student-answer-button p-4 bg-white border-2 border-sora/10 shadow-sm rounded-3xl font-black text-base md:text-lg text-sora transition-all btn-bouncy relative overflow-hidden flex items-center justify-center text-center hover:border-kaili break-words";
 
               if (isEvaluating) {
                 if (selectedOption === option) {

@@ -5,6 +5,8 @@ import { HiSparkles } from "react-icons/hi";
 import ConfirmDialog from "../components/ConfirmDialog";
 import Navbar from "../components/Navbar";
 import RoomCard from "../components/RoomCard";
+import Sidebar from "../components/Sidebar";
+import BottomNav from "../components/BottomNav";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 

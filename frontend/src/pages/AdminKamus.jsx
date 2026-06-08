@@ -377,6 +377,7 @@ function AdminKamus() {
           </div>
         </main>
       </div>
+      <BottomNav role="admin" />
 
       {/* MODAL */}
       {showModal && (

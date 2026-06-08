@@ -3,6 +3,8 @@ import { useParams, useNavigate } from "react-router-dom";
 
 import Navbar from "../components/Navbar";
 import ConfirmDialog from "../components/ConfirmDialog";
+import Sidebar from "../components/Sidebar";
+import BottomNav from "../components/BottomNav";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
@@ -394,7 +396,7 @@ function DetailRoom() {
   }
 
   return (
-    <div className="teacher-page-bg h-screen overflow-hidden">
+    <div className="flex teacher-page-bg h-screen overflow-hidden">
       <Sidebar role="guru" />
       <div className="flex-1 h-screen overflow-y-auto custom-scrollbar relative">
         <Navbar role="guru" user={user} showBackButton />

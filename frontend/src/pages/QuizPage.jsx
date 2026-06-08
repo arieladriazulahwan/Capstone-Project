@@ -309,7 +309,7 @@ function QuizPage() {
   const renderType = question.renderType;
 
   return (
-    <div className="genz-bg h-screen overflow-hidden p-4 text-sora pb-20">
+    <div className="genz-bg h-screen overflow-y-auto overflow-x-hidden p-4 text-sora pb-20">
       <div className="max-w-3xl mx-auto">
         {/* HEADER */}
         <div className="bg-white/80 backdrop-blur-md border border-sora/10 shadow-soft-sora rounded-3xl p-6 mb-6 flex justify-between items-center">
@@ -436,7 +436,7 @@ function QuizPage() {
                 <p className="text-xs font-black text-kaili mb-1 uppercase tracking-wider">
                   Susunan Jawaban:
                 </p>
-                <p className="text-sora font-black text-xl min-h-[30px]">
+                <p className="text-sora font-black text-lg md:text-xl min-h-[30px] break-words">
                   {Array.isArray(answers[currentQuestion]) ? answers[currentQuestion].join(" ") : ""}
                 </p>
               </div>

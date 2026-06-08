@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FiBookOpen, FiClock, FiType } from "react-icons/fi";
 import Navbar from "../components/Navbar";
+import Sidebar from "../components/Sidebar";
+import BottomNav from "../components/BottomNav";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 const MAX_UPLOAD_FILE_SIZE = 50 * 1024 * 1024;
@@ -392,7 +394,7 @@ function BuatRoom() {
   };
 
   return (
-    <div className="teacher-page-bg h-screen overflow-hidden">
+    <div className="flex teacher-page-bg h-screen overflow-hidden">
       <Sidebar role="guru" />
       <div className="flex-1 h-screen overflow-y-auto custom-scrollbar relative">
         <Navbar role="guru" user={user} showBackButton={true} />

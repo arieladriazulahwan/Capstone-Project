@@ -233,7 +233,7 @@ function Kamus() {
       <div className="flex-1 flex flex-col pb-20 md:pb-0">
         <Navbar user={user} />
 
-        <main className="flex-1 px-4 py-6 flex justify-center">
+        <main className="flex-1 px-4 py-6 flex justify-center overflow-y-auto overflow-x-hidden">
           <div className="w-full max-w-md md:max-w-3xl">
 
             <div className="bg-kaili/10 border border-kaili/20 mb-5 rounded-3xl p-6 shadow-soft-sora relative overflow-hidden">

@@ -190,6 +190,7 @@ function AdminRooms() {
           </div>
         </main>
       </div>
+      <BottomNav role="admin" />
 
       {/* DETAIL MODAL */}
       {showDetail && selectedRoom && (

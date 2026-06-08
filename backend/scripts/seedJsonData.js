@@ -56,7 +56,8 @@ const resetTables = async (connection) => {
 };
 
 const seedVocab = async (connection) => {
-  const vocab = readJson(path.join(dataDir, "vocab.json"));
+  const vocab = readJson(path.join(dataDir, "vocab1.json"));
+  console.log(`Menyiapkan ${vocab.length} kosakata...`);
   let entries = 0;
   let translations = 0;
 

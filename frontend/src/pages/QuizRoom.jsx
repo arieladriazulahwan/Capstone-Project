@@ -146,7 +146,7 @@ function QuizRoom() {
 
   return (
 
-    <div className="h-screen overflow-hidden genz-bg p-4 text-sora pb-20">
+    <div className="h-screen overflow-y-auto overflow-x-hidden genz-bg p-4 text-sora pb-20">
       <div className="max-w-3xl mx-auto pt-6">
 
         {/* HEADER */}
@@ -293,7 +293,7 @@ function QuizRoom() {
 
               </div>
 
-              <div className="bg-white/50 p-4 border border-white/60 rounded-3xl text-center text-3xl font-black text-sora min-h-[80px] flex items-center justify-center shadow-inner">
+              <div className="bg-white/50 p-4 border border-white/60 rounded-3xl text-center text-2xl md:text-3xl font-black text-sora min-h-[80px] flex flex-wrap items-center justify-center shadow-inner break-words">
                 {(answers[currentQuestion] || []).join(" ") || "..."}
               </div>
 
