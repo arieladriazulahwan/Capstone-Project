@@ -22,7 +22,7 @@ function DetailRoom() {
   const [expandedAttempt, setExpandedAttempt] = useState(null);
   
   useEffect(() => {
-    const fetchRoom = async () => {
+    const fetchRoom = async (isPolling = false) => {
       try {
         const token = localStorage.getItem("token");
         const res = await fetch(`${API_BASE_URL}/api/rooms/detail/${id}`, {
@@ -34,34 +34,43 @@ function DetailRoom() {
         const data = await res.json();
 
         if (!res.ok) {
-          alert(data.message || "Gagal memuat room");
+          if (!isPolling) alert(data.message || "Gagal memuat room");
           return;
         }
 
-        setRoom(data.room);
-        setDraftRoomDetails({
-          title: data.room.title,
-          category: data.room.category,
-          timer: data.room.timer,
-        });
-        setDraftQuestions(
-          data.room.questions?.map((q) => ({
-            ...q,
-            answer:
-              Array.isArray(q.answer) || q.answer === null
-                ? (Array.isArray(q.answer) ? q.answer.join(" ") : "")
-                : q.answer,
-          })) || []
-        );
+        if (isPolling) {
+          setRoom((prev) => ({ ...prev, attempts: data.room.attempts }));
+        } else {
+          setRoom(data.room);
+          setDraftRoomDetails({
+            title: data.room.title,
+            category: data.room.category,
+            timer: data.room.timer,
+          });
+          setDraftQuestions(
+            data.room.questions?.map((q) => ({
+              ...q,
+              answer:
+                Array.isArray(q.answer) || q.answer === null
+                  ? (Array.isArray(q.answer) ? q.answer.join(" ") : "")
+                  : q.answer,
+            })) || []
+          );
+        }
       } catch (err) {
         console.log(err);
-        alert("Gagal mengambil data room");
+        if (!isPolling) alert("Gagal mengambil data room");
       } finally {
-        setLoading(false);
+        if (!isPolling) setLoading(false);
       }
     };
 
     fetchRoom();
+    
+    // Polling interval every 5 seconds to get the latest attempts
+    const intervalId = setInterval(() => {
+      fetchRoom(true);
+    }, 5000);
 
     const fetchUser = async () => {
       const token = localStorage.getItem("token");
@@ -81,6 +90,8 @@ function DetailRoom() {
     };
 
     fetchUser();
+
+    return () => clearInterval(intervalId);
   }, [id]);
 
   const getTypeLabel = (type) => {
@@ -733,7 +744,10 @@ function DetailRoom() {
 
             {room.attempts?.length > 0 ? (
               <div className="space-y-3">
-                {room.attempts.map((attempt, idx) => {
+                {[...room.attempts].sort((a, b) => {
+                  if (b.score !== a.score) return b.score - a.score;
+                  return new Date(a.created_at) - new Date(b.created_at);
+                }).map((attempt, idx) => {
                   const correctCount = attempt.answers.filter((a) => a.is_correct).length;
                   const wrongCount = attempt.answers.length - correctCount;
                   const isExpanded = expandedAttempt === attempt.id;
