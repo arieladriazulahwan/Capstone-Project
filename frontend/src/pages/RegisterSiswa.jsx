@@ -14,6 +14,11 @@ function RegisterSiswa() {
   const handleRegister = async (e) => {
     e.preventDefault();
 
+    if (password.length < 4) {
+      alert("Password minimal 4 karakter");
+      return;
+    }
+
     try {
       const res = await fetch(`${API_BASE_URL}/api/auth/register`, {
         method: "POST",
@@ -104,7 +109,7 @@ function RegisterSiswa() {
           <label className="mb-1.5 block text-sm font-bold text-sora">Kata Sandi</label>
           <input
             type="password"
-            placeholder="Minimal 6 karakter"
+            placeholder="Minimal 4 karakter"
             className="w-full rounded-2xl border-2 border-sora/10 bg-white px-4 py-3 outline-none transition-all focus:border-kaili focus:ring-4 focus:ring-kaili/20 font-medium placeholder:text-sora/30"
             value={password}
             onChange={(e) => setPassword(e.target.value)}

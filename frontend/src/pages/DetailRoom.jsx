@@ -20,6 +20,7 @@ function DetailRoom() {
   const [deleteQuestionTarget, setDeleteQuestionTarget] = useState(null);
   const [questionView, setQuestionView] = useState("soal");
   const [expandedAttempt, setExpandedAttempt] = useState(null);
+  const [sortBy, setSortBy] = useState("score");
   
   useEffect(() => {
     const fetchRoom = async (isPolling = false) => {
@@ -740,13 +741,28 @@ function DetailRoom() {
                 <h2 className="text-2xl font-bold">Nilai Siswa</h2>
                 <p className="text-gray-500">Klik nama siswa untuk melihat detail jawaban</p>
               </div>
+              <div className="flex items-center gap-2">
+                <span className="text-sm font-semibold text-gray-600">Urutkan:</span>
+                <select
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value)}
+                  className="border border-gray-200 bg-white rounded-xl px-3 py-2 text-sm outline-none focus:border-kaili"
+                >
+                  <option value="score">Nilai Tertinggi</option>
+                  <option value="time">Selesai Terbaru</option>
+                </select>
+              </div>
             </div>
 
             {room.attempts?.length > 0 ? (
               <div className="space-y-3">
                 {[...room.attempts].sort((a, b) => {
-                  if (b.score !== a.score) return b.score - a.score;
-                  return new Date(a.created_at) - new Date(b.created_at);
+                  if (sortBy === "score") {
+                    if (b.score !== a.score) return b.score - a.score;
+                    return new Date(a.created_at) - new Date(b.created_at);
+                  } else {
+                    return new Date(b.created_at) - new Date(a.created_at);
+                  }
                 }).map((attempt, idx) => {
                   const correctCount = attempt.answers.filter((a) => a.is_correct).length;
                   const wrongCount = attempt.answers.length - correctCount;

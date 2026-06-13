@@ -285,6 +285,10 @@ exports.register = async (req, res) => {
     return res.status(400).json({ message: "Semua field wajib diisi" });
   }
 
+  if (password.length < 4) {
+    return res.status(400).json({ message: "Password minimal 4 karakter" });
+  }
+
   try {
     const [results] = await db.promise().query("SELECT * FROM users WHERE username = ?", [username]);
     if (results.length > 0) {

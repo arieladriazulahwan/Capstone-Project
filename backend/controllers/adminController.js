@@ -813,6 +813,10 @@ exports.createUser = async (req, res) => {
       return res.status(400).json({ message: "Semua field wajib diisi" });
     }
 
+    if (password.length < 4) {
+      return res.status(400).json({ message: "Password minimal 4 karakter" });
+    }
+
     if (!["siswa", "guru"].includes(role)) {
       return res
         .status(400)

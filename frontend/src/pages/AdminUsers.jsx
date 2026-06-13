@@ -95,8 +95,8 @@ function AdminUsers() {
       return alert("Nama dan Username wajib diisi!");
     }
 
-    if (!editItem && !form.password.trim()) {
-      return alert("Password wajib diisi untuk pengguna baru!");
+    if (!editItem && (!form.password.trim() || form.password.length < 4)) {
+      return alert("Password minimal 4 karakter untuk pengguna baru!");
     }
 
     let res;
