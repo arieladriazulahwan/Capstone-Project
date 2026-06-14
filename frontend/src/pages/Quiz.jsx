@@ -146,8 +146,13 @@ function Quiz() {
 
       if (percentage >= 80) {
         let multiplier = 1.0;
-        if (bab === "bab2") multiplier = 1.2;
-        else if (bab === "bab3") multiplier = 1.5;
+        const babNumber = parseInt(bab.replace("bab", ""));
+        
+        if (!isNaN(babNumber) && babNumber > 1) {
+          for (let i = 2; i <= babNumber; i++) {
+            multiplier += (i / 10);
+          }
+        }
 
         earnedXP = Math.round(updatedScore * 10 * multiplier);
       }
