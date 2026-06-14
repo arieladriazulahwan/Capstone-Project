@@ -153,13 +153,14 @@ exports.getDashboardStats = async (req, res) => {
       FROM users
       WHERE role != 'admin'
         AND last_login >= DATE_SUB(CURDATE(), INTERVAL 6 DAY)
-      GROUP BY last_login
+      GROUP BY DATE_FORMAT(last_login, '%Y-%m-%d')
     `);
+
     const [attemptTrendRows] = await db.promise().query(`
       SELECT DATE_FORMAT(created_at, '%Y-%m-%d') AS date, COUNT(*) AS count
       FROM room_attempts
       WHERE DATE(created_at) >= DATE_SUB(CURDATE(), INTERVAL 6 DAY)
-      GROUP BY DATE(created_at)
+      GROUP BY DATE_FORMAT(created_at, '%Y-%m-%d')
     `);
 
     const vocab = readJSON(vocabPath);
