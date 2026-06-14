@@ -361,7 +361,12 @@ router.post("/submit/:code", authMiddleware, async (req, res) => {
     );
 
     // 🔥 TAMBAHAN: Update XP Gamifikasi Siswa
-    const earnedXP = score * 10;
+    const percentage = total > 0 ? (score / total) * 100 : 0;
+    let earnedXP = 10; // Default flat 10 jika gagal
+    if (percentage >= 80) {
+      earnedXP = Math.round(score * 10 * 1.0);
+    }
+
     if (earnedXP > 0) {
       const [profiles] = await db.promise().query(
         "SELECT xp, level FROM student_profiles WHERE user_id = ?",

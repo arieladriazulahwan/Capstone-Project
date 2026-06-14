@@ -140,7 +140,17 @@ function Quiz() {
 
     try {
       const token = localStorage.getItem("token");
-      const earnedXP = updatedScore * 10;
+
+      const percentage = (updatedScore / questions.length) * 100;
+      let earnedXP = 10; // Default jika gagal (flat 10 poin)
+
+      if (percentage >= 80) {
+        let multiplier = 1.0;
+        if (bab === "bab2") multiplier = 1.2;
+        else if (bab === "bab3") multiplier = 1.5;
+
+        earnedXP = Math.round(updatedScore * 10 * multiplier);
+      }
 
       if (bab) {
         const progressRes = await fetch(`${API_BASE_URL}/api/auth/complete-bab`, {
